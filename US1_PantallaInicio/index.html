@@ -1,18 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Cocinando Juntos</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home - Cocinando Juntos</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="index.js"></script>
+    </head>
 <body>
     <!--MENU NAVEGACIÓN-->
     <nav>
-        <img src="" alt=""> <!-- Logo -->
-        <p>Buscador</p>
-        <p>Registrarse / Iniciar Sesión</p>
-        <img src="" alt=""> <!-- 3 Lineas-->
+        <div class="logo">Logo</div>
+        <input type="text" class="search-bar" placeholder="Buscar recetas...">
+        <a href="#" class="auth-buttons">Registrarse / Iniciar Sesión</a>
+        <div class="menu-icon">☰</div>
     </nav>    
+
+    <main>
+        <section class="featured-dishes">
+            <h2>Platos Destacados</h2>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide">
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
+                            <h3>Galletas de Sésamo</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                            <h3>Pollo Agridulce</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/España/tortilla-patatas.jpeg" alt="Tortilla de Patatas">
+                            <h3>Tortilla de Patatas</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/España/pan-tomate.jpg" alt="Pan con Tomate">
+                            <h3>Pan con Tomate</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Francia/coq-au-vin.jpg" alt="Coq au Vin">
+                            <h3>Coq au Vin</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg" alt="Crepas Dulces">
+                            <h3>Crepas Dulces</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Italia/pizza-margarita.jpg" alt="Pizza Margarita">
+                            <h3>Pizza Margarita</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Italia/lasaña.jpg" alt="Lasaña">
+                            <h3>Lasaña</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Japon/sushi.jpeg" alt="Sushi">
+                            <h3>Sushi</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Japon/ramen.jpg" alt="Ramen">
+                            <h3>Ramen</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg" alt="Arepa Venezolana">
+                            <h3>Arepa Venezolana</h3>
+                        </div>
+                        <div class="slide-card">
+                            <img src="/US1_PantallaInicio/Imagenes/Venezuela/cachapa-venezolana.jpg" alt="Cachapa Venezolana">
+                            <h3>Cachapa Venezolana</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-buttons">
+                    <button class="slider-button" onclick="moveSlide(-1)">❮</button>
+                    <button class="slider-button" onclick="moveSlide(1)">❯</button>
+                </div>
+                <div class="dots-container"></div>
+            </div>
+        </section>
+        <section class="culture-dishes">
+            <h2>Platos por Cultura</h2>
+            <div class="culture-grid">
+                <a href="#" class="culture-card">
+                    <img src="/US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg" alt="Cocina China">
+                    <h3>China</h3>
+                </a>
+                <a href="#" class="culture-card">
+                    <img src="/US1_PantallaInicio/Imagenes/España/tortilla-patatas.jpeg" alt="Cocina Española">
+                    <h3>España</h3>
+                </a>
+                <a href="#" class="culture-card">
+                    <img src="/US1_PantallaInicio/Imagenes/Francia/coq-au-vin.jpg" alt="Cocina Francesa">
+                    <h3>Francia</h3>
+                </a>
+                <a href="#" class="culture-card">
+                    <img src="/US1_PantallaInicio/Imagenes/Italia/pizza-margarita.jpg" alt="Cocina Italiana">
+                    <h3>Italia</h3>
+                </a>
+                <a href="#" class="culture-card">
+                    <img src="/US1_PantallaInicio/Imagenes/Japon/sushi.jpeg" alt="Cocina Japonesa">
+                    <h3>Japón</h3>
+                </a>
+                <a href="#" class="culture-card">
+                    <img src="/US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg" alt="Cocina Venezolana">
+                    <h3>Venezuela</h3>
+                </a>
+            </div>
+        </section>
+
+        <section class="recipe-filters">
+            <h2>Explorar Recetas</h2>
+            <!-- Aquí irán los filtros de recetas -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>   
     
 </body>
 </html>
