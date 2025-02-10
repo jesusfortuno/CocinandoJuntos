@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recetas Populares</title>
+  <link rel="stylesheet" href="platosPopulares.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Nombre del Proyecto</div>
+      <nav>
+        <input type="text" placeholder="Buscar recetas...">
+        <div class="nav-links">
+          <a href="#">Registrarse / Iniciar Sesión</a>
+        </div>
+        <div class="menu-icon">&#9776;</div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="main">
+        <h1>Página de las Recetas Más Populares</h1>
+        <p>Descubre los sabores auténticos y deliciosos que puedes preparar en casa.</p>
+        <div class="separator"></div> <!-- Línea divisoria -->
+    </div>
+
+    <div class="filter-section">
+        <select id="filter-culture">
+            <option value="">Todas las culturas</option>
+            <option value="Española">Española</option>
+            <option value="Italiana">Italiana</option>
+            <option value="Francesa">Francesa</option>
+            <option value="China">China</option>
+            <option value="Japonesa">Japonesa</option>
+            <option value="Venezolana">Venezolana</option>
+        </select>
+
+        <select id="filter-time">
+            <option value="">Cualquier tiempo</option>
+            <option value="0-30">Menos de 30 min</option>
+            <option value="30-60">30 - 60 min</option>
+            <option value="60-120">60 - 120 min</option>
+            <option value="120+">Más de 120 min</option>
+        </select>
+
+        <select id="filter-difficulty">
+            <option value="">Cualquier dificultad</option>
+            <option value="Fácil">Fácil</option>
+            <option value="Media">Media</option>
+            <option value="Difícil">Difícil</option>
+        </select>
+
+        <button id="apply-filters">Filtrar</button>
+    </div>
+    <section class="recipes-grid">
+      <article class="recipe-card" data-culture="Española">
+        <img src="https://via.placeholder.com/150" alt="Pan con tomate, jamón y aceite">
+        <h2>Pan con tomate, jamón y aceite</h2>
+        <p>Fácil | 15 min | Entrada</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Bizcocho de capuchino">
+        <h2>Bizcocho de capuchino</h2>
+        <p>Media | 45 min | Postre</p>
+      </article>
+      <article class="recipe-card" data-culture="Francesa">
+        <img src="https://via.placeholder.com/150" alt="Tostadas francesas">
+        <h2>Tostadas francesas</h2>
+        <p>Fácil | 20 min | Desayuno</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Bollitos chinos">
+        <h2>Bollitos chinos</h2>
+        <p>Media | 30 min | Aperitivo</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Tamagoyaki">
+        <h2>Tamagoyaki</h2>
+        <p>Media | 25 min | Desayuno</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Arepa">
+        <h2>Arepa</h2>
+        <p>Fácil | 20 min | Desayuno</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Paella">
+        <h2>Paella</h2>
+        <p>Difícil | 90 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Lasaña">
+        <h2>Lasaña</h2>
+        <p>Media | 75 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Coq au vin">
+        <h2>Coq au vin</h2>
+        <p>Difícil | 120 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Pollo agridulce">
+        <h2>Pollo agridulce</h2>
+        <p>Fácil | 40 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Ramen">
+        <h2>Ramen</h2>
+        <p>Difícil | 120 min | Sopa</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Criollo venezolano">
+        <h2>Criollo venezolano</h2>
+        <p>Media | 90 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Churros con chocolate">
+        <h2>Churros con chocolate</h2>
+        <p>Fácil | 30 min | Postre</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Cannoli">
+        <h2>Cannoli</h2>
+        <p>Difícil | 90 min | Postre</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Crepas dulces">
+        <h2>Crepas dulces</h2>
+        <p>Fácil | 20 min | Postre</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Galletas de sésamo">
+        <h2>Galletas de sésamo</h2>
+        <p>Media | 30 min | Postre</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Dorayaki">
+        <h2>Dorayaki</h2>
+        <p>Fácil | 20 min | Postre</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Golfeados">
+        <h2>Golfeados</h2>
+        <p>Media | 40 min | Postre</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Tortilla de patatas">
+        <h2>Tortilla de patatas</h2>
+        <p>Fácil | 25 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Pizza margarita">
+        <h2>Pizza margarita</h2>
+        <p>Media | 60 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Quiche Lorraine">
+        <h2>Quiche Lorraine</h2>
+        <p>Media | 50 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Fideos salteados">
+        <h2>Fideos salteados</h2>
+        <p>Difícil | 45 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Sushi">
+        <h2>Sushi</h2>
+        <p>Difícil | 60 min | Plato Principal</p>
+      </article>
+      <article class="recipe-card">
+        <img src="https://via.placeholder.com/150" alt="Cachapa">
+        <h2>Cachapa</h2>
+        <p>Fácil | 30 min | Desayuno</p>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <p>© 2024 Cocinando Juntos - Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    document.getElementById("apply-filters").addEventListener("click", function() {
+        let selectedCulture = document.getElementById("filter-culture").value;
+        let selectedTime = document.getElementById("filter-time").value;
+        let selectedDifficulty = document.getElementById("filter-difficulty").value;
+  
+        let recipes = document.querySelectorAll(".recipe-card");
+  
+        recipes.forEach(recipe => {
+            let text = recipe.querySelector("p").innerText;
+            let [difficulty, timeText] = text.split(" | ");
+  
+            let time = parseInt(timeText.replace(" min", ""));
+            let culture = recipe.dataset.culture; 
+  
+            let matchesCulture = selectedCulture === "" || culture === selectedCulture;
+            let matchesDifficulty = selectedDifficulty === "" || difficulty === selectedDifficulty;
+            let matchesTime = false;
+  
+            if (selectedTime === "" || 
+                (selectedTime === "0-30" && time <= 30) ||
+                (selectedTime === "30-60" && time > 30 && time <= 60) ||
+                (selectedTime === "60-120" && time > 60 && time <= 120) ||
+                (selectedTime === "120+" && time > 120)) {
+                matchesTime = true;
+            }
+  
+            if (matchesCulture && matchesDifficulty && matchesTime) {
+                recipe.style.display = "block";
+            } else {
+                recipe.style.display = "none";
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>
