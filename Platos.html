@@ -1,170 +1,190 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recetas Populares</title>
-  <link rel="stylesheet" href="platosPopulares.css">
-  <style>
-    /* Estilos para el botón de filtros */
-    #filter-btn {
-      position: fixed;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #ff6600;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 5px;
-      z-index: 10;
-    }
-
-    /* Estilos para el cuadro de filtros */
-    #filter-options {
-      display: none;
-      position: fixed;
-      left: 60px; /* Se abre a la derecha del botón */
-      top: 50%;
-      transform: translateY(-50%);
-      background: white;
-      padding: 15px;
-      border: 1px solid #ccc;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      width: 250px;
-      z-index: 10;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mejores Valorados - Cocinando Juntos</title>
+    <link rel="stylesheet" href="./platos.css">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="logo">Nombre del Proyecto</div>
-      <nav>
-        <input type="text" placeholder="Buscar recetas...">
-        <div class="nav-links">
-          <a href="#">Registrarse / Iniciar Sesión</a>
+    <!--MENU NAVEGACIÓN-->
+    <nav>
+        <a href="./US1_PantallaInicio/index.html" class="logo">
+            <img src="./US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <input type="text" class="search-bar" placeholder="Buscar recetas...">
+        <a href="./login.html" class="auth-buttons">Registrarse / Iniciar Sesión</a>
+        <div class="menu-icon">☰</div>
+    </nav>    
+
+    <main>
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="./US1_PantallaInicio/index.html">Inicio</a> > 
+            <span>Mejores Valorados</span>
         </div>
-        <div class="menu-icon">&#9776;</div>
-      </nav>
-    </div>
-  </header>
-  
-  <main>
-    <div class="main">
-      <h1>Página de las Recetas Más Populares</h1>
-      <p>Descubre los sabores auténticos y deliciosos que puedes preparar en casa.</p>
-      <div class="separator"></div>
-    </div>
 
-    <!-- Botón para mostrar los filtros -->
-    <button id="filter-btn">Filtros</button>
+        <!-- Título de la cultura -->
+        <div class="culture-header">
+            <h1>Mejores Valorados</h1>
+            <div class="culture-description">
+                <p>Descubre las mejores valoraciones de la semana</p>
+            </div>
+        </div>
 
-    <!-- Cuadro emergente de filtros -->
-    <div id="filter-options">
-      <label for="filter-culture">Cultura:</label>
-      <select id="filter-culture">
-          <option value="">Todas</option>
-          <option value="Española">Española</option>
-          <option value="Italiana">Italiana</option>
-          <option value="Francesa">Francesa</option>
-          <option value="China">China</option>
-          <option value="Japonesa">Japonesa</option>
-          <option value="Venezolana">Venezolana</option>
-      </select>
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="filter-group">
+                <button class="filter-button active" onclick="window.location.href='./Platos.html'">Mejor Valoradas</button>
+            </div>            
+            <div class="filter-group">
+                <button class="filter-button" id="filter-btn">Filtros</button>
+            </div>
+        </div>
 
-      <label for="filter-time">Tiempo:</label>
-      <select id="filter-time">
-          <option value="">Cualquier tiempo</option>
-          <option value="0-30">Menos de 30 min</option>
-          <option value="30-60">30 - 60 min</option>
-          <option value="60-120">60 - 120 min</option>
-          <option value="120+">Más de 120 min</option>
-      </select>
+        <!-- Cuadro emergente de filtros -->
+        <div id="filter-options" style="display: none;">
+            <label for="filter-culture">Cultura:</label>
+            <select id="filter-culture">
+                <option value="">Todas</option>
+                <option value="Española">Española</option>
+                <option value="Italiana">Italiana</option>
+                <option value="Francesa">Francesa</option>
+                <option value="China">China</option>
+                <option value="Japonesa">Japonesa</option>
+                <option value="Venezolana">Venezolana</option>
+            </select>
+    
+            <label for="filter-time">Tiempo:</label>
+            <select id="filter-time">
+                <option value="">Cualquier tiempo</option>
+                <option value="0-30">Menos de 30 min</option>
+                <option value="30-60">30 - 60 min</option>
+                <option value="60-120">60 - 120 min</option>
+                <option value="120+">Más de 120 min</option>
+            </select>
+    
+            <label for="filter-difficulty">Dificultad:</label>
+            <select id="filter-difficulty">
+                <option value="">Cualquier dificultad</option>
+                <option value="Fácil">Fácil</option>
+                <option value="Media">Media</option>
+                <option value="Difícil">Difícil</option>
+            </select>
+    
+            <button id="apply-filters">Filtrar</button>
+        </div>
 
-      <label for="filter-difficulty">Dificultad:</label>
-      <select id="filter-difficulty">
-          <option value="">Cualquier dificultad</option>
-          <option value="Fácil">Fácil</option>
-          <option value="Media">Media</option>
-          <option value="Difícil">Difícil</option>
-      </select>
+        <!-- Grid de recetas -->
+        <div class="recipes-grid">
+            <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
+                <div class="recipe-image">
+                    <img src="./US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                </div>
+                <h3>Pollo Agridulce</h3>
+                <div class="recipe-meta">
+                    <span class="difficulty">Fácil</span>
+                    <span class="time">45 min</span>
+                    <span class="category">Principal</span>
+                </div>
+            </div>
+        <div class="recipes-grid">
+            <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
+                <div class="recipe-image">
+                    <img src="./US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                </div>
+                <h3>Pollo Agridulce</h3>
+                <div class="recipe-meta">
+                    <span class="difficulty">Fácil</span>
+                    <span class="time">45 min</span>
+                    <span class="category">Principal</span>
+              </div>
+          </div>
+          <div class="recipes-grid">
+              <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
+                  <div class="recipe-image">
+                      <img src="./US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                  </div>
+                  <h3>Pollo Agridulce</h3>
+                  <div class="recipe-meta">
+                      <span class="difficulty">Fácil</span>
+                      <span class="time">45 min</span>
+                      <span class="category">Principal</span>
+                </div>
+            </div>
+          <div class="recipes-grid">
+              <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
+                  <div class="recipe-image">
+                      <img src="./US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                  </div>
+                  <h3>Pollo Agridulce</h3>
+                  <div class="recipe-meta">
+                      <span class="difficulty">Fácil</span>
+                      <span class="time">45 min</span>
+                      <span class="category">Principal</span>
+                </div>
+            </div>
+            <!-- Más recetas aquí -->
+        </div>
+    </main>
 
-      <button id="apply-filters">Filtrar</button>
-    </div>
+    <footer>
+        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
 
-    <section class="recipes-grid">
-      <article class="recipe-card" data-culture="Española" data-time="15" data-difficulty="Fácil">
-        <img src="https://via.placeholder.com/150" alt="Pan con tomate, jamón y aceite">
-        <h2>Pan con tomate, jamón y aceite</h2>
-        <p>Fácil | 15 min | Entrada</p>
-      </article>
-      <article class="recipe-card" data-culture="Francesa" data-time="20" data-difficulty="Fácil">
-        <img src="https://via.placeholder.com/150" alt="Tostadas francesas">
-        <h2>Tostadas francesas</h2>
-        <p>Fácil | 20 min | Desayuno</p>
-      </article>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2024 Cocinando Juntos - Todos los derechos reservados</p>
-  </footer>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const filterBtn = document.getElementById("filter-btn");
-      const filterOptions = document.getElementById("filter-options");
-      const applyFilterBtn = document.getElementById("apply-filters");
-
-      // Mostrar/ocultar el cuadro de filtros
-      filterBtn.addEventListener("click", () => {
-        filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
-      });
-
-      // Filtrar recetas
-      applyFilterBtn.addEventListener("click", () => {
-        const selectedCulture = document.getElementById("filter-culture").value;
-        const selectedTime = document.getElementById("filter-time").value;
-        const selectedDifficulty = document.getElementById("filter-difficulty").value;
-        const recipes = document.querySelectorAll(".recipe-card");
-
-        recipes.forEach(recipe => {
-          const recipeCulture = recipe.getAttribute("data-culture");
-          const recipeTime = parseInt(recipe.getAttribute("data-time"));
-          const recipeDifficulty = recipe.getAttribute("data-difficulty");
-
-          const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
-          const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
-          let matchesTime = false;
-
-          if (selectedTime === "" || 
-              (selectedTime === "0-30" && recipeTime <= 30) ||
-              (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
-              (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
-              (selectedTime === "120+" && recipeTime > 120)) {
-            matchesTime = true;
-          }
-
-          if (matchesCulture && matchesDifficulty && matchesTime) {
-            recipe.style.display = "inline-block";
-          } else {
-            recipe.style.display = "none";
-          }
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const filterBtn = document.getElementById("filter-btn");
+            const filterOptions = document.getElementById("filter-options");
+            const applyFilterBtn = document.getElementById("apply-filters");
+    
+            // Mostrar/ocultar el cuadro de filtros
+            filterBtn.addEventListener("click", () => {
+                filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
+            });
+    
+            // Filtrar recetas
+            applyFilterBtn.addEventListener("click", () => {
+                const selectedCulture = document.getElementById("filter-culture").value;
+                const selectedTime = document.getElementById("filter-time").value;
+                const selectedDifficulty = document.getElementById("filter-difficulty").value;
+                const recipes = document.querySelectorAll(".recipe-card");
+    
+                recipes.forEach(recipe => {
+                    const recipeCulture = recipe.getAttribute("data-culture");
+                    const recipeTime = parseInt(recipe.getAttribute("data-time"));
+                    const recipeDifficulty = recipe.getAttribute("data-difficulty");
+    
+                    const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
+                    const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
+                    let matchesTime = false;
+    
+                    if (selectedTime === "" || 
+                        (selectedTime === "0-30" && recipeTime <= 30) ||
+                        (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
+                        (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
+                        (selectedTime === "120+" && recipeTime > 120)) {
+                        matchesTime = true;
+                    }
+    
+                    if (matchesCulture && matchesDifficulty && matchesTime) {
+                        recipe.style.display = "inline-block";
+                    } else {
+                        recipe.style.display = "none";
+                    }
+                });
+    
+                // Ocultar el cuadro de filtros después de aplicar
+                filterOptions.style.display = "none";
+            });
+    
+            // Cerrar el cuadro si se hace clic fuera de él
+            document.addEventListener("click", (event) => {
+                if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
+                    filterOptions.style.display = "none";
+                }
+            });
         });
-
-        // Ocultar el cuadro de filtros después de aplicar
-        filterOptions.style.display = "none";
-      });
-
-      // Cerrar el cuadro si se hace clic fuera de él
-      document.addEventListener("click", (event) => {
-        if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
-          filterOptions.style.display = "none";
-        }
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>

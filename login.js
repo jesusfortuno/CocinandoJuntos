@@ -27,7 +27,7 @@ document.getElementById("login-form").addEventListener("submit", async function 
     // 💡 Verificar contraseña (considera usar hash en producción)
     if (data && data.password === password) {
       alert("¡Inicio de sesión exitoso!");
-      window.location.href = "inicio.html";
+      window.location.href = "./US1_PantallaInicio/index.html";
     } else {
       alert("Correo o contraseña incorrectos.");
     }

@@ -31,7 +31,7 @@ document.getElementById("register-form").addEventListener("submit", async functi
       alert("Error al registrar usuario.");
     } else {
       alert("¡Registro exitoso!");
-      window.location.href = "inicio.html";
+      window.location.href = "./US1_PantallaInicio/index.html";
     }
   } catch (error) {
     console.error("Error de conexión:", error);
