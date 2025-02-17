@@ -24,6 +24,7 @@ nav {
     padding: 1rem;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     border-bottom: 1px solid #e0d5c9;
     gap: 20px;
 }
@@ -53,6 +54,7 @@ nav {
     margin-left: auto;
     color: #6b4423;
     text-decoration: none;
+    margin-right: 20px;
 }
 
 .menu-icon {
@@ -94,6 +96,7 @@ main {
     color: #6b4423;
     font-size: 2.5rem;
     font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .culture-description {
@@ -108,7 +111,7 @@ main {
 .filters {
     display: flex;
     justify-content: space-between;
-    margin: 2rem 0;
+    margin: 1.5rem;
     align-items: center;
 }
 
@@ -133,22 +136,27 @@ main {
 }
 
 /* Grid de recetas */
+/* Asegurar que las tarjetas se alineen correctamente */
 .recipes-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    padding: 1rem 0;
+    justify-content: center;
+    padding-top: 1rem;
 }
 
+/* Asegurar que todas las tarjetas sean del mismo tamaño */
 .recipe-card {
-    flex: 0 0 calc(25% - 1.5rem);
+    flex: 0 1 calc(25% - 2rem); /* Ajusta según el gap */
     background: white;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
     cursor: pointer;
+    min-width: 250px;
 }
+
 
 .recipe-card:hover {
     transform: translateY(-5px);
@@ -177,6 +185,7 @@ main {
     padding: 1rem;
     color: #333;
     font-size: 1.1rem;
+    margin: 0;
 }
 
 .recipe-meta {
@@ -194,6 +203,7 @@ main {
     border-radius: 4px;
     font-size: 0.8rem;
     color: #6b4423;
+    display: inline-block;
 }
 
 /* Footer */
@@ -211,7 +221,7 @@ footer {
 /* Responsividad */
 @media screen and (max-width: 1200px) {
     .recipe-card {
-        flex: 0 0 calc(33.333% - 1.34rem);
+        flex: 0 0 calc(33.333% - 2rem);
     }
 }
 
@@ -222,8 +232,21 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
+    main {
+        padding: 0.5rem 0.5rem 4rem 0.5rem;
+    }
     .recipe-card {
         flex: 0 0 100%;
+    }
+    .recipe-image {
+        height: 150px;
+    }
+    .filter-button {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+    .culture-header h1 {
+        font-size: 2rem;
     }
 }
 
@@ -237,5 +260,12 @@ footer {
     }
     .culture-header h1 {
         font-size: 1.75rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .recipe-meta {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
