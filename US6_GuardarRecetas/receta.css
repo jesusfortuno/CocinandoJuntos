@@ -1,0 +1,383 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+nav {
+    background-color: #f8f1e9;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #e0d5c9;
+    gap: 20px;
+}
+
+.logo {
+    width: 200px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.search-bar {
+    padding: 0.5rem;
+    border: 1px solid #d4c3b5;
+    border-radius: 4px;
+    width: 300px;
+}
+
+.auth-buttons {
+    margin-left: auto;
+    margin-right: 20px;
+    color: #6b4423;
+    text-decoration: none;
+    margin-left: auto;
+}
+
+.menu-icon {
+    cursor: pointer;
+}
+
+main {
+    max-width: 95%;
+    margin: 1rem auto;
+    padding: 0 1rem 4rem 1rem;
+    flex: 1;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    margin: 1rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: #6b4423;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Título de la receta */
+.recipe-title {
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f8f1e9;
+}
+
+.recipe-title h1 {
+    color: #6b4423;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+/* Imagen de la receta */
+.recipe-photo {
+    flex: 2; /* La imagen ocupará más espacio */
+    max-width: 60%; /* Ajusta el tamaño */
+}
+
+.recipe-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Detalles de la receta */
+.recipe-details {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.recipe-details p {
+    margin: 0;
+    font-weight: bold;
+    color: #6b4423; /* Color del texto */
+}
+
+/* Estilos para la sección de siguiente receta / anterior */
+.recipe-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.recipe-navigation .button {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+/* Estilos para la sección de siguiente botones valoraciones y favoritos */
+.recipe-actions {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* Estilos para la sección de ingredientes */
+.recipe-ingredients,
+.recipe-steps {
+    flex: 1; /* Ocupa la mitad del espacio */
+    padding: 20px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Fondo gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+    margin: 10px; /* Margen alrededor de cada sección */
+}
+
+.recipe-steps h2 {
+    color: #6b4423; /* Color del título */
+    margin-bottom: 10px; /* Espacio debajo del título */
+    font-size: 1.5rem; /* Tamaño del texto del título */
+}
+
+.recipe-explanation p {
+    line-height: 1.6; /* Espaciado entre líneas */
+    color: #333; /* Color del texto */
+    font-size: 1rem; /* Tamaño del texto */
+}
+
+.recipe-steps ol {
+    padding-left: 20px; /* Espaciado a la izquierda para la lista */
+}
+
+.recipe-steps li {
+    margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+}
+
+/* Estilos para la sección de recetas */
+.recipe-ingredients h2 {
+    margin-bottom: 15px; /* Espacio debajo del título */
+    color: #6b4423; /* Color del título */
+    font-size: 1.5rem; /* Tamaño del texto del título */
+}
+
+.recipe-ingredients ul {
+    padding-left: 20px; /* Espaciado a la izquierda para la lista */
+}
+
+.recipe-ingredients li {
+    margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+}
+
+.recipe-container {
+    display: flex; /* Usar flexbox para alinear los elementos */
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #6b4423;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    margin-top: auto;
+}
+
+/* Botones */
+.button {
+    background-color: #6b4423; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #4a2a1a; /* Color al pasar el mouse */
+}
+
+.recipe-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.recipe-buttons button {
+    background: #754c29; /* Mantener el color de los botones */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.recipe-buttons button:hover {
+    background: #5a3d2b;
+}
+
+/* ---------------------------- RESPONSIVE ---------------------------- */
+
+@media screen and (max-width: 768px) {
+    .recipe-container {
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+    }
+    .recipe-ingredients,
+    .recipe-steps {
+        width: 100%; /* Ocuparán toda la pantalla */
+    }
+}
+
+/* ---------------------------- VALORACIONES ---------------------------- */
+.hidden {
+    display: none; /* Oculta el elemento */
+}
+
+.recipe-header {
+    display: flex;
+    align-items: center; /* Alinear verticalmente */
+    gap: 20px; /* Espacio entre imagen e info */
+}
+
+.recipe-navigation {
+    display: flex; /* Usar flexbox para alinear los elementos */
+    justify-content: space-between; /* Espacio entre los elementos */
+}
+
+.recipe-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #f8f1e7; /* Mantener el mismo tono */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.recipe-info p {
+    margin: 5px 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.recipe-info span {
+    font-weight: bold;
+    color: #5a3d2b; /* Color oscuro para destacar */
+}
+
+.recipe-info-container {
+    flex: 1;
+    background-color: #ffe6cc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-info-container .recipe-info {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #6b4423;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #d4c3b5;
+}
+
+.recipe-actions {
+    margin-top: 10px;
+}
+
+.recipe-actions .button {
+    width: 100%;
+    text-align: center;
+    background-color: #6b4423;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.recipe-actions .button:hover {
+    background-color: #4a2a1a;
+}
+
+.recipe-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1750px;
+    margin: 0 auto;
+}
+
+.recipe-details-container {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.recipe-tags {
+    display: flex;
+    gap: 15px; /* Espaciado entre etiquetas */
+    align-items: center;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    margin-bottom: 10px; /* Separación de los botones */
+}
+
+.recipe-tags span {
+    background: #f8e8d8; /* Color de fondo similar a tu imagen */
+    color: #5a3d2b; /* Color de texto */
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 80px; /* Tamaño mínimo */
+    display: inline-block;
+}
+
+.tag {
+    background: #f8e8d8; /* Color de fondo similar a la imagen */
+    color: #5a3d2b; /* Color de texto */
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
