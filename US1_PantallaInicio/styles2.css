@@ -300,3 +300,22 @@ footer {
         margin-bottom: 0.3rem;
     }
 }
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#user-name {
+    color: #6b4423;
+}

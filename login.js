@@ -14,7 +14,7 @@ document.getElementById("login-form").addEventListener("submit", async function 
     // 💡 Buscar usuario por email
     const { data, error } = await supabase
       .from("usuarios")
-      .select("email, password")
+      .select("email, password") // Asegúrate de que la columna 'password' esté guardada de manera segura (hash)
       .eq("email", email)
       .single();
 
@@ -24,12 +24,32 @@ document.getElementById("login-form").addEventListener("submit", async function 
       return;
     }
 
-    // 💡 Verificar contraseña (considera usar hash en producción)
-    if (data && data.password === password) {
-      alert("¡Inicio de sesión exitoso!");
-      window.location.href = "./US1_PantallaInicio/index.html";
+    // 💡 Verificar contraseña
+    if (data) {
+      if (data.password === password) {
+        // Obtener información completa del usuario
+        const { data: userData, error: userError } = await supabase
+          .from("usuarios")
+          .select("*")
+          .eq("email", email)
+          .single();
+        
+        if (!userError) {
+          // Guardamos el username en lugar del nombre
+          const userToStore = {
+            username: userData.username,  // cambiado de nombre a username
+            email: userData.email,
+            // otros campos que quieras guardar
+          };
+          localStorage.setItem("usuario", JSON.stringify(userToStore));
+          alert("¡Inicio de sesión exitoso!");
+          window.location.href = "./US1_PantallaInicio/index.html";
+        }
+      } else {
+        alert("Correo o contraseña incorrectos.");
+      }
     } else {
-      alert("Correo o contraseña incorrectos.");
+      alert("Usuario no encontrado.");
     }
   } catch (error) {
     console.error("Error de conexión:", error);

@@ -30,6 +30,13 @@ document.getElementById("register-form").addEventListener("submit", async functi
       console.error("Error al insertar datos:", error);
       alert("Error al registrar usuario.");
     } else {
+      // Guardar datos del usuario en localStorage
+      const userToStore = {
+        username: username,
+        email: email
+      };
+      localStorage.setItem("usuario", JSON.stringify(userToStore));
+      
       alert("¡Registro exitoso!");
       window.location.href = "./US1_PantallaInicio/index.html";
     }
