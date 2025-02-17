@@ -45,13 +45,46 @@
                 <button class="filter-button active" onclick="window.location.href='../Platos.html'">Mejor Valoradas</button>
             </div>            
             <div class="filter-group">
-                <button class="filter-button">Filtrar</button>
+                <button class="filter-button" id="filter-btn">Filtros</button>
             </div>
+        </div>
+
+        <!-- Cuadro emergente de filtros -->
+        <div id="filter-options" style="display: none;">
+            <label for="filter-culture">Cultura:</label>
+            <select id="filter-culture">
+                <option value="">Todas</option>
+                <option value="China">China</option>
+                <option value="Española">Española</option>
+                <option value="Italiana">Italiana</option>
+                <option value="Francesa">Francesa</option>
+                <option value="Japonesa">Japonesa</option>
+                <option value="Venezolana">Venezolana</option>
+            </select>
+
+            <label for="filter-difficulty">Dificultad:</label>
+            <select id="filter-difficulty">
+                <option value="">Todas</option>
+                <option value="Fácil">Fácil</option>
+                <option value="Media">Media</option>
+                <option value="Difícil">Difícil</option>
+            </select>
+
+            <label for="filter-time">Tiempo:</label>
+            <select id="filter-time">
+                <option value="">Cualquier tiempo</option>
+                <option value="0-30">Menos de 30 min</option>
+                <option value="30-60">30 - 60 min</option>
+                <option value="60-120">60 - 120 min</option>
+                <option value="121">Más de 120 min</option>
+            </select>
+
+            <button id="apply-filters">Aplicar Filtros</button>
         </div>
 
         <!-- Grid de recetas -->
         <div class="recipes-grid">
-            <div class="recipe-card">
+            <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Media">
                 <div class="recipe-image">
                     <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
                 </div>
@@ -63,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="recipe-card">
+            <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <img src="./Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
                 </div>
@@ -75,7 +108,7 @@
                 </div>
             </div>
 
-            <div class="recipe-card">
+            <div class="recipe-card" data-culture="China" data-time="180" data-difficulty="Media">
                 <div class="recipe-image">
                     <img src="./Imagenes/China/bollitos-chinos.jpg" alt="Bollitos Chinos">
                 </div>
@@ -87,7 +120,7 @@
                 </div>
             </div>
 
-            <div class="recipe-card">
+            <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados">
                 </div>
@@ -111,24 +144,71 @@
         const userInfo = document.getElementById("user-info");
         const authButton = document.getElementById("auth-button");
         
-        // Si el usuario está registrado en localStorage
         if (usuario) {
-            // Mostrar la información del usuario
             userInfo.style.display = "flex";
             document.getElementById("user-name").textContent = usuario.username;
             authButton.style.display = "none";
             
-            // Agregar funcionalidad de cerrar sesión
             document.getElementById("logout-btn").addEventListener("click", (e) => {
                 e.preventDefault();
                 localStorage.removeItem("usuario");
                 window.location.reload();
             });
         } else {
-            // Si no hay usuario, mostrar el botón de login
             userInfo.style.display = "none";
             authButton.style.display = "block";
         }
+
+        // Script para los filtros
+        document.addEventListener("DOMContentLoaded", () => {
+            const filterBtn = document.getElementById("filter-btn");
+            const filterOptions = document.getElementById("filter-options");
+            const applyFiltersBtn = document.getElementById("apply-filters");
+            
+            filterBtn.addEventListener("click", () => {
+                filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
+            });
+            
+            applyFiltersBtn.addEventListener("click", () => {
+                const selectedCulture = document.getElementById("filter-culture").value;
+                const selectedDifficulty = document.getElementById("filter-difficulty").value;
+                const selectedTime = document.getElementById("filter-time").value;
+                
+                const recipes = document.querySelectorAll(".recipe-card");
+                
+                recipes.forEach(recipe => {
+                    const recipeCulture = recipe.getAttribute("data-culture");
+                    const recipeTime = parseInt(recipe.getAttribute("data-time"));
+                    const recipeDifficulty = recipe.getAttribute("data-difficulty");
+                    
+                    const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
+                    const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
+                    let matchesTime = false;
+                    
+                    if (selectedTime === "" || 
+                        (selectedTime === "0-30" && recipeTime <= 30) ||
+                        (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
+                        (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
+                        (selectedTime === "121" && recipeTime > 120)) {
+                        matchesTime = true;
+                    }
+                    
+                    if (matchesCulture && matchesDifficulty && matchesTime) {
+                        recipe.style.display = "inline-block";
+                    } else {
+                        recipe.style.display = "none";
+                    }
+                });
+                
+                filterOptions.style.display = "none";
+            });
+            
+            document.addEventListener("click", (event) => {
+                if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
+                    filterOptions.style.display = "none";
+                }
+            });
+        });
     </script>
 </body>
 </html>
