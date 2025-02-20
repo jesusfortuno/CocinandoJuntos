@@ -10,24 +10,24 @@
 
 <body>
     <nav>
-        <div class="logo">
-            <img src="/US6_GuardarRecetas/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </div>
+        <a href="./../US1_PantallaInicio/index.html" class="logo">
+            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
         <input type="text" class="search-bar" placeholder="Buscar recetas...">
     
         <div id="user-info" class="user-info" style="display: none;">
-            <img src="/US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
             <span id="user-name">Nombre del Usuario</span>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
     
-        <a href="../login.html" id="auth-button" class="auth-buttons">Registrarse / Iniciar Sesión</a>
+        <a href="./../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
         <div class="menu-icon">☰</div>
     </nav>
 
     <main>
         <div class="breadcrumb">
-            <a href="index.html">Inicio</a> > Pollo Agridulce
+            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > Pollo Agridulce
         </div>
 
         <div class="recipe-title">
@@ -36,7 +36,7 @@
 
         <div class="recipe-wrapper">
             <div class="recipe-photo">
-                <img src="/US6_GuardarRecetas/Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
             </div>
 
             <div class="recipe-details-container">
@@ -135,6 +135,6 @@
 
     <!-- Asegúrate de cargar la librería de Supabase antes del script de favoritos.js -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="/favoritos.js"></script>
+    <script src="./../favoritos.js"></script>
 </body>
 </html>
