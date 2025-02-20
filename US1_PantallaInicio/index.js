@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para actualizar la visibilidad de las tarjetas según el ancho de la pantalla
     function updateCardsVisibility() {
         const windowWidth = window.innerWidth;
-        slides.forEach(slide => {
+        slides.forEach((slide, slideIndex) => {
+            // Ocultar todos los slides excepto el actual
+            slide.style.display = slideIndex === currentSlide ? 'flex' : 'none';
+            
             const cards = slide.querySelectorAll('.slide-card');
             cards.forEach((card, index) => {
                 if (windowWidth <= 768) {
@@ -51,7 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateSlider() {
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        // En lugar de usar transform, cambiamos la visibilidad de los slides
+        slides.forEach((slide, index) => {
+            slide.style.display = index === currentSlide ? 'flex' : 'none';
+        });
         updateDots();
     }
 
@@ -62,5 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicialización
     updateCardsVisibility();
-    setInterval(() => moveSlide(1), 5000);
+    
+    // Iniciar el autoplay
+    let autoplayInterval = setInterval(() => moveSlide(1), 5000);
+
+    // Opcional: Pausar el autoplay cuando el usuario interactúa
+    slider.addEventListener('mouseenter', () => {
+        clearInterval(autoplayInterval);
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        autoplayInterval = setInterval(() => moveSlide(1), 5000);
+    });
 });

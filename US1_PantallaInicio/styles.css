@@ -142,21 +142,20 @@ footer {
     width: 100%;
     height: 50vh;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     margin: 0 0 40px 0;
 }
 
 .slider {
-    display: flex;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s ease-in-out;
+    position: relative;
 }
 
 .slide {
-    min-width: 100%;
+    width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     gap: 1.5rem;
     padding: 0 1.5rem;
