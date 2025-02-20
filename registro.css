@@ -78,3 +78,20 @@ input:focus, select:focus {
 .register-button:hover {
   background-color: #8c5a38;
 }
+
+.logo img {
+  width: 150px;
+  height: auto;
+  max-width: 100%;
+}
+
+.volver-container {
+  position: absolute;
+  top: 105px;
+  right: 760px;
+}
+.volver-container img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
