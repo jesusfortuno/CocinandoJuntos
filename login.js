@@ -11,48 +11,32 @@ document.getElementById("login-form").addEventListener("submit", async function 
   const password = document.getElementById("password").value;
 
   try {
-    // 💡 Buscar usuario por email
-    const { data, error } = await supabase
-      .from("usuarios")
-      .select("email, password") // Asegúrate de que la columna 'password' esté guardada de manera segura (hash)
-      .eq("email", email)
-      .single();
+    const { data: usuario, error } = await supabase
+        .from("usuarios")
+        .select("id, username, email")
+        .eq("email", email)
+        .eq("password", password)
+        .single();
 
     if (error) {
-      console.error("Error al buscar usuario:", error);
+      console.error("Error:", error.message);
       alert("Error al iniciar sesión. Verifica tus credenciales.");
       return;
     }
 
-    // 💡 Verificar contraseña
-    if (data) {
-      if (data.password === password) {
-        // Obtener información completa del usuario
-        const { data: userData, error: userError } = await supabase
-          .from("usuarios")
-          .select("*")
-          .eq("email", email)
-          .single();
-        
-        if (!userError) {
-          // Guardamos el username en lugar del nombre
-          const userToStore = {
-            username: userData.username,  // cambiado de nombre a username
-            email: userData.email,
-            // otros campos que quieras guardar
-          };
-          localStorage.setItem("usuario", JSON.stringify(userToStore));
-          alert("¡Inicio de sesión exitoso!");
-          window.location.href = "./US1_PantallaInicio/index.html";
-        }
-      } else {
-        alert("Correo o contraseña incorrectos.");
-      }
+    if (usuario) {
+      localStorage.setItem("usuario", JSON.stringify({
+        id: usuario.id,
+        username: usuario.username,
+        email: usuario.email
+      }));
+      alert("¡Inicio de sesión exitoso!");
+      window.location.href = "./US1_PantallaInicio/index.html";
     } else {
-      alert("Usuario no encontrado.");
+      alert("Correo o contraseña incorrectos.");
     }
   } catch (error) {
-    console.error("Error de conexión:", error);
-    alert("Error de conexión. Intenta más tarde.");
+    console.error("Error:", error);
+    alert("Error inesperado. Por favor, intenta de nuevo.");
   }
 });

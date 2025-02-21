@@ -249,6 +249,24 @@ footer {
     background: #5a3d2b;
 }
 
+/* Estilos para el botón de favoritos */
+.favorite-btn {
+    background-color: #fff;
+    border: 2px solid #ff4b4b;
+    color: #ff4b4b;
+    transition: all 0.3s ease;
+}
+
+.favorite-btn:hover {
+    background-color: #ff4b4b;
+    color: white;
+}
+
+.favorite-btn.favorito-activo {
+    background-color: #ff4b4b;
+    color: white;
+}
+
 /* ---------------------------- RESPONSIVE ---------------------------- */
 
 @media screen and (max-width: 768px) {

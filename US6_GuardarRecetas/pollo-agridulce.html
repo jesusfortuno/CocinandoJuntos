@@ -101,40 +101,55 @@
     </main>
 
     <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+        <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
 
-    <!-- Agregar el siguiente script al final del archivo HTML -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../favoritos.js"></script>
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
         const userInfo = document.getElementById("user-info");
         const authButton = document.getElementById("auth-button");
+        const userName = document.getElementById("user-name");
+        const logoutBtn = document.getElementById("logout-btn");
 
-        console.log("Datos del usuario:", usuario); // Para depuración
-
-        // Si el usuario está registrado en localStorage
+        // Mostrar información del usuario si está logueado
         if (usuario) {
-            // Mostrar la información del usuario
             userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username || "Usuario";
             authButton.style.display = "none";
-
-            // Agregar funcionalidad de cerrar sesión
-            document.getElementById("logout-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.reload();
-            });
+            userName.textContent = usuario.username;
         } else {
-            // Si no hay usuario, mostrar el botón de login
             userInfo.style.display = "none";
             authButton.style.display = "block";
         }
-    </script>
 
-    <!-- Asegúrate de cargar la librería de Supabase antes del script de favoritos.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="./../favoritos.js"></script>
+        // Manejar el botón de favoritos
+        const favButton = document.querySelector('.favorite-btn');
+        if (favButton) {
+            favButton.addEventListener('click', async function() {
+                if (!usuario) {
+                    alert('Debes iniciar sesión para guardar en favoritos');
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                const recetaId = this.getAttribute('data-receta-id');
+                const resultado = await agregarAFavoritos(recetaId);
+                
+                if (resultado) {
+                    this.classList.add('favorito-activo');
+                    this.textContent = ' En Favoritos';
+                }
+            });
+        }
+
+        // Manejar el cierre de sesión
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('usuario');
+            window.location.href = '../login.html';
+        });
+    </script>
 </body>
 </html>
