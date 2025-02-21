@@ -119,20 +119,28 @@
             userInfo.style.display = "flex";
             authButton.style.display = "none";
             userName.textContent = usuario.username;
+            console.log("ID del usuario:", usuario.id); // Para debug
         } else {
             userInfo.style.display = "none";
             authButton.style.display = "block";
         }
 
-        // Manejar el botón de favoritos
+        // Manejar el botón de favoritos - usando una función nombrada para evitar duplicados
         const favButton = document.querySelector('.favorite-btn');
         if (favButton) {
-            favButton.addEventListener('click', async function() {
+            // Remover eventos previos si existen
+            favButton.replaceWith(favButton.cloneNode(true));
+            const newFavButton = document.querySelector('.favorite-btn');
+            
+            newFavButton.addEventListener('click', async function favButtonHandler() {
                 if (!usuario) {
                     alert('Debes iniciar sesión para guardar en favoritos');
                     window.location.href = '../login.html';
                     return;
                 }
+
+                // Deshabilitar el botón mientras se procesa
+                this.disabled = true;
 
                 const recetaId = this.getAttribute('data-receta-id');
                 const resultado = await agregarAFavoritos(recetaId);
@@ -141,6 +149,9 @@
                     this.classList.add('favorito-activo');
                     this.textContent = ' En Favoritos';
                 }
+
+                // Rehabilitar el botón
+                this.disabled = false;
             });
         }
 

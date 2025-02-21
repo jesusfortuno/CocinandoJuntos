@@ -14,7 +14,29 @@ async function agregarAFavoritos(recetaId) {
 
         const usuario = JSON.parse(usuarioGuardado);
         
-        // Insertar en favoritos
+        // Verificar que tengamos un ID de usuario válido
+        if (!usuario.id) {
+            console.error("ID de usuario no encontrado");
+            alert("Error: Usuario no identificado correctamente");
+            return false;
+        }
+
+        console.log("Intentando guardar favorito para usuario:", usuario.id);
+
+        // Verificar si ya existe el favorito
+        const { data: existente } = await supabase
+            .from("favoritos")
+            .select("id")
+            .eq("usuario_id", usuario.id)
+            .eq("receta_id", parseInt(recetaId))
+            .maybeSingle();
+
+        if (existente) {
+            alert("Esta receta ya está en tus favoritos");
+            return false;
+        }
+
+        // Si no existe, insertar nuevo favorito
         const { error } = await supabase
             .from("favoritos")
             .insert({
@@ -24,15 +46,12 @@ async function agregarAFavoritos(recetaId) {
             });
 
         if (error) {
-            if (error.code === '23505') {
-                alert("Esta receta ya está en tus favoritos");
-            } else {
-                console.error("Error al guardar:", error);
-                alert("Error al guardar en favoritos");
-            }
+            console.error("Error al guardar:", error);
+            alert("Error al guardar en favoritos");
             return false;
         }
 
+        console.log("Favorito guardado exitosamente");
         alert("¡Receta guardada en favoritos!");
         return true;
 
