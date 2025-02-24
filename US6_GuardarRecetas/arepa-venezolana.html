@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arepa Venezolana - Cocinando Juntos</title>
+    <link rel="stylesheet" href="arepa-venezolana.css">
+</head>
+
+<body>
+    <nav>
+        <a href="./../US1_PantallaInicio/index.html" class="logo">
+            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <input type="text" class="search-bar" placeholder="Buscar recetas...">
+    
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+    
+        <a href="./../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+        <div class="menu-icon">☰</div>
+    </nav>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a href="./../US1_PantallaInicio/cultura-venezolana.html">Cultura Venezolana</a> > Arepa Venezolana
+        </div>
+
+        <div class="recipe-title">
+            <h1>Arepa Venezolana</h1>
+        </div>
+
+        <div class="recipe-wrapper">
+            <div class="recipe-photo">
+                <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Arepa Venezolana">
+            </div>
+
+            <div class="recipe-details-container">
+                <div class="recipe-info">
+                    <div class="recipe-tags">
+                        <span class="tag">Dificultad: Fácil</span>
+                        <span class="tag">Tiempo: 30 min</span>
+                        <span class="tag">Categoría: Desayuno</span>
+                    </div>
+
+                    <div class="recipe-actions">
+                        <button class="button favorite-btn" data-receta-id="5">❤️ Añadir a Favoritos</button>
+                        <button class="button rate-btn">⭐ Valorar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="recipe-container">
+            <div class="recipe-ingredients">
+                <h2>Ingredientes</h2>
+                <ul>
+                    <li>Dos tazas de harina de maíz para 4 personas a 2 o 3 arepas por persona</li>
+                    <li>Una cucharadita de sal</li>
+                    <li>Agua tibia</li>
+                    <li>Leche tibia (opcional)</li>
+                    <li>Una cucharadita de mantequilla (opcional)</li>
+                </ul>
+            </div>
+
+            <div class="recipe-steps">
+                <h2>Pasos para la Receta</h2>
+                <ol>
+                    <li>La receta tradicional de arepas únicamente requiere de harina de maíz, agua y sal, por lo que además de resultar deliciosas no contienen gluten, por lo que son perfectas para celiacos. Sin embargo si deseas obtener una masa mucho más suave y sabrosa puedes añadir a la mezcla un poco de leche y una cucharadita de mantequilla. Tus arepas quedarán sencillamente deliciosas.</li>
+                    <li>La masa de arepa siempre debe quedar suave y fácil de moldear, si la misma queda dura el resultado final será también una arepa dura y difícil de disfrutar y digerir.Para conseguir que tus arepas queden suavecitas y ricas, comienza por mezclar una taza y media de agua tibia con media taza de leche completa, desnatada o deslactosada (como prefieras). Añade la cucharadita de sal y revuelve. Si lo deseas puedes prescindir de la leche y usar entonces únicamente dos tazas de agua.</li>
+                    <li>Añade la mantequilla si quieres darle más sabor a la masa. Luego ve añadiendo poco a poco la harina de maíz mientras vas mezclando con la mano. No lo hagas todo de golpe o corres el riesgo de que la masa te quede muy dura. Deja de echar la harina en el momento en el que la masa esté compacta pero aún suave y fácil de moldear. Si sientes que ha quedado demasiado dura basta con agregar un poco más de líquido.</li>
+                    <li>Enciende el horno a 250 ºC para precalentarlo y, en simultáneo, coloca una sartén antiadherente a fuego medio para que se vaya calentando, no hace falta añadir aceite. Llega el momento de hacer las arepas. Realiza bolas con la masa que luego deberás aplastar suavemente hasta formar una especie de pan redondo de aproximadamente un dedo de grosor. El tamaño de la arepa será básicamente el que desee el cocinero.</li>
+                    <li>Coloca las arepas en la sartén a fuego medio bajo con el fin de que se doren y se sellen externamente. Es importante que no las hagas a fuego muy alto pues se quemarán por fuera y quedarán crudas por dentro. Una vez doradas y selladas, introdúcelas en el horno por 5 minutos en cada lado. Aunque muchas personas omiten este paso y las hacen únicamente en la sartén, este toque final permite que las arepas queden crujientes por fuera y suaves y cocinadas por dentro.</li>
+                    <li>Cuando tus arepas estén duritas y doradas por fuera estarán listas para ser consumidas. Ahora solo falta abrirlas y rellenarlas con lo que quieras: jamón y queso, pollo, carne. Hay una larga lista de deliciosas posibilidades para hacer una comida exquisita y muy completa. ¡Buen provecho!</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="hidden">
+            <h2>Valoraciones y Comentarios</h2>
+            <p>Aquí irá la sección para valoraciones y comentarios de los usuarios.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../favoritos.js"></script>
+    <script>
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const userInfo = document.getElementById("user-info");
+        const authButton = document.getElementById("auth-button");
+        const userName = document.getElementById("user-name");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        // Mostrar información del usuario si está logueado
+        if (usuario) {
+            userInfo.style.display = "flex";
+            authButton.style.display = "none";
+            userName.textContent = usuario.username;
+        } else {
+            userInfo.style.display = "none";
+            authButton.style.display = "block";
+        }
+
+        // Manejar el botón de favoritos - usando una función nombrada para evitar duplicados
+        const favButton = document.querySelector('.favorite-btn');
+        if (favButton) {
+            // Remover eventos previos si existen
+            favButton.replaceWith(favButton.cloneNode(true));
+            const newFavButton = document.querySelector('.favorite-btn');
+            
+            newFavButton.addEventListener('click', async function favButtonHandler() {
+                if (!usuario) {
+                    alert('Debes iniciar sesión para guardar en favoritos');
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                // Deshabilitar el botón mientras se procesa
+                this.disabled = true;
+
+                const recetaId = this.getAttribute('data-receta-id');
+                const resultado = await agregarAFavoritos(recetaId);
+                
+                if (resultado) {
+                    this.classList.add('favorito-activo');
+                    this.textContent = ' En Favoritos';
+                }
+
+                // Rehabilitar el botón
+                this.disabled = false;
+            });
+        }
+
+        // Manejar el cierre de sesión
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('usuario');
+            window.location.href = '../login.html';
+        });
+    </script>
+</body>
+</html>

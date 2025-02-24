@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollo Agridulce - Cocinando Juntos</title>
+    <link rel="stylesheet" href="pollo-agridulce.css">
+</head>
+
+<body>
+    <nav>
+        <a href="./../US1_PantallaInicio/index.html" class="logo">
+            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <input type="text" class="search-bar" placeholder="Buscar recetas...">
+    
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+    
+        <a href="./../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+        <div class="menu-icon">☰</div>
+    </nav>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a href="./../US1_PantallaInicio/cultura-china.html">Cultura China</a> > Pollo Agridulce
+        </div>
+
+        <div class="recipe-title">
+            <h1>Pollo Agridulce</h1>
+        </div>
+
+        <div class="recipe-wrapper">
+            <div class="recipe-photo">
+                <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+            </div>
+
+            <div class="recipe-details-container">
+                <div class="recipe-info">
+                    <div class="recipe-tags">
+                        <span class="tag">Dificultad: Media</span>
+                        <span class="tag">Tiempo: 40 min</span>
+                        <span class="tag">Categoría: Principal</span>
+                    </div>
+
+                    <div class="recipe-actions">
+                        <button class="button favorite-btn" data-receta-id="1">❤️ Añadir a Favoritos</button>
+                        <button class="button rate-btn">⭐ Valorar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="recipe-container">
+            <div class="recipe-ingredients">
+                <h2>Ingredientes</h2>
+                <ul>
+                    <li>300 g pechuga de pollo</li>
+                    <li>125 g pimiento</li>
+                    <li>120 g piña</li>
+                    <li>100 g cebolla</li>
+                    <li>1 trocito jengibre</li>
+                    <li>1 diente ajo</li>
+                    <li>Maicena</li>
+                    <li>1 cda salsa de soja</li>
+                    <li>Para la salsa:</li>
+                    <li>150 ml agua</li>
+                    <li>60 g salsa de tomate (Ketchup)</li>
+                    <li>2 cdas vinagre de arroz</li>
+                    <li>2 cdas salsa de soja</li>
+                    <li>2 cdas azúcar moreno</li>
+                    <li>1 cdts sal</li>
+                </ul>
+            </div>
+
+            <div class="recipe-steps">
+                <h2>Pasos para la Receta</h2>
+                <ol>
+                    <li>Para preparar la salsa, en una sartén calentar el agua, el ketchup, la salsa de soja, el vinagre, el azúcar, la sal y remover todo bien. Cuando haya reducido un poco, reservar la salsa para luego.</li>
+                    <li>Picar el ajo y el jengibre, cortar la cebolla y el pimiento en dados, además cortar el pollo en trozos grandes.</li>
+                    <li>Para marinar el pollo, mezclar en un bol el pollo, la salsa de soja, el vino chino, el huevo y mezclar todo bien y terminar rebozándolo con una buena cantidad de maicena.</li>
+                    <li>Freír los trozos de pollo en una buena cantidad de aceite vegetal a fuego alto y cuando estén bien dorados, sacarlos a un papel absorbente.</li>
+                    <li>Empezar a saltear, en una sartén con un chorrito de aceite vegetal freír el ajo y el jengibre.</li>
+                    <li>Cuando empiecen a oler bien, añadir el pimiento, la cebolla y saltear durante un par de minutos. Seguidamente añadir la piña y saltear durante un minuto más.</li>
+                    <li>Incorporar la salsa que hemos preparado con anterioridad y un poco de maicena disuelta en agua para que espese un poco. Añadir el pollo, mezclar todo bien y ya está listo para servir.</li>
+                </ol>
+            </div>
+        </div>
+
+        
+
+        <div class="hidden">
+            <h2>Valoraciones y Comentarios</h2>
+            <p>Aquí irá la sección para valoraciones y comentarios de los usuarios.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../favoritos.js"></script>
+    <script>
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const userInfo = document.getElementById("user-info");
+        const authButton = document.getElementById("auth-button");
+        const userName = document.getElementById("user-name");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        // Mostrar información del usuario si está logueado
+        if (usuario) {
+            userInfo.style.display = "flex";
+            authButton.style.display = "none";
+            userName.textContent = usuario.username;
+            console.log("ID del usuario:", usuario.id); // Para debug
+        } else {
+            userInfo.style.display = "none";
+            authButton.style.display = "block";
+        }
+
+        // Manejar el botón de favoritos - usando una función nombrada para evitar duplicados
+        const favButton = document.querySelector('.favorite-btn');
+        if (favButton) {
+            // Remover eventos previos si existen
+            favButton.replaceWith(favButton.cloneNode(true));
+            const newFavButton = document.querySelector('.favorite-btn');
+            
+            newFavButton.addEventListener('click', async function favButtonHandler() {
+                if (!usuario) {
+                    alert('Debes iniciar sesión para guardar en favoritos');
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                // Deshabilitar el botón mientras se procesa
+                this.disabled = true;
+
+                const recetaId = this.getAttribute('data-receta-id');
+                const resultado = await agregarAFavoritos(recetaId);
+                
+                if (resultado) {
+                    this.classList.add('favorito-activo');
+                    this.textContent = ' En Favoritos';
+                }
+
+                // Rehabilitar el botón
+                this.disabled = false;
+            });
+        }
+
+        // Manejar el cierre de sesión
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('usuario');
+            window.location.href = '../login.html';
+        });
+    </script>
+</body>
+</html>

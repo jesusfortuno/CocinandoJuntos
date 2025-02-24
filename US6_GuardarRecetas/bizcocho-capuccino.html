@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizcocho Capuccino - Cocinando Juntos</title>
+    <link rel="stylesheet" href="bizcocho-capuccino.css ">
+</head>
+
+<body>
+    <nav>
+        <a href="./../US1_PantallaInicio/index.html" class="logo">
+            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <input type="text" class="search-bar" placeholder="Buscar recetas...">
+    
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+    
+        <a href="./../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+        <div class="menu-icon">☰</div>
+    </nav>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a href="./../US1_PantallaInicio/cultura-italiana.html">Cultura Italiana</a> > Bizcocho Capuccino
+        </div>
+
+        <div class="recipe-title">
+            <h1>Bizcocho Capuccino</h1>
+        </div>
+
+        <div class="recipe-wrapper">
+            <div class="recipe-photo">
+                <img src="./Imagenes/Italia/bizcocho-capuccino.jpg  " alt="Bizcocho Capuccino">
+            </div>
+
+            <div class="recipe-details-container">
+                <div class="recipe-info">
+                    <div class="recipe-tags">
+                        <span class="tag">Dificultad: Fácil</span>
+                        <span class="tag">Tiempo: 60 min</span>
+                        <span class="tag">Categoría: Desayuno</span>
+                    </div>
+
+                    <div class="recipe-actions">
+                        <button class="button favorite-btn" data-receta-id="4">❤️ Añadir a Favoritos</button>
+                        <button class="button rate-btn">⭐ Valorar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="recipe-container">
+            <div class="recipe-ingredients">
+                <h2>Ingredientes</h2>
+                <ul>
+                    <li>3 huevos</li>
+                    <li>1 yogur natural</li>
+                    <li>1 vasito de yogur aceite de girasol</li>
+                    <li>1 vasito de yogur azúcar</li>
+                    <li>3 vasitos de yogur harina</li>
+                    <li>1 sobre levadura Royal</li>
+                    <li>1 pizca sal</li>
+                    <li>1 chorrito aroma de vainilla</li>
+                </ul>
+            </div>
+
+            <div class="recipe-steps">
+                <h2>Pasos para la Receta</h2>
+                <ol>
+                    <li>Batimos los huevos con el yogur</li>
+                    <li>Precalentar el horno a 180 grados</li>
+                    <li>Agregamos un vasito de azúcar y otro vasito con una cucharada de café soluble y otra de cacao en polvo y lo rellenamos de azúcar. Esto es al gusto ya que la proporción es como gustes, más café o más cacao. Mezclar bien con unas varillas</li>
+                    <li>Añadimos el aceite, la sal y la vainilla y mezclamos</li>
+                    <li>Añadimos dos vasos de harina y mezclamos bien. Después añadimos un tercero junto con la levadura y volvemos a mezclar</li>
+                    <li>Dejar reposar unos minutos</li>
+                    <li>Hornear a 180 grados durante 40 minutos</li>
+                    <li>Dejar que enfríe para desmoldar y dejar acabar de enfriar en una rejilla. Buen provecho</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="hidden">
+            <h2>Valoraciones y Comentarios</h2>
+            <p>Aquí irá la sección para valoraciones y comentarios de los usuarios.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../favoritos.js"></script>
+    <script>
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const userInfo = document.getElementById("user-info");
+        const authButton = document.getElementById("auth-button");
+        const userName = document.getElementById("user-name");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        // Mostrar información del usuario si está logueado
+        if (usuario) {
+            userInfo.style.display = "flex";
+            authButton.style.display = "none";
+            userName.textContent = usuario.username;
+        } else {
+            userInfo.style.display = "none";
+            authButton.style.display = "block";
+        }
+
+        // Manejar el botón de favoritos - usando una función nombrada para evitar duplicados
+        const favButton = document.querySelector('.favorite-btn');
+        if (favButton) {
+            // Remover eventos previos si existen
+            favButton.replaceWith(favButton.cloneNode(true));
+            const newFavButton = document.querySelector('.favorite-btn');
+            
+            newFavButton.addEventListener('click', async function favButtonHandler() {
+                if (!usuario) {
+                    alert('Debes iniciar sesión para guardar en favoritos');
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                // Deshabilitar el botón mientras se procesa
+                this.disabled = true;
+
+                const recetaId = this.getAttribute('data-receta-id');
+                const resultado = await agregarAFavoritos(recetaId);
+                
+                if (resultado) {
+                    this.classList.add('favorito-activo');
+                    this.textContent = ' En Favoritos';
+                }
+
+                // Rehabilitar el botón
+                this.disabled = false;
+            });
+        }
+
+        // Manejar el cierre de sesión
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('usuario');
+            window.location.href = '../login.html';
+        });
+    </script>
+</body>
+</html>
