@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="PaginaAdmin.css">
+</head>
+<body>
+
+<nav>
+    <a href="./../US1_PantallaInicio/index.html" class="logo">
+        <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+    </a>
+    <input type="text" placeholder="Buscar..." class="search-bar">
+    <div id="user-info" class="user-info" style="display: none;">
+        <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+        <span id="user-name">Nombre del Usuario</span>
+        <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+    </div>
+
+    <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+    <div class="menu-icon">☰</div>
+</nav>
+
+<main>
+
+    <div class="admin-dashboard">
+        <div class="profile-section">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil" class="admin-profile-pic">
+            <span class="admin-name">Nombre usuario</span>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-item">
+                <span class="stat-label">Total de Recetas:</span>
+                <span class="stat-value" id="total-recetas">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Total de Usuarios:</span>
+                <span class="stat-value" id="total-usuarios">0</span>
+            </div>
+        </div>
+
+        <div class="management-section">
+            <div class="management-item">
+                <a href="./gestionRecetas.html" class="management-link">Gestión de Recetas</a>
+            </div>
+            <div class="management-item">
+                <a href="#" class="management-link">Gestión de Usuario</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+</footer>
+
+<script>
+    // Obtener el usuario desde localStorage
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const userInfo = document.getElementById("user-info");
+    const authButton = document.getElementById("auth-button");
+    const adminName = document.querySelector(".admin-name");
+    
+    if (usuario) {
+        console.log('Usuario encontrado:', usuario);
+        userInfo.style.display = "flex";
+        document.getElementById("user-name").textContent = usuario.username;
+        adminName.textContent = usuario.username;
+        authButton.style.display = "none";
+
+        document.getElementById("logout-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("usuario");
+            window.location.reload();
+        });
+    } else {
+        console.log('No se encontró usuario en localStorage');
+        userInfo.style.display = "none";
+        authButton.style.display = "block";
+        window.location.href = "../login.html";
+    }
+</script>
+
+<!-- Scripts de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="adminStats.js"></script>
+
+</body>
+</html>
