@@ -66,7 +66,8 @@ async function añadirReceta(formData) {
     }
 }
 
-
+// Editar receta
+// ... (resto del código anterior igual)
 
 // Editar receta
 async function editarReceta(id) {
@@ -79,14 +80,15 @@ async function editarReceta(id) {
 
         if (error) throw error;
 
+        if (!receta) {
+            throw new Error('Receta no encontrada');
+        }
+
         // Rellenar el formulario con los datos de la receta
-        document.getElementById('titulo').value = receta.titulo;
-        document.getElementById('descripcion').value = receta.descripcion;
-        document.getElementById('dificultad').value = receta.dificultad;
-        document.getElementById('tiempo').value = receta.tiempo;
-        document.getElementById('categoria').value = receta.categoria;
-        document.getElementById('ingredientes').value = receta.ingredientes;
-        document.getElementById('pasos').value = receta.pasos;
+        const fields = ['titulo', 'descripcion', 'dificultad', 'tiempo', 'categoria', 'ingredientes', 'pasos'];
+        fields.forEach(field => {
+            document.getElementById(field).value = receta[field] || '';
+        });
 
         // Mostrar el modal
         document.getElementById('modal-title').textContent = 'Editar Receta';
@@ -95,27 +97,87 @@ async function editarReceta(id) {
         modal.style.display = "block";
     } catch (error) {
         console.error('Error al cargar la receta para editar:', error);
-        alert('Error al cargar la receta');
+        alert('Error al cargar la receta: ' + error.message);
     }
 }
 
-// Eliminar receta
-async function eliminarReceta(id) {
-    if (confirm('¿Estás seguro de que quieres eliminar esta receta?')) {
-        try {
-            const { error } = await supabase
+// Manejar el envío del formulario
+recipeForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(recipeForm);
+    const mode = recipeForm.dataset.mode;
+    
+    try {
+        if (mode === 'add') {
+            // Añadir nueva receta
+            const { data, error } = await supabase
                 .from('recetas')
-                .delete()
-                .eq('id', id);
+                .insert([{
+                    titulo: formData.get('titulo'),
+                    descripcion: formData.get('descripcion'),
+                    dificultad: formData.get('dificultad'),
+                    tiempo: formData.get('tiempo'),
+                    categoria: formData.get('categoria'),
+                    ingredientes: formData.get('ingredientes'),
+                    pasos: formData.get('pasos')
+                }])
+                .select();
 
             if (error) throw error;
+            
+            alert('Receta añadida con éxito');
+        } else if (mode === 'edit') {
+            const recetaId = parseInt(recipeForm.dataset.recetaId);
+            if (!recetaId) throw new Error('ID de receta no válido');
 
-            cargarRecetas();
-            alert('Receta eliminada con éxito');
-        } catch (error) {
-            console.error('Error al eliminar receta:', error);
-            alert('Error al eliminar la receta');
+            // Actualizar receta existente
+            const { error } = await supabase
+                .from('recetas')
+                .update({
+                    titulo: formData.get('titulo'),
+                    descripcion: formData.get('descripcion'),
+                    dificultad: formData.get('dificultad'),
+                    tiempo: formData.get('tiempo'),
+                    categoria: formData.get('categoria'),
+                    ingredientes: formData.get('ingredientes'),
+                    pasos: formData.get('pasos')
+                })
+                .eq('id', recetaId)
+                .select();
+
+            if (error) throw error;
+            
+            alert('Receta actualizada con éxito');
         }
+
+        modal.style.display = "none";
+        await cargarRecetas(); // Esperar a que se recarguen las recetas
+    } catch (error) {
+        console.error('Error en la operación:', error);
+        alert('Error: ' + error.message);
+    }
+};
+
+// Eliminar receta
+async function eliminarReceta(id) {
+    if (!id || !confirm('¿Estás seguro de que quieres eliminar esta receta?')) {
+        return;
+    }
+
+    try {
+        const { error } = await supabase
+            .from('recetas')
+            .delete()
+            .eq('id', id)
+            .select(); // Añadir select() para verificar que la operación se completó
+
+        if (error) throw error;
+
+        await cargarRecetas(); // Esperar a que se recarguen las recetas
+        alert('Receta eliminada con éxito');
+    } catch (error) {
+        console.error('Error al eliminar receta:', error);
+        alert('Error al eliminar la receta: ' + error.message);
     }
 }
 
@@ -134,39 +196,6 @@ closeBtn.onclick = () => {
 window.onclick = (event) => {
     if (event.target == modal) {
         modal.style.display = "none";
-    }
-};
-
-recipeForm.onsubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(recipeForm);
-    
-    if (recipeForm.dataset.mode === 'edit') {
-        try {
-            const { error } = await supabase
-                .from('recetas')
-                .update({
-                    titulo: formData.get('titulo'),
-                    descripcion: formData.get('descripcion'),
-                    dificultad: formData.get('dificultad'),
-                    tiempo: formData.get('tiempo'),
-                    categoria: formData.get('categoria'),
-                    ingredientes: formData.get('ingredientes'),
-                    pasos: formData.get('pasos')
-                })
-                .eq('id', recipeForm.dataset.recetaId);
-
-            if (error) throw error;
-
-            modal.style.display = "none";
-            cargarRecetas();
-            alert('Receta actualizada con éxito');
-        } catch (error) {
-            console.error('Error al actualizar receta:', error);
-            alert('Error al actualizar la receta');
-        }
-    } else {
-        añadirReceta(formData);
     }
 };
 
