@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Usuario - Cocinando Juntos</title>
+    <link rel="stylesheet" href="usuario.css">
+</head>
+<body>
+    <!--MENU NAVEGACIÓN-->
+    <nav>
+        <div class="logo">
+            <a href="../US1_PantallaInicio/index.html">
+                <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+            </a>
+        </div>
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="../Us1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="../US1_PantallaInicio/index.html" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="profile-section">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil">
+                </div>
+                <span id="profile-user-name">Nombre del Usuario</span>
+            </div>
+            <div class="profile-info">
+                <h3>Información Personal</h3>
+                <p>Email: <span id="user-email"></span></p>
+                <button class="primary-btn">Cambiar Contraseña</button>
+            </div>
+        </section>
+
+        <section class="recent-comments">
+            <h3>Comentarios Más Recientes</h3>
+            <div class="comment">Comentario 1</div>
+            <div class="comment">Comentario 2</div>
+        </section>
+
+        <section class="recent-ratings">
+            <h3>Valoraciones Más Recientes</h3>
+            <div class="rating">Valoración 1</div>
+            <div class="rating">Valoración 2</div>
+        </section>
+
+        <section class="saved-recipes">
+            <h3>Últimas Recetas Guardadas</h3>
+            <div id="saved-recipes-container" class="recipes-grid">
+                <!-- Las recetas se insertarán dinámicamente con JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Colocar justo antes de los scripts y del cierre del body -->
+    <div id="password-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Cambiar Contraseña</h2>
+            <form id="change-password-form">
+                <div class="form-group">
+                    <label for="current-password">Contraseña actual:</label>
+                    <div class="password-container">
+                        <input type="password" id="current-password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('current-password')">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Contraseña nueva:</label>
+                    <div class="password-container">
+                        <input type="password" id="new-password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('new-password')">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Repetir contraseña nueva:</label>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="primary-btn">Actualizar Contraseña</button>
+                <button type="button" class="secondary-btn" onclick="closeModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="usuario.js"></script>
+
+</body>
+</html>

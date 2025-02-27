@@ -80,4 +80,17 @@ document.addEventListener('DOMContentLoaded', () => {
     slider.addEventListener('mouseleave', () => {
         autoplayInterval = setInterval(() => moveSlide(1), 5000);
     });
+
+    window.onload = function() {
+        const loggedIn = localStorage.getItem('loggedIn');
+        const email = localStorage.getItem('email'); // Obtener el correo electrónico
+
+        if (loggedIn === 'true') {
+            // Mostrar el correo electrónico en la barra de navegación
+            document.getElementById('user-name').textContent = email || 'Usuario';
+            document.getElementById('user-name').onclick = function() {
+                window.location.href = 'US7_PaginaDeUsuario/usuario.html'; // Redirigir al perfil
+            };
+        }
+    };
 });
