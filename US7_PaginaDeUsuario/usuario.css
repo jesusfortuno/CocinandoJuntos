@@ -10,6 +10,14 @@ html, body {
     margin: 0;
 }
 
+footer {
+    background-color: #6b4423;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f1e9;
@@ -148,21 +156,10 @@ main {
       margin-bottom: 20px;
   }
 
-
-
-
-
-
-
-
   .comment, .rating {
       padding: 10px;
       border-bottom: 1px solid #ccc;
   }
-
-
-
-
 
   .saved-recipes {
       background-color: #f8f1e9;
@@ -219,6 +216,7 @@ main {
         width: 100%;
     }
 }
+
 
 .hidden {
     display: none;
