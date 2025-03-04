@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="gestionUsuarios.css">
+</head>
+<body>
+    <nav>
+        <a href="./../US1_PantallaInicio/index.html" class="logo">
+            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="./PaginaAdmin.html">Panel de Administración</a> &gt; <span>Gestión de Usuarios</span>
+        </div>
+
+        <div class="users-management">
+            <div class="management-header">
+                <h1>Gestión de Usuarios</h1>
+                <button id="add-user-btn" class="primary-button">Añadir Nuevo Usuario</button>
+            </div>
+
+            <div class="users-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Los usuarios se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal para añadir/editar usuario -->
+        <div id="user-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title">Añadir Nuevo Usuario</h2>
+                <form id="user-form">
+                    <div class="form-group">
+                        <label for="username">Nombre de usuario:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password">
+                        <small>Dejar en blanco para mantener la contraseña actual al editar</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="rol">Rol:</label>
+                        <select id="rol" name="rol" required>
+                            <option value="user">Usuario</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="primary-button">Guardar Usuario</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="gestionUsuarios.js"></script>
+</body>
+</html>
+
