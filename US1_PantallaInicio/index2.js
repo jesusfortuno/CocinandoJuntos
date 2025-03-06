@@ -60,6 +60,79 @@ function initializeSearchBar() {
   })
 }
 
+// Función para obtener la ruta de imagen según el título de la receta
+function getImagePath(titulo) {
+  // Mapeo de títulos a rutas de imágenes
+  const imageMap = {
+    "Pollo Agridulce": "./Imagenes/China/pollo-agridulce.jpg",
+    Paella: "./Imagenes/España/paella.jpg",
+    "Crepas Dulces": "./Imagenes/Francia/crepas-dulces.jpg",
+    "Bizcocho Capuccino": "./Imagenes/Italia/bizcocho-capuccino.jpg",
+    "Arepa Venezolana": "./Imagenes/Venezuela/arepa-venezolana.jpg",
+    "Galletas de Sésamo": "./Imagenes/China/galletas-de-sesamo.jpg",
+    "Bolitas Chinas": "./Imagenes/China/bolitas-chinas.jpg",
+    "Fideos Salteados": "./Imagenes/China/fideos-salteados.jpg",
+    "Tortilla de Patatas": "./Imagenes/España/tortilla-patatas.jpeg",
+    patata: "./Imagenes/España/tortilla-patatas.jpeg",
+  }
+
+  // Buscar coincidencia exacta
+  if (imageMap[titulo]) {
+    return imageMap[titulo]
+  }
+
+  // Buscar coincidencia parcial
+  for (const key in imageMap) {
+    if (titulo.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(titulo.toLowerCase())) {
+      return imageMap[key]
+    }
+  }
+
+  // Imagen por defecto según categoría
+  if (titulo.toLowerCase().includes("pollo")) {
+    return "./Imagenes/China/pollo-agridulce.jpg"
+  } else if (titulo.toLowerCase().includes("pasta") || titulo.toLowerCase().includes("pizza")) {
+    return "./Imagenes/Italia/pizza-margarita.jpg"
+  } else if (titulo.toLowerCase().includes("sushi") || titulo.toLowerCase().includes("ramen")) {
+    return "./Imagenes/Japon/sushi.jpeg"
+  }
+
+  // Imagen por defecto si no hay coincidencia
+  return "./Imagenes/default-recipe.jpg"
+}
+
+// Función para obtener la URL de la página según el título de la receta
+function getRecipeUrl(receta) {
+  // Convertir el título a un formato de URL amigable
+  const slug = receta.titulo
+    .toLowerCase()
+    .replace(/\s+/g, "-") // Reemplazar espacios con guiones
+    .replace(/[^\w-]+/g, "") // Eliminar caracteres especiales
+    .replace(/--+/g, "-") // Reemplazar múltiples guiones con uno solo
+    .replace(/^-+/, "") // Eliminar guiones al inicio
+    .replace(/-+$/, "") // Eliminar guiones al final
+
+  // Mapeo de títulos específicos a URLs específicas
+  const urlMap = {
+    "pollo-agridulce": "./../US6_GuardarRecetas/pollo-agridulce.html",
+    "paella": "./../US6_GuardarRecetas/paella.html",
+    "crepas-dulces": "./../US6_GuardarRecetas/crepas-dulces.html",
+    "bizcocho-capuccino": "./../US6_GuardarRecetas/bizcocho-capuccino.html",
+    "arepa-venezolana": "./../US6_GuardarRecetas/arepa-venezolana.html",
+    "galletas-de-sesamo": "./../US6_GuardarRecetas/galletas-de-sesamo.html",
+    "tortilla-de-patatas": "./../US6_GuardarRecetas/tortilla-de-patatas.html",
+    patata: "./../US6_GuardarRecetas/tortilla-de-patatas.html",
+  }
+
+  // Si existe una URL específica para este slug, usarla
+  if (urlMap[slug]) {
+    return urlMap[slug]
+  }
+
+  // URL genérica basada en el ID de la receta
+  return `./../US6_GuardarRecetas/receta.html?id=${receta.id}`
+}
+
 // Función para realizar la búsqueda en Supabase
 async function performSearch(query) {
   const searchResults = document.getElementById("search-results")
@@ -88,20 +161,23 @@ async function performSearch(query) {
         const resultItem = document.createElement("div")
         resultItem.classList.add("result-item")
 
-        // Crear imagen de miniatura (usamos placeholder si no hay imagen)
-        const imageSrc = receta.imagen || `/placeholder.svg?height=50&width=50`
+        // Obtener imagen específica para esta receta
+        const imageSrc = getImagePath(receta.titulo)
 
         resultItem.innerHTML = `
-                    <img src="${imageSrc}" alt="${receta.titulo}" class="result-image">
-                    <div class="result-info">
-                        <span class="result-title">${receta.titulo}</span>
-                        <span class="result-category">${receta.categoria}</span>
-                    </div>
-                `
+          <img src="${imageSrc}" alt="${receta.titulo}" class="result-image">
+          <div class="result-info">
+            <span class="result-title">${receta.titulo}</span>
+            <span class="result-category">${receta.categoria}</span>
+          </div>
+        `
 
-        // Añadir evento de clic para navegar a la receta
+        // Obtener URL específica para esta receta
+        const recipeUrl = getRecipeUrl(receta)
+
+        // Añadir evento de clic para navegar a la receta específica
         resultItem.addEventListener("click", () => {
-          window.location.href = `./receta.html?id=${receta.id}`
+          window.location.href = recipeUrl
         })
 
         searchResults.appendChild(resultItem)
@@ -112,7 +188,7 @@ async function performSearch(query) {
       verTodoButton.classList.add("ver-todo-button")
       verTodoButton.innerHTML = "Ver Todo"
       verTodoButton.addEventListener("click", () => {
-        window.location.href = `./busqueda.html?q=${query}`
+        window.location.href = `./../Platos.html?q=${query}`
       })
       searchResults.appendChild(verTodoButton)
     } else {
