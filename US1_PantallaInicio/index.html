@@ -8,6 +8,25 @@
         <script src="index.js"></script>
     </head>
 <body>
+    <nav>
+        <a href="../US1_PantallaInicio/index.html" class="logo">
+            <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+
+        <input type="text" class="search-bar" placeholder="Buscar recetas...">
+     
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <a href="../US7_PaginaDeUsuario/usuario.html" style="text-decoration: none;"><span id="user-name">Nombre del Usuario</span></a>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+
+        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+
+        <div class="menu-icon" id="menuToggle">☰</div>
+    </nav>
+
+    <!-- El menú desplegable debe estar aquí, fuera del nav -->
     <div class="overlay-menu" id="overlayMenu">
         <div class="overlay-content">
             <div class="close-btn" id="closeMenu">×</div>
@@ -37,57 +56,17 @@
                     <li><a href="#postres">Postres</a></li>
                 </ul>
             </div>
+            <div class="menu-section">
+                <h3>Dificultad de la Receta</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-      <nav>
-          <a href="index.html" class="logo">
-              <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-          </a>
 
-          <input type="text" class="search-bar" placeholder="Buscar recetas...">
-       
-          <div id="user-info" class="user-info" style="display: none;">
-              <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-              <span id="user-name">Nombre del Usuario</span>
-              <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-          </div>
-
-          <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-
-          <div class="menu-icon" id="menuToggle">☰
-              <div class="overlay-menu" id="overlayMenu">
-                  <div class="overlay-content">
-                      <div class="close-btn" id="closeMenu">×</div>
-                      <div class="menu-section">
-                          <h3>Culturas Gastronómicas</h3>
-                          <ul>
-                              <li><a href="#italiana">Italiana</a></li>
-                              <li><a href="#mexicana">Mexicana</a></li>
-                              <li><a href="#japonesa">Japonesa</a></li>
-                              <li><a href="#mediterranea">Mediterránea</a></li>
-                              <li><a href="#india">India</a></li>
-                          </ul>
-                      </div>
-                      <div class="menu-section">
-                          <h3>Tiempo de Preparación</h3>
-                          <ul>
-                              <li><a href="#rapidas">15 minutos</a></li>
-                              <li><a href="#medio">30 minutos</a></li>
-                              <li><a href="#elaboradas">1 hora o más</a></li>
-                          </ul>
-                      </div>
-                      <div class="menu-section">
-                          <h3>Tipo de Plato</h3>
-                          <ul>
-                              <li><a href="#entrantes">Entrantes</a></li>
-                              <li><a href="#principales">Platos Principales</a></li>
-                              <li><a href="#postres">Postres</a></li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </nav>
     <main>
         <section class="featured-dishes">
             <h2>Platos Destacados</h2>
@@ -200,19 +179,51 @@
     </footer> 
 
     <script>
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const userInfo = document.getElementById("user-info");
+        const authButton = document.getElementById("auth-button");
+        
+        console.log("Datos del usuario:", usuario); // Para depuración
+    
+        // Si el usuario está registrado en localStorage
+        if (usuario) {
+            // Mostrar la información del usuario
+            userInfo.style.display = "flex";
+            document.getElementById("user-name").textContent = usuario.username || "Usuario";
+            authButton.style.display = "none";
+            
+            // Agregar funcionalidad de cerrar sesión
+            document.getElementById("logout-btn").addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.removeItem("usuario");
+                window.location.reload();
+            });
+        } else {
+            // Si no hay usuario, mostrar el botón de login
+            userInfo.style.display = "none";
+            authButton.style.display = "block";
+        }
         // Código JavaScript directamente en el HTML para asegurar el orden correcto
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('overlayMenu').classList.add('active');
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Menú desplegable
+            document.getElementById('menuToggle').addEventListener('click', function(e) {
+                e.preventDefault();
+                const overlayMenu = document.getElementById('overlayMenu');
+                overlayMenu.classList.toggle('active');
+            });
 
-        document.getElementById('closeMenu').addEventListener('click', function() {
-            document.getElementById('overlayMenu').classList.remove('active');
-        });
+            document.getElementById('closeMenu').addEventListener('click', function() {
+                const overlayMenu = document.getElementById('overlayMenu');
+                overlayMenu.classList.remove('active');
+            });
 
-        document.getElementById('overlayMenu').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('active');
-            }
+            // Cerrar al hacer clic fuera del menú
+            document.getElementById('overlayMenu').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
         });
     </script>
     <script src="index.js"></script>

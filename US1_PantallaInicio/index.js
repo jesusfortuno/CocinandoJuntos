@@ -93,21 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
     };
-});
 
-// Mantener el código existente y añadir:
-document.getElementById('menuToggle').addEventListener('click', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  const dropdownMenu = this.querySelector('.dropdown-menu');
-  dropdownMenu.classList.toggle('active');
-});
+    // Menú desplegable
+    document.getElementById('menuToggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        const overlayMenu = document.getElementById('overlayMenu');
+        overlayMenu.classList.toggle('active');
+    });
 
-document.addEventListener('click', function(e) {
-  const dropdownMenu = document.querySelector('.dropdown-menu');
-  const menuToggle = document.getElementById('menuToggle');
-    
-  if (!menuToggle.contains(e.target)) {
-      dropdownMenu.classList.remove('active');
-  }
+    document.getElementById('closeMenu').addEventListener('click', function() {
+        const overlayMenu = document.getElementById('overlayMenu');
+        overlayMenu.classList.remove('active');
+    });
+
+    // Cerrar al hacer clic fuera del menú
+    document.getElementById('overlayMenu').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+        }
+    });
 });
