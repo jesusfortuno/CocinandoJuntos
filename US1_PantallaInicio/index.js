@@ -81,3 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
         autoplayInterval = setInterval(() => moveSlide(1), 5000);
     });
 });
+
+// Añade este código a tu archivo JavaScript existente
+document.getElementById('menuToggle').addEventListener('click', function() {
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  dropdownMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', function(event) {
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  const menuToggle = document.getElementById('menuToggle');
+  
+  if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+    dropdownMenu.classList.remove('active');
+  }
+});
