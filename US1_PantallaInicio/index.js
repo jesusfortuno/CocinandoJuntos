@@ -95,17 +95,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
-// Añade este código a tu archivo JavaScript existente
-document.getElementById('menuToggle').addEventListener('click', function() {
-  const dropdownMenu = document.getElementById('dropdownMenu');
+// Mantener el código existente y añadir:
+document.getElementById('menuToggle').addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const dropdownMenu = this.querySelector('.dropdown-menu');
   dropdownMenu.classList.toggle('active');
 });
 
-document.addEventListener('click', function(event) {
-  const dropdownMenu = document.getElementById('dropdownMenu');
+document.addEventListener('click', function(e) {
+  const dropdownMenu = document.querySelector('.dropdown-menu');
   const menuToggle = document.getElementById('menuToggle');
-  
-  if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-    dropdownMenu.classList.remove('active');
+    
+  if (!menuToggle.contains(e.target)) {
+      dropdownMenu.classList.remove('active');
   }
 });
