@@ -96,6 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
                     const usuario = JSON.parse(usuarioGuardado);
             
+                    // Primero autenticamos al usuario con Supabase
+                    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+                        email: usuario.email,
+                        password: usuario.password // Necesitarás almacenar la contraseña en localStorage también
+                    });
+            
+                    if (authError) {
+                        console.error('Error de autenticación:', authError);
+                        alert('Error de autenticación');
+                        return false;
+                    }
+            
                     console.log('Eliminando favorito:', { usuario_id: usuario.id, receta_id: recetaId });
             
                     // Eliminar de la base de datos
