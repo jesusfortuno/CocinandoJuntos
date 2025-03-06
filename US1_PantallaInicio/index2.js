@@ -65,7 +65,7 @@ function getImagePath(titulo) {
   // Mapeo de títulos a rutas de imágenes
   const imageMap = {
     "Pollo Agridulce": "./Imagenes/China/pollo-agridulce.jpg",
-    Paella: "./Imagenes/España/paella.jpg",
+    Paella: "./Imagenes/España/paella.png",
     "Crepas Dulces": "./Imagenes/Francia/crepas-dulces.jpg",
     "Bizcocho Capuccino": "./Imagenes/Italia/bizcocho-capuccino.jpg",
     "Arepa Venezolana": "./Imagenes/Venezuela/arepa-venezolana.jpg",
@@ -115,7 +115,7 @@ function getRecipeUrl(receta) {
   // Mapeo de títulos específicos a URLs específicas
   const urlMap = {
     "pollo-agridulce": "./../US6_GuardarRecetas/pollo-agridulce.html",
-    "paella": "./../US6_GuardarRecetas/paella.html",
+    paella: "./../US6_GuardarRecetas/paella.html",
     "crepas-dulces": "./../US6_GuardarRecetas/crepas-dulces.html",
     "bizcocho-capuccino": "./../US6_GuardarRecetas/bizcocho-capuccino.html",
     "arepa-venezolana": "./../US6_GuardarRecetas/arepa-venezolana.html",
@@ -131,6 +131,32 @@ function getRecipeUrl(receta) {
 
   // URL genérica basada en el ID de la receta
   return `./../US6_GuardarRecetas/receta.html?id=${receta.id}`
+}
+
+// Función para convertir nivel de dificultad a puntos visuales
+function getDifficultyDots(dificultad) {
+  let nivel = 0
+
+  if (dificultad === "Fácil") {
+    nivel = 1
+  } else if (dificultad === "Media") {
+    nivel = 2
+  } else if (dificultad === "Difícil") {
+    nivel = 3
+  }
+
+  let dotsHTML = '<div class="difficulty-indicator">'
+
+  for (let i = 1; i <= 3; i++) {
+    if (i <= nivel) {
+      dotsHTML += '<span class="difficulty-dot active"></span>'
+    } else {
+      dotsHTML += '<span class="difficulty-dot"></span>'
+    }
+  }
+
+  dotsHTML += "</div>"
+  return dotsHTML
 }
 
 // Función para realizar la búsqueda en Supabase
@@ -157,6 +183,12 @@ async function performSearch(query) {
 
     // Mostrar resultados
     if (recetas && recetas.length > 0) {
+      // Añadir un encabezado a los resultados
+      const resultsHeader = document.createElement("div")
+      resultsHeader.classList.add("results-header")
+      resultsHeader.innerHTML = `<h3 style="text-align: center; margin-top: 20px;">Resultados para "${query}"</h3>`;
+      searchResults.appendChild(resultsHeader)
+
       recetas.forEach((receta) => {
         const resultItem = document.createElement("div")
         resultItem.classList.add("result-item")
@@ -164,11 +196,15 @@ async function performSearch(query) {
         // Obtener imagen específica para esta receta
         const imageSrc = getImagePath(receta.titulo)
 
+        // Obtener indicador visual de dificultad
+        const difficultyDots = getDifficultyDots(receta.dificultad)
+
         resultItem.innerHTML = `
           <img src="${imageSrc}" alt="${receta.titulo}" class="result-image">
           <div class="result-info">
             <span class="result-title">${receta.titulo}</span>
-            <span class="result-category">${receta.categoria}</span>
+            <span class="result-category">${receta.categoria || "Categoría no especificada"}</span>
+            <span class="result-difficulty">Dificultad: ${difficultyDots}</span>
           </div>
         `
 
@@ -186,16 +222,20 @@ async function performSearch(query) {
       // Añadir botón "Ver Todo"
       const verTodoButton = document.createElement("div")
       verTodoButton.classList.add("ver-todo-button")
-      verTodoButton.innerHTML = "Ver Todo"
+      verTodoButton.innerHTML = '<i class="fas fa-list-ul"></i> Ver Todos los Resultados'
       verTodoButton.addEventListener("click", () => {
-        window.location.href = `./../Platos.html?q=${query}`
+        window.location.href = `./busqueda.html?q=${query}`
       })
       searchResults.appendChild(verTodoButton)
     } else {
       // No hay resultados
       const noResults = document.createElement("div")
       noResults.classList.add("no-results")
-      noResults.textContent = "No se encontraron resultados"
+      noResults.innerHTML = `
+        <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px; color: #d4c3b5;"></i>
+        <p>No se encontraron resultados para "${query}"</p>
+        <p style="font-size: 13px; margin-top: 5px;">Intenta con otra búsqueda</p>
+      `
       searchResults.appendChild(noResults)
     }
   } catch (error) {
