@@ -1,83 +1,74 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let currentSlide = 0;
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    const dotsContainer = document.querySelector('.dots-container');
-
-    // Función para actualizar la visibilidad de las tarjetas según el ancho de la pantalla
-    function updateCardsVisibility() {
-        const windowWidth = window.innerWidth;
-        slides.forEach((slide, slideIndex) => {
-            // Ocultar todos los slides excepto el actual
-            slide.style.display = slideIndex === currentSlide ? 'flex' : 'none';
-            
-            const cards = slide.querySelectorAll('.slide-card');
-            cards.forEach((card, index) => {
-                if (windowWidth <= 768) {
-                    // Mostrar solo 1 tarjeta
-                    card.style.display = index === 0 ? 'block' : 'none';
-                } else if (windowWidth <= 1024) {
-                    // Mostrar 2 tarjetas
-                    card.style.display = index < 2 ? 'block' : 'none';
-                } else {
-                    // Mostrar todas las tarjetas
-                    card.style.display = 'block';
-                }
-            });
-        });
+document.addEventListener("DOMContentLoaded", () => {
+    // Configuración del slider de recetas
+    const track = document.querySelector(".recipe-track")
+    const prevButton = document.querySelector(".prev-button")
+    const nextButton = document.querySelector(".next-button")
+    const cards = track.querySelectorAll(".recipe-card")
+    const cardCount = cards.length
+    const cardsToShow = 5
+    let currentIndex = 0
+  
+    // Función para actualizar la posición del slider
+    function updateSliderPosition() {
+      const cardWidth = track.offsetWidth / cardsToShow
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`
+      track.style.transition = "transform 0.5s ease"
+  
+      // Actualizar estado de los botones
+      prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"
+      prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer"
+      nextButton.style.opacity = currentIndex >= cardCount - cardsToShow ? "0.5" : "1"
+      nextButton.style.cursor = currentIndex >= cardCount - cardsToShow ? "default" : "pointer"
     }
-
-    // Crear los dots
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
-
-    function updateDots() {
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-    }
-
-    function moveSlide(direction) {
-        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-        updateSlider();
-    }
-
-    function goToSlide(index) {
-        currentSlide = index;
-        updateSlider();
-    }
-
-    function updateSlider() {
-        // En lugar de usar transform, cambiamos la visibilidad de los slides
-        slides.forEach((slide, index) => {
-            slide.style.display = index === currentSlide ? 'flex' : 'none';
-        });
-        updateDots();
-    }
-
-    // Event listeners
-    window.addEventListener('resize', updateCardsVisibility);
-    window.moveSlide = moveSlide;
-    window.goToSlide = goToSlide;
-
+  
+    // Event listeners para los botones de navegación
+    prevButton.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex -= cardsToShow
+        if (currentIndex < 0) currentIndex = 0
+        updateSliderPosition()
+      }
+    })
+  
+    nextButton.addEventListener("click", () => {
+      if (currentIndex < cardCount - cardsToShow) {
+        currentIndex += cardsToShow
+        if (currentIndex > cardCount - cardsToShow) {
+          currentIndex = cardCount - cardsToShow
+        }
+        updateSliderPosition()
+      }
+    })
+  
     // Inicialización
-    updateCardsVisibility();
-    
-    // Iniciar el autoplay
-    let autoplayInterval = setInterval(() => moveSlide(1), 5000);
-
-    // Opcional: Pausar el autoplay cuando el usuario interactúa
-    slider.addEventListener('mouseenter', () => {
-        clearInterval(autoplayInterval);
-    });
-
-    slider.addEventListener('mouseleave', () => {
-        autoplayInterval = setInterval(() => moveSlide(1), 5000);
-    });
-});
+    updateSliderPosition()
+  
+    // Event listener para resize
+    let resizeTimer
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        currentIndex = 0 // Reset position on resize
+        updateSliderPosition()
+      }, 250)
+    })
+  
+    // Scroll suave para los enlaces de anclaje
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault()
+        const targetId = this.getAttribute("href")
+        if (targetId === "#") return
+  
+        const targetElement = document.querySelector(targetId)
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop,
+            behavior: "smooth",
+          })
+        }
+      })
+    })
+  })
+  
+  

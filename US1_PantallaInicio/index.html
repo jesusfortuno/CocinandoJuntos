@@ -26,110 +26,99 @@
     </nav>    
 
     <main>
-        <section class="featured-dishes">
-            <h2>Platos Destacados</h2>
-            <div class="slider-container">
-                <div class="slider">
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
-                            <h3>Galletas de Sésamo</h3>
-                        </div>
-                        <div class="slide-card">
-                            <a href="./../US6_GuardarRecetas/pollo-agridulce.html">
-                            <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
-                            <h3>Pollo Agridulce</h3>
-                            </a>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="Tortilla de Patatas">
-                            <h3>Tortilla de Patatas</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/España/pan-tomate.jpg" alt="Pan con Tomate">
-                            <h3>Pan con Tomate</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Coq au Vin">
-                            <h3>Coq au Vin</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Francia/crepas-dulces.jpg" alt="Crepas Dulces">
-                            <h3>Crepas Dulces</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="Pizza Margarita">
-                            <h3>Pizza Margarita</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Italia/lasaña.jpg" alt="Lasaña">
-                            <h3>Lasaña</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Japon/sushi.jpeg" alt="Sushi">
-                            <h3>Sushi</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/Japon/ramen.jpg" alt="Ramen">
-                            <h3>Ramen</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Arepa Venezolana">
-                            <h3>Arepa Venezolana</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Venezuela/cachapa-venezolana.jpg" alt="Cachapa Venezolana">
-                            <h3>Cachapa Venezolana</h3>
-                        </div>
+        <section class="hero-video-section">
+            <div class="video-container">
+                <video autoplay muted loop id="hero-video">
+                    <source src="./Imagenes/videoplayback.mp4" type="video/mp4">
+                    Tu navegador no soporta videos HTML5.
+                </video>
+                <div class="video-overlay">
+                    <h1>Cocinando Juntos</h1>
+                    <p>Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la gastronomía donde podrás explorar sabores de diferentes culturas.</p>
+                    <div class="hero-buttons">
+                        <a href="#explore" class="hero-btn primary-btn">Explorar Recetas</a>
+                        <a href="../login.html" class="hero-btn secondary-btn">Unirse Ahora</a>
                     </div>
                 </div>
-                <div class="slider-buttons">
-                    <button class="slider-button" onclick="moveSlide(-1)">❮</button>
-                    <button class="slider-button" onclick="moveSlide(1)">❯</button>
+            </div>
+        </section>
+        <div class="content-wrapper">
+            <section id="explore" class="culture-dishes">
+                <h2>Platos por Cultura</h2>
+                <div class="culture-scroll">
+                    <a href="cultura-china.html" class="culture-card">
+                        <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Cocina China">
+                        <h3>China</h3>
+                    </a>
+                    <a href="cultura-española.html" class="culture-card">
+                        <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="Cocina Española">
+                        <h3>España</h3>
+                    </a>
+                    <a href="cultura-francesa.html" class="culture-card">
+                        <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Cocina Francesa">
+                        <h3>Francia</h3>
+                    </a>
+                    <a href="cultura-italiana.html" class="culture-card">
+                        <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="Cocina Italiana">
+                        <h3>Italia</h3>
+                    </a>
+                    <a href="cultura-japonesa.html" class="culture-card">
+                        <img src="./Imagenes/Japon/sushi.jpeg" alt="Cocina Japonesa">
+                        <h3>Japón</h3>
+                    </a>
+                    <a href="cultura-venezolana.html" class="culture-card">
+                        <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Cocina Venezolana">
+                        <h3>Venezuela</h3>
+                    </a>
                 </div>
-                <div class="dots-container"></div>
-            </div>
-        </section>
-        <section class="culture-dishes">
-            <h2>Platos por Cultura</h2>
-            <div class="culture-grid">
-                <a href="cultura-china.html" class="culture-card">
-                    <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Cocina China">
-                    <h3>China</h3>
-                </a>
-                <a href="cultura-española.html" class="culture-card">
-                    <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="Cocina Española">
-                    <h3>España</h3>
-                </a>
-                <a href="cultura-francesa.html" class="culture-card">
-                    <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Cocina Francesa">
-                    <h3>Francia</h3>
-                </a>
-                <a href="cultura-italiana.html" class="culture-card">
-                    <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="Cocina Italiana">
-                    <h3>Italia</h3>
-                </a>
-                <a href="cultura-japonesa.html" class="culture-card">
-                    <img src="./Imagenes/Japon/sushi.jpeg" alt="Cocina Japonesa">
-                    <h3>Japón</h3>
-                </a>
-                <a href="cultura-venezolana.html" class="culture-card">
-                    <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Cocina Venezolana">
-                    <h3>Venezuela</h3>
-                </a>
-            </div>
-        </section>
+            </section>
 
-        <section class="recipe-filters">
-            <h2>Explorar Recetas</h2>
-            <!-- Aquí irán los filtros de recetas -->
-        </section>
+            <section class="recipe-filters">
+                <h2>Explorar Recetas</h2>
+                <div class="recipe-slider">
+                    <button class="slider-nav prev-button">❮</button>
+                    <div class="recipe-track">
+                        <div class="recipe-card">
+                            <img src="./Imagenes/recetas/paella.jpg" alt="Paella Valenciana">
+                            <div class="recipe-content">
+                                <h3>Paella Valenciana</h3>
+                                <p>España • 60 min</p>
+                            </div>
+                        </div>
+                        <div class="recipe-card">
+                            <img src="./Imagenes/recetas/ramen.jpg" alt="Ramen Tradicional">
+                            <div class="recipe-content">
+                                <h3>Ramen Tradicional</h3>
+                                <p>Japón • 120 min</p>
+                            </div>
+                        </div>
+                        <div class="recipe-card">
+                            <img src="./Imagenes/recetas/lasagna.jpg" alt="Lasaña Boloñesa">
+                            <div class="recipe-content">
+                                <h3>Lasaña Boloñesa</h3>
+                                <p>Italia • 90 min</p>
+                            </div>
+                        </div>
+                        <div class="recipe-card">
+                            <img src="./Imagenes/recetas/croissant.jpg" alt="Croissants">
+                            <div class="recipe-content">
+                                <h3>Croissants</h3>
+                                <p>Francia • 180 min</p>
+                            </div>
+                        </div>
+                        <div class="recipe-card">
+                            <img src="./Imagenes/recetas/dumplings.jpg" alt="Dumplings">
+                            <div class="recipe-content">
+                                <h3>Dumplings</h3>
+                                <p>China • 45 min</p>
+                            </div>
+                        </div>
+                        <!-- Más recetas... -->
+                    </div>
+                    <button class="slider-nav next-button">❯</button>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer>
