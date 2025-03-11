@@ -168,20 +168,21 @@ main {
 
 .recipe-slider {
   position: relative;
-  padding: 0 80px; /* Aumentar el padding lateral de 40px a 80px */
-  margin: 2rem 0;
+  padding: 0 80px; /* Volver al padding lateral anterior */
+  margin: 2rem auto; /* Mantener el margen superior e inferior */
   overflow: hidden;
 }
 
 .recipe-track {
   display: flex;
   transition: transform 0.5s ease;
-  width: 100%;
+  width: fit-content; /* Volver a 100% para que ocupe todo el ancho */
+  margin: 0 auto; /* Eliminar el margen para que no esté centrado */
 }
 
 .recipe-card {
   flex: 0 0 calc(20% - 2rem);
-  margin-right: 2.5rem; /* Aumentar de 1rem a 2.5rem para más separación */
+  margin-right: 2.5rem; /* Volver al margen derecho anterior */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -829,13 +830,15 @@ footer {
 
 .description {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8); /* Aumentar la opacidad para un mejor contraste */
   color: white;
   padding: 10px;
   border-radius: 5px;
-  bottom: 50px;
+  bottom: 50px; /* Ajustar la posición según sea necesario */
   left: 10px;
-  display: none; /* Ocultar por defecto */
+  display: none; /* Mantener oculto por defecto */
   z-index: 10;
+  text-align: center; /* Centrar el texto */
+  width: calc(100% - 20px); /* Ajustar el ancho para que no se desborde */
 }
 
