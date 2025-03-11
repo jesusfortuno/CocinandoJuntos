@@ -9,20 +9,63 @@
 <body>
     <!--MENU NAVEGACIÓN-->
     <nav>
-        <a href="index.html" class="logo">
-            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        <a href="../US1_PantallaInicio/index.html" class="logo">
+            <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
         </a>
+
         <input type="text" class="search-bar" placeholder="Buscar recetas...">
-        
+     
         <div id="user-info" class="user-info" style="display: none;">
-            <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
+            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <a href="../US7_PaginaDeUsuario/usuario.html" style="text-decoration: none;"><span id="user-name">Nombre del Usuario</span></a>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
 
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-        <div class="menu-icon">☰</div>
-    </nav>    
+
+        <div class="menu-icon" id="menuToggle">☰</div>
+    </nav>
+
+    <!-- El menú desplegable debe estar aquí, fuera del nav -->
+    <div class="overlay-menu" id="overlayMenu">
+        <div class="overlay-content">
+            <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gastronómicas</h3>
+                <ul>
+                    <li><a href="#italiana">Italiana</a></li>
+                    <li><a href="#mexicana">Mexicana</a></li>
+                    <li><a href="#japonesa">Japonesa</a></li>
+                    <li><a href="#mediterranea">Mediterránea</a></li>
+                    <li><a href="#india">India</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tiempo de Preparación</h3>
+                <ul>
+                    <li><a href="#rapidas">15 minutos</a></li>
+                    <li><a href="#medio">30 minutos</a></li>
+                    <li><a href="#elaboradas">1 hora o más</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tipo de Plato</h3>
+                <ul>
+                    <li><a href="#entrantes">Entrantes</a></li>
+                    <li><a href="#principales">Platos Principales</a></li>
+                    <li><a href="#postres">Postres</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Dificultad de la Receta</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>   
 
     <main>
         <!-- Breadcrumb -->
