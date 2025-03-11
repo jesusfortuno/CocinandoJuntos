@@ -9,6 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0
   let autoSlideInterval
 
+  // Verificar si los elementos existen
+  if (!track || !prevButton || !nextButton || cardCount === 0) {
+    console.error("Error: Elementos del slider no encontrados o no hay tarjetas.")
+    return
+  }
+
+  console.log("Total cards:", cardCount)
+
   // Función para mostrar el slider
   function showSlider() {
     document.getElementById("recipe-slider-section").style.display = "block"
@@ -24,29 +32,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para actualizar la posición del slider
   function updateSliderPosition() {
-    // Calcular el ancho total de 5 tarjetas
+    console.log("Updating slider position...")
+    // Calcular el ancho total de las tarjetas
     const cardWidth = track.querySelector(".recipe-card").offsetWidth
     const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight)
     const totalCardWidth = cardWidth + cardMargin
 
-    // Mover el track para mostrar el grupo actual de 5 tarjetas
-    track.style.transform = `translateX(-${currentIndex * cardsToShow * totalCardWidth}px)`
+    // Mover el track para mostrar el grupo actual de tarjetas
+    track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`
     track.style.transition = "transform 0.5s ease"
 
     // Actualizar estado de los botones
     prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"
     prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer"
 
-    // Calcular el número máximo de grupos de 5 tarjetas
+    // Calcular el número máximo de grupos de tarjetas
     const maxGroups = Math.ceil(cardCount / cardsToShow) - 1
     nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1"
     nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer"
+
+    // Mostrar solo las tarjetas en el índice actual
+    cards.forEach((card, index) => {
+      card.style.display =
+        index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow ? "block" : "none"
+    })
   }
 
   // Función para iniciar el auto-slide
   function startAutoSlide() {
     autoSlideInterval = setInterval(() => {
-      // Calcular el número máximo de grupos de 5 tarjetas
       const maxGroups = Math.ceil(cardCount / cardsToShow) - 1
 
       if (currentIndex < maxGroups) {
@@ -67,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   nextButton.addEventListener("click", () => {
-    // Calcular el número máximo de grupos de 5 tarjetas
     const maxGroups = Math.ceil(cardCount / cardsToShow) - 1
 
     if (currentIndex < maxGroups) {
@@ -79,8 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   // Inicialización
-  hideSlider() // Ocultar el slider al inicio
-  showSlider() // Mostrar el slider después de cargar las recetas
+  // hideSlider(); // Ocultar el slider al inicio
+  // showSlider(); // Mostrar el slider después de cargar las recetas
+
+  // Inicializar la visibilidad de las tarjetas
+  updateSliderPosition() // Asegúrate de que esto se llame después de mostrar el slider
 
   // Event listener para resize
   let resizeTimer
@@ -106,6 +122,19 @@ document.addEventListener("DOMContentLoaded", () => {
           behavior: "smooth",
         })
       }
+    })
+  })
+
+  // Event listeners para las tarjetas de recetas
+  cards.forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      const description = card.querySelector(".description")
+      description.style.display = "block" // Mostrar descripción
+    })
+
+    card.addEventListener("mouseleave", () => {
+      const description = card.querySelector(".description")
+      description.style.display = "none" // Ocultar descripción
     })
   })
 })

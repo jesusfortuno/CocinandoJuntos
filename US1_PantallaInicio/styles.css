@@ -168,7 +168,7 @@ main {
 
 .recipe-slider {
   position: relative;
-  padding: 0 40px;
+  padding: 0 80px; /* Aumentar el padding lateral de 40px a 80px */
   margin: 2rem 0;
   overflow: hidden;
 }
@@ -180,8 +180,8 @@ main {
 }
 
 .recipe-card {
-  flex: 0 0 calc(20% - 1rem);
-  margin-right: 1rem;
+  flex: 0 0 calc(20% - 2rem);
+  margin-right: 2.5rem; /* Aumentar de 1rem a 2.5rem para más separación */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -262,11 +262,11 @@ main {
 }
 
 .prev-button {
-  left: 10px;
+  left: 20px; /* Aumentar de 10px a 20px */
 }
 
 .next-button {
-  right: 10px;
+  right: 20px; /* Aumentar de 10px a 20px */
 }
 
 footer {
@@ -826,4 +826,16 @@ footer {
 /* .recipe-card:nth-child(n+6) {
     display: none;
   } */
+
+.description {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  bottom: 50px;
+  left: 10px;
+  display: none; /* Ocultar por defecto */
+  z-index: 10;
+}
 
