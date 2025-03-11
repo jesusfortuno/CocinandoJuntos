@@ -1,11 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pollo Agridulce - Cocinando Juntos</title>
     <link rel="stylesheet" href="pollo-agridulce.css">
+    <style>
+        /* Estilos adicionales para los comentarios */
+        .comentario {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .comentario-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .comentario-fecha {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .comentario-valoracion {
+            margin-bottom: 8px;
+        }
+        
+        .estrella-activa {
+            color: #f39c12;
+        }
+        
+        .estrella-inactiva {
+            color: #ccc;
+        }
+        
+        .comentario-texto {
+            line-height: 1.5;
+        }
+        
+        #commentsList {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 
 <body>
@@ -49,13 +89,12 @@
 
                     <div class="recipe-actions">
                         <button class="button favorite-btn" data-receta-id="1">❤️ Añadir a Favoritos</button>
-                        <button class="button rate-btn">⭐ Valorar</button>
+                        <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                     </div>
                 </div>
             </div>
         </div>
-        
-        
+
         <div class="recipe-container">
             <div class="recipe-ingredients">
                 <h2>Ingredientes</h2>
@@ -92,11 +131,17 @@
             </div>
         </div>
 
-        
-
-        <div class="hidden">
-            <h2>Valoraciones y Comentarios</h2>
-            <p>Aquí irá la sección para valoraciones y comentarios de los usuarios.</p>
+        <!-- Sección de comentarios -->
+        <div id="commentsSection">
+            <h3>Deja tu comentario</h3>
+            <div class="rating">
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            <textarea id="commentText" placeholder="Escribe tu comentario aquí..."></textarea>
+            <button id="submitComment">Publicar</button>
+            <div id="commentsList">
+                <p>Cargando comentarios...</p>
+            </div>
         </div>
     </main>
 
@@ -105,7 +150,8 @@
     </footer>
 
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script src="../favoritos.js"></script>
+    <script type="module" src="../favoritos.js"></script>
+    <script type="module" src="../valorar.js"></script>
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
