@@ -38,27 +38,29 @@
             <div class="menu-section">
                 <h3>Culturas Gastronómicas</h3>
                 <ul>
-                    <li><a href="#italiana">Italiana</a></li>
-                    <li><a href="#mexicana">Mexicana</a></li>
-                    <li><a href="#japonesa">Japonesa</a></li>
-                    <li><a href="#mediterranea">Mediterránea</a></li>
-                    <li><a href="#india">India</a></li>
+                    <li><a href="cultura-china.html">China</a></li>
+                    <li><a href="cultura-española.html">Española</a></li>
+                    <li><a href="cultura-francesa.html">Francesa</a></li>
+                    <li><a href="cultura-italiana.html">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
                 </ul>
             </div>
             <div class="menu-section">
                 <h3>Tiempo de Preparación</h3>
                 <ul>
-                    <li><a href="#rapidas">15 minutos</a></li>
-                    <li><a href="#medio">30 minutos</a></li>
-                    <li><a href="#elaboradas">1 hora o más</a></li>
+                    <li><a href="#rapidas">Menos de 30min</a></li>
+                    <li><a href="#medio">Entre 30min - 120min</a></li>
+                    <li><a href="#elaboradas">Más de 120min</a></li>
                 </ul>
             </div>
             <div class="menu-section">
                 <h3>Tipo de Plato</h3>
                 <ul>
-                    <li><a href="#entrantes">Entrantes</a></li>
-                    <li><a href="#principales">Platos Principales</a></li>
-                    <li><a href="#postres">Postres</a></li>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
                 </ul>
             </div>
             <div class="menu-section">
@@ -212,6 +214,28 @@
             authButton.style.display = "block";
         }
 
+        // Código JavaScript directamente en el HTML para asegurar el orden correcto
+        document.addEventListener('DOMContentLoaded', () => {
+                // Menú desplegable
+                document.getElementById('menuToggle').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const overlayMenu = document.getElementById('overlayMenu');
+                    overlayMenu.classList.toggle('active');
+                });
+
+                document.getElementById('closeMenu').addEventListener('click', function () {
+                    const overlayMenu = document.getElementById('overlayMenu');
+                    overlayMenu.classList.remove('active');
+                });
+
+                // Cerrar al hacer clic fuera del menú
+                document.getElementById('overlayMenu').addEventListener('click', function (e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+
         // Script para los filtros
         document.addEventListener("DOMContentLoaded", () => {
             const filterBtn = document.getElementById("filter-btn");
@@ -260,27 +284,6 @@
                 if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
                     filterOptions.style.display = "none";
                 }
-            });
-            // Código JavaScript directamente en el HTML para asegurar el orden correcto
-            document.addEventListener('DOMContentLoaded', () => {
-                // Menú desplegable
-                document.getElementById('menuToggle').addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const overlayMenu = document.getElementById('overlayMenu');
-                    overlayMenu.classList.toggle('active');
-                });
-
-                document.getElementById('closeMenu').addEventListener('click', function () {
-                    const overlayMenu = document.getElementById('overlayMenu');
-                    overlayMenu.classList.remove('active');
-                });
-
-                // Cerrar al hacer clic fuera del menú
-                document.getElementById('overlayMenu').addEventListener('click', function (e) {
-                    if (e.target === this) {
-                        this.classList.remove('active');
-                    }
-                });
             });
         });
     </script>
