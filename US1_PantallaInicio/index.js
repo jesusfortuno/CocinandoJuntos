@@ -90,9 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
         card.querySelector(".description p")?.textContent ||
         "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."
 
-      // Crear contenido del overlay
+      // Crear contenido del overlay con una clase específica para el título
       overlay.innerHTML = `
-        <h3>${title}</h3>
+        <h3 class="title">${title}</h3>
         <p>${description}</p>
       `
 
