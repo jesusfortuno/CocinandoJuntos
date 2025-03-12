@@ -18,79 +18,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para actualizar la posición del slider
   function updateSliderPosition() {
-    // Calcular el número máximo de grupos
     const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+    if (currentIndex > maxIndex) currentIndex = maxIndex
 
-    // Asegurar que currentIndex nunca exceda el máximo permitido
-    if (currentIndex > maxIndex) {
-      currentIndex = maxIndex
-    }
-
-    // Mostrar todas las tarjetas pero ajustar su visibilidad
     cards.forEach((card, index) => {
-      // Determinar si la tarjeta debe mostrarse en el grupo actual
       const isVisible = index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow
       card.style.display = isVisible ? "block" : "none"
     })
 
-    // Actualizar estado de los botones
     prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"
     prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer"
-
     nextButton.style.opacity = currentIndex >= maxIndex ? "0.5" : "1"
     nextButton.style.cursor = currentIndex >= maxIndex ? "default" : "pointer"
 
-    // Después de un breve retraso, permitir nuevamente la animación
     setTimeout(() => {
       isAnimating = false
     }, 300)
   }
 
-  // Función para iniciar el auto-slide
   function startAutoSlide() {
     autoSlideInterval = setInterval(() => {
       if (isAnimating) return
-
       const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
-
-      if (currentIndex < maxIndex) {
-        currentIndex += 1
-      } else {
-        currentIndex = 0 // Reiniciar al principio
-      }
-
+      currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
       updateSliderPosition()
-    }, 25000) // Cambiar cada 25 segundos
+    }, 25000)
   }
 
-  // Event listeners para los botones de navegación
   prevButton.addEventListener("click", () => {
-    if (isAnimating) return // Evitar clics rápidos
+    if (isAnimating) return
     isAnimating = true
-
-    if (currentIndex > 0) {
-      currentIndex -= 1
-    }
-
+    if (currentIndex > 0) currentIndex -= 1
     updateSliderPosition()
   })
 
   nextButton.addEventListener("click", () => {
-    if (isAnimating) return // Evitar clics rápidos
+    if (isAnimating) return
     isAnimating = true
-
     const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
-
-    if (currentIndex < maxIndex) {
-      currentIndex += 1
-    } else {
-      currentIndex = 0 // Reiniciar al principio
-    }
-
+    currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
     updateSliderPosition()
   })
 
-  // Inicializar la visibilidad de las tarjetas
+  // Inicializar slider
   updateSliderPosition()
   startAutoSlide()
 
@@ -99,9 +69,57 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer)
     resizeTimer = setTimeout(() => {
-      currentIndex = 0 // Reset position on resize
+      currentIndex = 0
       updateSliderPosition()
     }, 250)
+  })
+
+  // Event listeners para las tarjetas de recetas
+  cards.forEach((card) => {
+    const recipeContent = card.querySelector(".recipe-content")
+    const recipeImage = card.querySelector(".recipe-image")
+
+    if (recipeContent && recipeImage) {
+      // Crear overlay para el hover
+      const overlay = document.createElement("div")
+      overlay.className = "recipe-overlay"
+
+      // Obtener información de la receta
+      const title = recipeContent.querySelector("h3").textContent
+      const description =
+        card.querySelector(".description p")?.textContent ||
+        "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."
+
+      // Crear contenido del overlay
+      overlay.innerHTML = `
+        <h3>${title}</h3>
+        <p>${description}</p>
+      `
+
+      // Añadir overlay a la tarjeta
+      card.appendChild(overlay)
+
+      // Eliminar la descripción original para evitar duplicados
+      const oldDescription = card.querySelector(".description")
+      if (oldDescription) {
+        oldDescription.remove()
+      }
+    }
+
+    // Eventos de mouse
+    card.addEventListener("mouseenter", () => {
+      const overlay = card.querySelector(".recipe-overlay")
+      if (overlay) {
+        overlay.classList.add("active")
+      }
+    })
+
+    card.addEventListener("mouseleave", () => {
+      const overlay = card.querySelector(".recipe-overlay")
+      if (overlay) {
+        overlay.classList.remove("active")
+      }
+    })
   })
 
   // Scroll suave para los enlaces de anclaje
@@ -110,30 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault()
       const targetId = this.getAttribute("href")
       if (targetId === "#") return
-
       const targetElement = document.querySelector(targetId)
       if (targetElement) {
         window.scrollTo({
           top: targetElement.offsetTop,
           behavior: "smooth",
         })
-      }
-    })
-  })
-
-  // Event listeners para las tarjetas de recetas
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      const description = card.querySelector(".description")
-      if (description) {
-        description.style.display = "block" // Mostrar descripción
-      }
-    })
-
-    card.addEventListener("mouseleave", () => {
-      const description = card.querySelector(".description")
-      if (description) {
-        description.style.display = "none" // Ocultar descripción
       }
     })
   })
