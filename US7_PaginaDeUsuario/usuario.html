@@ -24,24 +24,33 @@
         <!-- Sección de Perfil -->
         <section class="section-container profile-section">
             <h2 class="section-title">Perfil de Usuario</h2>
+            
             <div class="profile-header">
                 <div class="profile-avatar">
                     <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil">
                 </div>
                 <span id="profile-user-name">Nombre del Usuario</span>
             </div>
+            
             <div class="profile-info">
                 <h3>Información Personal</h3>
-                <p>Email: <span id="user-email"></span></p>
+                <p>
+                    <strong>Email:</strong>
+                    <span id="user-email">usuario@ejemplo.com</span>
+                </p>
                 <button class="primary-btn">Cambiar Contraseña</button>
             </div>
         </section>
 
         <!-- Sección de Comentarios y Valoraciones -->
-        <section class="section-container">
+        <section class="section-container comentarios-section">
             <h2 class="section-title">Mis Comentarios y Valoraciones</h2>
             <div id="comentarios-valoraciones-container">
                 <!-- Los comentarios se cargarán dinámicamente aquí -->
+            </div>
+            <div class="scroll-indicator">
+                <span>Desliza para ver más</span>
+                <span class="arrow">↓</span>
             </div>
         </section>
 

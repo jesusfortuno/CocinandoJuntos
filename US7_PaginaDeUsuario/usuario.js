@@ -178,17 +178,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const { data: comentarios, error } = await supabase
         .from("comentarios")
         .select(`
-                id_comentario,
-                id_usuario,
-                id_receta,
-                valoracion,
-                comentario,
-                fecha_comentario,
-                recetas!inner (
-                    id,
-                    titulo
-                )
-            `)
+              id_comentario,
+              id_usuario,
+              id_receta,
+              valoracion,
+              comentario,
+              fecha_comentario,
+              recetas!inner (
+                  id,
+                  titulo
+              )
+          `)
         .eq("id_usuario", userId)
         .order("fecha_comentario", { ascending: false })
 
@@ -239,24 +239,84 @@ document.addEventListener("DOMContentLoaded", () => {
         comentarioElement.classList.add("comentario-item")
 
         comentarioElement.innerHTML = `
-                <div class="comentario-header">
-                    <span class="nombre-receta">${nombreReceta}</span>
-                    <div class="valoracion">
-                        <span class="estrellas">${estrellas}</span>
-                        <span class="valor">${c.valoracion}/5</span>
-                    </div>
-                </div>
-                <p class="comentario-texto">${c.comentario || "Sin comentario"}</p>
-                <p class="comentario-fecha">${fechaFormateada}</p>
-            `
+              <div class="comentario-header">
+                  <span class="nombre-receta">${nombreReceta}</span>
+                  <div class="valoracion">
+                      <span class="estrellas">${estrellas}</span>
+                      <span class="valor">${c.valoracion}/5</span>
+                  </div>
+              </div>
+              <p class="comentario-texto">${c.comentario || "Sin comentario"}</p>
+              <p class="comentario-fecha">${fechaFormateada}</p>
+          `
 
         comentariosContainer.appendChild(comentarioElement)
       })
+
+      // Después de cargar los comentarios, inicializar el indicador de scroll
+      console.log("Inicializando indicador de scroll después de cargar comentarios")
+      setTimeout(initializeScrollIndicator, 300)
     } catch (error) {
       console.error("Error al cargar comentarios y valoraciones:", error)
       const comentariosContainer = document.getElementById("comentarios-valoraciones-container")
       comentariosContainer.innerHTML = "<p>Error al cargar comentarios y valoraciones</p>"
     }
+  }
+
+  // Añadir después de la función fetchComentariosValoraciones
+  // Actualizar la función initializeScrollIndicator
+  function initializeScrollIndicator() {
+    const container = document.getElementById("comentarios-valoraciones-container")
+    const indicator = document.querySelector(".scroll-indicator")
+
+    if (!container || !indicator) {
+      console.error("No se encontró el contenedor o el indicador")
+      return
+    }
+
+    // Función simplificada para actualizar el indicador
+    function updateScrollIndicator() {
+      console.log("Altura del contenedor:", container.clientHeight)
+      console.log("Altura del contenido:", container.scrollHeight)
+      console.log("Posición del scroll:", container.scrollTop)
+
+      // Si hay suficiente contenido para hacer scroll
+      if (container.scrollHeight > container.clientHeight) {
+        // Si no estamos en el fondo, mostrar el indicador
+        if (container.scrollTop < container.scrollHeight - container.clientHeight - 10) {
+          indicator.classList.add("visible")
+        } else {
+          indicator.classList.remove("visible")
+        }
+      } else {
+        // No hay suficiente contenido para hacer scroll
+        indicator.classList.remove("visible")
+      }
+    }
+
+    // Asegurarse de que el contenedor tenga overflow-y: auto
+    container.style.overflowY = "auto"
+
+    // Actualizar el indicador cuando se carguen los comentarios
+    const observer = new MutationObserver(() => {
+      console.log("Contenido del contenedor cambiado")
+      setTimeout(updateScrollIndicator, 200)
+    })
+    observer.observe(container, { childList: true, subtree: true })
+
+    // Actualizar el indicador cuando se haga scroll
+    container.addEventListener("scroll", updateScrollIndicator)
+
+    // Actualizar el indicador inicialmente después de un retraso
+    setTimeout(updateScrollIndicator, 500)
+
+    // Hacer scroll suave al hacer clic en el indicador
+    indicator.addEventListener("click", () => {
+      container.scrollBy({
+        top: 100, // Scroll más pequeño para mejor control
+        behavior: "smooth",
+      })
+    })
   }
 
   // Modificar la parte donde se cargan los datos del usuario para incluir la carga de comentarios

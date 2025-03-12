@@ -173,6 +173,89 @@ main {
   font-size: 1rem;
 }
 
+/* Actualizar los estilos del contenedor de comentarios */
+#comentarios-valoraciones-container {
+  max-height: 300px; /* Reducir la altura máxima para forzar el scroll */
+  overflow-y: auto !important; /* Forzar el overflow */
+  padding-right: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e0d5c9; /* Añadir borde para visualizar mejor el contenedor */
+  border-radius: 8px;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #6b4423 #f1f1f1;
+}
+
+/* Estilizar la barra de desplazamiento */
+#comentarios-valoraciones-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+#comentarios-valoraciones-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#comentarios-valoraciones-container::-webkit-scrollbar-thumb {
+  background: #6b4423;
+  border-radius: 4px;
+}
+
+#comentarios-valoraciones-container::-webkit-scrollbar-thumb:hover {
+  background: #5a371d;
+}
+
+/* Actualizar el indicador de scroll */
+.scroll-indicator {
+  position: absolute;
+  bottom: -15px; /* Posicionarlo debajo del contenedor */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #6b4423;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scroll-indicator.visible {
+  opacity: 1;
+}
+
+.scroll-indicator:hover {
+  background-color: #5a371d;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.scroll-indicator .arrow {
+  font-size: 1.2rem;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* Añadir clase para la sección de comentarios */
+.comentarios-section {
+  position: relative;
+  padding-bottom: 30px; /* Espacio para el indicador */
+}
+
 /* Comentarios y valoraciones */
 .comentario-item {
   background-color: #f9f9f9;
@@ -180,11 +263,18 @@ main {
   padding: 1.25rem;
   margin-bottom: 1rem;
   transition: transform 0.2s ease;
+  border-bottom: 1px solid #e0d5c9;
+  padding-bottom: 1rem;
 }
 
 .comentario-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comentario-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .comentario-header {
@@ -268,8 +358,8 @@ main {
 }
 
 .recipe-btn {
-  color: #6b4423;
   padding: 0.75rem 1.5rem;
+  color: #6b4423;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
@@ -278,6 +368,7 @@ main {
   border: none;
   min-width: 120px;
   text-align: center;
+  background-color: #ffffff;
 }
 
 /* Modal */
@@ -366,6 +457,12 @@ main {
   background-color: #d1c4b8;
   transform: translateY(-2px);
 }
+
+/* Actualizar los estilos del contenedor de comentarios */
+
+/* Estilizar la barra de desplazamiento */
+
+/* Actualizar el indicador de scroll */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
