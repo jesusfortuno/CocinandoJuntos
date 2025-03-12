@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home - Cocinando Juntos</title>
-        <link rel="stylesheet" href="styles.css">
-        <script src="index.js"></script>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cocinando Juntos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+</head>
+
 <body>
     <!--MENU NAVEGACIÓN-->
     <nav>
@@ -23,7 +25,7 @@
 
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
         <div class="menu-icon">☰</div>
-    </nav>    
+    </nav>
 
     <main>
         <section class="hero-video-section">
@@ -34,7 +36,8 @@
                 </video>
                 <div class="video-overlay">
                     <h1>Cocinando Juntos</h1>
-                    <p>Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la gastronomía donde podrás explorar sabores de diferentes culturas.</p>
+                    <p>Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la
+                        gastronomía donde podrás explorar sabores de diferentes culturas.</p>
                     <div class="hero-buttons">
                         <a href="#explore" class="hero-btn primary-btn">Explorar Recetas</a>
                         <a href="../login.html" class="hero-btn secondary-btn">Unirse Ahora</a>
@@ -80,99 +83,106 @@
                     <div class="recipe-track">
                         <!-- Primer grupo de recetas -->
                         <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Media">
-    <div class="recipe-image">
-        <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
-    </div>
-    <div class="recipe-content">
-        <h3>Pollo Agridulce</h3>
-        <div class="recipe-meta">
-            <span class="difficulty">Media</span>
-            <span class="time">45 min</span>
-            <span class="category">Comida</span>
-        </div>
-        <div class="description">
-            <h3 class="title">Pollo Agridulce</h3>
-            <p>Delicioso plato de pollo agridulce con un toque especial. Una combinación perfecta de sabores dulces y ácidos que te transportará a la auténtica cocina china.</p>
-            <a href="#" class="read-more">Leer más</a>
-        </div>
-    </div>
-</div>
+                            <div class="recipe-image">
+                                <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Pollo Agridulce</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Media</span>
+                                    <span class="time">45 min</span>
+                                    <span class="category">Comida</span>
+                                </div>
+                                <div class="description">
+                                    <h3 class="title">Pollo Agridulce</h3>
+                                    <p>Delicioso plato de pollo agridulce con un toque especial. Una combinación
+                                        perfecta de sabores dulces y ácidos que te transportará a la auténtica cocina
+                                        china.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
 
-<!-- Repite la estructura para las demás recetas -->
-<div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
-    <div class="recipe-image">
-        <img src="./Imagenes/recetas/galletas-sesamo.jpg" alt="Galletas de Sésamo">
-    </div>
-    <div class="recipe-content">
-        <h3>Galletas de Sésamo</h3>
-        <div class="recipe-meta">
-            <span class="difficulty">Fácil</span>
-            <span class="time">45 min</span>
-            <span class="category">Merienda</span>
-        </div>
-        <div class="description">
-            <p>Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional china. Perfectas para acompañar el té o como snack en cualquier momento del día.</p>
-            <a href="#" class="read-more">Leer más</a>
-        </div>
-    </div>
-</div>
+                        <!-- Repite la estructura para las demás recetas -->
+                        <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/recetas/galletas-sesamo.jpg" alt="Galletas de Sésamo">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Galletas de Sésamo</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Fácil</span>
+                                    <span class="time">45 min</span>
+                                    <span class="category">Merienda</span>
+                                </div>
+                                <div class="description">
+                                    <p>Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional
+                                        china. Perfectas para acompañar el té o como snack en cualquier momento del día.
+                                    </p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
 
-<div class="recipe-card" data-culture="China" data-time="90" data-difficulty="Media">
-    <div class="recipe-image">
-        <img src="./Imagenes/recetas/bolitos-chinos.jpg" alt="Bollitos Chinos">
-    </div>
-    <div class="recipe-content">
-        <h3>Bollitos Chinos</h3>
-        <div class="recipe-meta">
-            <span class="difficulty">Media</span>
-            <span class="time">1.30h</span>
-            <span class="category">Desayuno</span>
-        </div>
-        <div class="description">
-            <p>Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un desayuno tradicional de la cocina china que te encantará.</p>
-            <a href="#" class="read-more">Leer más</a>
-        </div>
-    </div>
-</div>
+                        <div class="recipe-card" data-culture="China" data-time="90" data-difficulty="Media">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/recetas/bolitos-chinos.jpg" alt="Bollitos Chinos">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Bollitos Chinos</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Media</span>
+                                    <span class="time">1.30h</span>
+                                    <span class="category">Desayuno</span>
+                                </div>
+                                <div class="description">
+                                    <p>Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un
+                                        desayuno tradicional de la cocina china que te encantará.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
 
-<div class="recipe-card" data-culture="China" data-time="40" data-difficulty="Fácil">
-    <div class="recipe-image">
-        <img src="./Imagenes/recetas/fideos-salteados.jpg" alt="Fideos Salteados">
-    </div>
-    <div class="recipe-content">
-        <h3>Fideos Salteados</h3>
-        <div class="recipe-meta">
-            <span class="difficulty">Fácil</span>
-            <span class="time">40 min</span>
-            <span class="category">Cena</span>
-        </div>
-        <div class="description">
-            <p>Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y sabroso que te transportará a las calles de China.</p>
-            <a href="#" class="read-more">Leer más</a>
-        </div>
-    </div>
-</div>
+                        <div class="recipe-card" data-culture="China" data-time="40" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/recetas/fideos-salteados.jpg" alt="Fideos Salteados">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Fideos Salteados</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Fácil</span>
+                                    <span class="time">40 min</span>
+                                    <span class="category">Cena</span>
+                                </div>
+                                <div class="description">
+                                    <p>Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y
+                                        sabroso que te transportará a las calles de China.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
 
-<div class="recipe-card" data-culture="China" data-time="30" data-difficulty="Fácil">
-    <div class="recipe-image">
-        <img src="./Imagenes/China/fideos-salteados.jpg" alt="Sopa Wonton">
-    </div>
-    <div class="recipe-content">
-        <h3>Sopa Wonton</h3>
-        <div class="recipe-meta">
-            <span class="difficulty">Fácil</span>
-            <span class="time">30 min</span>
-            <span class="category">Sopa</span>
-        </div>
-        <div class="description">
-            <p>Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos.</p>
-            <a href="#" class="read-more">Leer más</a>
-        </div>
-    </div>
-</div>
+                        <div class="recipe-card" data-culture="China" data-time="30" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/China/fideos-salteados.jpg" alt="Sopa Wonton">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Sopa Wonton</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Fácil</span>
+                                    <span class="time">30 min</span>
+                                    <span class="category">Sopa</span>
+                                </div>
+                                <div class="description">
+                                    <p>Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato
+                                        tradicional chino perfecto para días fríos.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
 
 
-                        
+
                         <!-- Segundo grupo de recetas -->
                         <div class="recipe-card" data-culture="Internacional" data-time="60" data-difficulty="Fácil">
                             <div class="recipe-image">
@@ -239,58 +249,102 @@
 
     <footer>
         <div class="footer-container">
+            <!-- Columna 1: Sobre Nosotros -->
             <div class="footer-links">
                 <h3>Sobre Nosotros</h3>
                 <ul>
+                    <li><a href="#">Quiénes Somos</a></li>
                     <li><a href="#">Prensa</a></li>
                     <li><a href="#">Anuncios</a></li>
                     <li><a href="#">Carreras</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Privacidad</a></li>
-                    <li><a href="#">Términos</a></li>
-                    <li><a href="#">Cookie Settings</a></li>
                 </ul>
             </div>
+
+            <!-- Columna 2: Legal -->
+            <div class="footer-links">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Cookies</a></li>
+                    <li><a href="#">Aviso Legal</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Comunidad -->
+            <div class="footer-links">
+                <h3>Comunidad</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Recetas</a></li>
+                    <li><a href="#">Chefs</a></li>
+                    <li><a href="#">Eventos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Redes Sociales -->
             <div class="footer-social">
                 <h3>Síguenos</h3>
                 <div class="social-icons">
-                    <a href="#"><img src="path/to/instagram-icon.png" alt="Instagram"></a>
-                    <a href="#"><img src="path/to/facebook-icon.png" alt="Facebook"></a>
-                    <a href="#"><img src="path/to/snapchat-icon.png" alt="Snapchat"></a>
-                    <a href="#"><img src="path/to/youtube-icon.png" alt="YouTube"></a>
-                    <a href="#"><img src="path/to/pinterest-icon.png" alt="Pinterest"></a>
-                    <a href="#"><img src="path/to/twitter-icon.png" alt="Twitter"></a>
-                    <a href="#"><img src="path/to/tiktok-icon.png" alt="TikTok"></a>
+                    <a href="#" aria-label="Instagram">
+                        <img src="./Imagenes/instagram-icon.png" alt="Instagram"
+                            onerror="this.src='/placeholder.svg?height=20&width=20'; this.onerror=null;">
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <img src="./Imagenes/facebook-icon.png" alt="Facebook"
+                            onerror="this.src='/placeholder.svg?height=20&width=20'; this.onerror=null;">
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <img src="./Imagenes/twitter-icon.png" alt="Twitter"
+                            onerror="this.src='/placeholder.svg?height=20&width=20'; this.onerror=null;">
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <img src="./Imagenes/youtube-icon.png" alt="YouTube"
+                            onerror="this.src='/placeholder.svg?height=20&width=20'; this.onerror=null;">
+                    </a>
+                    <a href="#" aria-label="Pinterest">
+                        <img src="./Imagenes/pinterest-icon.png" alt="Pinterest"
+                            onerror="this.src='/placeholder.svg?height=20&width=20'; this.onerror=null;">
+                    </a>
+                    <a href="#" aria-label="TikTok">
+                        <img src="./Imagenes/tiktok-icon.png" alt="TikTok"
+                            onerror="this.src='/placeholder.svg?height=20&width=20'; this.onerror=null;">
+                    </a>
                 </div>
             </div>
         </div>
+
+        <!-- Footer Bottom -->
         <div class="footer-bottom">
             <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
             <div class="language-selector">
-                <label for="language">Language:</label>
+                <label for="language">Idioma:</label>
                 <select id="language">
                     <option value="es">Español</option>
                     <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
                 </select>
             </div>
         </div>
-    </footer> 
+    </footer>
     <!-- Agregar el siguiente script al final del archivo HTML -->
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
         const userInfo = document.getElementById("user-info");
         const authButton = document.getElementById("auth-button");
-        
+
         console.log("Datos del usuario:", usuario); // Para depuración
-    
+
         // Si el usuario está registrado en localStorage
         if (usuario) {
             // Mostrar la información del usuario
             userInfo.style.display = "flex";
             document.getElementById("user-name").textContent = usuario.username || "Usuario";
             authButton.style.display = "none";
-            
+
             // Agregar funcionalidad de cerrar sesión
             document.getElementById("logout-btn").addEventListener("click", (e) => {
                 e.preventDefault();
@@ -303,7 +357,7 @@
             authButton.style.display = "block";
         }
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const track = document.querySelector(".recipe-track");
@@ -358,5 +412,5 @@
         });
     </script>
 </body>
-</html>
 
+</html>
