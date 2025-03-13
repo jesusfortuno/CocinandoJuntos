@@ -5,29 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bizcocho Capuccino - Cocinando Juntos</title>
-    <link rel="stylesheet" href="bizcocho-capuccino.css ">
+    <link rel="stylesheet" href="bizcocho-capuccino.css">
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
 </head>
 
 <body>
     <nav>
-        <a href="./../US1_PantallaInicio/index.html" class="logo">
-            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        <a href="../US1_PantallaInicio/index.html">
+            <div class="logo">
+                <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+            </div>
         </a>
         <input type="text" class="search-bar" placeholder="Buscar recetas...">
-    
+
         <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
+            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
+                class="user-icon">
+            <a href="../US7_PaginaDeUsuario/usuario.html"><span id="user-name">Nombre del Usuario</span></a>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
-    
-        <a href="./../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+
+        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
         <div class="menu-icon">☰</div>
     </nav>
 
     <main>
         <div class="breadcrumb">
-            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a href="./../US1_PantallaInicio/cultura-italiana.html">Cultura Italiana</a> > Bizcocho Capuccino
+            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
+                href="./../US1_PantallaInicio/cultura-italiana.html">Cultura Italiana</a> > Bizcocho Capuccino
         </div>
 
         <div class="recipe-title">
@@ -54,8 +59,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
         <div class="recipe-container">
             <div class="recipe-ingredients">
                 <h2>Ingredientes</h2>
@@ -76,9 +81,12 @@
                 <ol>
                     <li>Batimos los huevos con el yogur</li>
                     <li>Precalentar el horno a 180 grados</li>
-                    <li>Agregamos un vasito de azúcar y otro vasito con una cucharada de café soluble y otra de cacao en polvo y lo rellenamos de azúcar. Esto es al gusto ya que la proporción es como gustes, más café o más cacao. Mezclar bien con unas varillas</li>
+                    <li>Agregamos un vasito de azúcar y otro vasito con una cucharada de café soluble y otra de cacao en
+                        polvo y lo rellenamos de azúcar. Esto es al gusto ya que la proporción es como gustes, más café
+                        o más cacao. Mezclar bien con unas varillas</li>
                     <li>Añadimos el aceite, la sal y la vainilla y mezclamos</li>
-                    <li>Añadimos dos vasos de harina y mezclamos bien. Después añadimos un tercero junto con la levadura y volvemos a mezclar</li>
+                    <li>Añadimos dos vasos de harina y mezclamos bien. Después añadimos un tercero junto con la levadura
+                        y volvemos a mezclar</li>
                     <li>Dejar reposar unos minutos</li>
                     <li>Hornear a 180 grados durante 40 minutos</li>
                     <li>Dejar que enfríe para desmoldar y dejar acabar de enfriar en una rejilla. Buen provecho</li>
@@ -122,7 +130,7 @@
             // Remover eventos previos si existen
             favButton.replaceWith(favButton.cloneNode(true));
             const newFavButton = document.querySelector('.favorite-btn');
-            
+
             newFavButton.addEventListener('click', async function favButtonHandler() {
                 if (!usuario) {
                     alert('Debes iniciar sesión para guardar en favoritos');
@@ -135,7 +143,7 @@
 
                 const recetaId = this.getAttribute('data-receta-id');
                 const resultado = await agregarAFavoritos(recetaId);
-                
+
                 if (resultado) {
                     this.classList.add('favorito-activo');
                     this.textContent = ' En Favoritos';
@@ -147,11 +155,12 @@
         }
 
         // Manejar el cierre de sesión
-        logoutBtn.addEventListener('click', function(e) {
+        logoutBtn.addEventListener('click', function (e) {
             e.preventDefault();
             localStorage.removeItem('usuario');
             window.location.href = '../login.html';
         });
     </script>
 </body>
+
 </html>

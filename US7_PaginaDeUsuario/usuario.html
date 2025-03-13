@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Usuario - Cocinando Juntos</title>
+    <link rel="stylesheet" href="usuario.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="../US1_PantallaInicio/index.html">
+                <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+            </a>
+        </div>
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="../Us1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="../US1_PantallaInicio/index.html" id="logout-btn">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Sección de Perfil -->
+        <section class="section-container profile-section">
+            <h2 class="section-title">Perfil de Usuario</h2>
+            
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil">
+                </div>
+                <span id="profile-user-name">Nombre del Usuario</span>
+            </div>
+            
+            <div class="profile-info">
+                <h3>Información Personal</h3>
+                <p>
+                    <strong>Email:</strong>
+                    <span id="user-email">usuario@ejemplo.com</span>
+                </p>
+                <button class="primary-btn">Cambiar Contraseña</button>
+            </div>
+        </section>
+
+        <!-- Sección de Comentarios y Valoraciones -->
+        <section class="section-container comentarios-section">
+            <h2 class="section-title">Mis Comentarios y Valoraciones</h2>
+            <div id="comentarios-valoraciones-container">
+                <!-- Los comentarios se cargarán dinámicamente aquí -->
+            </div>
+            <div class="scroll-indicator">
+                <span>Desliza para ver más</span>
+                <span class="arrow">↓</span>
+            </div>
+        </section>
+
+        <!-- Sección de Recetas Guardadas -->
+        <section class="section-container">
+            <h2 class="section-title">Últimas Recetas Guardadas</h2>
+            <div id="saved-recipes-container" class="recipes-grid">
+                <!-- Las recetas se insertarán dinámicamente con JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Cambio de Contraseña -->
+    <div id="password-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Cambiar Contraseña</h2>
+            <form id="change-password-form">
+                <div class="form-group">
+                    <label for="current-password">Contraseña actual:</label>
+                    <div class="password-container">
+                        <input type="password" id="current-password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('current-password')">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Contraseña nueva:</label>
+                    <div class="password-container">
+                        <input type="password" id="new-password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('new-password')">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Repetir contraseña nueva:</label>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirm-password')">👁️</button>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Actualizar Contraseña</button>
+                    <button type="button" class="secondary-btn" onclick="closeModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="usuario.js"></script>
+</body>
+</html>
+

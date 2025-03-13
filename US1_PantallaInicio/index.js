@@ -151,3 +151,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
+
+    slider.addEventListener('mouseleave', () => {
+        autoplayInterval = setInterval(() => moveSlide(1), 5000);
+    });
+
+    window.onload = function() {
+        const loggedIn = localStorage.getItem('loggedIn');
+        const email = localStorage.getItem('email'); // Obtener el correo electrónico
+
+        if (loggedIn === 'true') {
+            // Mostrar el correo electrónico en la barra de navegación
+            document.getElementById('user-name').textContent = email || 'Usuario';
+            document.getElementById('user-name').onclick = function() {
+                window.location.href = 'US7_PaginaDeUsuario/usuario.html'; // Redirigir al perfil
+            };
+        }
+    };
+});
+
+// Añade este código a tu archivo JavaScript existente
+document.getElementById('menuToggle').addEventListener('click', function() {
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  dropdownMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', function(event) {
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  const menuToggle = document.getElementById('menuToggle');
+  
+  if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+    dropdownMenu.classList.remove('active');
+  }
+});
