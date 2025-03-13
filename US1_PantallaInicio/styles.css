@@ -1540,4 +1540,30 @@ input:checked + .slider:before {
   transform: translateY(-2px);
 }
 
+/* Estilos para el botón de scroll hacia arriba */
+.scroll-to-top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.scroll-gif {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.scroll-gif:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .scroll-gif {
+    width: 40px;
+    height: 40px;
+  }
+}
 

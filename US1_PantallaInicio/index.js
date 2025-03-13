@@ -137,5 +137,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   })
+
+  // Funcionalidad para el botón de scroll hacia arriba
+  const scrollToTopButton = document.querySelector(".scroll-to-top")
+  if (scrollToTopButton) {
+    scrollToTopButton.addEventListener("click", () => {
+      // Animación suave de scroll hacia arriba
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    })
+  }
 })
 
