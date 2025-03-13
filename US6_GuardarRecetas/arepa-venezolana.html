@@ -25,6 +25,49 @@
         <div class="menu-icon">☰</div>
     </nav>
 
+    <!-- El menú desplegable debe estar aquí, fuera del nav -->
+    <div class="overlay-menu" id="overlayMenu">
+        <div class="overlay-content">
+            <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gastronómicas</h3>
+                <ul>
+                    <li><a href="cultura-china.html">China</a></li>
+                    <li><a href="cultura-española.html">Española</a></li>
+                    <li><a href="cultura-francesa.html">Francesa</a></li>
+                    <li><a href="cultura-italiana.html">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tiempo de Preparación</h3>
+                <ul>
+                    <li><a href="#rapidas">Menos de 30min</a></li>
+                    <li><a href="#medio">Entre 30min - 120min</a></li>
+                    <li><a href="#elaboradas">Más de 120min</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tipo de Plato</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Dificultad de la Receta</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <main>
         <div class="breadcrumb">
             <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a href="./../US1_PantallaInicio/cultura-venezolana.html">Cultura Venezolana</a> > Arepa Venezolana
@@ -110,7 +153,7 @@
             userInfo.style.display = "none";
             authButton.style.display = "block";
         }
-
+        
         // Manejar el botón de favoritos - usando una función nombrada para evitar duplicados
         const favButton = document.querySelector('.favorite-btn');
         if (favButton) {
@@ -140,7 +183,6 @@
                 this.disabled = false;
             });
         }
-
         // Manejar el cierre de sesión
         logoutBtn.addEventListener('click', function(e) {
             e.preventDefault();
