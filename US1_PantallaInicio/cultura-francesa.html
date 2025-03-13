@@ -1,33 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cultura Francesa - Cocinando Juntos</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
+
 <body>
     <!--MENU NAVEGACIÓN-->
     <nav>
-        <a href="index.html" class="logo">
-            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        <a href="../US1_PantallaInicio/index.html" class="logo">
+            <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
         </a>
+
         <input type="text" class="search-bar" placeholder="Buscar recetas...">
 
         <div id="user-info" class="user-info" style="display: none;">
-            <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
+            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
+                class="user-icon">
+            <a href="../US7_PaginaDeUsuario/usuario.html" style="text-decoration: none;"><span id="user-name">Nombre del
+                    Usuario</span></a>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
 
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-        <div class="menu-icon">☰</div>
-    </nav>    
+
+        <div class="menu-icon" id="menuToggle">☰</div>
+    </nav>
+
+    <!-- El menú desplegable debe estar aquí, fuera del nav -->
+    <div class="overlay-menu" id="overlayMenu">
+        <div class="overlay-content">
+            <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gastronómicas</h3>
+                <ul>
+                    <li><a href="cultura-china.html">China</a></li>
+                    <li><a href="cultura-española.html">Española</a></li>
+                    <li><a href="cultura-francesa.html">Francesa</a></li>
+                    <li><a href="cultura-italiana.html">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tipo de Plato</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Dificultad de la Receta</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="index.html">Inicio</a> > 
+            <a href="index.html">Inicio</a> >
             <span>Cultura Francesa</span>
         </div>
 
@@ -42,8 +83,9 @@
         <!-- Filtros -->
         <div class="filters">
             <div class="filter-group">
-                <button class="filter-button active" onclick="window.location.href='../Platos.html'">Mejor Valoradas</button>
-            </div>            
+                <button class="filter-button active" onclick="window.location.href='../Platos.html'">Mejor
+                    Valoradas</button>
+            </div>
             <div class="filter-group">
                 <button class="filter-button" id="filter-btn">Filtros</button>
             </div>
@@ -98,7 +140,8 @@
 
             <div class="recipe-card" data-culture="Francesa" data-time="30" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <a href="./../US6_GuardarRecetas/crepas-dulces.html"><img src="./Imagenes/Francia/crepas-dulces.jpg" alt="Crepas dulces"></a>
+                    <a href="./../US6_GuardarRecetas/crepas-dulces.html"><img src="./Imagenes/Francia/crepas-dulces.jpg"
+                            alt="Crepas dulces"></a>
                 </div>
                 <h3>Crepas dulces</h3>
                 <div class="recipe-meta">
@@ -143,14 +186,14 @@
         const usuario = JSON.parse(localStorage.getItem("usuario"));
         const userInfo = document.getElementById("user-info");
         const authButton = document.getElementById("auth-button");
-        
+
         // Si el usuario está registrado en localStorage
         if (usuario) {
             // Mostrar la información del usuario
             userInfo.style.display = "flex";
             document.getElementById("user-name").textContent = usuario.username;
             authButton.style.display = "none";
-            
+
             // Agregar funcionalidad de cerrar sesión
             document.getElementById("logout-btn").addEventListener("click", (e) => {
                 e.preventDefault();
@@ -162,51 +205,71 @@
             userInfo.style.display = "none";
             authButton.style.display = "block";
         }
+        // Código JavaScript directamente en el HTML para asegurar el orden correcto
+        document.addEventListener('DOMContentLoaded', () => {
+            // Menú desplegable
+            document.getElementById('menuToggle').addEventListener('click', function (e) {
+                e.preventDefault();
+                const overlayMenu = document.getElementById('overlayMenu');
+                overlayMenu.classList.toggle('active');
+            });
 
+            document.getElementById('closeMenu').addEventListener('click', function () {
+                const overlayMenu = document.getElementById('overlayMenu');
+                overlayMenu.classList.remove('active');
+            });
+
+            // Cerrar al hacer clic fuera del menú
+            document.getElementById('overlayMenu').addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
         // Script para los filtros
         document.addEventListener("DOMContentLoaded", () => {
             const filterBtn = document.getElementById("filter-btn");
             const filterOptions = document.getElementById("filter-options");
             const applyFiltersBtn = document.getElementById("apply-filters");
-            
+
             filterBtn.addEventListener("click", () => {
                 filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
             });
-            
+
             applyFiltersBtn.addEventListener("click", () => {
                 const selectedCulture = document.getElementById("filter-culture").value;
                 const selectedDifficulty = document.getElementById("filter-difficulty").value;
                 const selectedTime = document.getElementById("filter-time").value;
-                
+
                 const recipes = document.querySelectorAll(".recipe-card");
-                
+
                 recipes.forEach(recipe => {
                     const recipeCulture = recipe.getAttribute("data-culture");
                     const recipeTime = parseInt(recipe.getAttribute("data-time"));
                     const recipeDifficulty = recipe.getAttribute("data-difficulty");
-                    
+
                     const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
                     const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
                     let matchesTime = false;
-                    
-                    if (selectedTime === "" || 
+
+                    if (selectedTime === "" ||
                         (selectedTime === "0-30" && recipeTime <= 30) ||
                         (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
                         (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
                         (selectedTime === "121" && recipeTime > 120)) {
                         matchesTime = true;
                     }
-                    
+
                     if (matchesCulture && matchesDifficulty && matchesTime) {
                         recipe.style.display = "inline-block";
                     } else {
                         recipe.style.display = "none";
                     }
                 });
-                
+
                 filterOptions.style.display = "none";
             });
-            
+
             document.addEventListener("click", (event) => {
                 if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
                     filterOptions.style.display = "none";
@@ -215,4 +278,5 @@
         });
     </script>
 </body>
+
 </html>
