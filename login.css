@@ -86,12 +86,14 @@ input:focus {
 }
 
 .volver-container {
-  position: absolute;
   top: 220px;
   right: 780px;
 }
 
 .volver-container img {
+  position: fixed;
+  margin-left: 160px;
+  margin-top: -20px;
   width: 20px;
   height: 20px;
   cursor: pointer;
