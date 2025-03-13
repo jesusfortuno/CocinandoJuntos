@@ -1,83 +1,153 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let currentSlide = 0;
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    const dotsContainer = document.querySelector('.dots-container');
+document.addEventListener("DOMContentLoaded", () => {
+  // Configuración del slider de recetas
+  const track = document.querySelector(".recipe-track")
+  const prevButton = document.querySelector(".prev-button")
+  const nextButton = document.querySelector(".next-button")
+  const cards = track.querySelectorAll(".recipe-card")
+  const cardCount = cards.length
+  const cardsToShow = 5 // Mostrar 5 tarjetas a la vez
+  let currentIndex = 0
+  let autoSlideInterval
+  let isAnimating = false // Bandera para evitar clics rápidos
 
-    // Función para actualizar la visibilidad de las tarjetas según el ancho de la pantalla
-    function updateCardsVisibility() {
-        const windowWidth = window.innerWidth;
-        slides.forEach((slide, slideIndex) => {
-            // Ocultar todos los slides excepto el actual
-            slide.style.display = slideIndex === currentSlide ? 'flex' : 'none';
-            
-            const cards = slide.querySelectorAll('.slide-card');
-            cards.forEach((card, index) => {
-                if (windowWidth <= 768) {
-                    // Mostrar solo 1 tarjeta
-                    card.style.display = index === 0 ? 'block' : 'none';
-                } else if (windowWidth <= 1024) {
-                    // Mostrar 2 tarjetas
-                    card.style.display = index < 2 ? 'block' : 'none';
-                } else {
-                    // Mostrar todas las tarjetas
-                    card.style.display = 'block';
-                }
-            });
-        });
+  // Verificar si los elementos existen
+  if (!track || !prevButton || !nextButton || cardCount === 0) {
+    console.error("Error: Elementos del slider no encontrados o no hay tarjetas.")
+    return
+  }
+
+  // Función para actualizar la posición del slider
+  function updateSliderPosition() {
+    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+    if (currentIndex > maxIndex) currentIndex = maxIndex
+
+    cards.forEach((card, index) => {
+      const isVisible = index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow
+      card.style.display = isVisible ? "block" : "none"
+    })
+
+    prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"
+    prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer"
+    nextButton.style.opacity = currentIndex >= maxIndex ? "0.5" : "1"
+    nextButton.style.cursor = currentIndex >= maxIndex ? "default" : "pointer"
+
+    setTimeout(() => {
+      isAnimating = false
+    }, 300)
+  }
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+      if (isAnimating) return
+      const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+      currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
+      updateSliderPosition()
+    }, 25000)
+  }
+
+  prevButton.addEventListener("click", () => {
+    if (isAnimating) return
+    isAnimating = true
+    if (currentIndex > 0) currentIndex -= 1
+    updateSliderPosition()
+  })
+
+  nextButton.addEventListener("click", () => {
+    if (isAnimating) return
+    isAnimating = true
+    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+    currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
+    updateSliderPosition()
+  })
+
+  // Inicializar slider
+  updateSliderPosition()
+  startAutoSlide()
+
+  // Event listener para resize
+  let resizeTimer
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(() => {
+      currentIndex = 0
+      updateSliderPosition()
+    }, 250)
+  })
+
+  // Event listeners para las tarjetas de recetas
+  cards.forEach((card) => {
+    const recipeContent = card.querySelector(".recipe-content")
+    const recipeImage = card.querySelector(".recipe-image")
+
+    if (recipeContent && recipeImage) {
+      // Crear overlay para el hover
+      const overlay = document.createElement("div")
+      overlay.className = "recipe-overlay"
+
+      // Obtener información de la receta
+      const title = recipeContent.querySelector("h3").textContent
+      const description =
+        card.querySelector(".description p")?.textContent ||
+        "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."
+
+      // Crear contenido del overlay con una clase específica para el título
+      overlay.innerHTML = `
+        <h3 class="title">${title}</h3>
+        <p>${description}</p>
+      `
+
+      // Añadir overlay a la tarjeta
+      card.appendChild(overlay)
+
+      // Eliminar la descripción original para evitar duplicados
+      const oldDescription = card.querySelector(".description")
+      if (oldDescription) {
+        oldDescription.remove()
+      }
     }
 
-    // Crear los dots
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
+    // Eventos de mouse
+    card.addEventListener("mouseenter", () => {
+      const overlay = card.querySelector(".recipe-overlay")
+      if (overlay) {
+        overlay.classList.add("active")
+      }
+    })
 
-    function updateDots() {
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-    }
+    card.addEventListener("mouseleave", () => {
+      const overlay = card.querySelector(".recipe-overlay")
+      if (overlay) {
+        overlay.classList.remove("active")
+      }
+    })
+  })
 
-    function moveSlide(direction) {
-        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-        updateSlider();
-    }
+  // Scroll suave para los enlaces de anclaje
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault()
+      const targetId = this.getAttribute("href")
+      if (targetId === "#") return
+      const targetElement = document.querySelector(targetId)
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: "smooth",
+        })
+      }
+    })
+  })
 
-    function goToSlide(index) {
-        currentSlide = index;
-        updateSlider();
-    }
+  // Funcionalidad para el botón de scroll hacia arriba
+  const scrollToTopButton = document.querySelector(".scroll-to-top")
+  if (scrollToTopButton) {
+    scrollToTopButton.addEventListener("click", () => {
+      // Animación suave de scroll hacia arriba
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    })
+  }
+})
 
-    function updateSlider() {
-        // En lugar de usar transform, cambiamos la visibilidad de los slides
-        slides.forEach((slide, index) => {
-            slide.style.display = index === currentSlide ? 'flex' : 'none';
-        });
-        updateDots();
-    }
-
-    // Event listeners
-    window.addEventListener('resize', updateCardsVisibility);
-    window.moveSlide = moveSlide;
-    window.goToSlide = goToSlide;
-
-    // Inicialización
-    updateCardsVisibility();
-    
-    // Iniciar el autoplay
-    let autoplayInterval = setInterval(() => moveSlide(1), 5000);
-
-    // Opcional: Pausar el autoplay cuando el usuario interactúa
-    slider.addEventListener('mouseenter', () => {
-        clearInterval(autoplayInterval);
-    });
-
-    slider.addEventListener('mouseleave', () => {
-        autoplayInterval = setInterval(() => moveSlide(1), 5000);
-    });
-});
