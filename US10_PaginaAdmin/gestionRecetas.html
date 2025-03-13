@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Recetas</title>
+    <link rel="stylesheet" href="gestionRecetas.css">
+</head>
+<body>
+    <nav>
+        <a href="./../US1_PantallaInicio/index.html" class="logo">
+            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="./PaginaAdmin.html">Panel de Administración</a> &gt; <span>Gestión de Recetas</span>
+        </div>
+
+        <div class="recipes-management">
+            <div class="management-header">
+                <h1>Gestión de Recetas</h1>
+                <button id="add-recipe-btn" class="primary-button">Añadir Nueva Receta</button>
+            </div>
+
+            <div class="recipes-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <th>Dificultad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recipes-table-body">
+                        <!-- Las recetas se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal para añadir/editar receta -->
+        <div id="recipe-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title">Añadir Nueva Receta</h2>
+                <form id="recipe-form">
+                    <div class="form-group">
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" name="titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" name="descripcion" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="dificultad">Dificultad:</label>
+                        <select id="dificultad" name="dificultad" required>
+                            <option value="Fácil">Fácil</option>
+                            <option value="Media">Media</option>
+                            <option value="Difícil">Difícil</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tiempo">Tiempo de preparación:</label>
+                        <input type="text" id="tiempo" name="tiempo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoría:</label>
+                        <input type="text" id="categoria" name="categoria" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ingredientes">Ingredientes:</label>
+                        <textarea id="ingredientes" name="ingredientes" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pasos">Pasos:</label>
+                        <textarea id="pasos" name="pasos" required></textarea>
+                    </div>
+                    <button type="submit" class="primary-button">Guardar Receta</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="gestionRecetas.js"></script>
+</body>
+</html> 

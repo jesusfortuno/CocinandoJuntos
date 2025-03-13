@@ -1,0 +1,229 @@
+/* Estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    min-height: 100vh;
+    background-color: #fdf5e6;
+    color: #5a3d2b;
+  }
+  
+  /* Navegación */
+  nav {
+    background-color: #f8f1e9;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0d5c9;
+  }
+  
+  .logo {
+    width: 200px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  
+  /* Contenido principal */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 180px);
+  }
+  
+  .breadcrumb {
+    margin-bottom: 2rem;
+  }
+  
+  .breadcrumb a {
+    color: #6b4423;
+    text-decoration: none;
+  }
+  
+  .management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .primary-button {
+    background-color: #6b4423;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .primary-button:hover {
+    background-color: #8b5933;
+  }
+  
+  /* Tabla de usuarios */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  th,
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0d5c9;
+  }
+  
+  th {
+    background-color: #f8f1e9;
+    color: #6b4423;
+    font-weight: bold;
+  }
+  
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 8px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #6b4423;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d4c3b5;
+    border-radius: 4px;
+  }
+  
+  .form-group small {
+    display: block;
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #6b4423;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  
+  /* Botones de acción en la tabla */
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .edit-btn {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #357abd;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Estilos para roles */
+  .role-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .role-admin {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .role-user {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  
