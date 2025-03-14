@@ -6,16 +6,17 @@
   font-family: Arial, sans-serif;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
 }
 
 body {
-    padding-top: 90px; /* Altura del nav */
+  padding-top: 90px; /* Altura del nav */
 }
 
 nav {
@@ -220,6 +221,8 @@ main {
   display: none;
 }
 
+/* Añadir o modificar estos estilos para el overlay de las recetas */
+
 /* Nuevo overlay para el hover */
 .recipe-overlay {
   position: absolute;
@@ -238,11 +241,42 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 10;
 }
 
 .recipe-overlay.active {
   opacity: 1;
   visibility: visible;
+}
+
+/* Nuevo estilo específico para el título del overlay */
+.recipe-overlay .title {
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 0;
+}
+
+.recipe-overlay p {
+  color: white;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 90%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Asegurar que la tarjeta tenga posición relativa para el posicionamiento correcto */
+.recipe-card {
+  position: relative;
+}
+
+/* Asegurar que la imagen tenga z-index adecuado */
+.recipe-image {
+  position: relative;
+  z-index: 1;
 }
 
 /* Nuevo estilo específico para el título del overlay */
@@ -811,9 +845,9 @@ footer {
 }
 /* Ajustar el contenedor de la derecha */
 .right-section {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Añadir estilos para el nuevo wrapper de contenido */
@@ -1586,7 +1620,6 @@ input:checked + .slider:before {
   }
 }
 
-
 /* Añade estos estilos a tu archivo CSS existente */
 .menu-toggle {
   cursor: pointer;
@@ -1609,7 +1642,7 @@ input:checked + .slider:before {
   top: 100%;
   right: 0;
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   min-width: 200px;
   z-index: 999;
@@ -1647,3 +1680,4 @@ input:checked + .slider:before {
 .menu-section ul li a:hover {
   color: #000;
 }
+

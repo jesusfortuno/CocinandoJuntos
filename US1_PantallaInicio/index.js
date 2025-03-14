@@ -76,21 +76,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Event listeners para las tarjetas de recetas
   cards.forEach((card) => {
-    const recipeContent = card.querySelector(".recipe-content")
-    const recipeImage = card.querySelector(".recipe-image")
-
-    if (recipeContent && recipeImage) {
-      // Crear overlay para el hover
+    // Crear overlay para el hover si no existe
+    if (!card.querySelector(".recipe-overlay")) {
       const overlay = document.createElement("div")
       overlay.className = "recipe-overlay"
 
       // Obtener información de la receta
-      const title = recipeContent.querySelector("h3").textContent
+      const title = card.querySelector("h3")?.textContent || "Receta"
       const description =
         card.querySelector(".description p")?.textContent ||
         "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."
 
-      // Crear contenido del overlay con una clase específica para el título
+      // Crear contenido del overlay
       overlay.innerHTML = `
         <h3 class="title">${title}</h3>
         <p>${description}</p>
@@ -98,12 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Añadir overlay a la tarjeta
       card.appendChild(overlay)
-
-      // Eliminar la descripción original para evitar duplicados
-      const oldDescription = card.querySelector(".description")
-      if (oldDescription) {
-        oldDescription.remove()
-      }
     }
 
     // Eventos de mouse
@@ -149,38 +140,30 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
   }
+
+  // Añadir funcionalidad para el menú desplegable
+  const menuToggle = document.getElementById("menuToggle")
+  const overlayMenu = document.getElementById("overlayMenu")
+
+  if (menuToggle && overlayMenu) {
+    menuToggle.addEventListener("click", (e) => {
+      e.preventDefault()
+      overlayMenu.classList.toggle("active")
+    })
+
+    const closeMenu = document.getElementById("closeMenu")
+    if (closeMenu) {
+      closeMenu.addEventListener("click", () => {
+        overlayMenu.classList.remove("active")
+      })
+    }
+
+    // Cerrar al hacer clic fuera del menú
+    overlayMenu.addEventListener("click", function (e) {
+      if (e.target === this) {
+        this.classList.remove("active")
+      }
+    })
+  }
 })
 
-
-    slider.addEventListener('mouseleave', () => {
-        autoplayInterval = setInterval(() => moveSlide(1), 5000);
-    });
-
-    window.onload = function() {
-        const loggedIn = localStorage.getItem('loggedIn');
-        const email = localStorage.getItem('email'); // Obtener el correo electrónico
-
-        if (loggedIn === 'true') {
-            // Mostrar el correo electrónico en la barra de navegación
-            document.getElementById('user-name').textContent = email || 'Usuario';
-            document.getElementById('user-name').onclick = function() {
-                window.location.href = 'US7_PaginaDeUsuario/usuario.html'; // Redirigir al perfil
-            };
-        }
-    };
-});
-
-// Añade este código a tu archivo JavaScript existente
-document.getElementById('menuToggle').addEventListener('click', function() {
-  const dropdownMenu = document.getElementById('dropdownMenu');
-  dropdownMenu.classList.toggle('active');
-});
-
-document.addEventListener('click', function(event) {
-  const dropdownMenu = document.getElementById('dropdownMenu');
-  const menuToggle = document.getElementById('menuToggle');
-  
-  if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-    dropdownMenu.classList.remove('active');
-  }
-});
