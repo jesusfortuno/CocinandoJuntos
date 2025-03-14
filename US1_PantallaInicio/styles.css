@@ -6,6 +6,8 @@
   font-family: Arial, sans-serif;
 }
 
+/* Modificar estos estilos del footer para corregir el problema de desplazamiento */
+
 html,
 body {
   height: 100%;
@@ -13,10 +15,15 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  overflow-x: hidden; /* Evitar desplazamiento horizontal */
 }
 
 body {
   padding-top: 90px; /* Altura del nav */
+  min-height: 100vh; /* Asegurar altura mínima */
+  position: relative; /* Para posicionamiento relativo */
+  display: flex;
+  flex-direction: column;
 }
 
 nav {
@@ -62,6 +69,9 @@ nav {
 }
 
 main {
+  flex: 1 0 auto; /* Hacer que el contenido principal ocupe el espacio disponible */
+  margin-bottom: 0; /* Eliminar margen inferior */
+  padding-bottom: 2rem; /* Añadir padding inferior para separar del footer */
   max-width: 100%;
   margin: 0;
   padding: 0;
@@ -377,19 +387,26 @@ main {
   right: 20px;
 }
 
+/* Modificar los estilos del footer */
 footer {
-  background-color: #6b4423; /* Cambia este color al que desees */
+  background: linear-gradient(to bottom, #8b5d33, #6b4423);
   color: white;
-  padding: 2rem 0;
-  text-align: center;
+  padding: 3rem 0 0; /* Eliminar padding bottom */
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+  min-height: fit-content;
+  height: auto;
+  overflow: visible;
 }
 
 .footer-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .footer-links {
@@ -434,8 +451,10 @@ footer {
 
 .social-icons {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: center; /* Centrar los iconos */
 }
 
 .social-icons img {
@@ -443,13 +462,23 @@ footer {
   height: 30px;
 }
 
+/* Ajustar el footer bottom */
 .footer-bottom {
+  width: 100%;
+  padding: 1.5rem 0;
   margin-top: 2rem;
-  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .language-selector {
-  margin-top: 1rem;
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative; /* Asegurar posicionamiento relativo */
+  z-index: 20; /* Asegurar que esté por encima de otros elementos */
 }
 
 .language-selector label {
@@ -1122,9 +1151,13 @@ footer {
 footer {
   background: linear-gradient(to bottom, #8b5d33, #6b4423);
   color: white;
-  padding: 3rem 0 1.5rem;
+  padding: 3rem 0 0; /* Eliminar padding bottom */
   position: relative;
   overflow: hidden;
+  width: 100%;
+  margin-top: auto;
+  min-height: fit-content;
+  height: auto;
 }
 
 footer::before {
@@ -1257,17 +1290,13 @@ footer::before {
   filter: brightness(0);
 }
 
+/* Ajustar el footer bottom */
 .footer-bottom {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  background: rgba(0, 0, 0, 0.1);
   text-align: center;
-}
-
-.footer-bottom p {
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
 }
 
 .language-selector {
@@ -1315,17 +1344,12 @@ footer::before {
   .footer-container {
     grid-template-columns: 1fr;
     gap: 2rem;
+    padding: 0 1rem;
   }
 
   .footer-links,
   .footer-social {
     text-align: center;
-  }
-
-  .footer-links h3::after,
-  .footer-social h3::after {
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .social-icons {
@@ -1593,24 +1617,26 @@ input:checked + .slider:before {
   transform: translateY(-2px);
 }
 
-/* Estilos para el botón de scroll hacia arriba */
+/* Ajustar el botón de scroll */
 .scroll-to-top {
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  padding: 1rem 0;
   cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
 }
 
 .scroll-gif {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   transition: transform 0.3s ease;
 }
 
 .scroll-gif:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
@@ -1679,5 +1705,30 @@ input:checked + .slider:before {
 
 .menu-section ul li a:hover {
   color: #000;
+}
+
+/* Ajustar responsive del footer */
+@media (max-width: 992px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .footer-links,
+  .footer-social {
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
 }
 

@@ -165,5 +165,46 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   }
+
+  // Asegurar que el footer se muestre correctamente
+  function adjustFooterPosition() {
+    const footer = document.querySelector("footer")
+    const body = document.body
+    const html = document.documentElement
+
+    // Obtener la altura del documento
+    const height = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight,
+    )
+
+    // Si la altura del documento es menor que la ventana, ajustar el footer
+    if (height <= window.innerHeight) {
+      footer.style.position = "absolute"
+      footer.style.bottom = "0"
+      footer.style.width = "100%"
+    } else {
+      footer.style.position = "relative"
+      footer.style.bottom = "auto"
+    }
+  }
+
+  // Ejecutar al cargar y al cambiar el tamaño de la ventana
+  adjustFooterPosition()
+  window.addEventListener("resize", adjustFooterPosition)
+
+  // Asegurar que el botón de scroll funcione correctamente
+  //const scrollToTopButton = document.querySelector(".scroll-to-top");
+  //if (scrollToTopButton) {
+  //  scrollToTopButton.addEventListener("click", () => {
+  //    window.scrollTo({
+  //      top: 0,
+  //      behavior: "smooth",
+  //    });
+  //  });
+  //}
 })
 
