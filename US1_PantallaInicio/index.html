@@ -99,6 +99,7 @@
             </div>
         </section>
         <div class="content-wrapper">
+            <!-- Sección de platos por cultura -->
             <section id="explore" class="culture-dishes">
                 <h2>Platos por Cultura</h2>
                 <div class="culture-scroll">
@@ -310,7 +311,7 @@
                     <li><a href="./contacto.html">Contacto</a></li>
                 </ul>
             </div>
-    
+
             <!-- Columna 2: Legal -->
             <div class="footer-links">
                 <h3>Legal</h3>
@@ -321,7 +322,7 @@
                     <li><a href="./aviso_legal.html">Aviso Legal</a></li>
                 </ul>
             </div>
-    
+
             <!-- Columna 3: Comunidad -->
             <div class="footer-links">
                 <h3>Comunidad</h3>
@@ -330,7 +331,7 @@
                     <li><a href="./chefs.html">Chefs</a></li>
                 </ul>
             </div>
-    
+
             <!-- Columna 4: Redes Sociales -->
             <div class="footer-social">
                 <h3>Síguenos</h3>
@@ -356,21 +357,27 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-            <div class="language-selector">
-                <label for="language">Idioma:</label>
-                <select id="language">
-                    <option value="es">Español</option>
-                    <option value="en">English</option>
-                    <option value="mi">Miguel</option>
-                </select>
-            </div>
-            
-            <div class="scroll-to-top">
-                <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    © 2025 Cocinando Juntos - Todos los derechos reservados
+                </div>
+                <!-- Dentro del footer-bottom-right -->
+                <div class="footer-bottom-right">
+                    <div class="language-selector">
+                        <label for="language">Idioma:</label>
+                        <select id="language">
+                            <option value="es">Español</option>
+                            <option value="en">English</option>
+                            <option value="mi">Miguel</option>
+                        </select>
+                    </div>
+                    <div class="scroll-to-top" id="scrollToTop">
+                        <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -497,9 +504,35 @@
             }
         });
 
-        updateSliderPosition();
-    });
-</script>
+            nextButton.addEventListener("click", () => {
+                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+                if (currentIndex < maxGroups) {
+                    currentIndex += 1;
+                    updateSliderPosition();
+                }
+            });
+
+            updateSliderPosition();
+        });
+    </script>
+
+    <!-- Agregar este script al final del body, justo antes del cierre -->
+    <script>
+        // Script específico para el botón de scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener('click', function() {
+                    console.log('Botón de scroll clickeado');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 
