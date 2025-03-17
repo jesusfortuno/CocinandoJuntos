@@ -101,6 +101,70 @@
             </div>
         </div>
     </footer>
+
+    <div class="overlay-menu" id="overlayMenu">
+        <div class="overlay-content">
+            <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gastronómicas</h3>
+                <ul>
+                    <li><a href="cultura-china.html">China</a></li>
+                    <li><a href="cultura-española.html">Española</a></li>
+                    <li><a href="cultura-francesa.html">Francesa</a></li>
+                    <li><a href="cultura-italiana.html">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tipo de Plato</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Dificultad de la Receta</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.getElementById('menuToggle');
+        const overlayMenu = document.getElementById('overlayMenu');
+        const closeMenu = document.getElementById('closeMenu');
+
+        if (menuToggle && overlayMenu) {
+            menuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                overlayMenu.classList.toggle('active');
+            });
+
+            if (closeMenu) {
+                closeMenu.addEventListener('click', () => {
+                    overlayMenu.classList.remove('active');
+                });
+            }
+
+            // Cerrar al hacer clic fuera del menú
+            overlayMenu.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        } else {
+            console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
+        }
+    });
+    </script>
 </body>
 
 </html> 
