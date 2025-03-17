@@ -60,7 +60,7 @@ function initializeSearchBar() {
   })
 }
 
-// Función para obtener la ruta de imagen según el título de la receta
+// Modificar el mapeo de imágenes para incluir las rutas correctas
 function getImagePath(titulo) {
   // Mapeo de títulos a rutas de imágenes
   const imageMap = {
@@ -71,8 +71,13 @@ function getImagePath(titulo) {
     "Arepa Venezolana": "./Imagenes/Venezuela/arepa-venezolana.jpg",
     "Galletas de Sésamo": "./Imagenes/China/galletas-de-sesamo.jpg",
     "Bolitas Chinas": "./Imagenes/China/bolitas-chinas.jpg",
+    "Bollitos Chinos": "./Imagenes/China/bollitos-chinos.jpg",
     "Fideos Salteados": "./Imagenes/China/fideos-salteados.jpg",
     "Tortilla de Patatas": "./Imagenes/España/tortilla-patatas.jpeg",
+    "Tacos Mexicanos": "./Imagenes/Mexico/tacos.jpg",
+    "Smoothie de Frutas": "./Imagenes/Bebidas/smoothie.jpg",
+    "Pasta al Pesto": "./Imagenes/Italia/pasta.jpg",
+    "Batido Energético": "./Imagenes/Francia/coq-au-vin.jpg",
     patata: "./Imagenes/España/tortilla-patatas.jpeg",
   }
 
@@ -186,7 +191,7 @@ async function performSearch(query) {
       // Añadir un encabezado a los resultados
       const resultsHeader = document.createElement("div")
       resultsHeader.classList.add("results-header")
-      resultsHeader.innerHTML = `<h3 style="text-align: center; margin-top: 20px;">Resultados para "${query}"</h3>`;
+      resultsHeader.innerHTML = `<h3 style="text-align: center; margin-top: 20px;">Resultados para "${query}"</h3>`
       searchResults.appendChild(resultsHeader)
 
       recetas.forEach((receta) => {

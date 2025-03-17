@@ -31,13 +31,12 @@
             </div>
         </div>
 
+        <!-- Modificar la sección del user-info para mostrar solo un usuario según el tipo -->
         <div id="user-info" class="user-info" style="display: none;">
             <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <a href="./../US10_PaginaAdmin/PaginaAdmin.html" id="user-name" class="auth-buttons">Nombre del usuario</a>
-            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
-                class="user-icon">
-            <a href="../US7_PaginaDeUsuario/usuario.html" style="text-decoration: none;"><span id="user-name">Nombre del
-                    Usuario</span></a>
+            <a href="#" id="user-profile-link">
+                <span id="user-name">Nombre del usuario</span>
+            </a>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
 
@@ -85,7 +84,7 @@
         <section class="hero-video-section">
             <div class="video-container">
                 <video autoplay muted loop id="hero-video">
-                    <source src="./Imagenes/videoplayback.mp4" type="video/mp4">
+                    <!--<source src="./videos/videoplayback.mp4" type="video/mp4">-->
                     Tu navegador no soporta videos HTML5.
                 </video>
                 <div class="video-overlay">
@@ -161,7 +160,7 @@
                         <!-- Repite la estructura para las demás recetas -->
                         <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
                             <div class="recipe-image">
-                                <img src="./Imagenes/recetas/galletas-sesamo.jpg" alt="Galletas de Sésamo">
+                                <img src="./Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
                             </div>
                             <div class="recipe-content">
                                 <h3>Galletas de Sésamo</h3>
@@ -181,7 +180,7 @@
 
                         <div class="recipe-card" data-culture="China" data-time="90" data-difficulty="Media">
                             <div class="recipe-image">
-                                <img src="./Imagenes/recetas/bolitos-chinos.jpg" alt="Bollitos Chinos">
+                                <img src="./Imagenes/China/bollitos-chinos.jpg" alt="Bollitos Chinos">
                             </div>
                             <div class="recipe-content">
                                 <h3>Bollitos Chinos</h3>
@@ -200,7 +199,7 @@
 
                         <div class="recipe-card" data-culture="China" data-time="40" data-difficulty="Fácil">
                             <div class="recipe-image">
-                                <img src="./Imagenes/recetas/fideos-salteados.jpg" alt="Fideos Salteados">
+                                <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados">
                             </div>
                             <div class="recipe-content">
                                 <h3>Fideos Salteados</h3>
@@ -252,7 +251,7 @@
                         </div>
                         <div class="recipe-card" data-culture="México" data-time="50" data-difficulty="Media">
                             <div class="recipe-image">
-                                <img src="./Imagenes/recetas/tacos.jpg" alt="Tacos Mexicanos">
+                                <img src="./Imagenes/Mexico/tacos.jpg" alt="Tacos Mexicanos">
                             </div>
                             <h3>Tacos Mexicanos</h3>
                             <div class="recipe-meta">
@@ -263,7 +262,7 @@
                         </div>
                         <div class="recipe-card" data-culture="Internacional" data-time="20" data-difficulty="Fácil">
                             <div class="recipe-image">
-                                <img src="./Imagenes/recetas/smoothie.jpg" alt="Smoothie de Frutas">
+                                <img src="./Imagenes/Bebidas/smoothie.jpg" alt="Smoothie de Frutas">
                             </div>
                             <h3>Smoothie de Frutas</h3>
                             <div class="recipe-meta">
@@ -274,7 +273,7 @@
                         </div>
                         <div class="recipe-card" data-culture="Italia" data-time="30" data-difficulty="Fácil">
                             <div class="recipe-image">
-                                <img src="./Imagenes/recetas/pasta.jpg" alt="Pasta al Pesto">
+                                <img src="./Imagenes/Italia/pasta.jpg" alt="Pasta al Pesto">
                             </div>
                             <h3>Pasta al Pesto</h3>
                             <div class="recipe-meta">
@@ -385,97 +384,125 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="index2.js"></script>
-    <!-- Agregar el siguiente script al final del archivo HTML -->
+    <!-- Modificar el script para manejar correctamente los tipos de usuario -->
     <script>
-        // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
+    // Obtener el usuario desde localStorage
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const userInfo = document.getElementById("user-info");
+    const authButton = document.getElementById("auth-button");
+    const userProfileLink = document.getElementById("user-profile-link");
 
-        console.log("Datos del usuario:", usuario); // Para depuración
+    console.log("Datos del usuario:", usuario); // Para depuración
 
-        // Si el usuario está registrado en localStorage
-        if (usuario) {
-            // Mostrar la información del usuario
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username || "Usuario";
-            authButton.style.display = "none";
+    // Si el usuario está registrado en localStorage
+    if (usuario) {
+        // Mostrar la información del usuario
+        userInfo.style.display = "flex";
+        document.getElementById("user-name").textContent = usuario.username || "Usuario";
+        authButton.style.display = "none";
 
-            // Agregar funcionalidad de cerrar sesión
-            document.getElementById("logout-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.reload();
-            });
+        // Determinar el tipo de usuario y establecer el enlace correcto
+        if (usuario.username === "admin") {
+            // Si es admin, enlazar a la página de administrador
+            userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
         } else {
-            // Si no hay usuario, mostrar el botón de login
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
+            // Si es usuario normal, enlazar a la página de perfil
+            userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
         }
-        // Código JavaScript directamente en el HTML para asegurar el orden correcto
-        document.addEventListener('DOMContentLoaded', () => {
-            // Menú desplegable
-            document.getElementById('menuToggle').addEventListener('click', function (e) {
-                e.preventDefault();
-                const overlayMenu = document.getElementById('overlayMenu');
-                overlayMenu.classList.toggle('active');
-            });
 
-            document.getElementById('closeMenu').addEventListener('click', function () {
-                const overlayMenu = document.getElementById('overlayMenu');
-                overlayMenu.classList.remove('active');
-            });
-
-            // Cerrar al hacer clic fuera del menú
-            document.getElementById('overlayMenu').addEventListener('click', function (e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
-            });
+        // Agregar funcionalidad de cerrar sesión
+        document.getElementById("logout-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("usuario");
+            window.location.reload();
         });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const track = document.querySelector(".recipe-track");
-            const prevButton = document.querySelector(".prev-button");
-            const nextButton = document.querySelector(".next-button");
-            const cards = track.querySelectorAll(".recipe-card");
-            const cardCount = cards.length;
-            const cardsToShow = 5;
-            let currentIndex = 0;
-
-            if (!track || !prevButton || !nextButton || cardCount === 0) {
-                console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
-                return;
-            }
-
-            function updateSliderPosition() {
-                const cardWidth = track.querySelector(".recipe-card").offsetWidth;
-                const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
-                const totalCardWidth = cardWidth + cardMargin;
-
-                track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
-                track.style.transition = "transform 0.5s ease";
-
-                prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
-                prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
-
-                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-                nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
-                nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
-
-                cards.forEach((card, index) => {
-                    card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
+    } else {
+        // Si no hay usuario, mostrar el botón de login
+        userInfo.style.display = "none";
+        authButton.style.display = "block";
+    }
+    
+    // Código JavaScript para el menú desplegable
+    document.addEventListener('DOMContentLoaded', () => {
+        // Menú desplegable
+        const menuToggle = document.getElementById('menuToggle');
+        const overlayMenu = document.getElementById('overlayMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        
+        if (menuToggle && overlayMenu) {
+            menuToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                overlayMenu.classList.toggle('active');
+                console.log('Menú toggle clicked, overlay active:', overlayMenu.classList.contains('active'));
+            });
+            
+            if (closeMenu) {
+                closeMenu.addEventListener('click', function () {
+                    overlayMenu.classList.remove('active');
+                    console.log('Menú cerrado');
                 });
             }
-
-            prevButton.addEventListener("click", () => {
-                if (currentIndex > 0) {
-                    currentIndex -= 1;
-                    updateSliderPosition();
+            
+            // Cerrar al hacer clic fuera del menú
+            overlayMenu.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    console.log('Cerrado por clic fuera');
                 }
             });
+        } else {
+            console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
+        }
+    });
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const track = document.querySelector(".recipe-track");
+        const prevButton = document.querySelector(".prev-button");
+        const nextButton = document.querySelector(".next-button");
+        const cards = track.querySelectorAll(".recipe-card");
+        const cardCount = cards.length;
+        const cardsToShow = 5;
+        let currentIndex = 0;
+
+        if (!track || !prevButton || !nextButton || cardCount === 0) {
+            console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
+            return;
+        }
+
+        function updateSliderPosition() {
+            const cardWidth = track.querySelector(".recipe-card").offsetWidth;
+            const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
+            const totalCardWidth = cardWidth + cardMargin;
+
+            track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
+            track.style.transition = "transform 0.5s ease";
+
+            prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
+            prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
+
+            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+            nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
+            nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
+
+            cards.forEach((card, index) => {
+                card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
+            });
+        }
+
+        prevButton.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                updateSliderPosition();
+            }
+        });
+
+        nextButton.addEventListener("click", () => {
+            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+            if (currentIndex < maxGroups) {
+                currentIndex += 1;
+                updateSliderPosition();
+            }
+        });
 
             nextButton.addEventListener("click", () => {
                 const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
@@ -507,6 +534,5 @@
         });
     </script>
 </body>
-
 </html>
 
