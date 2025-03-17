@@ -1,0 +1,527 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f1e9;
+  color: #333;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav {
+  background-color: #f8f1e9;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0d5c9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 127px;
+  height: auto;
+  padding-left: 60px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}
+
+.user-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #e0d5c9;
+  padding: 2px;
+  transition: transform 0.2s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.05);
+}
+
+#user-name {
+  font-size: 1rem;
+  color: #6b4423;
+}
+
+#logout-btn {
+  color: #6b4423;
+  text-decoration: none;
+  margin-right: 20px;
+  transition: color 0.2s ease;
+}
+
+#logout-btn:hover {
+  color: #ff6b6b;
+}
+
+main {
+  padding: 2rem;
+  flex: 1;
+  max-width: 96%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Contenedor común para todas las secciones */
+.section-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+  color: #6b4423;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e0d5c9;
+}
+
+/* Perfil */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.profile-avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0d5c9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#profile-user-name {
+  font-size: 1.5rem;
+  color: #6b4423;
+  font-weight: 600;
+}
+
+.profile-info {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.profile-info h3 {
+  color: #6b4423;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e0d5c9;
+}
+
+.profile-info p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-info p strong {
+  color: #6b4423;
+  min-width: 80px;
+}
+
+.profile-info .primary-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Actualizar los estilos del contenedor de comentarios */
+#comentarios-valoraciones-container {
+  max-height: 300px; /* Reducir la altura máxima para forzar el scroll */
+  overflow-y: auto !important; /* Forzar el overflow */
+  padding-right: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e0d5c9; /* Añadir borde para visualizar mejor el contenedor */
+  border-radius: 8px;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #6b4423 #f1f1f1;
+}
+
+/* Estilizar la barra de desplazamiento */
+#comentarios-valoraciones-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+#comentarios-valoraciones-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#comentarios-valoraciones-container::-webkit-scrollbar-thumb {
+  background: #6b4423;
+  border-radius: 4px;
+}
+
+#comentarios-valoraciones-container::-webkit-scrollbar-thumb:hover {
+  background: #5a371d;
+}
+
+/* Actualizar el indicador de scroll */
+.scroll-indicator {
+  position: absolute;
+  bottom: -15px; /* Posicionarlo debajo del contenedor */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #6b4423;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scroll-indicator.visible {
+  opacity: 1;
+}
+
+.scroll-indicator:hover {
+  background-color: #5a371d;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.scroll-indicator .arrow {
+  font-size: 1.2rem;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* Añadir clase para la sección de comentarios */
+.comentarios-section {
+  position: relative;
+  padding-bottom: 30px; /* Espacio para el indicador */
+}
+
+/* Comentarios y valoraciones */
+.comentario-item {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease;
+  border-bottom: 1px solid #e0d5c9;
+  padding-bottom: 1rem;
+}
+
+.comentario-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comentario-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.comentario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.nombre-receta {
+  font-weight: bold;
+  color: #6b4423;
+  font-size: 1.1rem;
+}
+
+.valoracion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.estrellas {
+  color: #f8b400;
+  letter-spacing: 2px;
+}
+
+.comentario-texto {
+  color: #555;
+  line-height: 1.5;
+  margin: 0.75rem 0;
+}
+
+.comentario-fecha {
+  color: #888;
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+/* Actualizar los estilos de la cuadrícula de recetas */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0.5rem;
+}
+
+.recipe {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.recipe img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe h4 {
+  padding: 1.25rem;
+  color: #6b4423;
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.recipe-actions {
+  padding: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.recipe-btn {
+  padding: 0.75rem 1.5rem;
+  color: #6b4423;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+  min-width: 120px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #6b4423;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0d5c9;
+  border-radius: 6px;
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b4423;
+}
+
+/* Botones */
+.primary-btn,
+.secondary-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.primary-btn {
+  background-color: #6b4423;
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: #5a371d;
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background-color: #e0d5c9;
+  color: #6b4423;
+}
+
+.secondary-btn:hover {
+  background-color: #d1c4b8;
+  transform: translateY(-2px);
+}
+
+/* Actualizar los estilos del contenedor de comentarios */
+
+/* Estilizar la barra de desplazamiento */
+
+/* Actualizar el indicador de scroll */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+
+  .recipes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .recipe img {
+    height: 180px;
+  }
+
+  .recipe-actions {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .recipe-btn {
+    width: 100%;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .profile-avatar img {
+    width: 100px;
+    height: 100px;
+  }
+
+  #profile-user-name {
+    font-size: 1.25rem;
+  }
+
+  .profile-info {
+    padding: 1.5rem;
+  }
+
+  .comentario-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .recipe-actions {
+    flex-direction: column;
+  }
+}
+
+footer {
+  background-color: #6b4423;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+

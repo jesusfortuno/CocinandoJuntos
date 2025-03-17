@@ -5,165 +5,540 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home - Cocinando Juntos</title>
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles-search-update.css">
         <script src="index.js"></script>
+        <!-- Añadir FontAwesome para los iconos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
 <body>
-    <!--MENU NAVEGACIÓN-->
     <nav>
-        <div class="logo">
+        <a href="index.html" class="logo">
             <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <!-- Buscador con botón -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar recetas...">
+            <button id="search-button" type="button">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="search-close" type="button">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- Contenedor para resultados de búsqueda -->
+            <div id="search-results" class="search-results">
+                <!-- Los resultados se cargarán dinámicamente aquí -->
+            </div>
         </div>
-        <input type="text" class="search-bar" placeholder="Buscar recetas...">
 
+        <!-- Modificar la sección del user-info para mostrar solo un usuario según el tipo -->
         <div id="user-info" class="user-info" style="display: none;">
             <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
+            <a href="#" id="user-profile-link">
+                <span id="user-name">Nombre del usuario</span>
+            </a>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
 
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-        <div class="menu-icon">☰</div>
-    </nav>    
+
+        <div class="menu-icon" id="menuToggle">☰</div>
+    </nav>
+
+    <!-- El menú desplegable debe estar aquí, fuera del nav -->
+    <div class="overlay-menu" id="overlayMenu">
+        <div class="overlay-content">
+            <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gastronómicas</h3>
+                <ul>
+                    <li><a href="cultura-china.html">China</a></li>
+                    <li><a href="cultura-española.html">Española</a></li>
+                    <li><a href="cultura-francesa.html">Francesa</a></li>
+                    <li><a href="cultura-italiana.html">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tipo de Plato</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Dificultad de la Receta</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <main>
-        <section class="featured-dishes">
-            <h2>Platos Destacados</h2>
-            <div class="slider-container">
-                <div class="slider">
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
-                            <h3>Galletas de Sésamo</h3>
-                        </div>
-                        <div class="slide-card">
-                            <a href="./../US6_GuardarRecetas/pollo-agridulce.html">
-                            <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
-                            <h3>Pollo Agridulce</h3>
-                            </a>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="Tortilla de Patatas">
-                            <h3>Tortilla de Patatas</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/España/pan-tomate.jpg" alt="Pan con Tomate">
-                            <h3>Pan con Tomate</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Coq au Vin">
-                            <h3>Coq au Vin</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Francia/crepas-dulces.jpg" alt="Crepas Dulces">
-                            <h3>Crepas Dulces</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="Pizza Margarita">
-                            <h3>Pizza Margarita</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Italia/lasaña.jpg" alt="Lasaña">
-                            <h3>Lasaña</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Japon/sushi.jpeg" alt="Sushi">
-                            <h3>Sushi</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="slide-card">
-                            <img src="./Imagenes/Japon/ramen.jpg" alt="Ramen">
-                            <h3>Ramen</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Arepa Venezolana">
-                            <h3>Arepa Venezolana</h3>
-                        </div>
-                        <div class="slide-card">
-                            <img src="./Imagenes/Venezuela/cachapa-venezolana.jpg" alt="Cachapa Venezolana">
-                            <h3>Cachapa Venezolana</h3>
-                        </div>
+        <section class="hero-video-section">
+            <div class="video-container">
+                <video autoplay muted loop id="hero-video">
+                    <!--<source src="./videos/videoplayback.mp4" type="video/mp4">-->
+                    Tu navegador no soporta videos HTML5.
+                </video>
+                <div class="video-overlay">
+                    <h1>Cocinando Juntos</h1>
+                    <p>Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la
+                        gastronomía donde podrás explorar sabores de diferentes culturas.</p>
+                    <div class="hero-buttons">
+                        <a href="#explore" class="hero-btn primary-btn">Explorar Recetas</a>
+                        <a href="../login.html" class="hero-btn secondary-btn">Unirse Ahora</a>
                     </div>
                 </div>
-                <div class="slider-buttons">
-                    <button class="slider-button" onclick="moveSlide(-1)">❮</button>
-                    <button class="slider-button" onclick="moveSlide(1)">❯</button>
+            </div>
+        </section>
+        <div class="content-wrapper">
+            <!-- Sección de platos por cultura -->
+            <section id="explore" class="culture-dishes">
+                <h2>Platos por Cultura</h2>
+                <div class="culture-scroll">
+                    <a href="cultura-china.html" class="culture-card">
+                        <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Cocina China">
+                        <h3>China</h3>
+                    </a>
+                    <a href="cultura-española.html" class="culture-card">
+                        <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="Cocina Española">
+                        <h3>España</h3>
+                    </a>
+                    <a href="cultura-francesa.html" class="culture-card">
+                        <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Cocina Francesa">
+                        <h3>Francia</h3>
+                    </a>
+                    <a href="cultura-italiana.html" class="culture-card">
+                        <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="Cocina Italiana">
+                        <h3>Italia</h3>
+                    </a>
+                    <a href="cultura-japonesa.html" class="culture-card">
+                        <img src="./Imagenes/Japon/sushi.jpeg" alt="Cocina Japonesa">
+                        <h3>Japón</h3>
+                    </a>
+                    <a href="cultura-venezolana.html" class="culture-card">
+                        <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Cocina Venezolana">
+                        <h3>Venezuela</h3>
+                    </a>
                 </div>
-                <div class="dots-container"></div>
-            </div>
-        </section>
-        <section class="culture-dishes">
-            <h2>Platos por Cultura</h2>
-            <div class="culture-grid">
-                <a href="cultura-china.html" class="culture-card">
-                    <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Cocina China">
-                    <h3>China</h3>
-                </a>
-                <a href="cultura-española.html" class="culture-card">
-                    <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="Cocina Española">
-                    <h3>España</h3>
-                </a>
-                <a href="cultura-francesa.html" class="culture-card">
-                    <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Cocina Francesa">
-                    <h3>Francia</h3>
-                </a>
-                <a href="cultura-italiana.html" class="culture-card">
-                    <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="Cocina Italiana">
-                    <h3>Italia</h3>
-                </a>
-                <a href="cultura-japonesa.html" class="culture-card">
-                    <img src="./Imagenes/Japon/sushi.jpeg" alt="Cocina Japonesa">
-                    <h3>Japón</h3>
-                </a>
-                <a href="cultura-venezolana.html" class="culture-card">
-                    <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Cocina Venezolana">
-                    <h3>Venezuela</h3>
-                </a>
-            </div>
-        </section>
+            </section>
 
-        <section class="recipe-filters">
-            <h2>Explorar Recetas</h2>
-            <!-- Aquí irán los filtros de recetas -->
-        </section>
+            <!-- Sección de recetas -->
+            <section class="recipe-filters" id="recipe-slider-section">
+                <h2>Explorar Recetas</h2>
+                <div class="recipe-slider">
+                    <div class="recipe-track">
+                        <!-- Primer grupo de recetas -->
+                        <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Media">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Pollo Agridulce</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Media</span>
+                                    <span class="time">45 min</span>
+                                    <span class="category">Comida</span>
+                                </div>
+                                <div class="description">
+                                    <h3 class="title">Pollo Agridulce</h3>
+                                    <p>Delicioso plato de pollo agridulce con un toque especial. Una combinación
+                                        perfecta de sabores dulces y ácidos que te transportará a la auténtica cocina
+                                        china.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Repite la estructura para las demás recetas -->
+                        <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Galletas de Sésamo</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Fácil</span>
+                                    <span class="time">45 min</span>
+                                    <span class="category">Merienda</span>
+                                </div>
+                                <div class="description">
+                                    <p>Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional
+                                        china. Perfectas para acompañar el té o como snack en cualquier momento del día.
+                                    </p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recipe-card" data-culture="China" data-time="90" data-difficulty="Media">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/China/bollitos-chinos.jpg" alt="Bollitos Chinos">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Bollitos Chinos</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Media</span>
+                                    <span class="time">1.30h</span>
+                                    <span class="category">Desayuno</span>
+                                </div>
+                                <div class="description">
+                                    <p>Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un
+                                        desayuno tradicional de la cocina china que te encantará.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recipe-card" data-culture="China" data-time="40" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Fideos Salteados</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Fácil</span>
+                                    <span class="time">40 min</span>
+                                    <span class="category">Cena</span>
+                                </div>
+                                <div class="description">
+                                    <p>Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y
+                                        sabroso que te transportará a las calles de China.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recipe-card" data-culture="China" data-time="30" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/China/fideos-salteados.jpg" alt="Sopa Wonton">
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Sopa Wonton</h3>
+                                <div class="recipe-meta">
+                                    <span class="difficulty">Fácil</span>
+                                    <span class="time">30 min</span>
+                                    <span class="category">Sopa</span>
+                                </div>
+                                <div class="description">
+                                    <p>Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato
+                                        tradicional chino perfecto para días fríos.</p>
+                                    <a href="#" class="read-more">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Segundo grupo de recetas -->
+                        <div class="recipe-card" data-culture="Internacional" data-time="60" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/España/paella.png" alt="Ensalada Fresca">
+                            </div>
+                            <h3>Ensalada Fresca</h3>
+                            <div class="recipe-meta">
+                                <span class="difficulty">Fácil</span>
+                                <span class="time">60 min</span>
+                                <span class="category">Ensalada</span>
+                            </div>
+                        </div>
+                        <div class="recipe-card" data-culture="México" data-time="50" data-difficulty="Media">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/Mexico/tacos.jpg" alt="Tacos Mexicanos">
+                            </div>
+                            <h3>Tacos Mexicanos</h3>
+                            <div class="recipe-meta">
+                                <span class="difficulty">Media</span>
+                                <span class="time">50 min</span>
+                                <span class="category">Comida</span>
+                            </div>
+                        </div>
+                        <div class="recipe-card" data-culture="Internacional" data-time="20" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/Bebidas/smoothie.jpg" alt="Smoothie de Frutas">
+                            </div>
+                            <h3>Smoothie de Frutas</h3>
+                            <div class="recipe-meta">
+                                <span class="difficulty">Fácil</span>
+                                <span class="time">20 min</span>
+                                <span class="category">Bebida</span>
+                            </div>
+                        </div>
+                        <div class="recipe-card" data-culture="Italia" data-time="30" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/Italia/pasta.jpg" alt="Pasta al Pesto">
+                            </div>
+                            <h3>Pasta al Pesto</h3>
+                            <div class="recipe-meta">
+                                <span class="difficulty">Fácil</span>
+                                <span class="time">30 min</span>
+                                <span class="category">Comida</span>
+                            </div>
+                        </div>
+                        <div class="recipe-card" data-culture="Internacional" data-time="15" data-difficulty="Fácil">
+                            <div class="recipe-image">
+                                <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Batido Energético">
+                            </div>
+                            <h3>Batido Energético</h3>
+                            <div class="recipe-meta">
+                                <span class="difficulty">Fácil</span>
+                                <span class="time">15 min</span>
+                                <span class="category">Bebida</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-nav prev-button">❮</button>
+                    <button class="slider-nav next-button">❯</button>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer> 
-    <!-- Agregar el siguiente script al final del archivo HTML -->
+        <div class="footer-container">
+            <!-- Columna 1: Sobre Nosotros -->
+            <div class="footer-links">
+                <h3>Sobre Nosotros</h3>
+                <ul>
+                    <li><a href="./quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="./contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Legal -->
+            <div class="footer-links">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="./politica_privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="./terminos_condiciones.html">Términos y Condiciones</a></li>
+                    <li><a href="./politica_cookies.html">Política de Cookies</a></li>
+                    <li><a href="./aviso_legal.html">Aviso Legal</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Comunidad -->
+            <div class="footer-links">
+                <h3>Comunidad</h3>
+                <ul>
+                    <li><a href="./../Platos.html">Recetas</a></li>
+                    <li><a href="./chefs.html">Chefs</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Redes Sociales -->
+            <div class="footer-social">
+                <h3>Síguenos</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/" aria-label="Instagram">
+                        <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/" aria-label="Facebook">
+                        <img src="./Imagenes/logos/2023_Facebook_icon.svg.png" alt="Facebook">
+                    </a>
+                    <a href="https://x.com/" aria-label="Twitter">
+                        <img src="./Imagenes/logos/Logo_of_Twitter.svg.png" alt="Twitter">
+                    </a>
+                    <a href="https://www.youtube.com/" aria-label="YouTube">
+                        <img src="./Imagenes/logos/youtube.png" alt="YouTube">
+                    </a>
+                    <a href="https://es.pinterest.com/" aria-label="Pinterest">
+                        <img src="./Imagenes/logos/51LdjRWonGL.png" alt="Pinterest">
+                    </a>
+                    <a href="https://www.tiktok.com/es/" aria-label="TikTok">
+                        <img src="./Imagenes/logos/tiktok-6338432_1280.webp" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    © 2025 Cocinando Juntos - Todos los derechos reservados
+                </div>
+                <!-- Dentro del footer-bottom-right -->
+                <div class="footer-bottom-right">
+                    <div class="language-selector">
+                        <label for="language">Idioma:</label>
+                        <select id="language">
+                            <option value="es">Español</option>
+                            <option value="en">English</option>
+                            <option value="mi">Miguel</option>
+                        </select>
+                    </div>
+                    <!-- Modificar el botón de scroll para asegurar que funcione correctamente -->
+                    <!-- Reemplazar el div del botón de scroll con esta versión simplificada: -->
+
+                    <div class="scroll-to-top" id="scrollToTop">
+                      <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="index2.js"></script>
+    <!-- Modificar el script para manejar correctamente los tipos de usuario -->
     <script>
-        // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
-        
-        console.log("Datos del usuario:", usuario); // Para depuración
+    // Obtener el usuario desde localStorage
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const userInfo = document.getElementById("user-info");
+    const authButton = document.getElementById("auth-button");
+    const userProfileLink = document.getElementById("user-profile-link");
+
+    console.log("Datos del usuario:", usuario); // Para depuración
+
+    // Si el usuario está registrado en localStorage
+    if (usuario) {
+        // Mostrar la información del usuario
+        userInfo.style.display = "flex";
+        document.getElementById("user-name").textContent = usuario.username || "Usuario";
+        authButton.style.display = "none";
+
+        // Determinar el tipo de usuario y establecer el enlace correcto
+        if (usuario.username === "admin") {
+            // Si es admin, enlazar a la página de administrador
+            userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
+        } else {
+            // Si es usuario normal, enlazar a la página de perfil
+            userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
+        }
+
+        // Agregar funcionalidad de cerrar sesión
+        document.getElementById("logout-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("usuario");
+            window.location.reload();
+        });
+    } else {
+        // Si no hay usuario, mostrar el botón de login
+        userInfo.style.display = "none";
+        authButton.style.display = "block";
+    }
     
-        // Si el usuario está registrado en localStorage
-        if (usuario) {
-            // Mostrar la información del usuario
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username || "Usuario";
-            authButton.style.display = "none";
-            
-            // Agregar funcionalidad de cerrar sesión
-            document.getElementById("logout-btn").addEventListener("click", (e) => {
+    // Código JavaScript para el menú desplegable
+    document.addEventListener('DOMContentLoaded', () => {
+        // Menú desplegable
+        const menuToggle = document.getElementById('menuToggle');
+        const overlayMenu = document.getElementById('overlayMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        
+        if (menuToggle && overlayMenu) {
+            menuToggle.addEventListener('click', function (e) {
                 e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.reload();
+                overlayMenu.classList.toggle('active');
+                console.log('Menú toggle clicked, overlay active:', overlayMenu.classList.contains('active'));
+            });
+            
+            if (closeMenu) {
+                closeMenu.addEventListener('click', function () {
+                    overlayMenu.classList.remove('active');
+                    console.log('Menú cerrado');
+                });
+            }
+            
+            // Cerrar al hacer clic fuera del menú
+            overlayMenu.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    console.log('Cerrado por clic fuera');
+                }
             });
         } else {
-            // Si no hay usuario, mostrar el botón de login
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
+            console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
         }
+    });
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const track = document.querySelector(".recipe-track");
+        const prevButton = document.querySelector(".prev-button");
+        const nextButton = document.querySelector(".next-button");
+        const cards = track.querySelectorAll(".recipe-card");
+        const cardCount = cards.length;
+        const cardsToShow = 5;
+        let currentIndex = 0;
+
+        if (!track || !prevButton || !nextButton || cardCount === 0) {
+            console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
+            return;
+        }
+
+        function updateSliderPosition() {
+            const cardWidth = track.querySelector(".recipe-card").offsetWidth;
+            const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
+            const totalCardWidth = cardWidth + cardMargin;
+
+            track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
+            track.style.transition = "transform 0.5s ease";
+
+            prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
+            prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
+
+            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+            nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
+            nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
+
+            cards.forEach((card, index) => {
+                card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
+            });
+        }
+
+        prevButton.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                updateSliderPosition();
+            }
+        });
+
+        nextButton.addEventListener("click", () => {
+            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+            if (currentIndex < maxGroups) {
+                currentIndex += 1;
+                updateSliderPosition();
+            }
+        });
+
+            nextButton.addEventListener("click", () => {
+                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+                if (currentIndex < maxGroups) {
+                    currentIndex += 1;
+                    updateSliderPosition();
+                }
+            });
+
+            updateSliderPosition();
+        });
     </script>
-    
-    
+
+    <!-- Asegurar que el script para el botón de scroll esté correctamente implementado -->
+    <!-- Añadir este script al final del body, justo antes del cierre: -->
+
+    <script>
+      // Script específico para el botón de scroll
+      document.addEventListener('DOMContentLoaded', function() {
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        if (scrollToTopBtn) {
+          scrollToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Botón de scroll clickeado');
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          });
+        }
+      });
+    </script>
 </body>
 </html>
+

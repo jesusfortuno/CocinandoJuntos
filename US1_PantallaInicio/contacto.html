@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Cocinando Juntos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contacto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!--MENU NAVEGACIÓN-->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+
+        <!-- Modificar la sección del user-info para mostrar solo un usuario según el tipo -->
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <a href="#" id="user-profile-link">
+                <span id="user-name">Nombre del usuario</span>
+            </a>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+
+        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+
+        <div class="menu-icon" id="menuToggle">☰</div>
+    </nav>
+
+    <!-- El menú desplegable debe estar aquí, fuera del nav -->
+    <div class="overlay-menu" id="overlayMenu">
+        <div class="overlay-content">
+            <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gastronómicas</h3>
+                <ul>
+                    <li><a href="cultura-china.html">China</a></li>
+                    <li><a href="cultura-española.html">Española</a></li>
+                    <li><a href="cultura-francesa.html">Francesa</a></li>
+                    <li><a href="cultura-italiana.html">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Tipo de Plato</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Dificultad de la Receta</h3>
+                <ul>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="contact-hero">
+            <div class="contact-hero-overlay">
+                <h1>Contacto</h1>
+                <p>Estamos aquí para ayudarte con cualquier duda o sugerencia</p>
+            </div>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info-card">
+                <div class="contact-info-header">
+                    <h2>Información de Contacto</h2>
+                    <p>Ponte en contacto con nosotros a través de los siguientes medios:</p>
+                </div>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Correo Electrónico</h3>
+                            <a href="mailto:info@cocinandojuntos.com">info@cocinandojuntos.com</a>
+                            <a href="mailto:support@cocinandojuntos.com">support@cocinandojuntos.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Ubicación</h3>
+                            <p>Centro de Estudios Roca - Grupo Escolar Roca</p>
+                            <p>Barcelona, España</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Horario de Atención</h3>
+                            <p>Lunes a Viernes: 9:00 - 18:00</p>
+                            <p>Sábados: 10:00 - 14:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Redes Sociales</h3>
+                            <div class="contact-social-icons">
+                                <a href="https://www.instagram.com/" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.facebook.com/" aria-label="Facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                                <a href="https://x.com/" aria-label="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.youtube.com/" aria-label="YouTube">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a href="https://es.pinterest.com/" aria-label="Pinterest">
+                                    <i class="fab fa-pinterest"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/es/" aria-label="TikTok">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-card">
+                <h2>Envíanos tu Consulta</h2>
+                <p>Completa el formulario y te responderemos lo antes posible</p>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" placeholder="Tu nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" placeholder="Tu correo electrónico" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Asunto</label>
+                        <input type="text" id="subject" placeholder="Asunto de tu consulta">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" placeholder="Escribe tu consulta aquí..." rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="map-section">
+            <h2>Nuestra Ubicación</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2991.79970592065!2d2.183899326544281!3d41.421866393855126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4bcd4df52e8df%3A0xf5c866dc9d618114!2sCentro%20de%20Estudios%20Roca%20-%20Grupo%20Escolar%20Roca!5e0!3m2!1ses!2ses!4v1741879284223!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        
+        <div class="faq-section">
+            <h2>Preguntas Frecuentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Cómo puedo compartir mi receta en Cocinando Juntos?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para compartir tu receta, debes registrarte en nuestra plataforma y acceder a la sección "Compartir Receta" en tu perfil. Allí podrás subir fotos, ingredientes y pasos de preparación.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Puedo modificar una receta ya publicada?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, puedes editar tus recetas publicadas en cualquier momento desde tu perfil de usuario en la sección "Mis Recetas".</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Cómo puedo recuperar mi contraseña?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>En la página de inicio de sesión, haz clic en "¿Olvidaste tu contraseña?" y sigue las instrucciones que te enviaremos a tu correo electrónico.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Puedo guardar recetas para ver más tarde?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, puedes guardar tus recetas favoritas haciendo clic en el icono de corazón o marcador que aparece en cada receta. Podrás acceder a ellas desde la sección "Favoritos" en tu perfil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <!-- Columna 1: Sobre Nosotros -->
+            <div class="footer-links">
+                <h3>Sobre Nosotros</h3>
+                <ul>
+                    <li><a href="./quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="./contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Legal -->
+            <div class="footer-links">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="./politica_privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="./terminos_condiciones.html">Términos y Condiciones</a></li>
+                    <li><a href="./politica_cookies.html">Política de Cookies</a></li>
+                    <li><a href="./aviso_legal.html">Aviso Legal</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Comunidad -->
+            <div class="footer-links">
+                <h3>Comunidad</h3>
+                <ul>
+                    <li><a href="./../Platos.html">Recetas</a></li>
+                    <li><a href="./chefs.html">Chefs</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Redes Sociales -->
+            <div class="footer-social">
+                <h3>Síguenos</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/" aria-label="Instagram">
+                        <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/" aria-label="Facebook">
+                        <img src="./Imagenes/logos/2023_Facebook_icon.svg.png" alt="Facebook">
+                    </a>
+                    <a href="https://x.com/" aria-label="Twitter">
+                        <img src="./Imagenes/logos/Logo_of_Twitter.svg.png" alt="Twitter">
+                    </a>
+                    <a href="https://www.youtube.com/" aria-label="YouTube">
+                        <img src="./Imagenes/logos/youtube.png" alt="YouTube">
+                    </a>
+                    <a href="https://es.pinterest.com/" aria-label="Pinterest">
+                        <img src="./Imagenes/logos/51LdjRWonGL.png" alt="Pinterest">
+                    </a>
+                    <a href="https://www.tiktok.com/es/" aria-label="TikTok">
+                        <img src="./Imagenes/logos/tiktok-6338432_1280.webp" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+            <div class="language-selector">
+                <label for="language">Idioma:</label>
+                <select id="language">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                    <option value="mi">Miguel</option>
+                </select>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="index2.js"></script>
+    <script>
+        // Script para el toggle de las preguntas frecuentes
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-question');
+            
+            faqItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    const answer = this.nextElementSibling;
+                    const toggle = this.querySelector('.faq-toggle');
+                    
+                    // Cerrar todas las respuestas abiertas
+                    document.querySelectorAll('.faq-item').forEach(faqItem => {
+                        if (faqItem !== parent && faqItem.classList.contains('active')) {
+                            faqItem.classList.remove('active');
+                            faqItem.querySelector('.faq-answer').style.maxHeight = null;
+                            faqItem.querySelector('.faq-toggle').textContent = '+';
+                        }
+                    });
+                    
+                    // Abrir/cerrar la respuesta actual
+                    parent.classList.toggle('active');
+                    
+                    if (parent.classList.contains('active')) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        toggle.textContent = '−';
+                    } else {
+                        answer.style.maxHeight = null;
+                        toggle.textContent = '+';
+                    }
+                });
+            });
+        });
+        // Obtener el usuario desde localStorage
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const userInfo = document.getElementById("user-info");
+    const authButton = document.getElementById("auth-button");
+    const userProfileLink = document.getElementById("user-profile-link");
+
+    console.log("Datos del usuario:", usuario); // Para depuración
+
+    // Si el usuario está registrado en localStorage
+    if (usuario) {
+        // Mostrar la información del usuario
+        userInfo.style.display = "flex";
+        document.getElementById("user-name").textContent = usuario.username || "Usuario";
+        authButton.style.display = "none";
+
+        // Determinar el tipo de usuario y establecer el enlace correcto
+        if (usuario.username === "admin") {
+            // Si es admin, enlazar a la página de administrador
+            userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
+        } else {
+            // Si es usuario normal, enlazar a la página de perfil
+            userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
+        }
+
+        // Agregar funcionalidad de cerrar sesión
+        document.getElementById("logout-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("usuario");
+            window.location.reload();
+        });
+    } else {
+        // Si no hay usuario, mostrar el botón de login
+        userInfo.style.display = "none";
+        authButton.style.display = "block";
+    }
+    
+    // Código JavaScript para el menú desplegable
+    document.addEventListener('DOMContentLoaded', () => {
+        // Menú desplegable
+        const menuToggle = document.getElementById('menuToggle');
+        const overlayMenu = document.getElementById('overlayMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        
+        if (menuToggle && overlayMenu) {
+            menuToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                overlayMenu.classList.toggle('active');
+                console.log('Menú toggle clicked, overlay active:', overlayMenu.classList.contains('active'));
+            });
+            
+            if (closeMenu) {
+                closeMenu.addEventListener('click', function () {
+                    overlayMenu.classList.remove('active');
+                    console.log('Menú cerrado');
+                });
+            }
+            
+            // Cerrar al hacer clic fuera del menú
+            overlayMenu.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    console.log('Cerrado por clic fuera');
+                }
+            });
+        } else {
+            console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
+        }
+    });
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const track = document.querySelector(".recipe-track");
+        const prevButton = document.querySelector(".prev-button");
+        const nextButton = document.querySelector(".next-button");
+        const cards = track.querySelectorAll(".recipe-card");
+        const cardCount = cards.length;
+        const cardsToShow = 5;
+        let currentIndex = 0;
+
+        if (!track || !prevButton || !nextButton || cardCount === 0) {
+            console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
+            return;
+        }
+
+        function updateSliderPosition() {
+            const cardWidth = track.querySelector(".recipe-card").offsetWidth;
+            const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
+            const totalCardWidth = cardWidth + cardMargin;
+
+            track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
+            track.style.transition = "transform 0.5s ease";
+
+            prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
+            prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
+
+            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+            nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
+            nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
+
+            cards.forEach((card, index) => {
+                card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
+            });
+        }
+
+        prevButton.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                updateSliderPosition();
+            }
+        });
+
+        nextButton.addEventListener("click", () => {
+            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+            if (currentIndex < maxGroups) {
+                currentIndex += 1;
+                updateSliderPosition();
+            }
+        });
+
+        updateSliderPosition();
+    });
+    </script>
+</body>
+
+</html>
+

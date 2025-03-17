@@ -86,7 +86,6 @@ input:focus, select:focus {
 }
 
 .volver-container {
-  position: absolute;
   top: 105px;
   right: 760px;
 }
@@ -94,4 +93,7 @@ input:focus, select:focus {
   width: 20px;
   height: 20px;
   cursor: pointer;
+  position: fixed;
+  margin-left: 410px;
+  margin-top: -370px;
 }
