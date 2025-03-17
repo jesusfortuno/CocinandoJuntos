@@ -132,37 +132,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Funcionalidad para el botón de scroll hacia arriba
   // Usar una función independiente para asegurar que se ejecute correctamente
   function setupScrollToTop() {
-    const scrollToTopButton = document.getElementById("scrollToTop")
+    const scrollToTopButton = document.querySelector(".scroll-to-top")
 
     if (scrollToTopButton) {
       console.log("Botón de scroll encontrado:", scrollToTopButton)
 
-      // Asegurar que el evento se añada correctamente
+      // Usar un manejador de eventos directo y simple
       scrollToTopButton.onclick = (e) => {
         e.preventDefault()
-        console.log("Botón de scroll clickeado - función onclick")
+        console.log("Botón de scroll clickeado")
 
-        // Usar requestAnimationFrame para asegurar que el scroll se ejecute en el momento adecuado
-        requestAnimationFrame(() => {
-          // Animación suave de scroll hacia arriba
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          })
-        })
-      }
-
-      // Añadir también un event listener como respaldo
-      scrollToTopButton.addEventListener("click", (e) => {
-        e.preventDefault()
-        console.log("Botón de scroll clickeado - event listener")
-
-        // Animación suave de scroll hacia arriba
+        // Scroll suave hacia arriba
         window.scrollTo({
           top: 0,
           behavior: "smooth",
         })
-      })
+      }
     } else {
       console.error("Botón de scroll no encontrado")
     }
@@ -259,4 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Elementos del menú no encontrados:", { menuToggle, overlayMenu })
   }
 })
+
+// Asegurar que esta función se ejecute cuando el DOM esté cargado
+document.addEventListener("DOMContentLoaded", setupScrollToTop)
 

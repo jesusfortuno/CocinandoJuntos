@@ -374,8 +374,11 @@
                             <option value="mi">Miguel</option>
                         </select>
                     </div>
+                    <!-- Modificar el botón de scroll para asegurar que funcione correctamente -->
+                    <!-- Reemplazar el div del botón de scroll con esta versión simplificada: -->
+
                     <div class="scroll-to-top" id="scrollToTop">
-                        <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
+                      <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
                     </div>
                 </div>
             </div>
@@ -516,22 +519,25 @@
         });
     </script>
 
-    <!-- Agregar este script al final del body, justo antes del cierre -->
+    <!-- Asegurar que el script para el botón de scroll esté correctamente implementado -->
+    <!-- Añadir este script al final del body, justo antes del cierre: -->
+
     <script>
-        // Script específico para el botón de scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            
-            if (scrollToTopBtn) {
-                scrollToTopBtn.addEventListener('click', function() {
-                    console.log('Botón de scroll clickeado');
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                });
-            }
-        });
+      // Script específico para el botón de scroll
+      document.addEventListener('DOMContentLoaded', function() {
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        if (scrollToTopBtn) {
+          scrollToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Botón de scroll clickeado');
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          });
+        }
+      });
     </script>
 </body>
 </html>
