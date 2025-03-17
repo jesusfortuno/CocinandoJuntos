@@ -130,16 +130,46 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   // Funcionalidad para el botón de scroll hacia arriba
-  const scrollToTopButton = document.querySelector(".scroll-to-top")
-  if (scrollToTopButton) {
-    scrollToTopButton.addEventListener("click", () => {
-      // Animación suave de scroll hacia arriba
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
+  // Usar una función independiente para asegurar que se ejecute correctamente
+  function setupScrollToTop() {
+    const scrollToTopButton = document.getElementById("scrollToTop")
+
+    if (scrollToTopButton) {
+      console.log("Botón de scroll encontrado:", scrollToTopButton)
+
+      // Asegurar que el evento se añada correctamente
+      scrollToTopButton.onclick = (e) => {
+        e.preventDefault()
+        console.log("Botón de scroll clickeado - función onclick")
+
+        // Usar requestAnimationFrame para asegurar que el scroll se ejecute en el momento adecuado
+        requestAnimationFrame(() => {
+          // Animación suave de scroll hacia arriba
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+        })
+      }
+
+      // Añadir también un event listener como respaldo
+      scrollToTopButton.addEventListener("click", (e) => {
+        e.preventDefault()
+        console.log("Botón de scroll clickeado - event listener")
+
+        // Animación suave de scroll hacia arriba
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
       })
-    })
+    } else {
+      console.error("Botón de scroll no encontrado")
+    }
   }
+
+  // Ejecutar la configuración del botón de scroll
+  setupScrollToTop()
 
   // Añadir funcionalidad para el menú desplegable
   const menuToggle = document.getElementById("menuToggle")
@@ -195,16 +225,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ejecutar al cargar y al cambiar el tamaño de la ventana
   adjustFooterPosition()
   window.addEventListener("resize", adjustFooterPosition)
-
-  // Asegurar que el botón de scroll funcione correctamente
-  //const scrollToTopButton = document.querySelector(".scroll-to-top");
-  //if (scrollToTopButton) {
-  //  scrollToTopButton.addEventListener("click", () => {
-  //    window.scrollTo({
-  //      top: 0,
-  //      behavior: "smooth",
-  //    });
-  //  });
-  //}
 })
 
