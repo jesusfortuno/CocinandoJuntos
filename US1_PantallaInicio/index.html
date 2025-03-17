@@ -1,84 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home - Cocinando Juntos</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="styles-search-update.css">
-        <script src="index.js"></script>
-        <!-- Añadir FontAwesome para los iconos -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cocinando Juntos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-search-update.css">
+    <script src="index.js"></script>
+    <script type="module" src="../components.js"></script>
+    <!-- Añadir FontAwesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
 <body>
-    <nav>
-        <a href="index.html" class="logo">
-            <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <!-- Buscador con botón -->
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Buscar recetas...">
-            <button id="search-button" type="button">
-                <i class="fas fa-search"></i>
-            </button>
-            <button id="search-close" type="button">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <!-- Contenedor para resultados de búsqueda -->
-            <div id="search-results" class="search-results">
-                <!-- Los resultados se cargarán dinámicamente aquí -->
-            </div>
-        </div>
-
-        <!-- Modificar la sección del user-info para mostrar solo un usuario según el tipo -->
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <a href="#" id="user-profile-link">
-                <span id="user-name">Nombre del usuario</span>
-            </a>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-
-        <div class="menu-icon" id="menuToggle">☰</div>
-    </nav>
-
-    <!-- El menú desplegable debe estar aquí, fuera del nav -->
-    <div class="overlay-menu" id="overlayMenu">
-        <div class="overlay-content">
-            <div class="close-btn" id="closeMenu">×</div>
-            <div class="menu-section">
-                <h3>Culturas Gastronómicas</h3>
-                <ul>
-                    <li><a href="cultura-china.html">China</a></li>
-                    <li><a href="cultura-española.html">Española</a></li>
-                    <li><a href="cultura-francesa.html">Francesa</a></li>
-                    <li><a href="cultura-italiana.html">Italiana</a></li>
-                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
-                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Tipo de Plato</h3>
-                <ul>
-                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
-                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
-                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
-                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Dificultad de la Receta</h3>
-                <ul>
-                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
-                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
-                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div id="navbar-container"></div>
 
     <main>
         <section class="hero-video-section">
@@ -301,211 +237,129 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-container">
-            <!-- Columna 1: Sobre Nosotros -->
-            <div class="footer-links">
-                <h3>Sobre Nosotros</h3>
-                <ul>
-                    <li><a href="./quienes-somos.html">Quiénes Somos</a></li>
-                    <li><a href="./contacto.html">Contacto</a></li>
-                </ul>
-            </div>
-
-            <!-- Columna 2: Legal -->
-            <div class="footer-links">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="./politica_privacidad.html">Política de Privacidad</a></li>
-                    <li><a href="./terminos_condiciones.html">Términos y Condiciones</a></li>
-                    <li><a href="./politica_cookies.html">Política de Cookies</a></li>
-                    <li><a href="./aviso_legal.html">Aviso Legal</a></li>
-                </ul>
-            </div>
-
-            <!-- Columna 3: Comunidad -->
-            <div class="footer-links">
-                <h3>Comunidad</h3>
-                <ul>
-                    <li><a href="./../Platos.html">Recetas</a></li>
-                    <li><a href="./chefs.html">Chefs</a></li>
-                </ul>
-            </div>
-
-            <!-- Columna 4: Redes Sociales -->
-            <div class="footer-social">
-                <h3>Síguenos</h3>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/" aria-label="Instagram">
-                        <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram">
-                    </a>
-                    <a href="https://www.facebook.com/" aria-label="Facebook">
-                        <img src="./Imagenes/logos/2023_Facebook_icon.svg.png" alt="Facebook">
-                    </a>
-                    <a href="https://x.com/" aria-label="Twitter">
-                        <img src="./Imagenes/logos/Logo_of_Twitter.svg.png" alt="Twitter">
-                    </a>
-                    <a href="https://www.youtube.com/" aria-label="YouTube">
-                        <img src="./Imagenes/logos/youtube.png" alt="YouTube">
-                    </a>
-                    <a href="https://es.pinterest.com/" aria-label="Pinterest">
-                        <img src="./Imagenes/logos/51LdjRWonGL.png" alt="Pinterest">
-                    </a>
-                    <a href="https://www.tiktok.com/es/" aria-label="TikTok">
-                        <img src="./Imagenes/logos/tiktok-6338432_1280.webp" alt="TikTok">
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer Bottom -->
-        <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <div class="copyright">
-                    © 2025 Cocinando Juntos - Todos los derechos reservados
-                </div>
-                <!-- Dentro del footer-bottom-right -->
-                <div class="footer-bottom-right">
-                    <div class="language-selector">
-                        <label for="language">Idioma:</label>
-                        <select id="language">
-                            <option value="es">Español</option>
-                            <option value="en">English</option>
-                            <option value="mi">Miguel</option>
-                        </select>
-                    </div>
-                    <!-- Modificar el botón de scroll para asegurar que funcione correctamente -->
-                    <!-- Reemplazar el div del botón de scroll con esta versión simplificada: -->
-
-                    <div class="scroll-to-top" id="scrollToTop">
-                      <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="index2.js"></script>
     <!-- Modificar el script para manejar correctamente los tipos de usuario -->
     <script>
-    // Obtener el usuario desde localStorage
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
-    const userInfo = document.getElementById("user-info");
-    const authButton = document.getElementById("auth-button");
-    const userProfileLink = document.getElementById("user-profile-link");
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const userInfo = document.getElementById("user-info");
+        const authButton = document.getElementById("auth-button");
+        const userProfileLink = document.getElementById("user-profile-link");
 
-    console.log("Datos del usuario:", usuario); // Para depuración
+        console.log("Datos del usuario:", usuario); // Para depuración
 
-    // Si el usuario está registrado en localStorage
-    if (usuario) {
-        // Mostrar la información del usuario
-        userInfo.style.display = "flex";
-        document.getElementById("user-name").textContent = usuario.username || "Usuario";
-        authButton.style.display = "none";
+        // Si el usuario está registrado en localStorage
+        if (usuario) {
+            // Mostrar la información del usuario
+            userInfo.style.display = "flex";
+            document.getElementById("user-name").textContent = usuario.username || "Usuario";
+            authButton.style.display = "none";
 
-        // Determinar el tipo de usuario y establecer el enlace correcto
-        if (usuario.username === "admin") {
-            // Si es admin, enlazar a la página de administrador
-            userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
+            // Determinar el tipo de usuario y establecer el enlace correcto
+            if (usuario.username === "admin") {
+                // Si es admin, enlazar a la página de administrador
+                userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
+            } else {
+                // Si es usuario normal, enlazar a la página de perfil
+                userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
+            }
+
+            // Agregar funcionalidad de cerrar sesión
+            document.getElementById("logout-btn").addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.removeItem("usuario");
+                window.location.reload();
+            });
         } else {
-            // Si es usuario normal, enlazar a la página de perfil
-            userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
+            // Si no hay usuario, mostrar el botón de login
+            userInfo.style.display = "none";
+            authButton.style.display = "block";
         }
 
-        // Agregar funcionalidad de cerrar sesión
-        document.getElementById("logout-btn").addEventListener("click", (e) => {
-            e.preventDefault();
-            localStorage.removeItem("usuario");
-            window.location.reload();
+        // Código JavaScript para el menú desplegable
+        document.addEventListener('DOMContentLoaded', () => {
+            // Menú desplegable
+            const menuToggle = document.getElementById('menuToggle');
+            const overlayMenu = document.getElementById('overlayMenu');
+            const closeMenu = document.getElementById('closeMenu');
+
+            if (menuToggle && overlayMenu) {
+                menuToggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    overlayMenu.classList.toggle('active');
+                    console.log('Menú toggle clicked, overlay active:', overlayMenu.classList.contains('active'));
+                });
+
+                if (closeMenu) {
+                    closeMenu.addEventListener('click', function () {
+                        overlayMenu.classList.remove('active');
+                        console.log('Menú cerrado');
+                    });
+                }
+
+                // Cerrar al hacer clic fuera del menú
+                overlayMenu.addEventListener('click', function (e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        console.log('Cerrado por clic fuera');
+                    }
+                });
+            } else {
+                console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
+            }
         });
-    } else {
-        // Si no hay usuario, mostrar el botón de login
-        userInfo.style.display = "none";
-        authButton.style.display = "block";
-    }
-    
-    // Código JavaScript para el menú desplegable
-    document.addEventListener('DOMContentLoaded', () => {
-        // Menú desplegable
-        const menuToggle = document.getElementById('menuToggle');
-        const overlayMenu = document.getElementById('overlayMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        
-        if (menuToggle && overlayMenu) {
-            menuToggle.addEventListener('click', function (e) {
-                e.preventDefault();
-                overlayMenu.classList.toggle('active');
-                console.log('Menú toggle clicked, overlay active:', overlayMenu.classList.contains('active'));
-            });
-            
-            if (closeMenu) {
-                closeMenu.addEventListener('click', function () {
-                    overlayMenu.classList.remove('active');
-                    console.log('Menú cerrado');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const track = document.querySelector(".recipe-track");
+            const prevButton = document.querySelector(".prev-button");
+            const nextButton = document.querySelector(".next-button");
+            const cards = track.querySelectorAll(".recipe-card");
+            const cardCount = cards.length;
+            const cardsToShow = 5;
+            let currentIndex = 0;
+
+            if (!track || !prevButton || !nextButton || cardCount === 0) {
+                console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
+                return;
+            }
+
+            function updateSliderPosition() {
+                const cardWidth = track.querySelector(".recipe-card").offsetWidth;
+                const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
+                const totalCardWidth = cardWidth + cardMargin;
+
+                track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
+                track.style.transition = "transform 0.5s ease";
+
+                prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
+                prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
+
+                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+                nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
+                nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
+
+                cards.forEach((card, index) => {
+                    card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
                 });
             }
-            
-            // Cerrar al hacer clic fuera del menú
-            overlayMenu.addEventListener('click', function (e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                    console.log('Cerrado por clic fuera');
+
+            prevButton.addEventListener("click", () => {
+                if (currentIndex > 0) {
+                    currentIndex -= 1;
+                    updateSliderPosition();
                 }
             });
-        } else {
-            console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
-        }
-    });
-    
-    document.addEventListener("DOMContentLoaded", () => {
-        const track = document.querySelector(".recipe-track");
-        const prevButton = document.querySelector(".prev-button");
-        const nextButton = document.querySelector(".next-button");
-        const cards = track.querySelectorAll(".recipe-card");
-        const cardCount = cards.length;
-        const cardsToShow = 5;
-        let currentIndex = 0;
 
-        if (!track || !prevButton || !nextButton || cardCount === 0) {
-            console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
-            return;
-        }
-
-        function updateSliderPosition() {
-            const cardWidth = track.querySelector(".recipe-card").offsetWidth;
-            const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
-            const totalCardWidth = cardWidth + cardMargin;
-
-            track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
-            track.style.transition = "transform 0.5s ease";
-
-            prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
-            prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
-
-            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-            nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
-            nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
-
-            cards.forEach((card, index) => {
-                card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
+            nextButton.addEventListener("click", () => {
+                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+                if (currentIndex < maxGroups) {
+                    currentIndex += 1;
+                    updateSliderPosition();
+                }
             });
-        }
-
-        prevButton.addEventListener("click", () => {
-            if (currentIndex > 0) {
-                currentIndex -= 1;
-                updateSliderPosition();
-            }
-        });
-
-        nextButton.addEventListener("click", () => {
-            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-            if (currentIndex < maxGroups) {
-                currentIndex += 1;
-                updateSliderPosition();
-            }
-        });
 
             nextButton.addEventListener("click", () => {
                 const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
@@ -519,26 +373,22 @@
         });
     </script>
 
-    <!-- Asegurar que el script para el botón de scroll esté correctamente implementado -->
-    <!-- Añadir este script al final del body, justo antes del cierre: -->
-
     <script>
-      // Script específico para el botón de scroll
-      document.addEventListener('DOMContentLoaded', function() {
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        if (scrollToTopBtn) {
-          scrollToTopBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Botón de scroll clickeado');
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-          });
-        }
-      });
+        // Script específico para el botón de scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('Botón de scroll clickeado');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>
-
