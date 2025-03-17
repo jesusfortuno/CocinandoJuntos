@@ -19,14 +19,17 @@ body {
 }
 
 body {
-  padding-top: 90px; /* Altura del nav */
-  min-height: 100vh; /* Asegurar altura mínima */
-  position: relative; /* Para posicionamiento relativo */
+  padding-top: 0; /* Eliminar el padding-top que estaba causando el espacio */
+  min-height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
 nav {
+  position: sticky; /* Hacer que la barra de navegación sea sticky */
+  top: 0;
+  z-index: 1000;
   background-color: #f8f1e9;
   padding: 1rem;
   display: flex;
@@ -1646,89 +1649,84 @@ input:checked + .slider:before {
   }
 }
 
-/* Añade estos estilos a tu archivo CSS existente */
-.menu-toggle {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  z-index: 1000;
-}
-
-.menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background-color: #333;
-  transition: 0.3s;
-}
-
-.dropdown-menu {
+/* Estilos del menú desplegable - Actualizados para coincidir con "Recetas Dificultad Fácil" */
+.overlay-menu {
   display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  min-width: 200px;
-  z-index: 999;
+  position: static; /* Cambiado a static como en styles2.css */
+  width: 100%;
+  background-color: #f8f1e9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid #e8d5c4;
+  font-size: 16px;
 }
 
-.dropdown-menu.active {
-  display: block;
+.overlay-menu.active {
+  display: block; /* Muestra el menú cuando está activo */
+}
+
+.overlay-content {
+  width: 100%;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8f1e9;
+  gap: 5px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 120px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  z-index: 1001;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.close-btn:hover {
+  color: #6b4423;
 }
 
 .menu-section {
-  margin-bottom: 1rem;
+  flex: 1;
+  margin: 0;
+  padding: 0.3rem;
 }
 
 .menu-section h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
   color: #333;
-  margin-bottom: 0.5rem;
 }
 
 .menu-section ul {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .menu-section ul li {
+  margin: 0.2rem 0;
   padding: 0.3rem 0;
 }
 
 .menu-section ul li a {
+  font-size: 0.9rem;
   color: #666;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .menu-section ul li a:hover {
-  color: #000;
-}
-
-/* Ajustar responsive del footer */
-@media (max-width: 992px) {
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-
-  .footer-links,
-  .footer-social {
-    text-align: center;
-  }
-
-  .social-icons {
-    justify-content: center;
-  }
+  color: #6b4423;
 }
 

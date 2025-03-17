@@ -208,3 +208,36 @@ document.addEventListener("DOMContentLoaded", () => {
   //}
 })
 
+// Añadir esta función al final del archivo para asegurar que el menú hamburguesa funcione correctamente
+document.addEventListener("DOMContentLoaded", () => {
+  // Menú hamburguesa
+  const menuToggle = document.getElementById("menuToggle")
+  const overlayMenu = document.getElementById("overlayMenu")
+  const closeMenu = document.getElementById("closeMenu")
+
+  if (menuToggle && overlayMenu) {
+    menuToggle.addEventListener("click", (e) => {
+      e.preventDefault()
+      overlayMenu.classList.toggle("active")
+      console.log("Menú toggle clicked, overlay active:", overlayMenu.classList.contains("active"))
+    })
+
+    if (closeMenu) {
+      closeMenu.addEventListener("click", () => {
+        overlayMenu.classList.remove("active")
+        console.log("Menú cerrado")
+      })
+    }
+
+    // Cerrar al hacer clic fuera del menú
+    overlayMenu.addEventListener("click", function (e) {
+      if (e.target === this) {
+        this.classList.remove("active")
+        console.log("Cerrado por clic fuera")
+      }
+    })
+  } else {
+    console.error("Elementos del menú no encontrados:", { menuToggle, overlayMenu })
+  }
+})
+
