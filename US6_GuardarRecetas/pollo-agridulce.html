@@ -6,47 +6,6 @@
     <title>Pollo Agridulce - Cocinando Juntos</title>
     <link rel="stylesheet" href="pollo-agridulce.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
-    <style>
-        /* Estilos adicionales para los comentarios */
-        .comentario {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .comentario-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        
-        .comentario-fecha {
-            color: #888;
-            font-size: 0.9rem;
-        }
-        
-        .comentario-valoracion {
-            margin-bottom: 8px;
-        }
-        
-        .estrella-activa {
-            color: #f39c12;
-        }
-        
-        .estrella-inactiva {
-            color: #ccc;
-        }
-        
-        .comentario-texto {
-            line-height: 1.5;
-        }
-        
-        #commentsList {
-            margin-top: 30px;
-        }
-    </style>
 </head>
 
 <body>
@@ -74,15 +33,40 @@
         </div>
 
         <div class="recipe-title">
-            <h1>Pollo Agridulce</h1>
+            <h1>Pollo Agridulce <span class="recipe-rating" id="recipeRating">4/5 (2)</span></h1>
         </div>
 
-        <div class="recipe-wrapper">
-            <div class="recipe-photo">
-                <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+        <div class="recipe-main-content">
+            <!-- Columna izquierda: Foto principal y carrusel debajo -->
+            <div class="recipe-left-column">
+                <div class="recipe-photo">
+                    <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                </div>
+                
+                <!-- Carrusel de imágenes debajo de la foto principal -->
+                <div class="image-carousel-container">
+                    <div class="image-thumbnails" id="imageThumbnails">
+                        <div class="thumbnail active" data-index="0">
+                            <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce 1">
+                        </div>
+                        <div class="thumbnail" data-index="1">
+                            <img src="./Imagenes/China/pollo-agridulce2.jpg" alt="Pollo Agridulce 2">
+                        </div>
+                        <div class="thumbnail" data-index="2">
+                            <img src="./Imagenes/China/pollo-agridulce3.jpg" alt="Pollo Agridulce 3">
+                        </div>
+                        <div class="thumbnail" data-index="3">
+                            <img src="./Imagenes/China/pollo-agridulce4.jpg" alt="Pollo Agridulce 4">
+                        </div>
+                        <div class="thumbnail" data-index="4">
+                            <img src="./Imagenes/China/pollo-agridulce5.jpeg" alt="Pollo Agridulce 5">
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="recipe-details-container">
+            
+            <!-- Columna central: Información de la receta -->
+            <div class="recipe-center-column">
                 <div class="recipe-info">
                     <div class="recipe-tags">
                         <span class="tag">Dificultad: Media</span>
@@ -94,6 +78,22 @@
                         <button class="button favorite-btn" data-receta-id="1">❤️ Añadir a Favoritos</button>
                         <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Columna derecha: Video de la receta -->
+            <div class="recipe-right-column">
+                <div class="recipe-video">
+                    <iframe 
+                        id="recipeVideo"
+                        width="96%" 
+                        height="223" 
+                        src="https://www.youtube.com/embed/bCSRaJQ2P7c" 
+                        title="Pollo Agridulce Chino - Muve Flavors" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -155,6 +155,7 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script type="module" src="../favoritos.js"></script>
     <script type="module" src="../valorar.js"></script>
+    <script src="recipe-enhancements.js"></script>
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -213,3 +214,4 @@
     </script>
 </body>
 </html>
+
