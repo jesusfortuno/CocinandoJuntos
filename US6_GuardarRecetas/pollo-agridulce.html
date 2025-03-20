@@ -137,11 +137,15 @@
         <!-- Sección de comentarios -->
         <div id="commentsSection">
             <h3>Deja tu comentario</h3>
-            <div class="rating">
+            <div id="replyingTo" class="replying-to" style="display: none;"></div>
+            <div class="rating" id="ratingStars">
                 <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
             </div>
             <textarea id="commentText" placeholder="Escribe tu comentario aquí..."></textarea>
-            <button id="submitComment">Publicar</button>
+            <div class="comment-buttons">
+                <button id="submitComment">Publicar</button>
+                <button id="cancelReply" style="display: none;">Cancelar</button>
+            </div>
             <div id="commentsList">
                 <p>Cargando comentarios...</p>
             </div>

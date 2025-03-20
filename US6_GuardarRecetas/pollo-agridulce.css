@@ -444,6 +444,102 @@
     line-height: 1.5;
   }
   
+  /* Nuevos estilos para el sistema de respuestas */
+  .comentario-acciones {
+    margin-top: 8px;
+    text-align: right;
+  }
+  
+  .responder-btn {
+    background: none;
+    border: none;
+    color: #6b4423;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    text-decoration: underline;
+  }
+  
+  .responder-btn:hover {
+    color: #8b5933;
+  }
+  
+  /* Actualizar estilos para las respuestas */
+  .respuestas-container {
+    margin-top: 10px;
+    margin-left: 20px;
+    border-left: 3px solid #6b4423; /* Borde más grueso y del color principal */
+    padding-left: 15px;
+  }
+  
+  .respuesta {
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #f8f1e9; /* Fondo ligeramente diferente para distinguirlas */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative; /* Para posicionar el indicador de respuesta */
+  }
+  
+  .respuesta::before {
+    content: "↪"; /* Flecha que indica respuesta */
+    position: absolute;
+    left: -25px;
+    top: 15px;
+    color: #6b4423;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .respuesta-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  
+  .respuesta-fecha {
+    color: #888;
+    font-size: 0.9rem;
+  }
+  
+  .respuesta-texto {
+    line-height: 1.5;
+    margin-top: 0.75rem;
+  }
+  
+  .respuesta-acciones {
+    margin-top: 8px;
+    text-align: right;
+  }
+  
+  .replying-to {
+    background-color: #f8f1e9;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #6b4423;
+  }
+  
+  #cancelReply {
+    margin-left: 8px;
+    padding: 10px 20px;
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #cancelReply:hover {
+    background-color: #bbb;
+  }
+  
+  .comment-buttons {
+    display: flex;
+    margin-top: 10px;
+  }
+  
   /* Responsive */
   @media (max-width: 1200px) {
     .recipe-main-content {
