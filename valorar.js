@@ -204,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return comentariosConUsuarios
   }
 
+  // Función para enviar comentario (VERSIÓN MEJORADA)
   async function enviarComentario() {
     const idReceta = obtenerIdReceta()
     if (!idReceta) {
@@ -246,11 +247,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("Enviando comentario:", nuevoComentario)
 
-      const { data, error } = await supabase.from("comentarios").insert([nuevoComentario])
+      const { data, error } = await supabase.from("comentarios").insert([nuevoComentario]).select()
 
       if (error) {
         console.error("Error detallado:", error)
         throw error
+      }
+
+      console.log("Comentario insertado:", data)
+
+      // Si es una respuesta, crear notificación
+      if (respondingToId) {
+        // Obtener el título de la receta
+        const recetaTitulo = document.querySelector(".recipe-title h1")?.textContent.trim() || "Receta"
+
+        console.log("Preparando para crear notificación:")
+        console.log("- ID del comentario padre:", respondingToId)
+        console.log("- Texto de la respuesta:", comentarioTexto)
+        console.log("- ID de la receta:", idReceta)
+        console.log("- Título de la receta:", recetaTitulo)
+
+        // Verificar si la función está disponible
+        if (typeof window.crearNotificacionRespuesta === "function") {
+          console.log("Función crearNotificacionRespuesta disponible, llamando...")
+
+          try {
+            await window.crearNotificacionRespuesta(respondingToId, comentarioTexto, idReceta, recetaTitulo)
+            console.log("Llamada a crearNotificacionRespuesta completada")
+          } catch (notifError) {
+            console.error("Error al crear notificación:", notifError)
+          }
+        } else {
+          console.error("La función crearNotificacionRespuesta no está disponible")
+          console.log("Asegúrate de que notification-center.js esté cargado antes de valorar.js")
+        }
       }
 
       // Limpiar el formulario
