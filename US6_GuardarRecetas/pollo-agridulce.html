@@ -47,25 +47,27 @@
             <!-- Columna izquierda: Foto principal y carrusel debajo -->
             <div class="recipe-left-column">
                 <div class="recipe-photo">
-                    <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                    <a href="./Imagenes/China/pollo-agridulce.jpg" target="_blank">
+                        <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce" style="aspect-ratio: 1024/576; object-fit: cover;">
+                    </a>
                 </div>
 
                 <!-- Carrusel de imágenes debajo de la foto principal -->
                 <div class="image-carousel-container">
                     <div class="image-thumbnails" id="imageThumbnails">
-                        <div class="thumbnail active" data-index="0">
+                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/China/pollo-agridulce.jpg">
                             <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce 1">
                         </div>
-                        <div class="thumbnail" data-index="1">
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/China/pollo-agridulce2.jpg">
                             <img src="./Imagenes/China/pollo-agridulce2.jpg" alt="Pollo Agridulce 2">
                         </div>
-                        <div class="thumbnail" data-index="2">
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/China/pollo-agridulce3.jpg">
                             <img src="./Imagenes/China/pollo-agridulce3.jpg" alt="Pollo Agridulce 3">
                         </div>
-                        <div class="thumbnail" data-index="3">
+                        <div class="thumbnail" data-index="3" data-src="./Imagenes/China/pollo-agridulce4.jpg">
                             <img src="./Imagenes/China/pollo-agridulce4.jpg" alt="Pollo Agridulce 4">
                         </div>
-                        <div class="thumbnail" data-index="4">
+                        <div class="thumbnail" data-index="4" data-src="./Imagenes/China/pollo-agridulce5.jpeg">
                             <img src="./Imagenes/China/pollo-agridulce5.jpeg" alt="Pollo Agridulce 5">
                         </div>
                     </div>
@@ -225,6 +227,42 @@
             window.location.href = '../login.html';
         });
     </script>
+
+    <script>
+        // Ensure all carousel images have the same aspect ratio and are clickable
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainImageContainer = document.querySelector('.recipe-photo');
+            const mainImage = mainImageContainer.querySelector('img');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            // Set aspect ratio for all images
+            const allImages = document.querySelectorAll('.recipe-photo img, .thumbnail img');
+            allImages.forEach(img => {
+                img.style.aspectRatio = '1024/576';
+                img.style.objectFit = 'cover';
+            });
+            
+            // Handle thumbnail clicks
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    // Update active state
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Get image source
+                    const imgSrc = this.getAttribute('data-src');
+                    
+                    // Update main image
+                    mainImage.src = imgSrc;
+                    
+                    // Update link href
+                    const mainImageLink = mainImageContainer.querySelector('a');
+                    mainImageLink.href = imgSrc;
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
+
