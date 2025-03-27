@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Cocinando Juntos</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="styles-search-update.css">
     <script src="index.js"></script>
     <link rel="stylesheet" href="../notification-styles.css">
     <script src="../notification-center.js"></script>
@@ -14,14 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
+        <link rel="stylesheet" href="styles-search-update.css">
+        <script src="i18n.js"></script>
+        <script src="language-switcher.js"></script>
 <body>
     <nav>
         <a href="index.html" class="logo">
             <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
         </a>
         <!-- Buscador con botón -->
+        <!-- Modificar el buscador para incluir el atributo data-i18n en el placeholder -->
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Buscar recetas...">
+            <input type="text" id="search-input" placeholder="Buscar recetas..." data-i18n="Buscar recetas...">
             <button id="search-button" type="button">
                 <i class="fas fa-search"></i>
             </button>
@@ -53,6 +56,8 @@
     <div class="overlay-menu" id="overlayMenu">
         <div class="overlay-content">
             <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gast  id="closeMenu">×</div>
             <div class="menu-section">
                 <h3>Culturas Gastronómicas</h3>
                 <ul>
@@ -105,31 +110,31 @@
         <div class="content-wrapper">
             <!-- Sección de platos por cultura -->
             <section id="explore" class="culture-dishes">
-                <h2>Platos por Cultura</h2>
+                <h2 data-i18n="Platos por Cultura">Platos por Cultura</h2>
                 <div class="culture-scroll">
                     <a href="cultura-china.html" class="culture-card">
                         <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Cocina China">
-                        <h3>China</h3>
+                        <h3 data-i18n="China">China</h3>
                     </a>
                     <a href="cultura-española.html" class="culture-card">
                         <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="Cocina Española">
-                        <h3>España</h3>
+                        <h3 data-i18n="España">España</h3>
                     </a>
                     <a href="cultura-francesa.html" class="culture-card">
                         <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Cocina Francesa">
-                        <h3>Francia</h3>
+                        <h3 data-i18n="Francia">Francia</h3>
                     </a>
                     <a href="cultura-italiana.html" class="culture-card">
                         <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="Cocina Italiana">
-                        <h3>Italia</h3>
+                        <h3 data-i18n="Italia">Italia</h3>
                     </a>
                     <a href="cultura-japonesa.html" class="culture-card">
                         <img src="./Imagenes/Japon/sushi.jpeg" alt="Cocina Japonesa">
-                        <h3>Japón</h3>
+                        <h3 data-i18n="Japón">Japón</h3>
                     </a>
                     <a href="cultura-venezolana.html" class="culture-card">
                         <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Cocina Venezolana">
-                        <h3>Venezuela</h3>
+                        <h3 data-i18n="Venezuela">Venezuela</h3>
                     </a>
                 </div>
             </section>
@@ -375,8 +380,8 @@
                         <label for="language">Idioma:</label>
                         <select id="language">
                             <option value="es">Español</option>
+                            <option value="ca">Català</option>
                             <option value="en">English</option>
-                            <option value="mi">Miguel</option>
                         </select>
                     </div>
                     <!-- Modificar el botón de scroll para asegurar que funcione correctamente -->
@@ -392,7 +397,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="index2.js"></script>
-    <!-- Modificar el script para manejar correctamente los tipos de usuario -->
+    <!-- Eliminar la referencia a search.js ya que ahora la funcionalidad está en index2.js -->
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));

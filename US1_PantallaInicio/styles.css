@@ -154,6 +154,7 @@ main {
   display: none; /* Chrome, Safari and Opera */
 }
 
+/* Asegurar que las imágenes de las tarjetas de cultura se muestren correctamente */
 .culture-card {
   flex: 0 0 200px; /* Tamaño fijo en pantallas pequeñas */
   max-width: 250px;
@@ -168,16 +169,15 @@ main {
   background-color: white;
   height: 250px;
   display: flex;
-}
-
-.culture-card:hover {
-  transform: translateY(-5px);
+  flex-direction: column; /* Asegurar que los elementos se apilen verticalmente */
 }
 
 .culture-card img {
   width: 100%;
   height: 80%;
   object-fit: cover;
+  display: block; /* Asegurar que la imagen se muestre como bloque */
+  min-height: 200px; /* Altura mínima para evitar colapso */
 }
 
 .culture-card h3 {
@@ -190,6 +190,7 @@ main {
   text-align: center;
   font-size: 1.2rem;
   color: #6b4423;
+  z-index: 2; /* Asegurar que el texto esté por encima de la imagen */
 }
 
 /* Media queries para ajustar el comportamiento en diferentes tamaños de pantalla */
