@@ -87,54 +87,39 @@ document.addEventListener("DOMContentLoaded", () => {
       // Función para eliminar de favoritos
       window.eliminarDeFavoritos = async (recetaId) => {
         try {
-          const usuarioGuardado = localStorage.getItem("usuario")
-
+          const usuarioGuardado = localStorage.getItem("usuario");
           if (!usuarioGuardado) {
-            alert("Debes iniciar sesión para eliminar recetas de favoritos")
-            return false
+            alert("Debes iniciar sesión para eliminar recetas de favoritos");
+            return false;
           }
 
-          const usuario = JSON.parse(usuarioGuardado)
+          const usuario = JSON.parse(usuarioGuardado);
 
-          // Primero autenticamos al usuario con Supabase
-          const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-            email: usuario.email,
-            password: usuario.password, // Necesitarás almacenar la contraseña en localStorage también
-          })
-
-          if (authError) {
-            console.error("Error de autenticación:", authError)
-            alert("Error de autenticación")
-            return false
-          }
-
-          console.log("Eliminando favorito:", { usuario_id: usuario.id, receta_id: recetaId })
-
-          // Eliminar de la base de datos
-          const { data, error } = await supabase
+          // Intentar eliminar con una consulta más simple
+          const { error } = await supabase
             .from("favoritos")
             .delete()
-            .eq("usuario_id", usuario.id)
-            .eq("receta_id", Number.parseInt(recetaId))
+            .eq("receta_id", recetaId)
+            .eq("usuario_id", usuario.id);
 
           if (error) {
-            console.error("Error al eliminar de favoritos:", error)
-            alert("No se pudo eliminar la receta de favoritos")
-            return false
+            console.error("Error al eliminar de favoritos:", error);
+            throw error;
           }
 
           // Eliminar visualmente de la página
-          const recetaElemento = document.querySelector(`.recipe[data-receta-id="${recetaId}"]`)
+          const recetaElemento = document.querySelector(`.recipe[data-receta-id="${recetaId}"]`);
           if (recetaElemento) {
-            recetaElemento.remove()
+            recetaElemento.remove();
           }
 
-          alert("Receta eliminada de favoritos")
-          return true
+          console.log("Receta eliminada correctamente");
+          alert("Receta eliminada de favoritos");
+          return true;
         } catch (error) {
-          console.error("Error inesperado:", error)
-          alert("Error al eliminar la receta de favoritos")
-          return false
+          console.error("Error inesperado:", error);
+          alert("Error al eliminar la receta de favoritos: " + error.message);
+          return false;
         }
       }
       // Modificar la generación de recetas para añadir botón de eliminar
@@ -237,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const comentarioElement = document.createElement("div")
         comentarioElement.classList.add("comentario-item")
+        comentarioElement.setAttribute('data-comentario-id', c.id_comentario)
 
         comentarioElement.innerHTML = `
               <div class="comentario-header">
@@ -248,6 +234,11 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
               <p class="comentario-texto">${c.comentario || "Sin comentario"}</p>
               <p class="comentario-fecha">${fechaFormateada}</p>
+              <div class="comentario-actions">
+                  <button onclick="eliminarComentario(${c.id_comentario})" class="delete-comment-btn">
+                      Eliminar
+                  </button>
+              </div>
           `
 
         comentariosContainer.appendChild(comentarioElement)
@@ -393,5 +384,33 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeModal() {
     passwordModal.style.display = "none"
   }
+
+  // Mover la función eliminarComentario al scope global
+  window.eliminarComentario = async (idComentario) => {
+    try {
+      const confirmacion = confirm("¿Estás seguro de que deseas eliminar este comentario?");
+      if (!confirmacion) return;
+
+      const { error } = await supabase
+        .from('comentarios')
+        .delete()
+        .eq('id_comentario', idComentario);
+
+      if (error) {
+        throw error;
+      }
+
+      // Eliminar el comentario del DOM
+      const comentarioElement = document.querySelector(`[data-comentario-id="${idComentario}"]`);
+      if (comentarioElement) {
+        comentarioElement.remove();
+      }
+
+      alert('Comentario eliminado con éxito');
+    } catch (error) {
+      console.error('Error al eliminar el comentario:', error);
+      alert('Error al eliminar el comentario');
+    }
+  };
 })
 

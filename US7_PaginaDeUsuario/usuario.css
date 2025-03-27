@@ -313,6 +313,29 @@ main {
   text-align: right;
 }
 
+/* Añadir después de los estilos de .comentario-fecha */
+.comentario-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+.delete-comment-btn {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.delete-comment-btn:hover {
+    background-color: #ffe5e5;
+    transform: translateY(-1px);
+}
+
 /* Actualizar los estilos de la cuadrícula de recetas */
 .recipes-grid {
   display: grid;
