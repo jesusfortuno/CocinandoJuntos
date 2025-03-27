@@ -1,54 +1,352 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Comentarios</title>
-    <link rel="stylesheet" href="gestionComentarios.css">
+    <title>Gestión de Comentarios | Cocinando Juntos</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <nav>
+    <!-- Navegador superior -->
+    <nav class="top-nav">
         <a href="./../US1_PantallaInicio/index.html" class="logo">
             <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
         </a>
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar..." class="search-bar">
+        </div>
         <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
+                class="user-icon">
             <span id="user-name">Nombre del Usuario</span>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
+
+        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+        <div class="menu-icon" id="mobile-menu-toggle">☰</div>
     </nav>
 
-    <main>
-        <div class="breadcrumb">
-            <a href="./PaginaAdmin.html">Panel de Administración</a> &gt; <span>Gestión de Comentarios</span>
-        </div>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil"
+                    class="admin-profile-pic">
+                <span class="admin-name" id="sidebar-admin-name">Nombre usuario</span>
+                <span class="admin-role">Administrador</span>
+            </div>
 
-        <div class="comments-management">
-            <h1>Gestión de Comentarios</h1>
-            <div class="comments-list">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="./PaginaAdmin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="./gestionRecetas.html"><i class="fas fa-utensils"></i> Gestión de Recetas</a>
+                    </li>
+                    <li>
+                        <a href="./gestionUsuarios.html"><i class="fas fa-users"></i> Gestión de Usuarios</a>
+                    </li>
+                    <li class="active">
+                        <a href="./gestionComentarios.html"><i class="fas fa-comments"></i> Gestión de Comentarios</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="./PaginaAdmin.html"><i class="fas fa-home"></i> Panel de Administración</a>
+                <span>/</span>
+                <span>Gestión de Comentarios</span>
+            </div>
+
+            <div class="page-header">
+                <h1>Gestión de Comentarios</h1>
+                <div>
+                    <button id="approve-all-btn" class="btn btn-primary">
+                        <i class="fas fa-check-circle"></i> Aprobar Seleccionados
+                    </button>
+                    <button id="delete-all-btn" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Eliminar Seleccionados
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
+                            <th><input type="checkbox" id="select-all"></th>
                             <th>ID</th>
-                            <th>Comentario</th>
                             <th>Usuario</th>
-                            <th>Visible</th>
+                            <th>Receta</th>
+                            <th>Comentario</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="comments-table-body">
                         <!-- Los comentarios se cargarán aquí dinámicamente -->
+                        <!-- Ejemplos para visualización -->
+                        <tr>
+                            <td><input type="checkbox" class="comment-checkbox" data-id="1"></td>
+                            <td>1</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp"
+                                        alt="User" style="width: 30px; height: 30px; border-radius: 50%;">
+                                    <span>María López</span>
+                                </div>
+                            </td>
+                            <td>Tortilla Española</td>
+                            <td>¡Excelente receta! La hice el fin de semana y quedó deliciosa.</td>
+                            <td>12/05/2025</td>
+                            <td><span class="badge badge-success">Aprobado</span></td>
+                            <td class="table-actions">
+                                <button class="btn btn-info btn-sm view-comment" data-id="1">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="btn btn-danger btn-sm delete-comment" data-id="1">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="comment-checkbox" data-id="2"></td>
+                            <td>2</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp"
+                                        alt="User" style="width: 30px; height: 30px; border-radius: 50%;">
+                                    <span>Juan Pérez</span>
+                                </div>
+                            </td>
+                            <td>Gazpacho Andaluz</td>
+                            <td>Muy refrescante para el verano. Añadí un poco más de ajo y quedó perfecto.</td>
+                            <td>10/05/2025</td>
+                            <td><span class="badge badge-warning">Pendiente</span></td>
+                            <td class="table-actions">
+                                <button class="btn btn-success btn-sm approve-comment" data-id="2">
+                                    <i class="fas fa-check"></i> Aprobar
+                                </button>
+                                <button class="btn btn-info btn-sm view-comment" data-id="2">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="btn btn-danger btn-sm delete-comment" data-id="2">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
+        </main>
+    </div>
+
+    <!-- Modal para ver comentario -->
+    <div id="comment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalle del Comentario</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div id="comment-details">
+                <div class="form-group">
+                    <label>Usuario:</label>
+                    <p id="comment-user" class="form-control" style="background-color: #f9f9f9;"></p>
+                </div>
+                <div class="form-group">
+                    <label>Receta:</label>
+                    <p id="comment-recipe" class="form-control" style="background-color: #f9f9f9;"></p>
+                </div>
+                <div class="form-group">
+                    <label>Comentario:</label>
+                    <p id="comment-text" class="form-control" style="background-color: #f9f9f9; min-height: 100px;"></p>
+                </div>
+                <div class="form-group">
+                    <label>Fecha:</label>
+                    <p id="comment-date" class="form-control" style="background-color: #f9f9f9;"></p>
+                </div>
+                <div class="form-group">
+                    <label>Estado:</label>
+                    <p id="comment-status" class="form-control" style="background-color: #f9f9f9;"></p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="close-details">Cerrar</button>
+                    <button type="button" class="btn btn-success" id="approve-comment-btn">Aprobar</button>
+                    <button type="button" class="btn btn-danger" id="delete-comment-btn">Eliminar</button>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
 
     <footer>
         <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
 
+    <!-- Scripts de Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="gestionComentarios.js"></script>
+    <script>
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const userInfo = document.getElementById("user-info");
+        const authButton = document.getElementById("auth-button");
+        const sidebarAdminName = document.getElementById("sidebar-admin-name");
+
+        if (usuario) {
+            console.log('Usuario encontrado:', usuario);
+            userInfo.style.display = "flex";
+            document.getElementById("user-name").textContent = usuario.username;
+            sidebarAdminName.textContent = usuario.username;
+            authButton.style.display = "none";
+
+            // Configurar el botón de cierre de sesión
+            document.getElementById("logout-btn").addEventListener("click", function (e) {
+                e.preventDefault();
+                localStorage.removeItem("usuario");
+                window.location.href = "./../US1_PantallaInicio/index.html";
+            });
+        } else {
+            console.log('No se encontró usuario en localStorage');
+            userInfo.style.display = "none";
+            authButton.style.display = "block";
+            window.location.href = "../login.html";
+        }
+
+        // Función para alternar la visibilidad del sidebar en móviles
+        document.getElementById("mobile-menu-toggle").addEventListener("click", function () {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('sidebar-open');
+        });
+
+        // Modal de comentario
+        const modal = document.getElementById("comment-modal");
+        const closeBtn = document.querySelector(".close");
+        const closeDetailsBtn = document.getElementById("close-details");
+        const viewBtns = document.querySelectorAll(".view-comment");
+        const approveBtns = document.querySelectorAll(".approve-comment");
+        const deleteBtns = document.querySelectorAll(".delete-comment");
+
+        // Seleccionar todos los comentarios
+        document.getElementById("select-all").addEventListener("change", function () {
+            const checkboxes = document.querySelectorAll(".comment-checkbox");
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+
+        // Aprobar todos los seleccionados
+        document.getElementById("approve-all-btn").addEventListener("click", function () {
+            const selectedCheckboxes = document.querySelectorAll(".comment-checkbox:checked");
+            if (selectedCheckboxes.length === 0) {
+                alert("No hay comentarios seleccionados");
+                return;
+            }
+
+            if (confirm(`¿Estás seguro de que deseas aprobar ${selectedCheckboxes.length} comentarios?`)) {
+                // Aquí normalmente aprobarías los comentarios
+                console.log("Aprobando comentarios seleccionados");
+            }
+        });
+
+        // Eliminar todos los seleccionados
+        document.getElementById("delete-all-btn").addEventListener("click", function () {
+            const selectedCheckboxes = document.querySelectorAll(".comment-checkbox:checked");
+            if (selectedCheckboxes.length === 0) {
+                alert("No hay comentarios seleccionados");
+                return;
+            }
+
+            if (confirm(`¿Estás seguro de que deseas eliminar ${selectedCheckboxes.length} comentarios?`)) {
+                // Aquí normalmente eliminarías los comentarios
+                console.log("Eliminando comentarios seleccionados");
+            }
+        });
+
+        // Ver comentario
+        viewBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                const commentId = this.getAttribute("data-id");
+                // Aquí normalmente cargarías los datos del comentario
+                document.getElementById("comment-user").textContent = commentId === "1" ? "María López" : "Juan Pérez";
+                document.getElementById("comment-recipe").textContent = commentId === "1" ? "Tortilla Española" : "Gazpacho Andaluz";
+                document.getElementById("comment-text").textContent = commentId === "1"
+                    ? "¡Excelente receta! La hice el fin de semana y quedó deliciosa."
+                    : "Muy refrescante para el verano. Añadí un poco más de ajo y quedó perfecto.";
+                document.getElementById("comment-date").textContent = commentId === "1" ? "12/05/2025" : "10/05/2025";
+                document.getElementById("comment-status").textContent = commentId === "1" ? "Aprobado" : "Pendiente";
+
+                // Mostrar/ocultar botón de aprobar según el estado
+                document.getElementById("approve-comment-btn").style.display = commentId === "1" ? "none" : "inline-block";
+
+                modal.style.display = "block";
+            });
+        });
+
+        // Cerrar modal
+        closeBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        closeDetailsBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        // Cerrar modal al hacer clic fuera del contenido
+        window.addEventListener("click", function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Aprobar comentario desde el botón en la tabla
+        approveBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                const commentId = this.getAttribute("data-id");
+                if (confirm("¿Estás seguro de que deseas aprobar este comentario?")) {
+                    // Aquí normalmente aprobarías el comentario
+                    console.log("Aprobando comentario con ID:", commentId);
+                }
+            });
+        });
+
+        // Eliminar comentario desde el botón en la tabla
+        deleteBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                const commentId = this.getAttribute("data-id");
+                if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
+                    // Aquí normalmente eliminarías el comentario
+                    console.log("Eliminando comentario con ID:", commentId);
+                }
+            });
+        });
+
+        // Aprobar comentario desde el modal
+        document.getElementById("approve-comment-btn").addEventListener("click", function () {
+            if (confirm("¿Estás seguro de que deseas aprobar este comentario?")) {
+                // Aquí normalmente aprobarías el comentario
+                console.log("Aprobando comentario desde el modal");
+                modal.style.display = "none";
+            }
+        });
+
+        // Eliminar comentario desde el modal
+        document.getElementById("delete-comment-btn").addEventListener("click", function () {
+            if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
+                // Aquí normalmente eliminarías el comentario
+                console.log("Eliminando comentario desde el modal");
+                modal.style.display = "none";
+            }
+        });
+    </script>
 </body>
-</html> 
+
+</html>
