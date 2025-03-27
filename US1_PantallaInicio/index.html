@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home - Cocinando Juntos</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="styles-search-update.css">
-        <script src="index.js"></script>
-        <!-- Añadir FontAwesome para los iconos -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cocinando Juntos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-search-update.css">
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
+    <!-- Añadir FontAwesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
 <body>
     <nav>
         <a href="index.html" class="logo">
@@ -24,7 +28,7 @@
             <button id="search-close" type="button">
                 <i class="fas fa-times"></i>
             </button>
-            
+
             <!-- Contenedor para resultados de búsqueda -->
             <div id="search-results" class="search-results">
                 <!-- Los resultados se cargarán dinámicamente aquí -->
@@ -337,7 +341,8 @@
                 <h3>Síguenos</h3>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/" aria-label="Instagram">
-                        <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram">
+                        <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png"
+                            alt="Instagram">
                     </a>
                     <a href="https://www.facebook.com/" aria-label="Facebook">
                         <img src="./Imagenes/logos/2023_Facebook_icon.svg.png" alt="Facebook">
@@ -378,7 +383,7 @@
                     <!-- Reemplazar el div del botón de scroll con esta versión simplificada: -->
 
                     <div class="scroll-to-top" id="scrollToTop">
-                      <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
+                        <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
                     </div>
                 </div>
             </div>
@@ -389,123 +394,123 @@
     <script src="index2.js"></script>
     <!-- Modificar el script para manejar correctamente los tipos de usuario -->
     <script>
-    // Obtener el usuario desde localStorage
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
-    const userInfo = document.getElementById("user-info");
-    const authButton = document.getElementById("auth-button");
-    const userProfileLink = document.getElementById("user-profile-link");
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const userInfo = document.getElementById("user-info");
+        const authButton = document.getElementById("auth-button");
+        const userProfileLink = document.getElementById("user-profile-link");
 
-    console.log("Datos del usuario:", usuario); // Para depuración
+        console.log("Datos del usuario:", usuario); // Para depuración
 
-    // Si el usuario está registrado en localStorage
-    if (usuario) {
-        // Mostrar la información del usuario
-        userInfo.style.display = "flex";
-        document.getElementById("user-name").textContent = usuario.username || "Usuario";
-        authButton.style.display = "none";
+        // Si el usuario está registrado en localStorage
+        if (usuario) {
+            // Mostrar la información del usuario
+            userInfo.style.display = "flex";
+            document.getElementById("user-name").textContent = usuario.username || "Usuario";
+            authButton.style.display = "none";
 
-        // Determinar el tipo de usuario y establecer el enlace correcto
-        if (usuario.username === "admin") {
-            // Si es admin, enlazar a la página de administrador
-            userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
+            // Determinar el tipo de usuario y establecer el enlace correcto
+            if (usuario.username === "admin") {
+                // Si es admin, enlazar a la página de administrador
+                userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
+            } else {
+                // Si es usuario normal, enlazar a la página de perfil
+                userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
+            }
+
+            // Agregar funcionalidad de cerrar sesión
+            document.getElementById("logout-btn").addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.removeItem("usuario");
+                window.location.reload();
+            });
         } else {
-            // Si es usuario normal, enlazar a la página de perfil
-            userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
+            // Si no hay usuario, mostrar el botón de login
+            userInfo.style.display = "none";
+            authButton.style.display = "block";
         }
 
-        // Agregar funcionalidad de cerrar sesión
-        document.getElementById("logout-btn").addEventListener("click", (e) => {
-            e.preventDefault();
-            localStorage.removeItem("usuario");
-            window.location.reload();
+        // Código JavaScript para el menú desplegable
+        document.addEventListener('DOMContentLoaded', () => {
+            // Menú desplegable
+            const menuToggle = document.getElementById('menuToggle');
+            const overlayMenu = document.getElementById('overlayMenu');
+            const closeMenu = document.getElementById('closeMenu');
+
+            if (menuToggle && overlayMenu) {
+                menuToggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    overlayMenu.classList.toggle('active');
+                    console.log('Menú toggle clicked, overlay active:', overlayMenu.classList.contains('active'));
+                });
+
+                if (closeMenu) {
+                    closeMenu.addEventListener('click', function () {
+                        overlayMenu.classList.remove('active');
+                        console.log('Menú cerrado');
+                    });
+                }
+
+                // Cerrar al hacer clic fuera del menú
+                overlayMenu.addEventListener('click', function (e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        console.log('Cerrado por clic fuera');
+                    }
+                });
+            } else {
+                console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
+            }
         });
-    } else {
-        // Si no hay usuario, mostrar el botón de login
-        userInfo.style.display = "none";
-        authButton.style.display = "block";
-    }
-    
-    // Código JavaScript para el menú desplegable
-    document.addEventListener('DOMContentLoaded', () => {
-        // Menú desplegable
-        const menuToggle = document.getElementById('menuToggle');
-        const overlayMenu = document.getElementById('overlayMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        
-        if (menuToggle && overlayMenu) {
-            menuToggle.addEventListener('click', function (e) {
-                e.preventDefault();
-                overlayMenu.classList.toggle('active');
-                console.log('Menú toggle clicked, overlay active:', overlayMenu.classList.contains('active'));
-            });
-            
-            if (closeMenu) {
-                closeMenu.addEventListener('click', function () {
-                    overlayMenu.classList.remove('active');
-                    console.log('Menú cerrado');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const track = document.querySelector(".recipe-track");
+            const prevButton = document.querySelector(".prev-button");
+            const nextButton = document.querySelector(".next-button");
+            const cards = track.querySelectorAll(".recipe-card");
+            const cardCount = cards.length;
+            const cardsToShow = 5;
+            let currentIndex = 0;
+
+            if (!track || !prevButton || !nextButton || cardCount === 0) {
+                console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
+                return;
+            }
+
+            function updateSliderPosition() {
+                const cardWidth = track.querySelector(".recipe-card").offsetWidth;
+                const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
+                const totalCardWidth = cardWidth + cardMargin;
+
+                track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
+                track.style.transition = "transform 0.5s ease";
+
+                prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
+                prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
+
+                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+                nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
+                nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
+
+                cards.forEach((card, index) => {
+                    card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
                 });
             }
-            
-            // Cerrar al hacer clic fuera del menú
-            overlayMenu.addEventListener('click', function (e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                    console.log('Cerrado por clic fuera');
+
+            prevButton.addEventListener("click", () => {
+                if (currentIndex > 0) {
+                    currentIndex -= 1;
+                    updateSliderPosition();
                 }
             });
-        } else {
-            console.error('Elementos del menú no encontrados:', { menuToggle, overlayMenu });
-        }
-    });
-    
-    document.addEventListener("DOMContentLoaded", () => {
-        const track = document.querySelector(".recipe-track");
-        const prevButton = document.querySelector(".prev-button");
-        const nextButton = document.querySelector(".next-button");
-        const cards = track.querySelectorAll(".recipe-card");
-        const cardCount = cards.length;
-        const cardsToShow = 5;
-        let currentIndex = 0;
 
-        if (!track || !prevButton || !nextButton || cardCount === 0) {
-            console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
-            return;
-        }
-
-        function updateSliderPosition() {
-            const cardWidth = track.querySelector(".recipe-card").offsetWidth;
-            const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
-            const totalCardWidth = cardWidth + cardMargin;
-
-            track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
-            track.style.transition = "transform 0.5s ease";
-
-            prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
-            prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
-
-            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-            nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
-            nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
-
-            cards.forEach((card, index) => {
-                card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
+            nextButton.addEventListener("click", () => {
+                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+                if (currentIndex < maxGroups) {
+                    currentIndex += 1;
+                    updateSliderPosition();
+                }
             });
-        }
-
-        prevButton.addEventListener("click", () => {
-            if (currentIndex > 0) {
-                currentIndex -= 1;
-                updateSliderPosition();
-            }
-        });
-
-        nextButton.addEventListener("click", () => {
-            const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-            if (currentIndex < maxGroups) {
-                currentIndex += 1;
-                updateSliderPosition();
-            }
-        });
 
             nextButton.addEventListener("click", () => {
                 const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
@@ -523,23 +528,23 @@
     <!-- Añadir este script al final del body, justo antes del cierre: -->
 
     <script>
-      // Script específico para el botón de scroll
-      document.addEventListener('DOMContentLoaded', function() {
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        if (scrollToTopBtn) {
-          scrollToTopBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Botón de scroll clickeado');
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-          });
-        }
-      });
+        // Script específico para el botón de scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('Botón de scroll clickeado');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
     </script>
     <script src="responsive-fixes.js"></script>
 </body>
-</html>
 
+</html>
