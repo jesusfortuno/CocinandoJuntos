@@ -28,14 +28,26 @@ async function obtenerEstadisticas() {
             throw errorUsuarios;
         }
 
+        // Obtener total de comentarios
+        const { count: totalComentarios, error: errorComentarios } = await supabase
+            .from('comentarios')
+            .select('*', { count: 'exact', head: true });
+
+        if (errorComentarios) {
+            console.error('Error al obtener comentarios:', errorComentarios);
+            throw errorComentarios;
+        }
+
         // Actualizar los elementos en el DOM
         document.getElementById('total-recetas').textContent = recetas ? recetas.length : 0;
         document.getElementById('total-usuarios').textContent = totalUsuarios || 0;
+        document.getElementById('total-comentarios').textContent = totalComentarios || 0;
 
     } catch (error) {
         console.error('Error al obtener estadísticas:', error);
         document.getElementById('total-recetas').textContent = '0';
         document.getElementById('total-usuarios').textContent = '0';
+        document.getElementById('total-comentarios').textContent = '0';
     }
 }
 
