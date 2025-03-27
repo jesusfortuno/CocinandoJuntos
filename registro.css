@@ -5,9 +5,11 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f7f1e8; /* Fondo beige claro */
-  color: #5a3e2b; /* Color de texto marrón oscuro */
+  font-family: "Arial", sans-serif;
+  background-color: #f7f1e8;
+  /* Fondo beige claro */
+  color: #5a3e2b;
+  /* Color de texto marrón oscuro */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,10 +18,12 @@ body {
 
 .register-container {
   text-align: center;
-  border: 2px solid #c7a17a; /* Borde marrón claro */
+  border: 2px solid #c7a17a;
+  /* Borde marrón claro */
   padding: 40px;
   width: 450px;
-  background-color: #f3e4d6; /* Fondo más claro */
+  background-color: #f3e4d6;
+  /* Fondo más claro */
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -27,7 +31,8 @@ body {
 .title {
   margin-bottom: 20px;
   font-size: 1.8em;
-  color: #8c5a38; /* Marrón oscuro */
+  color: #8c5a38;
+  /* Marrón oscuro */
 }
 
 .logo-box {
@@ -46,11 +51,13 @@ body {
 
 label {
   text-align: left;
-  color: #8c5a38; /* Marrón oscuro */
+  color: #8c5a38;
+  /* Marrón oscuro */
   font-weight: bold;
 }
 
-input, select {
+input,
+select {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #c7a17a;
@@ -59,7 +66,8 @@ input, select {
   font-size: 1em;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: 2px solid #8c5a38;
 }
 
@@ -76,7 +84,8 @@ input:focus, select:focus {
 }
 
 .register-button:hover {
-  background-color: #8c5a38;
+  background-color: #d9c4a6;
+  color: #5a3e2b;
 }
 
 .logo img {
@@ -85,15 +94,21 @@ input:focus, select:focus {
   max-width: 100%;
 }
 
-.volver-container {
-  top: 105px;
-  right: 760px;
+/* Nuevo estilo para el botón de volver al inicio */
+.volver-inicio-btn {
+  display: block;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #a97c50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid #c7a17a;
+  font-weight: bold;
+  font-size: 1.1em;
 }
-.volver-container img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  position: fixed;
-  margin-left: 410px;
-  margin-top: -370px;
+
+.volver-inicio-btn:hover {
+  background-color: #d9c4a6;
+  color: #5a3e2b;
 }
