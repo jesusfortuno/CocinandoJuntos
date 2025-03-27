@@ -9,6 +9,13 @@ const translations = {
     "Buscar recetas...": "Buscar recetas...",
     "Iniciar Sesión": "Iniciar Sesión",
     "Cerrar Sesión": "Cerrar Sesión",
+    "Resultados para": "Resultados para",
+    "No se encontraron resultados": "No se encontraron resultados",
+    "Intenta con otra búsqueda": "Intenta con otra búsqueda",
+    Comida: "Comida",
+    Desayuno: "Desayuno",
+    "Dificultad:": "Dificultad:",
+    "Ver todas las recetas": "Ver todas las recetas",
 
     // Hero section
     "Cocinando Juntos": "Cocinando Juntos",
@@ -84,6 +91,13 @@ const translations = {
     "Buscar recetas...": "Cercar receptes...",
     "Iniciar Sesión": "Iniciar Sessió",
     "Cerrar Sesión": "Tancar Sessió",
+    "Resultados para": "Resultats per a",
+    "No se encontraron resultados": "No s'han trobat resultats",
+    "Intenta con otra búsqueda": "Intenta amb una altra cerca",
+    Comida: "Dinar",
+    Desayuno: "Esmorzar",
+    "Dificultad:": "Dificultat:",
+    "Ver todas las recetas": "Veure totes les receptes",
 
     // Hero section
     "Cocinando Juntos": "Cuinant Junts",
@@ -159,6 +173,13 @@ const translations = {
     "Buscar recetas...": "Search recipes...",
     "Iniciar Sesión": "Log In",
     "Cerrar Sesión": "Log Out",
+    "Resultados para": "Results for",
+    "No se encontraron resultados": "No results found",
+    "Intenta con otra búsqueda": "Try another search",
+    Comida: "Lunch",
+    Desayuno: "Breakfast",
+    "Dificultad:": "Difficulty:",
+    "Ver todas las recetas": "View all recipes",
 
     // Hero section
     "Cocinando Juntos": "Cooking Together",

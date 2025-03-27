@@ -19,21 +19,27 @@ function initializeSearchBar() {
   const searchButton = document.getElementById("search-button")
   const searchCloseButton = document.getElementById("search-close")
 
+  // Actualizar el placeholder según el idioma actual
+  updateSearchPlaceholder()
+
   // Mostrar resultados cuando se hace clic en el botón de búsqueda
   searchButton.addEventListener("click", () => {
-    if (searchResults.style.display === "block") {
+    if (searchInput.value.trim() === "") {
       searchResults.style.display = "none"
-    } else {
-      searchResults.style.display = "block"
-      searchInput.focus()
-      performSearch(searchInput.value)
+      return
     }
+
+    searchResults.style.display = "block"
+    searchInput.focus()
+    performSearch(searchInput.value)
   })
 
   // Cerrar resultados cuando se hace clic en el botón de cerrar
   if (searchCloseButton) {
     searchCloseButton.addEventListener("click", () => {
+      searchInput.value = ""
       searchResults.style.display = "none"
+      searchCloseButton.style.display = "none"
     })
   }
 
@@ -41,9 +47,11 @@ function initializeSearchBar() {
   searchInput.addEventListener("input", () => {
     if (searchInput.value.trim() === "") {
       searchResults.style.display = "none"
+      searchCloseButton.style.display = "none"
       return
     }
 
+    searchCloseButton.style.display = "block"
     searchResults.style.display = "block"
     performSearch(searchInput.value)
   })
@@ -58,6 +66,47 @@ function initializeSearchBar() {
       searchResults.style.display = "none"
     }
   })
+
+  // Escuchar cambios de idioma
+  document.addEventListener("languageChanged", (e) => {
+    updateSearchPlaceholder()
+
+    // Si hay una búsqueda activa, actualizar los resultados
+    if (searchInput.value.trim() !== "" && searchResults.style.display === "block") {
+      performSearch(searchInput.value)
+    }
+  })
+
+  // Inicialmente ocultar el botón de cerrar
+  if (searchCloseButton) {
+    searchCloseButton.style.display = "none"
+  }
+}
+
+// Función para actualizar el placeholder según el idioma
+function updateSearchPlaceholder() {
+  const searchInput = document.getElementById("search-input")
+  if (!searchInput) return
+
+  const language = getCurrentLanguage()
+  const placeholder = translate("Buscar recetas...", language)
+
+  if (placeholder) {
+    searchInput.placeholder = placeholder
+  }
+}
+
+// Función para obtener el idioma actual
+function getCurrentLanguage() {
+  return localStorage.getItem("language") || "es"
+}
+
+// Función para traducir texto
+function translate(text, language) {
+  if (!window.i18n || !window.i18n.translations || !window.i18n.translations[language]) {
+    return text
+  }
+  return window.i18n.translations[language][text] || text
 }
 
 // Modificar el mapeo de imágenes para incluir las rutas correctas
@@ -65,19 +114,33 @@ function getImagePath(titulo) {
   // Mapeo de títulos a rutas de imágenes
   const imageMap = {
     "Pollo Agridulce": "./Imagenes/China/pollo-agridulce.jpg",
+    "Sweet and Sour Chicken": "./Imagenes/China/pollo-agridulce.jpg", // Versión en inglés
+    "Pollastre Agredolç": "./Imagenes/China/pollo-agridulce.jpg", // Versión en catalán
     Paella: "./Imagenes/España/paella.png",
     "Crepas Dulces": "./Imagenes/Francia/crepas-dulces.jpg",
+    "Sweet Crepes": "./Imagenes/Francia/crepas-dulces.jpg", // Versión en inglés
+    "Creps Dolços": "./Imagenes/Francia/crepas-dulces.jpg", // Versión en catalán
     "Bizcocho Capuccino": "./Imagenes/Italia/bizcocho-capuccino.jpg",
+    "Cappuccino Cake": "./Imagenes/Italia/bizcocho-capuccino.jpg", // Versión en inglés
+    "Pastís de Capuccino": "./Imagenes/Italia/bizcocho-capuccino.jpg", // Versión en catalán
     "Arepa Venezolana": "./Imagenes/Venezuela/arepa-venezolana.jpg",
     "Galletas de Sésamo": "./Imagenes/China/galletas-de-sesamo.jpg",
+    "Sesame Cookies": "./Imagenes/China/galletas-de-sesamo.jpg", // Versión en inglés
+    "Galetes de Sèsam": "./Imagenes/China/galletas-de-sesamo.jpg", // Versión en catalán
     "Bolitas Chinas": "./Imagenes/China/bolitas-chinas.jpg",
     "Bollitos Chinos": "./Imagenes/China/bollitos-chinos.jpg",
+    "Chinese Buns": "./Imagenes/China/bollitos-chinos.jpg", // Versión en inglés
+    "Panets Xinesos": "./Imagenes/China/bollitos-chinos.jpg", // Versión en catalán
     "Fideos Salteados": "./Imagenes/China/fideos-salteados.jpg",
+    "Stir-Fried Noodles": "./Imagenes/China/fideos-salteados.jpg", // Versión en inglés
+    "Fideus Saltats": "./Imagenes/China/fideos-salteados.jpg", // Versión en catalán
     "Tortilla de Patatas": "./Imagenes/España/tortilla-patatas.jpeg",
     "Tacos Mexicanos": "./Imagenes/Mexico/tacos.jpg",
     "Smoothie de Frutas": "./Imagenes/Bebidas/smoothie.jpg",
     "Pasta al Pesto": "./Imagenes/Italia/pasta.jpg",
     "Batido Energético": "./Imagenes/Francia/coq-au-vin.jpg",
+    "Sopa Wonton": "./Imagenes/China/fideos-salteados.jpg",
+    "Wonton Soup": "./Imagenes/China/fideos-salteados.jpg", // Versión en inglés
     patata: "./Imagenes/España/tortilla-patatas.jpeg",
   }
 
@@ -120,11 +183,19 @@ function getRecipeUrl(receta) {
   // Mapeo de títulos específicos a URLs específicas
   const urlMap = {
     "pollo-agridulce": "./../US6_GuardarRecetas/pollo-agridulce.html",
+    "sweet-and-sour-chicken": "./../US6_GuardarRecetas/pollo-agridulce.html", // Versión en inglés
+    "pollastre-agredolc": "./../US6_GuardarRecetas/pollo-agridulce.html", // Versión en catalán
     paella: "./../US6_GuardarRecetas/paella.html",
     "crepas-dulces": "./../US6_GuardarRecetas/crepas-dulces.html",
+    "sweet-crepes": "./../US6_GuardarRecetas/crepas-dulces.html", // Versión en inglés
+    "creps-dolcos": "./../US6_GuardarRecetas/crepas-dulces.html", // Versión en catalán
     "bizcocho-capuccino": "./../US6_GuardarRecetas/bizcocho-capuccino.html",
+    "cappuccino-cake": "./../US6_GuardarRecetas/bizcocho-capuccino.html", // Versión en inglés
+    "pastis-de-capuccino": "./../US6_GuardarRecetas/bizcocho-capuccino.html", // Versión en catalán
     "arepa-venezolana": "./../US6_GuardarRecetas/arepa-venezolana.html",
     "galletas-de-sesamo": "./../US6_GuardarRecetas/galletas-de-sesamo.html",
+    "sesame-cookies": "./../US6_GuardarRecetas/galletas-de-sesamo.html", // Versión en inglés
+    "galetes-de-sesam": "./../US6_GuardarRecetas/galletas-de-sesamo.html", // Versión en catalán
     "tortilla-de-patatas": "./../US6_GuardarRecetas/tortilla-de-patatas.html",
     patata: "./../US6_GuardarRecetas/tortilla-de-patatas.html",
   }
@@ -142,11 +213,11 @@ function getRecipeUrl(receta) {
 function getDifficultyDots(dificultad) {
   let nivel = 0
 
-  if (dificultad === "Fácil") {
+  if (dificultad === "Fácil" || dificultad === "Easy" || dificultad === "Fàcil") {
     nivel = 1
-  } else if (dificultad === "Media") {
+  } else if (dificultad === "Media" || dificultad === "Medium" || dificultad === "Mitjana") {
     nivel = 2
-  } else if (dificultad === "Difícil") {
+  } else if (dificultad === "Difícil" || dificultad === "Hard" || dificultad === "Difícil") {
     nivel = 3
   }
 
@@ -173,6 +244,8 @@ async function performSearch(query) {
     return
   }
 
+  const language = getCurrentLanguage()
+
   try {
     // Buscar en la tabla recetas
     const { data: recetas, error } = await supabase
@@ -190,8 +263,8 @@ async function performSearch(query) {
     if (recetas && recetas.length > 0) {
       // Añadir un encabezado a los resultados
       const resultsHeader = document.createElement("div")
-      resultsHeader.classList.add("results-header")
-      resultsHeader.innerHTML = `<h3 style="text-align: center; margin-top: 20px;">Resultados para "${query}"</h3>`
+      resultsHeader.classList.add("search-results-header")
+      resultsHeader.textContent = `${translate("Resultados para", language)} "${query}"`
       searchResults.appendChild(resultsHeader)
 
       recetas.forEach((receta) => {
@@ -201,15 +274,19 @@ async function performSearch(query) {
         // Obtener imagen específica para esta receta
         const imageSrc = getImagePath(receta.titulo)
 
+        // Traducir categoría y dificultad
+        const categoriaTraducida = translate(receta.categoria, language) || receta.categoria
+        const dificultadTraducida = translate(receta.dificultad, language) || receta.dificultad
+
         // Obtener indicador visual de dificultad
         const difficultyDots = getDifficultyDots(receta.dificultad)
 
         resultItem.innerHTML = `
           <img src="${imageSrc}" alt="${receta.titulo}" class="result-image">
           <div class="result-info">
-            <span class="result-title">${receta.titulo}</span>
-            <span class="result-category">${receta.categoria || "Categoría no especificada"}</span>
-            <span class="result-difficulty">Dificultad: ${difficultyDots}</span>
+            <div class="result-title">${receta.titulo}</div>
+            <div class="result-category">${categoriaTraducida || "Categoría no especificada"}</div>
+            <div class="result-difficulty">${translate("Dificultad:", language)} ${difficultyDots}</div>
           </div>
         `
 
@@ -227,7 +304,7 @@ async function performSearch(query) {
       // Añadir botón "Ver Todo"
       const verTodoButton = document.createElement("div")
       verTodoButton.classList.add("ver-todo-button")
-      verTodoButton.innerHTML = '<i class="fas fa-list-ul"></i> Ver Todos los Resultados'
+      verTodoButton.textContent = translate("Ver todas las recetas", language)
       verTodoButton.addEventListener("click", () => {
         window.location.href = `./busqueda.html?q=${query}`
       })
@@ -238,8 +315,8 @@ async function performSearch(query) {
       noResults.classList.add("no-results")
       noResults.innerHTML = `
         <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px; color: #d4c3b5;"></i>
-        <p>No se encontraron resultados para "${query}"</p>
-        <p style="font-size: 13px; margin-top: 5px;">Intenta con otra búsqueda</p>
+        <p>${translate("No se encontraron resultados", language)} "${query}"</p>
+        <p style="font-size: 13px; margin-top: 5px;">${translate("Intenta con otra búsqueda", language)}</p>
       `
       searchResults.appendChild(noResults)
     }

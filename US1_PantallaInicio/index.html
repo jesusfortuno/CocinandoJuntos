@@ -18,8 +18,9 @@
             <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
         </a>
         <!-- Buscador con botón -->
+        <!-- Modificar el buscador para incluir el atributo data-i18n en el placeholder -->
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Buscar recetas...">
+            <input type="text" id="search-input" placeholder="Buscar recetas..." data-i18n="Buscar recetas...">
             <button id="search-button" type="button">
                 <i class="fas fa-search"></i>
             </button>
@@ -51,6 +52,8 @@
     <div class="overlay-menu" id="overlayMenu">
         <div class="overlay-content">
             <div class="close-btn" id="closeMenu">×</div>
+            <div class="menu-section">
+                <h3>Culturas Gast  id="closeMenu">×</div>
             <div class="menu-section">
                 <h3>Culturas Gastronómicas</h3>
                 <ul>
@@ -389,7 +392,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="index2.js"></script>
-    <!-- Modificar el script para manejar correctamente los tipos de usuario -->
+    <!-- Eliminar la referencia a search.js ya que ahora la funcionalidad está en index2.js -->
     <script>
     // Obtener el usuario desde localStorage
     const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -509,16 +512,8 @@
             }
         });
 
-            nextButton.addEventListener("click", () => {
-                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-                if (currentIndex < maxGroups) {
-                    currentIndex += 1;
-                    updateSliderPosition();
-                }
-            });
-
-            updateSliderPosition();
-        });
+        updateSliderPosition();
+    });
     </script>
 
     <!-- Asegurar que el script para el botón de scroll esté correctamente implementado -->

@@ -41,6 +41,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Actualizar elementos que podrían haberse generado después de la carga inicial
     // Por ejemplo, resultados de búsqueda, modales, etc.
 
+    // Actualizar el placeholder del buscador
+    const searchInput = document.getElementById("search-input")
+    if (searchInput && window.i18n.translations[language]["Buscar recetas..."]) {
+      searchInput.placeholder = window.i18n.translations[language]["Buscar recetas..."]
+    }
+
+    // Actualizar los resultados de búsqueda si están visibles
+    const searchResults = document.getElementById("search-results")
+    if (searchResults && searchResults.style.display !== "none") {
+      // Si hay un término de búsqueda activo, volver a ejecutar la búsqueda
+      const searchInput = document.getElementById("search-input")
+      if (searchInput && searchInput.value.trim()) {
+        // Disparar un evento de búsqueda para actualizar los resultados
+        const event = new Event("input")
+        searchInput.dispatchEvent(event)
+      }
+    }
+
     // Ejemplo: actualizar elementos generados dinámicamente en el slider
     const recipeCards = document.querySelectorAll(".recipe-card")
     recipeCards.forEach((card) => {
