@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fideos Salteados - Cocinando Juntos</title>
+    <title>Pan con Tomate - Cocinando Juntos</title>
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -12,7 +11,6 @@
     <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
     <nav>
         <a href="../US1_PantallaInicio/index.html">
@@ -36,19 +34,19 @@
     <main>
         <div class="breadcrumb">
             <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                href="./../US1_PantallaInicio/cultura-china.html">Cultura China</a> > Fideos Salteados
+                href="./../US1_PantallaInicio/cultura-española.html">Cultura Española</a> > Pan con Tomate
         </div>
 
         <div class="recipe-title">
-            <h1>Fideos Salteados<span class="recipe-rating" id="recipeRating"></span></h1>
+            <h1>Pan con Tomate<span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
         <div class="recipe-main-content">
             <!-- Columna izquierda: Foto principal y carrusel debajo -->
             <div class="recipe-left-column">
                 <div class="recipe-photo">
-                    <a href="./Imagenes/China/fideos-salteados.jpg" target="_blank">
-                        <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados"
+                    <a href="./Imagenes/España/pan-tomate.jpg" target="_blank">
+                        <img src="./Imagenes/España/pan-tomate.jpg" alt="Pan con Tomate"
                             style="aspect-ratio: 1024/576; object-fit: cover;">
                     </a>
                 </div>
@@ -56,20 +54,20 @@
                 <!-- Carrusel de imágenes debajo de la foto principal -->
                 <div class="image-carousel-container">
                     <div class="image-thumbnails" id="imageThumbnails">
-                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/China/fideos-salteados.jpg">
-                            <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados 1">
+                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/España/pan-tomate.jpg">
+                            <img src="./Imagenes/España/pan-tomate.jpg" alt="Pan con Tomate 1">
                         </div>
-                        <div class="thumbnail" data-index="1" data-src="./Imagenes/China/fideos-salteados2.jpg">
-                            <img src="./Imagenes/China/fideos-salteados2.jpg" alt="Fideos Salteados 2">
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/España/pan-tomate2.jpg">
+                            <img src="./Imagenes/España/pan-tomate2.jpg" alt="Pan con Tomate 2">
                         </div>
-                        <div class="thumbnail" data-index="2" data-src="./Imagenes/China/fideos-salteados3.jpg">
-                            <img src="./Imagenes/China/fideos-salteados3.jpg" alt="Fideos Salteados 3">
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/España/pan-tomate3.jpg">
+                            <img src="./Imagenes/España/pan-tomate3.jpg" alt="Pan con Tomate 3">
                         </div>
-                        <div class="thumbnail" data-index="3" data-src="./Imagenes/China/fideos-salteados4.jpg">
-                            <img src="./Imagenes/China/fideos-salteados4.jpg" alt="Fideos Salteados 4">
+                        <div class="thumbnail" data-index="3" data-src="./Imagenes/España/pan-tomate4.jpg">
+                            <img src="./Imagenes/España/pan-tomate4.jpg" alt="Pan con Tomate 4">
                         </div>
-                        <div class="thumbnail" data-index="4" data-src="./Imagenes/China/fideos-salteados5.jpeg">
-                            <img src="./Imagenes/China/fideos-salteados5.jpeg" alt="Fideos Salteados 5">
+                        <div class="thumbnail" data-index="4" data-src="./Imagenes/España/pan-tomate5.jpg">
+                            <img src="./Imagenes/España/pan-tomate5.jpg" alt="Pan con Tomate 5">
                         </div>
                     </div>
                 </div>
@@ -80,12 +78,12 @@
                 <div class="recipe-info">
                     <div class="recipe-tags">
                         <span class="tag">Dificultad: Fácil</span>
-                        <span class="tag">Tiempo: 40 min</span>
-                        <span class="tag">Categoría: Cena</span>
+                        <span class="tag">Tiempo: 15 min</span>
+                        <span class="tag">Categoría: Desayuno</span>
                     </div>
 
                     <div class="recipe-actions">
-                        <button class="button favorite-btn" data-receta-id="8">❤️ Añadir a Favoritos</button>
+                        <button class="button favorite-btn" data-receta-id="13">❤️ Añadir a Favoritos</button>
                         <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                     </div>
                 </div>
@@ -107,33 +105,20 @@
             <div class="recipe-ingredients">
                 <h2>Ingredientes</h2>
                 <ul>
-                    <li>300 g de tallarines</li>
-                    <li>1 pimiento rojo</li>
-                    <li>1 pimiento verde</li>
-                    <li>1 ajete fresco</li>
-                    <li>4 cs de salsa de soja</li>
-                    <li>2 cs salsa de ostras</li>
-                    <li>2 cs de vinagre negro chino (se puede sustituir por vinagre balsámico)</li>
-                    <li>1 cucharadita de azúcar</li>
-                    <li>Pimienta blanca</li>
-                    <li>Aceite de girasol</li>
-                    <li>400 g de filetes de lomo de cerdo</li>
-                    <li>1 cs de salsa de soja</li>
-                    <li>1 cs de salsa de ostras</li>
-                    <li>1 cs de maicena</li>
-                    <li>Pimienta blanca</li>
+                    <li>Pan de hogaza rebanadas</li>
+                    <li>2 Tomates muy maduros</li>
+                    <li>Aceite de oliva virgen extra</li>
+                    <li>2 Dientes de ajo</li>
+                    <li>Sal</li>
                 </ul>
             </div>
 
             <div class="recipe-steps">
                 <h2>Pasos para la Receta</h2>
                 <ol>
-                    <li>Prepara el cerdo marinado para los tallarines salteados chinos. Para el marinado, corta los filetes en tiras finas y ponlas en un bol.  Añade la maicena, la salsa de soja, la salsa de ostras, la pimienta blanca y el azúcar. Mezcla bien hasta que esté todo bien impregnado. Tapa con film transparente y deja reposar durante 20 minutos.</li>
-                    <li>Cuece la pasta en abundante agua hirviendo tal y como indique el fabricante en el envase.</li>
-                    <li>Prepara la salsa. En un bol, mezcla la salsa de ostras, la salsa de soja, el vinagre, el azúcar y un poco de pimienta blanca y reserva.</li>
-                    <li>Pica bien finito la parte blanca de los ajetes y reserva la parte verde para decorar. Corta los pimientos verde y rojo bien limpios y sin pepitas en tiras no muy gruesas de más o menos en mismo tamaño.</li>
-                    <li>Cocina rodo junto. En una sartén amplia con un chorro de aceite, cocina los ajetes hasta que empiecen a tomar color. Añade la carne de cerdo marinada y cocina hasta que esté hecha. Incorpora los pimientos y saltea todo junto un par de minutos. Vierte los tallarines y la salsa que has preparado antes y saltea todo junto hasta que esté bien mezclado y caliente.</li>
-                    <li>Añade la parte verde de los ajetes picada a la sartén y sirve recién hecho.</li>
+                    <li>Tostar las rebanadas de pan en un tostador, o plancha u horno con grill, para que quede tostado por fuera y aún con miga jugosa por dentro.</li>
+                    <li>Cortar los ajos por la mitad. Cortar los tomates por la mitad. En cada rebanada, restregar el medio ajo sobre el pan crujiente.</li>
+                    <li>Restregar después medio tomate en cada rebanada cubriendo perfectamente la superficie con tomate y añadir un chorro de aceite y una pizca de sal en escamas.</li>
                 </ol>
             </div>
         </div>
@@ -151,11 +136,11 @@
             </div>
         </div>
     </main>
-
     <footer>
         <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
 
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script type="module" src="../favoritos.js"></script>
     <script type="module" src="../valorar.js"></script>
     <script>
@@ -212,39 +197,6 @@
             e.preventDefault();
             localStorage.removeItem('usuario');
             window.location.href = '../login.html';
-        });
-
-        // Ensure all carousel images have the same aspect ratio and are clickable
-        document.addEventListener('DOMContentLoaded', function () {
-            const mainImageContainer = document.querySelector('.recipe-photo');
-            const mainImage = mainImageContainer.querySelector('img');
-            const thumbnails = document.querySelectorAll('.thumbnail');
-
-            // Set aspect ratio for all images
-            const allImages = document.querySelectorAll('.recipe-photo img, .thumbnail img');
-            allImages.forEach(img => {
-                img.style.aspectRatio = '1024/576';
-                img.style.objectFit = 'cover';
-            });
-
-            // Handle thumbnail clicks
-            thumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', function () {
-                    // Update active state
-                    thumbnails.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Get image source
-                    const imgSrc = this.getAttribute('data-src');
-
-                    // Update main image
-                    mainImage.src = imgSrc;
-
-                    // Update link href
-                    const mainImageLink = mainImageContainer.querySelector('a');
-                    mainImageLink.href = imgSrc;
-                });
-            });
         });
     </script>
 </body>

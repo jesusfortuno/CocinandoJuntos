@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fideos Salteados - Cocinando Juntos</title>
+    <title>Coq au Vin - Cocinando Juntos</title>
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -36,19 +36,19 @@
     <main>
         <div class="breadcrumb">
             <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                href="./../US1_PantallaInicio/cultura-china.html">Cultura China</a> > Fideos Salteados
+                href="./../US1_PantallaInicio/cultura-francesa.html">Cultura Francesa</a> > Coq au Vin
         </div>
 
         <div class="recipe-title">
-            <h1>Fideos Salteados<span class="recipe-rating" id="recipeRating"></span></h1>
+            <h1>Coq au Vin<span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
         <div class="recipe-main-content">
             <!-- Columna izquierda: Foto principal y carrusel debajo -->
             <div class="recipe-left-column">
                 <div class="recipe-photo">
-                    <a href="./Imagenes/China/fideos-salteados.jpg" target="_blank">
-                        <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados"
+                    <a href="./Imagenes/Francia/coq-au-vin.jpg" target="_blank">
+                        <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Coq au Vin"
                             style="aspect-ratio: 1024/576; object-fit: cover;">
                     </a>
                 </div>
@@ -56,20 +56,20 @@
                 <!-- Carrusel de imágenes debajo de la foto principal -->
                 <div class="image-carousel-container">
                     <div class="image-thumbnails" id="imageThumbnails">
-                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/China/fideos-salteados.jpg">
-                            <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados 1">
+                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/Francia/coq-au-vin.jpg">
+                            <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="Coq au Vin 1">
                         </div>
-                        <div class="thumbnail" data-index="1" data-src="./Imagenes/China/fideos-salteados2.jpg">
-                            <img src="./Imagenes/China/fideos-salteados2.jpg" alt="Fideos Salteados 2">
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/Francia/coq-au-vin2.jpg">
+                            <img src="./Imagenes/Francia/coq-au-vin2.jpg" alt="Coq au Vin 2">
                         </div>
-                        <div class="thumbnail" data-index="2" data-src="./Imagenes/China/fideos-salteados3.jpg">
-                            <img src="./Imagenes/China/fideos-salteados3.jpg" alt="Fideos Salteados 3">
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/Francia/coq-au-vin3.jpg">
+                            <img src="./Imagenes/Francia/coq-au-vin3.jpg" alt="Coq au Vin 3">
                         </div>
-                        <div class="thumbnail" data-index="3" data-src="./Imagenes/China/fideos-salteados4.jpg">
-                            <img src="./Imagenes/China/fideos-salteados4.jpg" alt="Fideos Salteados 4">
+                        <div class="thumbnail" data-index="3" data-src="./Imagenes/Francia/coq-au-vin4.jpg">
+                            <img src="./Imagenes/Francia/coq-au-vin4.jpg" alt="Coq au Vin 4">
                         </div>
-                        <div class="thumbnail" data-index="4" data-src="./Imagenes/China/fideos-salteados5.jpeg">
-                            <img src="./Imagenes/China/fideos-salteados5.jpeg" alt="Fideos Salteados 5">
+                        <div class="thumbnail" data-index="4" data-src="./Imagenes/Francia/coq-au-vin5.jpeg">
+                            <img src="./Imagenes/Francia/coq-au-vin5.jpeg" alt="Coq au Vin 5">
                         </div>
                     </div>
                 </div>
@@ -79,13 +79,13 @@
             <div class="recipe-center-column">
                 <div class="recipe-info">
                     <div class="recipe-tags">
-                        <span class="tag">Dificultad: Fácil</span>
-                        <span class="tag">Tiempo: 40 min</span>
-                        <span class="tag">Categoría: Cena</span>
+                        <span class="tag">Dificultad: Media</span>
+                        <span class="tag">Tiempo: 2h 45 min</span>
+                        <span class="tag">Categoría: Comida</span>
                     </div>
 
                     <div class="recipe-actions">
-                        <button class="button favorite-btn" data-receta-id="8">❤️ Añadir a Favoritos</button>
+                        <button class="button favorite-btn" data-receta-id="14">❤️ Añadir a Favoritos</button>
                         <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                     </div>
                 </div>
@@ -107,33 +107,50 @@
             <div class="recipe-ingredients">
                 <h2>Ingredientes</h2>
                 <ul>
-                    <li>300 g de tallarines</li>
-                    <li>1 pimiento rojo</li>
-                    <li>1 pimiento verde</li>
-                    <li>1 ajete fresco</li>
-                    <li>4 cs de salsa de soja</li>
-                    <li>2 cs salsa de ostras</li>
-                    <li>2 cs de vinagre negro chino (se puede sustituir por vinagre balsámico)</li>
-                    <li>1 cucharadita de azúcar</li>
-                    <li>Pimienta blanca</li>
-                    <li>Aceite de girasol</li>
-                    <li>400 g de filetes de lomo de cerdo</li>
-                    <li>1 cs de salsa de soja</li>
-                    <li>1 cs de salsa de ostras</li>
-                    <li>1 cs de maicena</li>
-                    <li>Pimienta blanca</li>
+                    <li>140 g de dados pequeños de zanahoria</li>
+                    <li>250 g de cebollas troceadas finamente</li>
+                    <li>60 g de chalotas troceadas finamente</li>
+                    <li>2 dientes de ajo machacados</li>
+                    <li>400 ml de fondo claro de pollo o ternera</li>
+                    <li>1500 ml de vino tinto</li>
+                    <li>Un bouquet garní de perejil, laurel y tomillo fresco</li>
+                    <li>Mantequilla clarificada o aceite de oliva</li>
+                    <li>300 g de champiñones pequeños</li>
+                    <li>12 cebollitas francesas</li>
+                    <li>150 g de zanahorias torneadas o en rodajas para decorar (opcional)</li>
+                    <li>300 ml de fondo claro</li>
+                    <li>1 o 2 cucharadas de azúcar</li>
+                    <li>Sal y pimienta negra recién molida al gusto</li>
+                    <li>Aceite de oliva virgen o mantequilla clarificada</li>
+                    <li>Un chorrito de vinagre de vino</li>
+                    <li>Un pollo troceado de un kilo y medio de peso</li>
+                    <li>Harina para rebozar el pollo</li>
+                    <li>200 g de panceta en bastones</li>
+                    <li>125 ml de aceite de oliva o mantequilla clarificada</li>
+                    <li>60 ml de coñac o brandy</li>
+                    <li>Sal y pimienta negra recién molida</li>
+                    <li>Una pizca de azúcar</li>
+                    <li>Un chorrito de vinagre o zumo de limón</li>
                 </ul>
             </div>
 
             <div class="recipe-steps">
                 <h2>Pasos para la Receta</h2>
                 <ol>
-                    <li>Prepara el cerdo marinado para los tallarines salteados chinos. Para el marinado, corta los filetes en tiras finas y ponlas en un bol.  Añade la maicena, la salsa de soja, la salsa de ostras, la pimienta blanca y el azúcar. Mezcla bien hasta que esté todo bien impregnado. Tapa con film transparente y deja reposar durante 20 minutos.</li>
-                    <li>Cuece la pasta en abundante agua hirviendo tal y como indique el fabricante en el envase.</li>
-                    <li>Prepara la salsa. En un bol, mezcla la salsa de ostras, la salsa de soja, el vinagre, el azúcar y un poco de pimienta blanca y reserva.</li>
-                    <li>Pica bien finito la parte blanca de los ajetes y reserva la parte verde para decorar. Corta los pimientos verde y rojo bien limpios y sin pepitas en tiras no muy gruesas de más o menos en mismo tamaño.</li>
-                    <li>Cocina rodo junto. En una sartén amplia con un chorro de aceite, cocina los ajetes hasta que empiecen a tomar color. Añade la carne de cerdo marinada y cocina hasta que esté hecha. Incorpora los pimientos y saltea todo junto un par de minutos. Vierte los tallarines y la salsa que has preparado antes y saltea todo junto hasta que esté bien mezclado y caliente.</li>
-                    <li>Añade la parte verde de los ajetes picada a la sartén y sirve recién hecho.</li>
+                    <li>Rehogamos, en una olla alta para caldos, los dados de zanahoria, las cebollas, las chalotas y los dientes de ajo con un poco de aceite de oliva.</li>
+                    <li>Añadimos el fondo de ternera o pollo, mezclamos muy bien y añadimos el vino junto con el bouquet garni cuando empiece a hervir. Dejamos cocer a fuego medio hasta que se haya reducido la mitad. Reservamos hasta la hora de guisar el coq au vin.</li>
+                    <li>Calentamos un poco de aceite de oliva o mantequilla clarificada en una sartén y salteamos los champiñones hasta que tomen color. Los retiramos de la sartén y los reservamos.</li>
+                    <li>Calentamos abundante agua y cuando empiece a hervir añadimos las cebollitas francesas. Las dejamos en el agua un minuto aproximadamente, las escurrimos y las metemos en un cuenco con agua fría -de esta manera podremos pelarlas más fácilmente.</li>
+                    <li>Colocamos las cebollitas, y las zanahorias para decorar si las usamos, dentro de un cazo mediano, añadimos el caldo y llevamos a ebullición. Bajamos el fuego al mínimo y dejamos que se evapore casi completamente el caldo.</li>
+                    <li>Agregamos las cucharadas de azúcar y, cuando las verduras estén brillantes y hayan tomado color, retiramos del fuego y reservamos.</li>
+                    <li>Calentamos un poco de aceite de oliva en una cocotte y freímos los bastones de panceta sin que lleguen a dorarse demasiado. Los retiramos con una espumadera y los ponemos sobre papel de cocina para eliminar el exceso de grasa. Reservamos junto con las guarniciones.</li>
+                    <li>Pasamos el pollo por harina rápidamente -no debemos dejar las piezas de pollo reposar sobre la harina ya que el gluten empieza a desarrollarse y se formarán pegotes en la carne- y lo sellamos en la misma cocotte hasta que esté dorado por todos los lados.</li>
+                    <li>Cubrimos el pollo con el fondo de vino y llevamos a ebullición. Cuando empiece a hervir tapamos y bajamos el fuego al mínimo. Dejamos hervir durante media hora aproximadamente.</li>
+                    <li>Retiramos el bouquet garni, escurrimos el pollo y lo reservamos en un cuenco.</li>
+                    <li>Pasamos toda la salsa por un procesador de alimentos o por batidora de mano (minipimer).</li>
+                    <li>Vertemos la salsa licuada nuevamente en la cocotte, añadimos el coñac o el brandy caliente y flambeamos. Añadimos los champiñones, las cebollitas francesas y la panceta en bastones. Hervimos a fuego bajo durante cinco minutos aproximadamente.</li>
+                    <li>Añadimos el pollo y mezclamos con cuidado con una cuchara o espátula. Dejamos que hierva un poco y condimentamos al gusto con sal, pimienta negra molida, una pizca de azúcar y un chorrito de vinagre o zumo de limón.</li>
+                    <li>Servimos el guiso decorado con las zanahorias glaseadas y unas ramitas de orégano fresco -si lo servimos al día siguiente el guiso estará mucho mejor-.</li>
                 </ol>
             </div>
         </div>
@@ -151,11 +168,11 @@
             </div>
         </div>
     </main>
-
     <footer>
         <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
 
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script type="module" src="../favoritos.js"></script>
     <script type="module" src="../valorar.js"></script>
     <script>

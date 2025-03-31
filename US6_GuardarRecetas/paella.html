@@ -23,30 +23,60 @@
         <input type="text" class="search-bar" placeholder="Buscar recetas...">
 
         <div id="user-info" class="user-info" style="display: none;">
-            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
+                class="user-icon">
             <a href="../US7_PaginaDeUsuario/usuario.html"><span id="user-name">Nombre del Usuario</span></a>
             <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
         </div>
 
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
         <div class="menu-icon">☰</div>
-    </nav>   
+    </nav>
 
     <main>
         <div class="breadcrumb">
-            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a href="./../US1_PantallaInicio/cultura-española.html">Cultura Española</a> > Paella
+            <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
+                href="./../US1_PantallaInicio/cultura-española.html">Cultura Española</a> > Paella
         </div>
 
         <div class="recipe-title">
-            <h1>Paella</h1>
+            <h1>Paella<span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
-        <div class="recipe-wrapper">
-            <div class="recipe-photo">
-                <img src="./Imagenes/España/paella.png" alt="Paella">
+        <div class="recipe-main-content">
+            <!-- Columna izquierda: Foto principal y carrusel debajo -->
+            <div class="recipe-left-column">
+                <div class="recipe-photo">
+                    <a href="./Imagenes/España/paella.png" target="_blank">
+                        <img src="./Imagenes/España/paella.png" alt="Pollo Agridulce"
+                            style="aspect-ratio: 1024/576; object-fit: cover;">
+                    </a>
+                </div>
+
+                <!-- Carrusel de imágenes debajo de la foto principal -->
+                <div class="image-carousel-container">
+                    <div class="image-thumbnails" id="imageThumbnails">
+                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/España/paella.png">
+                            <img src="./Imagenes/España/paella.png" alt="Pollo Agridulce 1">
+                        </div>
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/España/paella2.png">
+                            <img src="./Imagenes/España/paella2.png" alt="Pollo Agridulce 2">
+                        </div>
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/España/paella3.png">
+                            <img src="./Imagenes/España/paella3.png" alt="Pollo Agridulce 3">
+                        </div>
+                        <div class="thumbnail" data-index="3" data-src="./Imagenes/España/paella4.png">
+                            <img src="./Imagenes/España/paella4.png" alt="Pollo Agridulce 4">
+                        </div>
+                        <div class="thumbnail" data-index="4" data-src="./Imagenes/España/paella5.png">
+                            <img src="./Imagenes/España/paella5.png" alt="Pollo Agridulce 5">
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="recipe-details-container">
+            <!-- Columna central: Información de la receta -->
+            <div class="recipe-center-column">
                 <div class="recipe-info">
                     <div class="recipe-tags">
                         <span class="tag">Dificultad: Difícil</span>
@@ -60,8 +90,18 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Columna derecha: Video de la receta -->
+            <div class="recipe-right-column">
+                <div class="recipe-video">
+                    <iframe id="recipeVideo" width="96%" height="223" src="https://www.youtube.com/embed/bCSRaJQ2P7c"
+                        title="Pollo Agridulce Chino - Muve Flavors" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
         </div>
-        
         
         <div class="recipe-container">
             <div class="recipe-ingredients">

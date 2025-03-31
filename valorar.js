@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
+  // En la función obtenerIdReceta(), actualiza el mapeo de rutas para incluir la ruta actual
   function obtenerIdReceta() {
     // Obtener el nombre del archivo actual
     const rutaActual = window.location.pathname
@@ -88,10 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
       "/US6_GuardarRecetas/crepas-dulces.html": 3,
       "/US6_GuardarRecetas/bizcocho-capuccino.html": 4,
       "/US6_GuardarRecetas/arepa-venezolana.html": 5,
+      "/US6_GuardarRecetas/galletas-de-sesamo.html": 6,
       "/US6_GuardarRecetas/galleta-de-sesamo.html": 6,
       "/US6_GuardarRecetas/bollitos-chinos.html": 7,
       "/US6_GuardarRecetas/fideos-salteados.html": 8,
       "/US6_GuardarRecetas/tortilla-de-patatas.html": 9,
+      "/US6_GuardarRecetas/churros-chocolate.html": 12, 
+      "/US6_GuardarRecetas/pan-con-tomate.html": 13,
+      "/US6_GuardarRecetas/coq-au-vin.html": 14,
+      "/US6_GuardarRecetas/quiche-lorraine.html": 15,
+      "/US6_GuardarRecetas/tostada-francesa.html": 16,
     }
 
     // Encontrar el ID correspondiente a la ruta actual
@@ -99,6 +106,27 @@ document.addEventListener("DOMContentLoaded", () => {
       if (rutaActual.includes(ruta) || rutaActual.endsWith(ruta)) {
         return id
       }
+    }
+
+    // Si no se encuentra en el mapeo, intentar extraer el nombre de la receta de la URL
+    const nombreReceta = rutaActual.split("/").pop().replace(".html", "")
+
+    // Mapeo de nombres de archivo a IDs
+    const mapeoNombres = {
+      "pollo-agridulce": 1,
+      "paella": 2,
+      "crepas-dulces": 3,
+      "bizcocho-capuccino": 4,
+      "arepa-venezolana": 5,
+      "galletas-de-sesamo": 6,
+      "galleta-de-sesamo": 6,
+      "bolitas-chinas": 7,
+      "fideos-salteados": 8,
+      "tortilla-de-patatas": 9,
+    }
+
+    if (mapeoNombres[nombreReceta]) {
+      return mapeoNombres[nombreReceta]
     }
 
     console.error("No se pudo determinar el ID de la receta para la ruta:", rutaActual)

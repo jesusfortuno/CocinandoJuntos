@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fideos Salteados - Cocinando Juntos</title>
+    <title>Quiche Lorraine - Cocinando Juntos</title>
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -12,7 +11,6 @@
     <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
     <nav>
         <a href="../US1_PantallaInicio/index.html">
@@ -32,23 +30,22 @@
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
         <div class="menu-icon">☰</div>
     </nav>
-
     <main>
         <div class="breadcrumb">
             <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                href="./../US1_PantallaInicio/cultura-china.html">Cultura China</a> > Fideos Salteados
+                href="./../US1_PantallaInicio/cultura-francesa.html">Cultura Francesa</a> > Quiche Lorraine
         </div>
 
         <div class="recipe-title">
-            <h1>Fideos Salteados<span class="recipe-rating" id="recipeRating"></span></h1>
+            <h1>Quiche Lorraine<span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
         <div class="recipe-main-content">
             <!-- Columna izquierda: Foto principal y carrusel debajo -->
             <div class="recipe-left-column">
                 <div class="recipe-photo">
-                    <a href="./Imagenes/China/fideos-salteados.jpg" target="_blank">
-                        <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados"
+                    <a href="./Imagenes/Francia/quiche-lorraine.pn.webp" target="_blank">
+                        <img src="./Imagenes/Francia/quiche-lorraine.pn.webp" alt="Quiche Lorraine"
                             style="aspect-ratio: 1024/576; object-fit: cover;">
                     </a>
                 </div>
@@ -56,20 +53,20 @@
                 <!-- Carrusel de imágenes debajo de la foto principal -->
                 <div class="image-carousel-container">
                     <div class="image-thumbnails" id="imageThumbnails">
-                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/China/fideos-salteados.jpg">
-                            <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados 1">
+                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/Francia/quiche-lorraine.pn.webp">
+                            <img src="./Imagenes/Francia/quiche-lorraine.pn.webp" alt="Quiche Lorraine 1">
                         </div>
-                        <div class="thumbnail" data-index="1" data-src="./Imagenes/China/fideos-salteados2.jpg">
-                            <img src="./Imagenes/China/fideos-salteados2.jpg" alt="Fideos Salteados 2">
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/Francia/quiche-lorraine2.pn.webp">
+                            <img src="./Imagenes/Francia/quiche-lorraine2.pn.webp" alt="Quiche Lorraine 2">
                         </div>
-                        <div class="thumbnail" data-index="2" data-src="./Imagenes/China/fideos-salteados3.jpg">
-                            <img src="./Imagenes/China/fideos-salteados3.jpg" alt="Fideos Salteados 3">
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/Francia/quiche-lorraine3.pn.webp">
+                            <img src="./Imagenes/Francia/quiche-lorraine3.pn.webp" alt="Quiche Lorraine 3">
                         </div>
-                        <div class="thumbnail" data-index="3" data-src="./Imagenes/China/fideos-salteados4.jpg">
-                            <img src="./Imagenes/China/fideos-salteados4.jpg" alt="Fideos Salteados 4">
+                        <div class="thumbnail" data-index="3" data-src="./Imagenes/Francia/quiche-lorraine4.pn.webp">
+                            <img src="./Imagenes/Francia/quiche-lorraine4.pn.webp" alt="Quiche Lorraine 4">
                         </div>
-                        <div class="thumbnail" data-index="4" data-src="./Imagenes/China/fideos-salteados5.jpeg">
-                            <img src="./Imagenes/China/fideos-salteados5.jpeg" alt="Fideos Salteados 5">
+                        <div class="thumbnail" data-index="4" data-src="./Imagenes/Francia/quiche-lorraine5.pn.webp">
+                            <img src="./Imagenes/Francia/quiche-lorraine5.pn.webp" alt="Quiche Lorraine 5">
                         </div>
                     </div>
                 </div>
@@ -79,13 +76,13 @@
             <div class="recipe-center-column">
                 <div class="recipe-info">
                     <div class="recipe-tags">
-                        <span class="tag">Dificultad: Fácil</span>
-                        <span class="tag">Tiempo: 40 min</span>
-                        <span class="tag">Categoría: Cena</span>
+                        <span class="tag">Dificultad: Media</span>
+                        <span class="tag">Tiempo: 1h</span>
+                        <span class="tag">Categoría: Comida</span>
                     </div>
 
                     <div class="recipe-actions">
-                        <button class="button favorite-btn" data-receta-id="8">❤️ Añadir a Favoritos</button>
+                        <button class="button favorite-btn" data-receta-id="15">❤️ Añadir a Favoritos</button>
                         <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                     </div>
                 </div>
@@ -107,37 +104,38 @@
             <div class="recipe-ingredients">
                 <h2>Ingredientes</h2>
                 <ul>
-                    <li>300 g de tallarines</li>
-                    <li>1 pimiento rojo</li>
-                    <li>1 pimiento verde</li>
-                    <li>1 ajete fresco</li>
-                    <li>4 cs de salsa de soja</li>
-                    <li>2 cs salsa de ostras</li>
-                    <li>2 cs de vinagre negro chino (se puede sustituir por vinagre balsámico)</li>
-                    <li>1 cucharadita de azúcar</li>
+                    <li>250 g de harina de trigo</li>
+                    <li>125 g de mantequilla fría</li>
+                    <li>1 pizca de sal</li>
+                    <li>1 yema de huevo</li>
+                    <li>2 cucharadas de agua helada</li>
+                    <li>200 g de bacon ahumado</li>
+                    <li>500 ml de nata para cocinar</li>
+                    <li>3 huevos</li>
+                    <li>150 g de queso emmental</li>
+                    <li>Sal</li>
                     <li>Pimienta blanca</li>
-                    <li>Aceite de girasol</li>
-                    <li>400 g de filetes de lomo de cerdo</li>
-                    <li>1 cs de salsa de soja</li>
-                    <li>1 cs de salsa de ostras</li>
-                    <li>1 cs de maicena</li>
-                    <li>Pimienta blanca</li>
+                    <li>Nuez moscada recién rallada</li>
                 </ul>
             </div>
 
             <div class="recipe-steps">
                 <h2>Pasos para la Receta</h2>
                 <ol>
-                    <li>Prepara el cerdo marinado para los tallarines salteados chinos. Para el marinado, corta los filetes en tiras finas y ponlas en un bol.  Añade la maicena, la salsa de soja, la salsa de ostras, la pimienta blanca y el azúcar. Mezcla bien hasta que esté todo bien impregnado. Tapa con film transparente y deja reposar durante 20 minutos.</li>
-                    <li>Cuece la pasta en abundante agua hirviendo tal y como indique el fabricante en el envase.</li>
-                    <li>Prepara la salsa. En un bol, mezcla la salsa de ostras, la salsa de soja, el vinagre, el azúcar y un poco de pimienta blanca y reserva.</li>
-                    <li>Pica bien finito la parte blanca de los ajetes y reserva la parte verde para decorar. Corta los pimientos verde y rojo bien limpios y sin pepitas en tiras no muy gruesas de más o menos en mismo tamaño.</li>
-                    <li>Cocina rodo junto. En una sartén amplia con un chorro de aceite, cocina los ajetes hasta que empiecen a tomar color. Añade la carne de cerdo marinada y cocina hasta que esté hecha. Incorpora los pimientos y saltea todo junto un par de minutos. Vierte los tallarines y la salsa que has preparado antes y saltea todo junto hasta que esté bien mezclado y caliente.</li>
-                    <li>Añade la parte verde de los ajetes picada a la sartén y sirve recién hecho.</li>
+                    <li>Para hacer la masa, ponemos en un bol amplio 250 g de harina de trigo junto con 125 g de mantequilla fría cortada en tacos y 1 pizca de sal. Trabajamos los ingredientes con las yemas de los dedos hasta que adquieran una textura arenosa, antes de añadir el resto de los ingredientes.</li>
+                    <li>Añadimos 1 yema de huevo y 2 cucharadas de agua helada. Mezclamos los ingredientes hasta integrarlos todos sin trabajar demasiado la masa, es suficiente con que la masa se despegue del bol.</li>
+                    <li>Envolvemos la masa con papel film y la llevamos a la nevera 30 minutos.</li>
+                    <li>Pasado este tiempo, sacamos la masa de la nevera, la estiramos con ayuda de un rodillo y la colocamos sobre un molde redondo de unos 24 cm de diámetro, previamente engrasado con mantequilla y harina para evitar que se peque la masa. Ponemos sobre la masa papel de horno y sobre el papel, algún peso para evitar que la masa suba como legumbres o, en nuestro caso, bolitas de cerámica específicas para esta función. A continuación, horneamos la base de masa durante 10 minutos a 180 ºC con calor arriba y abajo.</li>
+                    <li>Para el relleno, cortamos en tacos regulares 200 g de bacon ahumado.</li>
+                    <li>Salteamos el bacon en una sartén a fuego medio-alto durante unos minutos, hasta que quede dorado.</li>
+                    <li>Batimos en un bol 500 ml de nata para cocinar con 3 huevos.</li>
+                    <li>Rallamos 150 g de queso emmental.</li>
+                    <li>Mezclamos bien todos los ingredientes del relleno y lo sazonamos con sal, pimienta blanca y un poco de nuez moscada recién rallada. Pasado el tiempo de horneado, retiramos la masa del horno, quitamos el peso y vertemos el relleno sobre la masa quebrada.</li>
+                    <li>Horneamos la quiche durante 30 minutos a 180 ºC con calor arriba y abajo.</li>
+                    <li>Pasado este tiempo, la sacamos del horno y esperamos a que enfríe un poco antes de desmoldarla. La servimos templada o fría de un día para otro.</li>
                 </ol>
             </div>
         </div>
-
         <!-- Sección de comentarios -->
         <div id="commentsSection">
             <h3>Deja tu comentario</h3>
@@ -151,11 +149,11 @@
             </div>
         </div>
     </main>
-
     <footer>
         <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
 
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script type="module" src="../favoritos.js"></script>
     <script type="module" src="../valorar.js"></script>
     <script>

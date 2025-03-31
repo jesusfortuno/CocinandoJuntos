@@ -33,7 +33,7 @@ async function cargarRecetas() {
     if (!recetas || recetas.length === 0) {
       recipesTableBody.innerHTML = `
                 <tr>
-                    <td colspan="5" class="text-center">No hay recetas disponibles</td>
+                    <td colspan="7" class="text-center">No hay recetas disponibles</td>
                 </tr>
             `
       return
@@ -43,12 +43,24 @@ async function cargarRecetas() {
       const row = document.createElement("tr")
       row.innerHTML = `
                 <td>${receta.id}</td>
+                <td>
+                    <img src="${receta.imagen || "./../US1_PantallaInicio/Imagenes/placeholder.jpg"}" alt="${receta.titulo}" 
+                    style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+                </td>
                 <td>${receta.titulo || ""}</td>
-                <td>${receta.categoria || ""}</td>
-                <td>${receta.dificultad || ""}</td>
-                <td class="action-buttons">
-                    <button class="edit-btn" onclick="editarReceta(${receta.id})">Editar</button>
-                    <button class="delete-btn" onclick="eliminarReceta(${receta.id})">Eliminar</button>
+                <td><span class="badge badge-primary">${receta.categoria || ""}</span></td>
+                <td><span class="badge badge-${receta.dificultad === "Fácil" ? "success" : receta.dificultad === "Media" ? "warning" : "danger"}">${receta.dificultad || ""}</span></td>
+                <td>${receta.tiempo || ""}</td>
+                <td class="table-actions">
+                    <button class="btn btn-info btn-sm edit-recipe" onclick="editarReceta(${receta.id})">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm delete-recipe" onclick="eliminarReceta(${receta.id})">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                    <button class="btn btn-success btn-sm generate-html" onclick="generarHTML(${receta.id})">
+                        <i class="fas fa-file-code"></i> Generar HTML
+                    </button>
                 </td>
             `
       recipesTableBody.appendChild(row)
@@ -67,10 +79,11 @@ async function guardarReceta(formData, id = null) {
 
     const recetaData = {
       titulo: formData.get("titulo"),
-      descripcion: formData.get("descripcion"),
+      // Eliminamos el campo descripción
       dificultad: formData.get("dificultad"),
       tiempo: formData.get("tiempo"),
       categoria: formData.get("categoria"),
+      // Eliminamos el campo cultura para evitar el error
       ingredientes: formData.get("ingredientes"),
       pasos: formData.get("pasos"),
       usuario_id: usuario.id,
@@ -87,12 +100,72 @@ async function guardarReceta(formData, id = null) {
 
     if (response.error) throw response.error
 
+    // Obtener la receta recién creada o actualizada
+    let receta
+    if (id) {
+      const { data, error } = await supabase.from("recetas").select("*").eq("id", id).single()
+      if (error) throw error
+      receta = data
+    } else {
+      // Si es una nueva receta, obtenemos la última insertada por este usuario
+      const { data, error } = await supabase
+        .from("recetas")
+        .select("*")
+        .eq("usuario_id", usuario.id)
+        .order("id", { ascending: false })
+        .limit(1)
+        .single()
+      if (error) throw error
+      receta = data
+    }
+
     modal.style.display = "none"
     await cargarRecetas()
-    alert(`Receta ${id ? "actualizada" : "añadida"} con éxito`)
+
+    // Preguntar al usuario si desea generar el HTML ahora
+    if (
+      receta &&
+      confirm(`Receta ${id ? "actualizada" : "añadida"} con éxito. ¿Deseas generar el archivo HTML ahora?`)
+    ) {
+      generarHTML(receta.id)
+    } else {
+      alert(`Receta ${id ? "actualizada" : "añadida"} con éxito. Puedes generar el HTML más tarde desde la tabla.`)
+    }
   } catch (error) {
     console.error("Error al guardar receta:", error)
     alert("Error al guardar la receta: " + error.message)
+  }
+}
+
+// Generar HTML para una receta
+async function generarHTML(id) {
+  try {
+    const usuario = getUsuario()
+    if (!usuario) return
+
+    // Obtener la receta de la base de datos
+    const { data: receta, error } = await supabase.from("recetas").select("*").eq("id", id).single()
+
+    if (error) throw error
+    if (!receta) throw new Error("No se encontró la receta")
+
+    // Generar nombre de archivo a partir del título
+    const nombreArchivo = window.generadorRecetas.generarNombreArchivo(receta.titulo)
+
+    // Generar el contenido HTML
+    const contenidoHTML = window.generadorRecetas.generarHTMLReceta(receta)
+
+    // Descargar el archivo HTML
+    const resultado = window.generadorRecetas.descargarArchivoHTML(nombreArchivo, contenidoHTML)
+
+    if (resultado) {
+      alert(`Archivo HTML generado correctamente. Por favor, guárdalo en la carpeta US6_GuardarRecetas.`)
+    } else {
+      alert("Error al generar el archivo HTML")
+    }
+  } catch (error) {
+    console.error("Error al generar HTML:", error)
+    alert("Error al generar HTML: " + error.message)
   }
 }
 
@@ -110,12 +183,18 @@ async function editarReceta(id) {
 
     // Llenar el formulario
     document.getElementById("titulo").value = receta.titulo || ""
-    document.getElementById("descripcion").value = receta.descripcion || ""
+    // Eliminamos la asignación al campo descripción
     document.getElementById("dificultad").value = receta.dificultad || ""
     document.getElementById("tiempo").value = receta.tiempo || ""
     document.getElementById("categoria").value = receta.categoria || ""
     document.getElementById("ingredientes").value = receta.ingredientes || ""
     document.getElementById("pasos").value = receta.pasos || ""
+
+    // Verificar si el elemento cultura existe antes de intentar asignarle un valor
+    const culturaElement = document.getElementById("cultura")
+    if (culturaElement) {
+      culturaElement.value = receta.cultura || ""
+    }
 
     // Configurar el formulario
     document.getElementById("modal-title").textContent = "Editar Receta"
@@ -194,9 +273,31 @@ function inicializar() {
   if (usuario) {
     document.getElementById("user-info").style.display = "flex"
     document.getElementById("user-name").textContent = usuario.username || usuario.email || "Usuario"
-    cargarRecetas()
+    document.getElementById("sidebar-admin-name").textContent = usuario.username || usuario.email || "Usuario"
+
+    // Cargar el script del generador de recetas
+    if (!window.generadorRecetas) {
+      const script = document.createElement("script")
+      script.src = "generadorRecetas.js"
+      script.onload = () => {
+        console.log("Script de generador de recetas cargado correctamente")
+        cargarRecetas()
+      }
+      script.onerror = (error) => {
+        console.error("Error al cargar el script de generador de recetas:", error)
+        cargarRecetas()
+      }
+      document.body.appendChild(script)
+    } else {
+      cargarRecetas()
+    }
   }
 }
+
+// Exportar funciones para uso global
+window.editarReceta = editarReceta
+window.eliminarReceta = eliminarReceta
+window.generarHTML = generarHTML
 
 // Ejecutar al cargar la página
 document.addEventListener("DOMContentLoaded", inicializar)

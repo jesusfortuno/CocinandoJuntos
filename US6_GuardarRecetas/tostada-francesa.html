@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fideos Salteados - Cocinando Juntos</title>
+    <title>Tostada Francesa - Cocinando Juntos</title>
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -12,7 +11,6 @@
     <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
     <nav>
         <a href="../US1_PantallaInicio/index.html">
@@ -32,23 +30,22 @@
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
         <div class="menu-icon">☰</div>
     </nav>
-
     <main>
         <div class="breadcrumb">
             <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                href="./../US1_PantallaInicio/cultura-china.html">Cultura China</a> > Fideos Salteados
+                href="./../US1_PantallaInicio/cultura-francesa.html">Cultura Francesa</a> > Tostada Francesa
         </div>
 
         <div class="recipe-title">
-            <h1>Fideos Salteados<span class="recipe-rating" id="recipeRating"></span></h1>
+            <h1>Tostada Francesa<span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
         <div class="recipe-main-content">
             <!-- Columna izquierda: Foto principal y carrusel debajo -->
             <div class="recipe-left-column">
                 <div class="recipe-photo">
-                    <a href="./Imagenes/China/fideos-salteados.jpg" target="_blank">
-                        <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados"
+                    <a href="./Imagenes/Francia/tostada-francesa.jpg" target="_blank">
+                        <img src="./Imagenes/Francia/tostada-francesa.jpg" alt="Tostada Francesa"
                             style="aspect-ratio: 1024/576; object-fit: cover;">
                     </a>
                 </div>
@@ -56,36 +53,35 @@
                 <!-- Carrusel de imágenes debajo de la foto principal -->
                 <div class="image-carousel-container">
                     <div class="image-thumbnails" id="imageThumbnails">
-                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/China/fideos-salteados.jpg">
-                            <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados 1">
+                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/Francia/tostada-francesa.jpg">
+                            <img src="./Imagenes/Francia/tostada-francesa.jpg" alt="Tostada Francesa 1">
                         </div>
-                        <div class="thumbnail" data-index="1" data-src="./Imagenes/China/fideos-salteados2.jpg">
-                            <img src="./Imagenes/China/fideos-salteados2.jpg" alt="Fideos Salteados 2">
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/Francia/tostada-francesa2.jpg">
+                            <img src="./Imagenes/Francia/tostada-francesa2.jpg" alt="Tostada Francesa 2">
                         </div>
-                        <div class="thumbnail" data-index="2" data-src="./Imagenes/China/fideos-salteados3.jpg">
-                            <img src="./Imagenes/China/fideos-salteados3.jpg" alt="Fideos Salteados 3">
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/Francia/tostada-francesa3.jpg">
+                            <img src="./Imagenes/Francia/tostada-francesa3.jpg" alt="Tostada Francesa 3">
                         </div>
-                        <div class="thumbnail" data-index="3" data-src="./Imagenes/China/fideos-salteados4.jpg">
-                            <img src="./Imagenes/China/fideos-salteados4.jpg" alt="Fideos Salteados 4">
+                        <div class="thumbnail" data-index="3" data-src="./Imagenes/Francia/tostada-francesa4.jpg">
+                            <img src="./Imagenes/Francia/tostada-francesa4.jpg" alt="Tostada Francesa 4">
                         </div>
-                        <div class="thumbnail" data-index="4" data-src="./Imagenes/China/fideos-salteados5.jpeg">
-                            <img src="./Imagenes/China/fideos-salteados5.jpeg" alt="Fideos Salteados 5">
+                        <div class="thumbnail" data-index="4" data-src="./Imagenes/Francia/tostada-francesa5.jpg">
+                            <img src="./Imagenes/Francia/tostada-francesa5.jpg" alt="Tostada Francesa 5">
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- Columna central: Información de la receta -->
             <div class="recipe-center-column">
                 <div class="recipe-info">
                     <div class="recipe-tags">
                         <span class="tag">Dificultad: Fácil</span>
-                        <span class="tag">Tiempo: 40 min</span>
-                        <span class="tag">Categoría: Cena</span>
+                        <span class="tag">Tiempo: 20 min</span>
+                        <span class="tag">Categoría: Desayuno</span>
                     </div>
 
                     <div class="recipe-actions">
-                        <button class="button favorite-btn" data-receta-id="8">❤️ Añadir a Favoritos</button>
+                        <button class="button favorite-btn" data-receta-id="16">❤️ Añadir a Favoritos</button>
                         <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                     </div>
                 </div>
@@ -107,37 +103,26 @@
             <div class="recipe-ingredients">
                 <h2>Ingredientes</h2>
                 <ul>
-                    <li>300 g de tallarines</li>
-                    <li>1 pimiento rojo</li>
-                    <li>1 pimiento verde</li>
-                    <li>1 ajete fresco</li>
-                    <li>4 cs de salsa de soja</li>
-                    <li>2 cs salsa de ostras</li>
-                    <li>2 cs de vinagre negro chino (se puede sustituir por vinagre balsámico)</li>
-                    <li>1 cucharadita de azúcar</li>
-                    <li>Pimienta blanca</li>
-                    <li>Aceite de girasol</li>
-                    <li>400 g de filetes de lomo de cerdo</li>
-                    <li>1 cs de salsa de soja</li>
-                    <li>1 cs de salsa de ostras</li>
-                    <li>1 cs de maicena</li>
-                    <li>Pimienta blanca</li>
+                    <li>20 gramos de mantequilla</li>
+                    <li>2 huevos</li>
+                    <li>6 rodajas de pan de molde</li>
+                    <li>1 cucharadita de esencia de vainilla (opcional)</li>
+                    <li>1 pizca de canela en polvo</li>
+                    <li>80 ml de leche</li>
+                    <li>Sirope de maple</li>
                 </ul>
             </div>
 
             <div class="recipe-steps">
                 <h2>Pasos para la Receta</h2>
                 <ol>
-                    <li>Prepara el cerdo marinado para los tallarines salteados chinos. Para el marinado, corta los filetes en tiras finas y ponlas en un bol.  Añade la maicena, la salsa de soja, la salsa de ostras, la pimienta blanca y el azúcar. Mezcla bien hasta que esté todo bien impregnado. Tapa con film transparente y deja reposar durante 20 minutos.</li>
-                    <li>Cuece la pasta en abundante agua hirviendo tal y como indique el fabricante en el envase.</li>
-                    <li>Prepara la salsa. En un bol, mezcla la salsa de ostras, la salsa de soja, el vinagre, el azúcar y un poco de pimienta blanca y reserva.</li>
-                    <li>Pica bien finito la parte blanca de los ajetes y reserva la parte verde para decorar. Corta los pimientos verde y rojo bien limpios y sin pepitas en tiras no muy gruesas de más o menos en mismo tamaño.</li>
-                    <li>Cocina rodo junto. En una sartén amplia con un chorro de aceite, cocina los ajetes hasta que empiecen a tomar color. Añade la carne de cerdo marinada y cocina hasta que esté hecha. Incorpora los pimientos y saltea todo junto un par de minutos. Vierte los tallarines y la salsa que has preparado antes y saltea todo junto hasta que esté bien mezclado y caliente.</li>
-                    <li>Añade la parte verde de los ajetes picada a la sartén y sirve recién hecho.</li>
+                    <li>Casca los huevos en un bol, bátelos y ve añadiendo poco a poco la leche, la canela y la esencia de vainilla.</li>
+                    <li>Cuando todos los ingredientes de la mezcla para estas tostadas francesas originales estén integrados, sumerge los panes de molde y deja que absorban la mezcla. Esto tomará unos 30 segundos. Si no tienes pan de molde, puedes usar también una barra de pan. Te recomendamos usar un pan que ya esté duro para que las tostadas tengan más consistencia.</li>
+                    <li>Pon una sartén al fuego y echa en ella la mantequilla. Espera a que se derrita y pon a cocinar las tostadas francesas fáciles hasta que se doren por ambos lados. Usa el fuego alto para que tus french toasts queden crujientes y deliciosas.</li>
+                    <li>¡Ahora solo queda servir! Báñalas en miel o en sirope de acre y acompaña con lo que gustes. Una buena idea es cortar láminas de fresas o acompañar con arándanos o frambuesas.</li>
                 </ol>
             </div>
         </div>
-
         <!-- Sección de comentarios -->
         <div id="commentsSection">
             <h3>Deja tu comentario</h3>
@@ -151,11 +136,11 @@
             </div>
         </div>
     </main>
-
     <footer>
         <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
 
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script type="module" src="../favoritos.js"></script>
     <script type="module" src="../valorar.js"></script>
     <script>

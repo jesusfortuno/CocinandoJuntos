@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fideos Salteados - Cocinando Juntos</title>
+    <title>Churros con Chocolate - Cocinando Juntos</title>
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -12,7 +11,6 @@
     <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
     <nav>
         <a href="../US1_PantallaInicio/index.html">
@@ -36,19 +34,19 @@
     <main>
         <div class="breadcrumb">
             <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                href="./../US1_PantallaInicio/cultura-china.html">Cultura China</a> > Fideos Salteados
+                href="./../US1_PantallaInicio/cultura-española.html">Cultura Española</a> > Churros con Chocolate
         </div>
 
         <div class="recipe-title">
-            <h1>Fideos Salteados<span class="recipe-rating" id="recipeRating"></span></h1>
+            <h1>Churros con Chocolate<span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
         <div class="recipe-main-content">
             <!-- Columna izquierda: Foto principal y carrusel debajo -->
             <div class="recipe-left-column">
                 <div class="recipe-photo">
-                    <a href="./Imagenes/China/fideos-salteados.jpg" target="_blank">
-                        <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados"
+                    <a href="./Imagenes/España/churros-chocolate.jpg" target="_blank">
+                        <img src="./Imagenes/España/churros-chocolate.jpg" alt="Churros con Chocolate"
                             style="aspect-ratio: 1024/576; object-fit: cover;">
                     </a>
                 </div>
@@ -56,20 +54,20 @@
                 <!-- Carrusel de imágenes debajo de la foto principal -->
                 <div class="image-carousel-container">
                     <div class="image-thumbnails" id="imageThumbnails">
-                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/China/fideos-salteados.jpg">
-                            <img src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados 1">
+                        <div class="thumbnail active" data-index="0" data-src="./Imagenes/España/churros-chocolate.jpg">
+                            <img src="./Imagenes/España/churros-chocolate.jpg" alt="Churros con Chocolate 1">
                         </div>
-                        <div class="thumbnail" data-index="1" data-src="./Imagenes/China/fideos-salteados2.jpg">
-                            <img src="./Imagenes/China/fideos-salteados2.jpg" alt="Fideos Salteados 2">
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/España/churros-chocolate2.jpg">
+                            <img src="./Imagenes/España/churros-chocolate2.jpg" alt="Churros con Chocolate 2">
                         </div>
-                        <div class="thumbnail" data-index="2" data-src="./Imagenes/China/fideos-salteados3.jpg">
-                            <img src="./Imagenes/China/fideos-salteados3.jpg" alt="Fideos Salteados 3">
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/España/churros-chocolate3.jpg">
+                            <img src="./Imagenes/España/churros-chocolate3.jpg" alt="Churros con Chocolate 3">
                         </div>
-                        <div class="thumbnail" data-index="3" data-src="./Imagenes/China/fideos-salteados4.jpg">
-                            <img src="./Imagenes/China/fideos-salteados4.jpg" alt="Fideos Salteados 4">
+                        <div class="thumbnail" data-index="3" data-src="./Imagenes/España/churros-chocolate4.jpg">
+                            <img src="./Imagenes/España/churros-chocolate4.jpg" alt="Churros con Chocolate 4">
                         </div>
-                        <div class="thumbnail" data-index="4" data-src="./Imagenes/China/fideos-salteados5.jpeg">
-                            <img src="./Imagenes/China/fideos-salteados5.jpeg" alt="Fideos Salteados 5">
+                        <div class="thumbnail" data-index="4" data-src="./Imagenes/España/churros-chocolate5.jpeg">
+                            <img src="./Imagenes/España/churros-chocolate5.jpeg" alt="Churros con Chocolate 5">
                         </div>
                     </div>
                 </div>
@@ -80,12 +78,12 @@
                 <div class="recipe-info">
                     <div class="recipe-tags">
                         <span class="tag">Dificultad: Fácil</span>
-                        <span class="tag">Tiempo: 40 min</span>
-                        <span class="tag">Categoría: Cena</span>
+                        <span class="tag">Tiempo: 35 min</span>
+                        <span class="tag">Categoría: Merienda</span>
                     </div>
 
                     <div class="recipe-actions">
-                        <button class="button favorite-btn" data-receta-id="8">❤️ Añadir a Favoritos</button>
+                        <button class="button favorite-btn" data-receta-id="12">❤️ Añadir a Favoritos</button>
                         <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                     </div>
                 </div>
@@ -107,33 +105,30 @@
             <div class="recipe-ingredients">
                 <h2>Ingredientes</h2>
                 <ul>
-                    <li>300 g de tallarines</li>
-                    <li>1 pimiento rojo</li>
-                    <li>1 pimiento verde</li>
-                    <li>1 ajete fresco</li>
-                    <li>4 cs de salsa de soja</li>
-                    <li>2 cs salsa de ostras</li>
-                    <li>2 cs de vinagre negro chino (se puede sustituir por vinagre balsámico)</li>
-                    <li>1 cucharadita de azúcar</li>
-                    <li>Pimienta blanca</li>
-                    <li>Aceite de girasol</li>
-                    <li>400 g de filetes de lomo de cerdo</li>
-                    <li>1 cs de salsa de soja</li>
-                    <li>1 cs de salsa de ostras</li>
-                    <li>1 cs de maicena</li>
-                    <li>Pimienta blanca</li>
+                    <li>320 ml de agua</li>
+                    <li>160 g e harina</li>
+                    <li>7 g de sal (1 cdta)</li>
+                    <li>Aceite para freír</li>
+                    <li>Azúcar para rebozar</li>
+                    <li>850 ml de leche</li>
+                    <li>180 g de chocolate a la taza en tableta</li>
+                    <li>20 g de cacao puro sin azúcar</li>
+                    <li>1 pizca de sal</li>
+                    <li>1 palito de canela</li>
                 </ul>
             </div>
 
             <div class="recipe-steps">
                 <h2>Pasos para la Receta</h2>
                 <ol>
-                    <li>Prepara el cerdo marinado para los tallarines salteados chinos. Para el marinado, corta los filetes en tiras finas y ponlas en un bol.  Añade la maicena, la salsa de soja, la salsa de ostras, la pimienta blanca y el azúcar. Mezcla bien hasta que esté todo bien impregnado. Tapa con film transparente y deja reposar durante 20 minutos.</li>
-                    <li>Cuece la pasta en abundante agua hirviendo tal y como indique el fabricante en el envase.</li>
-                    <li>Prepara la salsa. En un bol, mezcla la salsa de ostras, la salsa de soja, el vinagre, el azúcar y un poco de pimienta blanca y reserva.</li>
-                    <li>Pica bien finito la parte blanca de los ajetes y reserva la parte verde para decorar. Corta los pimientos verde y rojo bien limpios y sin pepitas en tiras no muy gruesas de más o menos en mismo tamaño.</li>
-                    <li>Cocina rodo junto. En una sartén amplia con un chorro de aceite, cocina los ajetes hasta que empiecen a tomar color. Añade la carne de cerdo marinada y cocina hasta que esté hecha. Incorpora los pimientos y saltea todo junto un par de minutos. Vierte los tallarines y la salsa que has preparado antes y saltea todo junto hasta que esté bien mezclado y caliente.</li>
-                    <li>Añade la parte verde de los ajetes picada a la sartén y sirve recién hecho.</li>
+                    <li>Poner el agua con la sal en un cazo al fuego y llevar a punto de ebullición.</li>
+                    <li>Verter la harina sobre el agua hirviendo, removiendo con una cuchara de madera.</li>
+                    <li>Retirar del fuego y seguir removiendo para finalmente amasar sobre la encimera o en robot de cocina. Amasar bien ayuda a eliminar burbujitas de aire que queden en la masa y así evitar en la medida de lo posible que los churros exploten cuando se frían.</li>
+                    <li>Poner la masa en la churrera con ayuda de una espátula.</li>
+                    <li>Formar los churros sobre una tabla y cortarlos a la medida deseada.</li>
+                    <li>Calentar el aceite y cuando esté bien caliente ir friendo los churros en pequeñas cantidades para no bajar la temperatura del aceite. Darles vuelta para que se doren uniformemente.</li>
+                    <li>A medida que se van retirando bien escurridos, pasarlos a papel absorbente y a continuación rebozarlos en azúcar.</li>
+                    <li>Poner la leche a calentar en un cazo con la canela, la sal, el cacao en polvo y la tableta de chocolate a la taza cortada a cuchillos y dejamos que se vaya calentando a fuego medio y vamos revolviendo de vez en cuando para evitar que se pegue al fondo del cazo y para favorecer que se vaya derritiendo el chocolate. Cuando ya esté todo bien integrado y caliente, retiramos la rama de canela y servimos. Según veamos que esté muy espeso, podemos añadir más leche.</li>
                 </ol>
             </div>
         </div>
@@ -141,11 +136,15 @@
         <!-- Sección de comentarios -->
         <div id="commentsSection">
             <h3>Deja tu comentario</h3>
-            <div class="rating">
+            <div id="replyingTo" class="replying-to" style="display: none;"></div>
+            <div class="rating" id="ratingStars">
                 <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
             </div>
             <textarea id="commentText" placeholder="Escribe tu comentario aquí..."></textarea>
-            <button id="submitComment">Publicar</button>
+            <div class="comment-buttons">
+                <button id="submitComment">Publicar</button>
+                <button id="cancelReply" style="display: none;">Cancelar</button>
+            </div>
             <div id="commentsList">
                 <p>Cargando comentarios...</p>
             </div>
@@ -183,7 +182,7 @@
             // Remover eventos previos si existen
             favButton.replaceWith(favButton.cloneNode(true));
             const newFavButton = document.querySelector('.favorite-btn');
-            
+
             newFavButton.addEventListener('click', async function favButtonHandler() {
                 if (!usuario) {
                     alert('Debes iniciar sesión para guardar en favoritos');
@@ -196,7 +195,7 @@
 
                 const recetaId = this.getAttribute('data-receta-id');
                 const resultado = await agregarAFavoritos(recetaId);
-                
+
                 if (resultado) {
                     this.classList.add('favorito-activo');
                     this.textContent = ' En Favoritos';
@@ -208,7 +207,7 @@
         }
 
         // Manejar el cierre de sesión
-        logoutBtn.addEventListener('click', function(e) {
+        logoutBtn.addEventListener('click', function (e) {
             e.preventDefault();
             localStorage.removeItem('usuario');
             window.location.href = '../login.html';
