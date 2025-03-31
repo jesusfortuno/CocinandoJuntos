@@ -21,43 +21,99 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
     if (currentIndex > maxIndex) currentIndex = maxIndex
 
+    // Obtener el idioma actual
+    const currentLanguage = localStorage.getItem("language") || "es"
+
+    // Usar un enfoque basado en display en lugar de transform para mayor estabilidad
     cards.forEach((card, index) => {
-      const isVisible = index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow
+      // Determinar si la tarjeta debería ser visible
+      const startIndex = currentIndex * cardsToShow
+      const endIndex = startIndex + cardsToShow
+      const isVisible = index >= startIndex && index < endIndex
+
+      // Aplicar display directamente en lugar de transform
       card.style.display = isVisible ? "block" : "none"
+
+      // Traducir TODAS las tarjetas, no solo las visibles
+      const elementsToTranslate = card.querySelectorAll("[data-i18n]")
+      elementsToTranslate.forEach((element) => {
+        const key = element.getAttribute("data-i18n")
+        if (
+          window.i18n &&
+          window.i18n.translations[currentLanguage] &&
+          window.i18n.translations[currentLanguage][key]
+        ) {
+          element.textContent = window.i18n.translations[currentLanguage][key]
+        }
+      })
     })
 
+    // Actualizar estado de los botones de navegación
     prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"
     prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer"
     nextButton.style.opacity = currentIndex >= maxIndex ? "0.5" : "1"
     nextButton.style.cursor = currentIndex >= maxIndex ? "default" : "pointer"
 
+    // Permitir nuevos clics después de un tiempo
     setTimeout(() => {
       isAnimating = false
     }, 300)
   }
 
   function startAutoSlide() {
+    // Limpiar cualquier intervalo existente para evitar múltiples intervalos
+    clearInterval(autoSlideInterval)
+
     autoSlideInterval = setInterval(() => {
+      // No hacer nada si hay una animación en curso
       if (isAnimating) return
+
+      isAnimating = true
       const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+
+      // Avanzar al siguiente grupo o volver al principio
       currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
       updateSliderPosition()
-    }, 25000)
+    }, 25000) // Mantener el intervalo de 25 segundos
   }
 
   prevButton.addEventListener("click", () => {
+    // Evitar clics durante la animación
     if (isAnimating) return
     isAnimating = true
-    if (currentIndex > 0) currentIndex -= 1
-    updateSliderPosition()
+
+    // Detener el autoplay para evitar conflictos
+    clearInterval(autoSlideInterval)
+
+    if (currentIndex > 0) {
+      currentIndex--
+      updateSliderPosition()
+    } else {
+      isAnimating = false // Permitir nuevos clics si no hay cambio
+    }
+
+    // Reiniciar el autoplay
+    startAutoSlide()
   })
 
   nextButton.addEventListener("click", () => {
+    // Evitar clics durante la animación
     if (isAnimating) return
     isAnimating = true
+
+    // Detener el autoplay para evitar conflictos
+    clearInterval(autoSlideInterval)
+
     const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
-    currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
-    updateSliderPosition()
+    if (currentIndex < maxIndex) {
+      currentIndex++
+      updateSliderPosition()
+    } else {
+      isAnimating = false // Permitir nuevos clics si no hay cambio
+    }
+
+    // Reiniciar el autoplay
+    startAutoSlide()
   })
 
   // Inicializar slider
@@ -69,7 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer)
     resizeTimer = setTimeout(() => {
-      currentIndex = 0
+      // No reiniciar a 0 para evitar saltos bruscos
+      // Verificar si el índice actual es válido con el nuevo tamaño
+      const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+      if (currentIndex > maxIndex) currentIndex = maxIndex
       updateSliderPosition()
     }, 250)
   })
@@ -210,6 +269,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ejecutar al cargar y al cambiar el tamaño de la ventana
   adjustFooterPosition()
   window.addEventListener("resize", adjustFooterPosition)
+
+  // Añadir un event listener para el cambio de idioma
+  document.addEventListener("languageChanged", (e) => {
+    updateSliderPosition() // Actualizar las traducciones cuando cambie el idioma
+  })
 })
 
 // Añadir esta función al final del archivo para asegurar que el menú hamburguesa funcione correctamente
@@ -246,5 +310,48 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 // Asegurar que esta función se ejecute cuando el DOM esté cargado
-document.addEventListener("DOMContentLoaded", setupScrollToTop)
+document.addEventListener("DOMContentLoaded", () => {
+  function setupScrollToTop() {
+    const scrollToTopButton = document.querySelector(".scroll-to-top")
+
+    if (scrollToTopButton) {
+      console.log("Botón de scroll encontrado:", scrollToTopButton)
+
+      // Usar un manejador de eventos directo y simple
+      scrollToTopButton.onclick = (e) => {
+        e.preventDefault()
+        console.log("Botón de scroll clickeado")
+
+        // Scroll suave hacia arriba
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      }
+    } else {
+      console.error("Botón de scroll no encontrado")
+    }
+  }
+  setupScrollToTop()
+})
+
+// Asegurarse de que no haya conflictos con otros manejadores de eventos
+document.addEventListener("DOMContentLoaded", () => {
+  // Remover cualquier manejador de eventos existente del botón de scroll
+  const scrollBtn = document.getElementById("scrollToTop")
+  if (scrollBtn) {
+    const newScrollBtn = scrollBtn.cloneNode(true)
+    scrollBtn.parentNode.replaceChild(newScrollBtn, scrollBtn)
+  }
+})
+
+// Añadir al final del archivo, justo después de la inicialización del slider
+document.addEventListener("languageChanged", (e) => {
+  if (typeof window.updateRecipeSliderPosition === "function") {
+    window.updateRecipeSliderPosition()
+  }
+})
+
+// Eliminar o comentar la función updateSliderPosition global al final del archivo
+// window.updateSliderPosition = updateSliderPosition;
 

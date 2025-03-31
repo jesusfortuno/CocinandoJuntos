@@ -47,11 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
     notificationPanel.id = "notification-panel"
     notificationPanel.innerHTML = `
         <div class="notification-header">
-          <h3>Notificaciones</h3>
-          <button id="mark-all-read" class="mark-all-read-btn">Marcar todas como leídas</button>
+          <h3 data-i18n="Notificaciones">Notificaciones</h3>
+          <button id="mark-all-read" class="mark-all-read-btn" data-i18n="Marcar todas como leídas">
+            Marcar todas como leídas
+          </button>
         </div>
         <div class="notification-list" id="notification-list">
-          <div class="notification-empty">No tienes notificaciones</div>
+          <div class="notification-empty" data-i18n="No tienes notificaciones">
+            No tienes notificaciones
+          </div>
         </div>
       `
 
@@ -89,6 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
         panel.classList.remove("active")
       }
     })
+
+    // Añadir traducción inicial según el idioma actual
+    const currentLanguage = window.i18n.getCurrentLanguage()
+    actualizarIdiomaNotificaciones(currentLanguage)
   }
 
   // Función para alternar la visibilidad del panel de notificaciones
@@ -131,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function actualizarInterfazNotificaciones(notificaciones) {
     const notificationList = document.getElementById("notification-list")
     const notificationCount = document.getElementById("notification-count")
+    const currentLanguage = window.i18n.getCurrentLanguage()
 
     // Contar notificaciones no leídas
     const noLeidas = notificaciones.filter((n) => !n.leida).length
@@ -139,9 +148,14 @@ document.addEventListener("DOMContentLoaded", () => {
     notificationCount.textContent = noLeidas
     notificationCount.style.display = noLeidas > 0 ? "flex" : "none"
 
-    // Si no hay notificaciones, mostrar mensaje
+    // Si no hay notificaciones, mostrar mensaje traducido
     if (!notificaciones || notificaciones.length === 0) {
-      notificationList.innerHTML = `<div class="notification-empty">No tienes notificaciones</div>`
+      const emptyMessage = window.i18n.translations[currentLanguage]["No tienes notificaciones"]
+      notificationList.innerHTML = `
+        <div class="notification-empty" data-i18n="No tienes notificaciones">
+          ${emptyMessage}
+        </div>
+      `
       return
     }
 
@@ -419,5 +433,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ejecutar verificación automáticamente
   setTimeout(verificarServicioNotificaciones, 2000) // Esperar 2 segundos para que todo se cargue
+
+  // Añadir una función para actualizar las traducciones de las notificaciones
+  function actualizarIdiomaNotificaciones(language) {
+    if (!window.i18n || !window.i18n.translations[language]) return;
+
+    // Actualizar el título de las notificaciones
+    const notificationTitle = document.querySelector('.notification-header h3');
+    if (notificationTitle) {
+      notificationTitle.textContent = window.i18n.translations[language]["Notificaciones"];
+    }
+
+    // Actualizar el botón de marcar todas como leídas
+    const markAllReadBtn = document.getElementById('mark-all-read');
+    if (markAllReadBtn) {
+      markAllReadBtn.textContent = window.i18n.translations[language]["Marcar todas como leídas"];
+    }
+
+    // Actualizar el mensaje de no notificaciones si está presente
+    const emptyMessage = document.querySelector('.notification-empty');
+    if (emptyMessage) {
+      emptyMessage.textContent = window.i18n.translations[language]["No tienes notificaciones"];
+    }
+  }
+
+  // Escuchar el evento de cambio de idioma
+  document.addEventListener("languageChanged", (e) => {
+    actualizarIdiomaNotificaciones(e.detail.language);
+  });
 })
 
