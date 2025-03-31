@@ -115,7 +115,34 @@ const translations = {
     "Descripción Galletas de Sésamo": "Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional china. Perfectas para acompañar el té o como snack en cualquier momento del día.",
     "Descripción Bollitos Chinos": "Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un desayuno tradicional de la cocina china que te encantará.",
     "Descripción Fideos Salteados": "Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y sabroso que te transportará a las calles de China.",
-    "Descripción Sopa Wonton": "Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos."
+    "Descripción Sopa Wonton": "Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos.",
+    "Ensalada Fresca": "Ensalada Fresca",
+    "Descripción Ensalada Fresca": "Deliciosa receta tradicional con ingredientes frescos y sabores únicos.",
+    "Tacos Mexicanos": "Tacos Mexicanos",
+    "Descripción Tacos Mexicanos": "Auténticos tacos mexicanos con tortillas caseras y rellenos tradicionales.",
+    "Smoothie de Frutas": "Smoothie de Frutas",
+    "Descripción Smoothie de Frutas": "Refrescante bebida llena de vitaminas y sabores naturales.",
+    "Pasta al Pesto": "Pasta al Pesto",
+    "Descripción Pasta al Pesto": "Deliciosa pasta italiana con salsa pesto casera y queso parmesano.",
+    "Batido Energético": "Batido Energético",
+    "Descripción Batido Energético": "Batido nutritivo perfecto para empezar el día con energía.",
+    "Fresh Salad": "Ensalada Fresca",
+    "Fresh Salad Description": "Deliciosa receta tradicional con ingredientes frescos y sabores únicos.",
+    "Mexican Tacos": "Tacos Mexicanos",
+    "Mexican Tacos Description": "Auténticos tacos mexicanos con tortillas caseras y rellenos tradicionales.",
+    "Fruit Smoothie": "Smoothie de Frutas",
+    "Fruit Smoothie Description": "Refrescante bebida llena de vitaminas y sabores naturales.",
+    "Pesto Pasta": "Pasta al Pesto",
+    "Pesto Pasta Description": "Deliciosa pasta italiana con salsa pesto casera y queso parmesano.",
+    "Energy Shake": "Batido Energético",
+    "Energy Shake Description": "Batido nutritivo perfecto para empezar el día con energía.",
+    "Easy": "Fácil",
+    "Medium": "Media",
+    "Hard": "Difícil",
+    "Salad": "Ensalada",
+    "Drink": "Bebida",
+    "Lunch": "Comida",
+    "Read more": "Leer más"
   },
 
   // Catalán
@@ -151,7 +178,7 @@ const translations = {
 
     // Recetas
     "Pollo Agridulce": "Pollastre Agredolç",
-    "Delicioso plato de pollo agridulce con un toque especial. Una combinación perfecta de sabores dulces y ácidos que te transportará a l'auténtica cocina xinesa.":
+    "Delicioso plato de pollo agridulce con un toque especial. Una combinación perfecta de sabors dulces y ácidos que te transportará a l'auténtica cocina xinesa.":
       "Deliciós plat de pollastre agredolç amb un toc especial. Una combinació perfecta de sabors dolços i àcids que et transportarà a l'autèntica cuina xinesa.",
     "Galletas de Sésamo": "Galetes de Sèsam",
     "Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional china. Perfectas para acompañar el té o como snack en cualquier momento del día.":
@@ -230,7 +257,34 @@ const translations = {
     "Descripción Galletas de Sésamo": "Cruixents galetes amb llavors de sèsam, una deliciosa recepta tradicional xinesa. Perfectes per acompanyar el te o com a snack en qualsevol moment del dia.",
     "Descripción Bollitos Chinos": "Suaus i esponjosos panets al vapor, farcits de delicioses barreges. Un esmorzar tradicional de la cuina xinesa que t'encantarà.",
     "Descripción Fideos Salteados": "Fideus saltats amb verdures cruixents i una salsa especial. Un plat ràpid i saborós que et transportarà als carrers de la Xina.",
-    "Descripción Sopa Wonton": "Reconfortant sopa amb wontons casolans farcits de carn i gambes. Un plat tradicional xinès perfecte per a dies freds."
+    "Descripción Sopa Wonton": "Reconfortant sopa amb wontons casolans farcits de carn i gambes. Un plat tradicional xinès perfecte per a dies freds.",
+    "Ensalada Fresca": "Amanida Fresca",
+    "Descripción Ensalada Fresca": "Deliciosa recepta tradicional amb ingredients frescos i sabors únics.",
+    "Tacos Mexicanos": "Tacos Mexicans",
+    "Descripción Tacos Mexicanos": "Autèntics tacos mexicans amb tortilles casolanes i farcits tradicionals.",
+    "Smoothie de Frutas": "Smoothie de Fruites",
+    "Descripción Smoothie de Frutas": "Beguda refrescant plena de vitamines i sabors naturals.",
+    "Pasta al Pesto": "Pasta al Pesto",
+    "Descripción Pasta al Pesto": "Deliciosa pasta italiana amb salsa pesto casolana i formatge parmesà.",
+    "Batido Energético": "Batut Energètic",
+    "Descripción Batido Energético": "Batut nutritiu perfecte per començar el dia amb energia.",
+    "Fresh Salad": "Ensalada Fresca",
+    "Fresh Salad Description": "Deliciosa recepta tradicional amb ingredients frescos i sabors únics.",
+    "Mexican Tacos": "Tacos Mexicans",
+    "Mexican Tacos Description": "Autèntics tacos mexicans amb tortilles casolanes i farcits tradicionals.",
+    "Fruit Smoothie": "Batut de Fruites",
+    "Fruit Smoothie Description": "Beguda refrescant plena de vitamines i sabors naturals.",
+    "Pesto Pasta": "Pasta al Pesto",
+    "Pesto Pasta Description": "Deliciosa pasta italiana amb salsa pesto casolana i formatge parmesà.",
+    "Energy Shake": "Batut Energètic",
+    "Energy Shake Description": "Batut nutritiu perfecte per començar el dia amb energia.",
+    "Easy": "Fàcil",
+    "Medium": "Mitjana",
+    "Hard": "Difícil",
+    "Salad": "Amanida",
+    "Drink": "Beguda",
+    "Lunch": "Dinar",
+    "Read more": "Llegir més"
   },
 
   // Inglés
@@ -341,11 +395,28 @@ const translations = {
     "Notifications": "Notifications",
 
     // Descripciones de recetas
-    "Descripción Pollo Agridulce": "Delicious sweet and sour chicken dish with a special touch. A perfect combination of sweet and sour flavors that will transport you to authentic Chinese cuisine.",
-    "Descripción Galletas de Sésamo": "Crunchy cookies with sesame seeds, a delicious traditional Chinese recipe. Perfect to accompany tea or as a snack at any time of day.",
-    "Descripción Bollitos Chinos": "Soft and fluffy steamed buns, filled with delicious mixtures. A traditional Chinese breakfast that you'll love.",
-    "Descripción Fideos Salteados": "Stir-fried noodles with crunchy vegetables and a special sauce. A quick and tasty dish that will transport you to the streets of China.",
-    "Descripción Sopa Wonton": "Comforting soup with homemade wontons filled with meat and shrimp. A traditional Chinese dish perfect for cold days."
+    "Descripción Pollo Agridulce": "Delicious sweet and sour chicken with a special touch...",
+    "Descripción Galletas de Sésamo": "Crunchy cookies with sesame seeds, a delicious traditional Chinese recipe...",
+    "Descripción Bollitos Chinos": "Soft and fluffy steamed buns, filled with delicious mixtures...",
+    "Descripción Fideos Salteados": "Stir-fried noodles with crunchy vegetables and a special sauce...",
+    "Descripción Sopa Wonton": "Comforting soup with homemade wontons filled with meat and shrimp...",
+    "Ensalada Fresca": "Fresh Salad",
+    "Fresh Salad Description": "Delicious traditional recipe with fresh ingredients and unique flavors.",
+    "Tacos Mexicanos": "Mexican Tacos",
+    "Mexican Tacos Description": "Authentic Mexican tacos with homemade tortillas and traditional fillings.",
+    "Smoothie de Frutas": "Fruit Smoothie",
+    "Fruit Smoothie Description": "Refreshing drink full of vitamins and natural flavors.",
+    "Pesto Pasta": "Pesto Pasta",
+    "Pesto Pasta Description": "Delicious Italian pasta with homemade pesto sauce and parmesan cheese.",
+    "Energy Shake": "Energy Shake",
+    "Energy Shake Description": "Nutritious shake perfect to start the day with energy.",
+    "Easy": "Easy",
+    "Medium": "Medium",
+    "Hard": "Hard",
+    "Salad": "Salad",
+    "Drink": "Drink",
+    "Lunch": "Lunch",
+    "Read more": "Read more"
   },
 }
 

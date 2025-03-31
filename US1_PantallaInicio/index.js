@@ -21,11 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
     if (currentIndex > maxIndex) currentIndex = maxIndex
 
+    // Obtener el idioma actual
+    const currentLanguage = localStorage.getItem("language") || "es"
+
+    // Calcular el rango de tarjetas que deberían ser visibles
+    const startIndex = currentIndex * cardsToShow
+    const endIndex = Math.min(startIndex + cardsToShow, cardCount)
+
     cards.forEach((card, index) => {
-      const isVisible = index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow
+      // Determinar si la tarjeta debería ser visible
+      const isVisible = index >= startIndex && index < endIndex
       card.style.display = isVisible ? "block" : "none"
+
+      // Traducir TODAS las tarjetas, no solo las visibles
+      const elementsToTranslate = card.querySelectorAll('[data-i18n]')
+      elementsToTranslate.forEach(element => {
+        const key = element.getAttribute('data-i18n')
+        if (window.i18n && window.i18n.translations[currentLanguage] && window.i18n.translations[currentLanguage][key]) {
+          element.textContent = window.i18n.translations[currentLanguage][key]
+        }
+      })
     })
 
+    // Actualizar estado de los botones de navegación
     prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"
     prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer"
     nextButton.style.opacity = currentIndex >= maxIndex ? "0.5" : "1"
@@ -210,6 +228,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ejecutar al cargar y al cambiar el tamaño de la ventana
   adjustFooterPosition()
   window.addEventListener("resize", adjustFooterPosition)
+
+  // Añadir un event listener para el cambio de idioma
+  document.addEventListener("languageChanged", (e) => {
+    updateSliderPosition(); // Actualizar las traducciones cuando cambie el idioma
+  });
 })
 
 // Añadir esta función al final del archivo para asegurar que el menú hamburguesa funcione correctamente
@@ -256,5 +279,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const newScrollBtn = scrollBtn.cloneNode(true);
         scrollBtn.parentNode.replaceChild(newScrollBtn, scrollBtn);
     }
+});
+
+// Añadir al final del archivo, justo después de la inicialización del slider
+document.addEventListener("languageChanged", (e) => {
+    updateSliderPosition();
 });
 
