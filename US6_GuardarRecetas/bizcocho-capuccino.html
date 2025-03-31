@@ -5,50 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bizcocho Capuccino - Cocinando Juntos</title>
-    <link rel="stylesheet" href="bizcocho-capuccino.css">
+    <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
-    <link rel="stylesheet" href="bizcocho-capuccino.css ">
-    <style>
-        /* Estilos adicionales para los comentarios */
-        .comentario {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .comentario-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        
-        .comentario-fecha {
-            color: #888;
-            font-size: 0.9rem;
-        }
-        
-        .comentario-valoracion {
-            margin-bottom: 8px;
-        }
-        
-        .estrella-activa {
-            color: #f39c12;
-        }
-        
-        .estrella-inactiva {
-            color: #ccc;
-        }
-        
-        .comentario-texto {
-            line-height: 1.5;
-        }
-        
-        #commentsList {
-            margin-top: 30px;
-        }
-    </style>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -78,15 +40,38 @@
         </div>
 
         <div class="recipe-title">
-            <h1>Bizcocho Capuccino</h1>
+            <h1>Bizcocho Capuccino <span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
-        <div class="recipe-wrapper">
-            <div class="recipe-photo">
-                <img src="./Imagenes/Italia/bizcocho-capuccino.jpg  " alt="Bizcocho Capuccino">
+        <div class="recipe-main-content">
+            <!-- Columna izquierda: Foto principal y carrusel debajo -->
+            <div class="recipe-left-column">
+                <div class="recipe-photo">
+                    <a href="./Imagenes/Italia/bizcocho-capuccino.jpg" target="_blank">
+                        <img src="./Imagenes/Italia/bizcocho-capuccino.jpg" alt="Bizcocho Capuccino"
+                            style="aspect-ratio: 1024/576; object-fit: cover;">
+                    </a>
+                </div>
+
+                <!-- Carrusel de imágenes debajo de la foto principal -->
+                <div class="image-carousel-container">
+                    <div class="image-thumbnails" id="imageThumbnails">
+                        <div class="thumbnail active" data-index="0"
+                            data-src="./Imagenes/Italia/bizcocho-capuccino.jpg">
+                            <img src="./Imagenes/Italia/bizcocho-capuccino.jpg" alt="Bizcocho Capuccino">
+                        </div>
+                        <div class="thumbnail" data-index="1" data-src="./Imagenes/Italia/bizcocho-capuccino.jpg">
+                            <img src="./Imagenes/Italia/bizcocho-capuccino.jpg" alt="Bizcocho Capuccino 2">
+                        </div>
+                        <div class="thumbnail" data-index="2" data-src="./Imagenes/Italia/bizcocho-capuccino.jpg">
+                            <img src="./Imagenes/Italia/bizcocho-capuccino.jpg" alt="Bizcocho Capuccino 3">
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="recipe-details-container">
+            <!-- Columna central: Información de la receta -->
+            <div class="recipe-center-column">
                 <div class="recipe-info">
                     <div class="recipe-tags">
                         <span class="tag">Dificultad: Fácil</span>
@@ -100,8 +85,18 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- Columna derecha: Video de la receta -->
+            <div class="recipe-right-column">
+                <div class="recipe-video">
+                    <iframe id="recipeVideo" width="96%" height="223" src="https://www.youtube.com/embed/dNBQHlxUGog"
+                        title="Arepa Venezolana - Receta Tradicional" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
 
         <div class="recipe-container">
             <div class="recipe-ingredients">

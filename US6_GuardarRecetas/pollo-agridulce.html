@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pollo Agridulce - Cocinando Juntos</title>
-    <link rel="stylesheet" href="pollo-agridulce.css">
+    <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="../notification-styles.css">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="recipe-title">
-            <h1>Pollo Agridulce <span class="recipe-rating" id="recipeRating">4/5 (2)</span></h1>
+            <h1>Pollo Agridulce <span class="recipe-rating" id="recipeRating"></span></h1>
         </div>
 
         <div class="recipe-main-content">
@@ -48,7 +48,8 @@
             <div class="recipe-left-column">
                 <div class="recipe-photo">
                     <a href="./Imagenes/China/pollo-agridulce.jpg" target="_blank">
-                        <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce" style="aspect-ratio: 1024/576; object-fit: cover;">
+                        <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce"
+                            style="aspect-ratio: 1024/576; object-fit: cover;">
                     </a>
                 </div>
 
@@ -168,7 +169,7 @@
         <p> 2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
 
-    
+
     <script type="module" src="../favoritos.js"></script>
     <script type="module" src="../valorar.js"></script>
     <script>
@@ -230,31 +231,31 @@
 
     <script>
         // Ensure all carousel images have the same aspect ratio and are clickable
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const mainImageContainer = document.querySelector('.recipe-photo');
             const mainImage = mainImageContainer.querySelector('img');
             const thumbnails = document.querySelectorAll('.thumbnail');
-            
+
             // Set aspect ratio for all images
             const allImages = document.querySelectorAll('.recipe-photo img, .thumbnail img');
             allImages.forEach(img => {
                 img.style.aspectRatio = '1024/576';
                 img.style.objectFit = 'cover';
             });
-            
+
             // Handle thumbnail clicks
             thumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', function() {
+                thumbnail.addEventListener('click', function () {
                     // Update active state
                     thumbnails.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    
+
                     // Get image source
                     const imgSrc = this.getAttribute('data-src');
-                    
+
                     // Update main image
                     mainImage.src = imgSrc;
-                    
+
                     // Update link href
                     const mainImageLink = mainImageContainer.querySelector('a');
                     mainImageLink.href = imgSrc;
@@ -265,4 +266,3 @@
 </body>
 
 </html>
-
