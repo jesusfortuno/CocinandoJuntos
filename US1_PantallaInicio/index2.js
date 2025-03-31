@@ -251,7 +251,7 @@ async function performSearch(query) {
     const { data: recetas, error } = await supabase
       .from("recetas")
       .select("id, titulo, categoria, dificultad")
-      .ilike("titulo", `%${query.toLowerCase()}%`)
+      .or(`titulo.ilike.%${query.toLowerCase()}%, categoria.ilike.%${query.toLowerCase()}%`)
       .limit(10)
 
     if (error) {
@@ -259,15 +259,20 @@ async function performSearch(query) {
       return
     }
 
+    // Filtrar resultados duplicados basados en el ID
+    const recetasUnicas = recetas.filter((receta, index, self) =>
+      index === self.findIndex((r) => r.id === receta.id)
+    )
+
     // Mostrar resultados
-    if (recetas && recetas.length > 0) {
+    if (recetasUnicas && recetasUnicas.length > 0) {
       // Añadir un encabezado a los resultados
       const resultsHeader = document.createElement("div")
       resultsHeader.classList.add("search-results-header")
       resultsHeader.textContent = `${translate("Resultados para", language)} "${query}"`
       searchResults.appendChild(resultsHeader)
 
-      recetas.forEach((receta) => {
+      recetasUnicas.forEach((receta) => {
         const resultItem = document.createElement("div")
         resultItem.classList.add("result-item")
 

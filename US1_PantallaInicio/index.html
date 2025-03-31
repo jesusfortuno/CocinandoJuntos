@@ -7,7 +7,6 @@
     <title>Home - Cocinando Juntos</title>
     <script src="index.js"></script>
     <link rel="stylesheet" href="../notification-styles.css">
-    <link rel="stylesheet" href="styles.css">
     <script src="../notification-center.js"></script>
     <!-- Añadir FontAwesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -48,7 +47,7 @@
             <a href="#" id="user-profile-link">
                 <span id="user-name">Nombre del usuario</span>
             </a>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+            <a href="#" id="logout-btn" class="auth-buttons" data-i18n="Cerrar Sesión">Cerrar Sesión</a>
         </div>
 
         <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
@@ -61,33 +60,31 @@
         <div class="overlay-content">
             <div class="close-btn" id="closeMenu">×</div>
             <div class="menu-section">
-                <h3>Culturas Gast  id="closeMenu">×</div>
-            <div class="menu-section">
-                <h3>Culturas Gastronómicas</h3>
+                <h3 data-i18n="Culturas Gastronómicas">Culturas Gastronómicas</h3>
                 <ul>
-                    <li><a href="cultura-china.html">China</a></li>
-                    <li><a href="cultura-española.html">Española</a></li>
-                    <li><a href="cultura-francesa.html">Francesa</a></li>
-                    <li><a href="cultura-italiana.html">Italiana</a></li>
-                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
-                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
+                    <li><a href="cultura-china.html" data-i18n="China">China</a></li>
+                    <li><a href="cultura-española.html" data-i18n="España">Española</a></li>
+                    <li><a href="cultura-francesa.html" data-i18n="Francia">Francesa</a></li>
+                    <li><a href="cultura-italiana.html" data-i18n="Italia">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html" data-i18n="Japón">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html" data-i18n="Venezuela">Venezolana</a></li>
                 </ul>
             </div>
             <div class="menu-section">
-                <h3>Tipo de Plato</h3>
+                <h3 data-i18n="Tipo de Plato">Tipo de Plato</h3>
                 <ul>
-                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
-                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
-                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
-                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html" data-i18n="Comida">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html" data-i18n="Merienda">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html" data-i18n="Cena">Cena</a></li>
                 </ul>
             </div>
             <div class="menu-section">
-                <h3>Dificultad de la Receta</h3>
+                <h3 data-i18n="Dificultad de la Receta">Dificultad de la Receta</h3>
                 <ul>
-                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
-                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
-                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html" data-i18n="Media">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil">Difícil</a></li>
                 </ul>
             </div>
         </div>
@@ -101,12 +98,13 @@
                     Tu navegador no soporta videos HTML5.
                 </video>
                 <div class="video-overlay">
-                    <h1>Cocinando Juntos</h1>
-                    <p>Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la
-                        gastronomía donde podrás explorar sabores de diferentes culturas.</p>
+                    <h1 data-i18n="Cocinando Juntos">Cocinando Juntos</h1>
+                    <p data-i18n="Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la gastronomía donde podrás explorar sabores de diferentes culturas.">
+                        Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la gastronomía donde podrás explorar sabores de diferentes culturas.
+                    </p>
                     <div class="hero-buttons">
-                        <a href="#explore" class="hero-btn primary-btn">Explorar Recetas</a>
-                        <a href="../login.html" class="hero-btn secondary-btn">Unirse Ahora</a>
+                        <a href="#explore" class="hero-btn primary-btn" data-i18n="Explorar Recetas">Explorar Recetas</a>
+                        <a href="../login.html" class="hero-btn secondary-btn" data-i18n="Unirse Ahora">Unirse Ahora</a>
                     </div>
                 </div>
             </div>
@@ -154,18 +152,16 @@
                                 <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
                             </div>
                             <div class="recipe-content">
-                                <h3>Pollo Agridulce</h3>
+                                <h3 data-i18n="Pollo Agridulce">Pollo Agridulce</h3>
                                 <div class="recipe-meta">
-                                    <span class="difficulty">Media</span>
+                                    <span class="difficulty" data-i18n="Media">Media</span>
                                     <span class="time">45 min</span>
-                                    <span class="category">Comida</span>
+                                    <span class="category" data-i18n="Comida">Comida</span>
                                 </div>
                                 <div class="description">
-                                    <h3 class="title">Pollo Agridulce</h3>
-                                    <p>Delicioso plato de pollo agridulce con un toque especial. Una combinación
-                                        perfecta de sabores dulces y ácidos que te transportará a la auténtica cocina
-                                        china.</p>
-                                    <a href="#" class="read-more">Leer más</a>
+                                    <h3 class="title" data-i18n="Pollo Agridulce">Pollo Agridulce</h3>
+                                    <p data-i18n="Descripción Pollo Agridulce">Delicioso plato de pollo agridulce con un toque especial. Una combinación perfecta de sabores dulces y ácidos que te transportará a la auténtica cocina china.</p>
+                                    <a href="#" class="read-more" data-i18n="Leer más">Leer más</a>
                                 </div>
                             </div>
                         </div>
@@ -183,10 +179,8 @@
                                     <span class="category">Merienda</span>
                                 </div>
                                 <div class="description">
-                                    <p>Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional
-                                        china. Perfectas para acompañar el té o como snack en cualquier momento del día.
-                                    </p>
-                                    <a href="#" class="read-more">Leer más</a>
+                                    <p data-i18n="Descripción Galletas de Sésamo">Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional china. Perfectas para acompañar el té o como snack en cualquier momento del día.</p>
+                                    <a href="#" class="read-more" data-i18n="Leer más">Leer más</a>
                                 </div>
                             </div>
                         </div>
@@ -203,9 +197,8 @@
                                     <span class="category">Desayuno</span>
                                 </div>
                                 <div class="description">
-                                    <p>Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un
-                                        desayuno tradicional de la cocina china que te encantará.</p>
-                                    <a href="#" class="read-more">Leer más</a>
+                                    <p data-i18n="Descripción Bollitos Chinos">Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un desayuno tradicional de la cocina china que te encantará.</p>
+                                    <a href="#" class="read-more" data-i18n="Leer más">Leer más</a>
                                 </div>
                             </div>
                         </div>
@@ -222,9 +215,8 @@
                                     <span class="category">Cena</span>
                                 </div>
                                 <div class="description">
-                                    <p>Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y
-                                        sabroso que te transportará a las calles de China.</p>
-                                    <a href="#" class="read-more">Leer más</a>
+                                    <p data-i18n="Descripción Fideos Salteados">Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y sabroso que te transportará a las calles de China.</p>
+                                    <a href="#" class="read-more" data-i18n="Leer más">Leer más</a>
                                 </div>
                             </div>
                         </div>
@@ -241,9 +233,8 @@
                                     <span class="category">Sopa</span>
                                 </div>
                                 <div class="description">
-                                    <p>Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato
-                                        tradicional chino perfecto para días fríos.</p>
-                                    <a href="#" class="read-more">Leer más</a>
+                                    <p data-i18n="Descripción Sopa Wonton">Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos.</p>
+                                    <a href="#" class="read-more" data-i18n="Leer más">Leer más</a>
                                 </div>
                             </div>
                         </div>

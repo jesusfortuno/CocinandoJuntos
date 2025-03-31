@@ -98,6 +98,69 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     })
+
+    // Actualizar los enlaces del footer
+    document.querySelectorAll('.footer-links a, .footer-links h3').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (key && window.i18n.translations[language][key]) {
+        element.textContent = window.i18n.translations[language][key];
+      }
+    });
+
+    // Actualizar elementos de la sección hero
+    document.querySelectorAll('.video-overlay [data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (key && window.i18n.translations[language][key]) {
+        element.textContent = window.i18n.translations[language][key];
+      }
+    });
+
+    // Actualizar las notificaciones
+    const notificationElements = document.querySelectorAll('.notification-panel [data-i18n]');
+    notificationElements.forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (window.i18n.translations[language][key]) {
+        element.textContent = window.i18n.translations[language][key];
+      }
+    });
+
+    // Actualizar específicamente los elementos de notificación
+    const notificationTitle = document.querySelector('.notification-header h3');
+    if (notificationTitle) {
+      notificationTitle.textContent = window.i18n.translations[language]["Notificaciones"];
+    }
+
+    const markAllReadBtn = document.getElementById('mark-all-read');
+    if (markAllReadBtn) {
+      markAllReadBtn.textContent = window.i18n.translations[language]["Marcar todas como leídas"];
+    }
+
+    const emptyMessage = document.querySelector('.notification-empty');
+    if (emptyMessage) {
+      emptyMessage.textContent = window.i18n.translations[language]["No tienes notificaciones"];
+    }
+
+    // Actualizar el botón de cerrar sesión
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+      logoutBtn.textContent = window.i18n.translations[language]["Cerrar Sesión"];
+    }
+
+    // Actualizar elementos del menú desplegable
+    document.querySelectorAll('.overlay-menu [data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (window.i18n.translations[language][key]) {
+        element.textContent = window.i18n.translations[language][key];
+      }
+    });
+
+    // Actualizar las descripciones de las recetas
+    document.querySelectorAll('.description p[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (window.i18n.translations[language][key]) {
+            element.textContent = window.i18n.translations[language][key];
+        }
+    });
   }
 })
 

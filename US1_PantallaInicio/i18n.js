@@ -16,6 +16,7 @@ const translations = {
     Desayuno: "Desayuno",
     "Dificultad:": "Dificultad:",
     "Ver todas las recetas": "Ver todas las recetas",
+    "Log Out": "Cerrar Sesión",
 
     // Hero section
     "Cocinando Juntos": "Cocinando Juntos",
@@ -67,6 +68,11 @@ const translations = {
     "Culturas Gastronómicas": "Culturas Gastronómicas",
     "Tipo de Plato": "Tipo de Plato",
     "Dificultad de la Receta": "Dificultad de la Receta",
+    Española: "Española",
+    Francesa: "Francesa",
+    Italiana: "Italiana",
+    Japonesa: "Japonesa",
+    Venezolana: "Venezolana",
 
     // Footer
     "Sobre Nosotros": "Sobre Nosotros",
@@ -83,6 +89,33 @@ const translations = {
     Síguenos: "Síguenos",
     "Idioma:": "Idioma:",
     "Todos los derechos reservados": "Todos los derechos reservados",
+
+    // Footer links
+    "Sobre Nosotros": "Sobre Nosotros",
+    "Contacto": "Contacto",
+    "Política de Privacidad": "Política de Privacidad",
+    "Términos y Condiciones": "Términos y Condiciones",
+    "Política de Cookies": "Política de Cookies",
+    "Aviso Legal": "Aviso Legal",
+    "Recetas": "Recetas",
+    "Chefs": "Chefs",
+    "Sobre Nosotros": "Sobre Nosotros",
+    "Legal": "Legal",
+    "Comunidad": "Comunidad",
+
+    // Notificaciones
+    "Notificaciones": "Notificaciones",
+    "Marcar todas como leídas": "Marcar todas como leídas",
+    "No tienes notificaciones": "No tienes notificaciones",
+    "Mark all as read": "Marcar todas como leídas",
+    "Notifications": "Notificaciones",
+
+    // Descripciones de recetas
+    "Descripción Pollo Agridulce": "Delicioso plato de pollo agridulce con un toque especial. Una combinación perfecta de sabores dulces y ácidos que te transportará a la auténtica cocina china.",
+    "Descripción Galletas de Sésamo": "Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional china. Perfectas para acompañar el té o como snack en cualquier momento del día.",
+    "Descripción Bollitos Chinos": "Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un desayuno tradicional de la cocina china que te encantará.",
+    "Descripción Fideos Salteados": "Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y sabroso que te transportará a las calles de China.",
+    "Descripción Sopa Wonton": "Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos."
   },
 
   // Catalán
@@ -98,6 +131,7 @@ const translations = {
     Desayuno: "Esmorzar",
     "Dificultad:": "Dificultat:",
     "Ver todas las recetas": "Veure totes les receptes",
+    "Log Out": "Tancar Sessió",
 
     // Hero section
     "Cocinando Juntos": "Cuinant Junts",
@@ -149,6 +183,11 @@ const translations = {
     "Culturas Gastronómicas": "Cultures Gastronòmiques",
     "Tipo de Plato": "Tipus de Plat",
     "Dificultad de la Receta": "Dificultat de la Recepta",
+    Española: "Espanyola",
+    Francesa: "Francesa",
+    Italiana: "Italiana",
+    Japonesa: "Japonesa",
+    Venezolana: "Veneçolana",
 
     // Footer
     "Sobre Nosotros": "Sobre Nosaltres",
@@ -165,6 +204,33 @@ const translations = {
     Síguenos: "Segueix-nos",
     "Idioma:": "Idioma:",
     "Todos los derechos reservados": "Tots els drets reservats",
+
+    // Footer links
+    "Sobre Nosotros": "Sobre Nosotros",
+    "Contacto": "Contacto",
+    "Política de Privacidad": "Política de Privacidad",
+    "Términos y Condiciones": "Términos y Condiciones",
+    "Política de Cookies": "Política de Cookies",
+    "Aviso Legal": "Aviso Legal",
+    "Recetas": "Receptes",
+    "Chefs": "Xefs",
+    "Sobre Nosotros": "Sobre Nosotros",
+    "Legal": "Legal",
+    "Comunidad": "Comunidad",
+
+    // Notificaciones
+    "Notificaciones": "Notificacions",
+    "Marcar todas como leídas": "Marcar totes com a llegides",
+    "No tienes notificaciones": "No tens notificacions",
+    "Mark all as read": "Marcar totes com a llegides",
+    "Notifications": "Notificacions",
+
+    // Descripciones de recetas
+    "Descripción Pollo Agridulce": "Deliciós plat de pollastre agredolç amb un toc especial. Una combinació perfecta de sabors dolços i àcids que et transportarà a l'autèntica cuina xinesa.",
+    "Descripción Galletas de Sésamo": "Cruixents galetes amb llavors de sèsam, una deliciosa recepta tradicional xinesa. Perfectes per acompanyar el te o com a snack en qualsevol moment del dia.",
+    "Descripción Bollitos Chinos": "Suaus i esponjosos panets al vapor, farcits de delicioses barreges. Un esmorzar tradicional de la cuina xinesa que t'encantarà.",
+    "Descripción Fideos Salteados": "Fideus saltats amb verdures cruixents i una salsa especial. Un plat ràpid i saborós que et transportarà als carrers de la Xina.",
+    "Descripción Sopa Wonton": "Reconfortant sopa amb wontons casolans farcits de carn i gambes. Un plat tradicional xinès perfecte per a dies freds."
   },
 
   // Inglés
@@ -180,6 +246,7 @@ const translations = {
     Desayuno: "Breakfast",
     "Dificultad:": "Difficulty:",
     "Ver todas las recetas": "View all recipes",
+    "Log Out": "Log Out",
 
     // Hero section
     "Cocinando Juntos": "Cooking Together",
@@ -231,6 +298,11 @@ const translations = {
     "Culturas Gastronómicas": "Gastronomic Cultures",
     "Tipo de Plato": "Dish Type",
     "Dificultad de la Receta": "Recipe Difficulty",
+    Española: "Spanish",
+    Francesa: "French",
+    Italiana: "Italian",
+    Japonesa: "Japanese",
+    Venezolana: "Venezuelan",
 
     // Footer
     "Sobre Nosotros": "About Us",
@@ -247,6 +319,33 @@ const translations = {
     Síguenos: "Follow Us",
     "Idioma:": "Language:",
     "Todos los derechos reservados": "All rights reserved",
+
+    // Footer links
+    "Sobre Nosotros": "About Us",
+    "Contacto": "Contact",
+    "Política de Privacidad": "Privacy Policy",
+    "Términos y Condiciones": "Terms and Conditions",
+    "Política de Cookies": "Cookie Policy",
+    "Aviso Legal": "Legal Notice",
+    "Recetas": "Recipes",
+    "Chefs": "Chefs",
+    "Sobre Nosotros": "About Us",
+    "Legal": "Legal",
+    "Comunidad": "Community",
+
+    // Notificaciones
+    "Notificaciones": "Notifications",
+    "Marcar todas como leídas": "Mark all as read",
+    "No tienes notificaciones": "You have no notifications",
+    "Mark all as read": "Mark all as read",
+    "Notifications": "Notifications",
+
+    // Descripciones de recetas
+    "Descripción Pollo Agridulce": "Delicious sweet and sour chicken dish with a special touch. A perfect combination of sweet and sour flavors that will transport you to authentic Chinese cuisine.",
+    "Descripción Galletas de Sésamo": "Crunchy cookies with sesame seeds, a delicious traditional Chinese recipe. Perfect to accompany tea or as a snack at any time of day.",
+    "Descripción Bollitos Chinos": "Soft and fluffy steamed buns, filled with delicious mixtures. A traditional Chinese breakfast that you'll love.",
+    "Descripción Fideos Salteados": "Stir-fried noodles with crunchy vegetables and a special sauce. A quick and tasty dish that will transport you to the streets of China.",
+    "Descripción Sopa Wonton": "Comforting soup with homemade wontons filled with meat and shrimp. A traditional Chinese dish perfect for cold days."
   },
 }
 
@@ -322,6 +421,14 @@ function prepareElementsForTranslation() {
       input.setAttribute("data-i18n", placeholder)
     }
   })
+
+  // Añadir soporte específico para los enlaces del footer
+  document.querySelectorAll('.footer-links a, .footer-links h3').forEach(element => {
+    const text = element.textContent.trim();
+    if (translations.es[text] || translations.ca[text] || translations.en[text]) {
+      element.setAttribute('data-i18n', text);
+    }
+  });
 }
 
 // Función para asegurar que las imágenes se carguen correctamente
