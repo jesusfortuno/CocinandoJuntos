@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="index2.js"></script>
     <script src="responsive-fixes.js"></script>
+    <script src="random-recipes.js"></script>
 </head>
 
 
@@ -483,65 +484,75 @@
             }
         });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const track = document.querySelector(".recipe-track");
-            const prevButton = document.querySelector(".prev-button");
-            const nextButton = document.querySelector(".next-button");
-            const cards = track.querySelectorAll(".recipe-card");
-            const cardCount = cards.length;
-            const cardsToShow = 5;
-            let currentIndex = 0;
+    </script>
 
-            if (!track || !prevButton || !nextButton || cardCount === 0) {
-                console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
-                return;
-            }
+    // Modificar el script al final del archivo HTML para usar el enfoque basado en display
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const track = document.querySelector(".recipe-track");
+        const prevButton = document.querySelector(".prev-button");
+        const nextButton = document.querySelector(".next-button");
+        const cards = track.querySelectorAll(".recipe-card");
+        const cardCount = cards.length;
+        const cardsToShow = 5;
+        let currentIndex = 0;
+        let isAnimating = false;
 
-            function updateSliderPosition() {
-                const cardWidth = track.querySelector(".recipe-card").offsetWidth;
-                const cardMargin = Number.parseInt(window.getComputedStyle(cards[0]).marginRight);
-                const totalCardWidth = cardWidth + cardMargin;
+        if (!track || !prevButton || !nextButton || cardCount === 0) {
+        console.error("Error: Elementos del slider no encontrados o no hay tarjetas.");
+        return;
+        }
 
-                track.style.transform = `translateX(-${currentIndex * totalCardWidth}px)`;
-                track.style.transition = "transform 0.5s ease";
-
-                prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
-                prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
-
-                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-                nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
-                nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
-
-                cards.forEach((card, index) => {
-                    card.style.display = (index >= currentIndex * cardsToShow && index < (currentIndex + 1) * cardsToShow) ? 'block' : 'none';
-                });
-            }
-
-            prevButton.addEventListener("click", () => {
-                if (currentIndex > 0) {
-                    currentIndex -= 1;
-                    updateSliderPosition();
-                }
-            });
-
-            nextButton.addEventListener("click", () => {
-                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-                if (currentIndex < maxGroups) {
-                    currentIndex += 1;
-                    updateSliderPosition();
-                }
-            });
-
-            nextButton.addEventListener("click", () => {
-                const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
-                if (currentIndex < maxGroups) {
-                    currentIndex += 1;
-                    updateSliderPosition();
-                }
-            });
-
-            updateSliderPosition();
+        function updateSliderPosition() {
+        // Usar un enfoque basado en display en lugar de transform
+        cards.forEach((card, index) => {
+            const startIndex = currentIndex * cardsToShow;
+            const endIndex = startIndex + cardsToShow;
+            const isVisible = index >= startIndex && index < endIndex;
+            card.style.display = isVisible ? "block" : "none";
         });
+
+        // Actualizar estado de los botones
+        prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
+        prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer";
+
+        const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+        nextButton.style.opacity = currentIndex >= maxGroups ? "0.5" : "1";
+        nextButton.style.cursor = currentIndex >= maxGroups ? "default" : "pointer";
+        
+        // Permitir nuevos clics después de un tiempo
+        setTimeout(() => {
+            isAnimating = false;
+        }, 300);
+        }
+
+        prevButton.addEventListener("click", () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSliderPosition();
+        } else {
+            isAnimating = false;
+        }
+        });
+
+        nextButton.addEventListener("click", () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        const maxGroups = Math.ceil(cardCount / cardsToShow) - 1;
+        if (currentIndex < maxGroups) {
+            currentIndex++;
+            updateSliderPosition();
+        } else {
+            isAnimating = false;
+        }
+        });
+
+        updateSliderPosition();
+    });
     </script>
 </body>
 
