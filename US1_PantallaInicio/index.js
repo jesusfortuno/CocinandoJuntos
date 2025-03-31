@@ -248,3 +248,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // Asegurar que esta función se ejecute cuando el DOM esté cargado
 document.addEventListener("DOMContentLoaded", setupScrollToTop)
 
+// Asegurarse de que no haya conflictos con otros manejadores de eventos
+document.addEventListener('DOMContentLoaded', () => {
+    // Remover cualquier manejador de eventos existente del botón de scroll
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (scrollBtn) {
+        const newScrollBtn = scrollBtn.cloneNode(true);
+        scrollBtn.parentNode.replaceChild(newScrollBtn, scrollBtn);
+    }
+});
+

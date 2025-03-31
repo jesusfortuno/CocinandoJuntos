@@ -106,28 +106,49 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Función para mejorar el botón de scroll
     function enhanceScrollButton() {
-      const scrollToTopBtn = document.getElementById("scrollToTop")
-  
-      if (scrollToTopBtn) {
-        // Mostrar/ocultar el botón según la posición de scroll
-        window.addEventListener("scroll", () => {
-          if (window.pageYOffset > 300) {
-            scrollToTopBtn.style.opacity = "1"
-          } else {
-            scrollToTopBtn.style.opacity = "0.7"
-          }
-        })
-  
-        // Asegurar que el evento de clic funcione correctamente
-        scrollToTopBtn.addEventListener("click", (e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          })
-        })
+      const scrollToTopBtn = document.getElementById("scrollToTop");
+      
+      if (!scrollToTopBtn) {
+        console.error("Scroll to top button not found");
+        return;
       }
+  
+      // Configuración inicial del botón
+      scrollToTopBtn.style.display = 'none';
+      
+      // Función para manejar la visibilidad del botón
+      function handleScroll() {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.style.display = 'block';
+          scrollToTopBtn.style.opacity = '1';
+        } else {
+          scrollToTopBtn.style.opacity = '0';
+          setTimeout(() => {
+            if (window.pageYOffset <= 300) {
+              scrollToTopBtn.style.display = 'none';
+            }
+          }, 300);
+        }
+      }
+  
+      // Función para realizar el scroll suave
+      function scrollToTop(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+  
+      // Añadir event listeners
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      scrollToTopBtn.addEventListener('click', scrollToTop);
+  
+      // Verificar la posición inicial del scroll
+      handleScroll();
+  
+      // Log para debugging
+      console.log("Scroll button initialized with new configuration");
     }
   
     // Inicializar todas las mejoras
@@ -140,6 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
     responsiveStyles.rel = "stylesheet"
     responsiveStyles.href = "styles-responsive.css"
     document.head.appendChild(responsiveStyles)
+
+    console.log("DOM loaded, initializing scroll button");
   })
   
   

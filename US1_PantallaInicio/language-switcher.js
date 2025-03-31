@@ -19,16 +19,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Evento para cambiar el idioma cuando se selecciona una opción
   languageSelector.addEventListener("change", function () {
     const selectedLanguage = this.value
-
-    // Guardar la preferencia de idioma
     localStorage.setItem("language", selectedLanguage)
-
-    // Cambiar el idioma de la página
-    if (window.i18n && typeof window.i18n.changeLanguage === "function") {
-      window.i18n.changeLanguage(selectedLanguage)
-    } else {
-      console.error("El sistema de internacionalización no está inicializado correctamente")
-    }
+    
+    // Solo traducir elementos que tengan el atributo data-i18n
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      // Ignorar enlaces del footer y elementos de navegación
+      if (!element.closest('.footer-links, .social-icons, nav')) {
+        const key = element.getAttribute("data-i18n")
+        if (window.i18n.translations[selectedLanguage][key]) {
+          if (element.placeholder !== undefined) {
+            element.placeholder = window.i18n.translations[selectedLanguage][key]
+          } else {
+            element.textContent = window.i18n.translations[selectedLanguage][key]
+          }
+        }
+      }
+    })
   })
 
   // Actualizar elementos dinámicos cuando cambia el idioma

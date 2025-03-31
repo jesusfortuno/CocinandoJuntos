@@ -5,17 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Cocinando Juntos</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="index.js"></script>
     <link rel="stylesheet" href="../notification-styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="../notification-center.js"></script>
     <!-- Añadir FontAwesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles-search-update.css">
+    <script src="i18n.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="index2.js"></script>
+    <script src="responsive-fixes.js"></script>
 </head>
 
-        <link rel="stylesheet" href="styles-search-update.css">
-        <script src="i18n.js"></script>
-        <script src="language-switcher.js"></script>
+
 <body>
     <nav>
         <a href="index.html" class="logo">
@@ -325,10 +329,10 @@
             <div class="footer-links">
                 <h3>Legal</h3>
                 <ul>
-                    <li><a href="./politica_privacidad.html">Política de Privacidad</a></li>
-                    <li><a href="./terminos_condiciones.html">Términos y Condiciones</a></li>
-                    <li><a href="./politica_cookies.html">Política de Cookies</a></li>
-                    <li><a href="./aviso_legal.html">Aviso Legal</a></li>
+                    <li><a href="./politica-privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="./terminos-condiciones.html">Términos y Condiciones</a></li>
+                    <li><a href="./politica-cookies.html">Política de Cookies</a></li>
+                    <li><a href="./aviso-legal.html">Aviso Legal</a></li>
                 </ul>
             </div>
 
@@ -336,7 +340,7 @@
             <div class="footer-links">
                 <h3>Comunidad</h3>
                 <ul>
-                    <li><a href="./../Platos.html">Recetas</a></li>
+                    <li><a href="./Platos.html">Recetas</a></li>
                     <li><a href="./chefs.html">Chefs</a></li>
                 </ul>
             </div>
@@ -345,36 +349,31 @@
             <div class="footer-social">
                 <h3>Síguenos</h3>
                 <div class="social-icons">
-                    <a href="https://www.instagram.com/" aria-label="Instagram">
-                        <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png"
-                            alt="Instagram">
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram">
                     </a>
-                    <a href="https://www.facebook.com/" aria-label="Facebook">
+                    <a href="https://www.facebook.com/" target="_blank">
                         <img src="./Imagenes/logos/2023_Facebook_icon.svg.png" alt="Facebook">
                     </a>
-                    <a href="https://x.com/" aria-label="Twitter">
+                    <a href="https://x.com/" target="_blank">
                         <img src="./Imagenes/logos/Logo_of_Twitter.svg.png" alt="Twitter">
                     </a>
-                    <a href="https://www.youtube.com/" aria-label="YouTube">
+                    <a href="https://www.youtube.com/" target="_blank">
                         <img src="./Imagenes/logos/youtube.png" alt="YouTube">
                     </a>
-                    <a href="https://es.pinterest.com/" aria-label="Pinterest">
+                    <a href="https://es.pinterest.com/" target="_blank">
                         <img src="./Imagenes/logos/51LdjRWonGL.png" alt="Pinterest">
                     </a>
-                    <a href="https://www.tiktok.com/es/" aria-label="TikTok">
+                    <a href="https://www.tiktok.com/es/" target="_blank">
                         <img src="./Imagenes/logos/tiktok-6338432_1280.webp" alt="TikTok">
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer-bottom">
             <div class="footer-bottom-content">
-                <div class="copyright">
-                    © 2025 Cocinando Juntos - Todos los derechos reservados
-                </div>
-                <!-- Dentro del footer-bottom-right -->
+                <p class="copyright">© 2025 Cocinando Juntos - Todos los derechos reservados</p>
                 <div class="footer-bottom-right">
                     <div class="language-selector">
                         <label for="language">Idioma:</label>
@@ -384,19 +383,13 @@
                             <option value="en">English</option>
                         </select>
                     </div>
-                    <!-- Modificar el botón de scroll para asegurar que funcione correctamente -->
-                    <!-- Reemplazar el div del botón de scroll con esta versión simplificada: -->
-
-                    <div class="scroll-to-top" id="scrollToTop">
+                    <button id="scrollToTop" class="scroll-to-top" aria-label="Volver arriba">
                         <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="index2.js"></script>
     <!-- Eliminar la referencia a search.js ya que ahora la funcionalidad está en index2.js -->
     <script>
         // Obtener el usuario desde localStorage
@@ -528,28 +521,6 @@
             updateSliderPosition();
         });
     </script>
-
-    <!-- Asegurar que el script para el botón de scroll esté correctamente implementado -->
-    <!-- Añadir este script al final del body, justo antes del cierre: -->
-
-    <script>
-        // Script específico para el botón de scroll
-        document.addEventListener('DOMContentLoaded', function () {
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-
-            if (scrollToTopBtn) {
-                scrollToTopBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    console.log('Botón de scroll clickeado');
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                });
-            }
-        });
-    </script>
-    <script src="responsive-fixes.js"></script>
 </body>
 
 </html>

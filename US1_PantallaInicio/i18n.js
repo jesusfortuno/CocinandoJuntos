@@ -282,26 +282,32 @@ function prepareElementsForTranslation() {
     "h5",
     "h6",
     "p",
-    "a:not(.culture-card)", // Excluir los enlaces de culture-card
     "button",
     "label",
-    "span",
-    "li",
+    "span:not(.copyright)", // Excluir el copyright
     "option",
-    ".recipe-meta span",
+    ".recipe-meta span"
   ]
 
-  // Seleccionar todos los elementos de texto
-  const textElements = document.querySelectorAll(textSelectors.join(", "))
+  // Excluir específicamente los enlaces del footer y otros enlaces de navegación
+  const excludeSelectors = [
+    '.footer-links a',
+    '.social-icons a',
+    '.auth-buttons',
+    '.culture-card',
+    'nav a'
+  ].join(',')
+
+  // Seleccionar todos los elementos de texto excepto los excluidos
+  const textElements = document.querySelectorAll(
+    textSelectors.join(", ")
+  )
 
   // Para cada elemento, añadir el atributo data-i18n con el texto original
   textElements.forEach((element) => {
-    // Ignorar elementos que ya tienen el atributo o están vacíos
-    // También ignorar elementos dentro de .culture-card que no sean h3
-    const isInCultureCard = element.closest(".culture-card") && element.tagName !== "H3"
-    if (!element.hasAttribute("data-i18n") && element.textContent.trim() && !isInCultureCard) {
+    // Verificar que el elemento no está dentro de las secciones excluidas
+    if (!element.closest(excludeSelectors) && !element.hasAttribute("data-i18n") && element.textContent.trim()) {
       const text = element.textContent.trim()
-
       // Verificar si el texto existe en las traducciones
       if (translations.es[text]) {
         element.setAttribute("data-i18n", text)
