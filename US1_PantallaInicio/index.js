@@ -311,6 +311,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Asegurar que esta función se ejecute cuando el DOM esté cargado
 document.addEventListener("DOMContentLoaded", () => {
+  function setupScrollToTop() {
+    const scrollToTopButton = document.querySelector(".scroll-to-top")
+
+    if (scrollToTopButton) {
+      console.log("Botón de scroll encontrado:", scrollToTopButton)
+
+      // Usar un manejador de eventos directo y simple
+      scrollToTopButton.onclick = (e) => {
+        e.preventDefault()
+        console.log("Botón de scroll clickeado")
+
+        // Scroll suave hacia arriba
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      }
+    } else {
+      console.error("Botón de scroll no encontrado")
+    }
+  }
   setupScrollToTop()
 })
 
@@ -326,9 +347,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Añadir al final del archivo, justo después de la inicialización del slider
 document.addEventListener("languageChanged", (e) => {
-  updateSliderPosition()
+  if (typeof window.updateRecipeSliderPosition === "function") {
+    window.updateRecipeSliderPosition()
+  }
 })
 
-// Añadir esta función global para que esté disponible para otros scripts
-window.updateSliderPosition = updateSliderPosition
+// Eliminar o comentar la función updateSliderPosition global al final del archivo
+// window.updateSliderPosition = updateSliderPosition;
 

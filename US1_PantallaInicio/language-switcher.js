@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
   languageSelector.addEventListener("change", function () {
     const selectedLanguage = this.value
     localStorage.setItem("language", selectedLanguage)
-    
+
     // Solo traducir elementos que tengan el atributo data-i18n
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       // Ignorar enlaces del footer y elementos de navegación
-      if (!element.closest('.footer-links, .social-icons, nav')) {
+      if (!element.closest(".footer-links, .social-icons, nav")) {
         const key = element.getAttribute("data-i18n")
         if (window.i18n.translations[selectedLanguage][key]) {
           if (element.placeholder !== undefined) {
@@ -35,11 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     })
+
+    // Disparar un evento personalizado para notificar que el idioma ha cambiado
+    document.dispatchEvent(
+      new CustomEvent("languageChanged", {
+        detail: { language: selectedLanguage },
+      }),
+    )
   })
 
   // Actualizar elementos dinámicos cuando cambia el idioma
   document.addEventListener("languageChanged", (e) => {
     updateDynamicElements(e.detail.language)
+
+    // Añadir esta línea para actualizar las traducciones de las recetas
+    if (typeof window.updateRecipeTranslations === "function") {
+      window.updateRecipeTranslations(e.detail.language)
+    }
   })
 
   // Función para actualizar elementos que se generan dinámicamente
@@ -65,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Ejemplo: actualizar elementos generados dinámicamente en el slider
+    // Actualizar específicamente las recetas en el slider
     const recipeCards = document.querySelectorAll(".recipe-card")
     recipeCards.forEach((card) => {
       // Buscar elementos dentro de las tarjetas que necesiten traducción
@@ -74,6 +86,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const key = element.getAttribute("data-i18n")
         if (window.i18n.translations[language][key]) {
           element.textContent = window.i18n.translations[language][key]
+        }
+      })
+
+      // Traducir también los elementos que no tienen data-i18n pero que podrían necesitar traducción
+      // como los botones "Leer más" o textos específicos
+      const readMoreLinks = card.querySelectorAll(".read-more")
+      readMoreLinks.forEach((link) => {
+        const readMoreKey = "Leer más"
+        if (window.i18n.translations[language][readMoreKey]) {
+          link.textContent = window.i18n.translations[language][readMoreKey]
         }
       })
     })
@@ -100,67 +122,72 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     // Actualizar los enlaces del footer
-    document.querySelectorAll('.footer-links a, .footer-links h3').forEach(element => {
-      const key = element.getAttribute('data-i18n');
+    document.querySelectorAll(".footer-links a, .footer-links h3").forEach((element) => {
+      const key = element.getAttribute("data-i18n")
       if (key && window.i18n.translations[language][key]) {
-        element.textContent = window.i18n.translations[language][key];
+        element.textContent = window.i18n.translations[language][key]
       }
-    });
+    })
 
     // Actualizar elementos de la sección hero
-    document.querySelectorAll('.video-overlay [data-i18n]').forEach(element => {
-      const key = element.getAttribute('data-i18n');
+    document.querySelectorAll(".video-overlay [data-i18n]").forEach((element) => {
+      const key = element.getAttribute("data-i18n")
       if (key && window.i18n.translations[language][key]) {
-        element.textContent = window.i18n.translations[language][key];
+        element.textContent = window.i18n.translations[language][key]
       }
-    });
+    })
 
     // Actualizar las notificaciones
-    const notificationElements = document.querySelectorAll('.notification-panel [data-i18n]');
-    notificationElements.forEach(element => {
-      const key = element.getAttribute('data-i18n');
+    const notificationElements = document.querySelectorAll(".notification-panel [data-i18n]")
+    notificationElements.forEach((element) => {
+      const key = element.getAttribute("data-i18n")
       if (window.i18n.translations[language][key]) {
-        element.textContent = window.i18n.translations[language][key];
+        element.textContent = window.i18n.translations[language][key]
       }
-    });
+    })
 
     // Actualizar específicamente los elementos de notificación
-    const notificationTitle = document.querySelector('.notification-header h3');
+    const notificationTitle = document.querySelector(".notification-header h3")
     if (notificationTitle) {
-      notificationTitle.textContent = window.i18n.translations[language]["Notificaciones"];
+      notificationTitle.textContent = window.i18n.translations[language]["Notificaciones"]
     }
 
-    const markAllReadBtn = document.getElementById('mark-all-read');
+    const markAllReadBtn = document.getElementById("mark-all-read")
     if (markAllReadBtn) {
-      markAllReadBtn.textContent = window.i18n.translations[language]["Marcar todas como leídas"];
+      markAllReadBtn.textContent = window.i18n.translations[language]["Marcar todas como leídas"]
     }
 
-    const emptyMessage = document.querySelector('.notification-empty');
+    const emptyMessage = document.querySelector(".notification-empty")
     if (emptyMessage) {
-      emptyMessage.textContent = window.i18n.translations[language]["No tienes notificaciones"];
+      emptyMessage.textContent = window.i18n.translations[language]["No tienes notificaciones"]
     }
 
     // Actualizar el botón de cerrar sesión
-    const logoutBtn = document.getElementById('logout-btn');
+    const logoutBtn = document.getElementById("logout-btn")
     if (logoutBtn) {
-      logoutBtn.textContent = window.i18n.translations[language]["Cerrar Sesión"];
+      logoutBtn.textContent = window.i18n.translations[language]["Cerrar Sesión"]
     }
 
     // Actualizar elementos del menú desplegable
-    document.querySelectorAll('.overlay-menu [data-i18n]').forEach(element => {
-      const key = element.getAttribute('data-i18n');
+    document.querySelectorAll(".overlay-menu [data-i18n]").forEach((element) => {
+      const key = element.getAttribute("data-i18n")
       if (window.i18n.translations[language][key]) {
-        element.textContent = window.i18n.translations[language][key];
+        element.textContent = window.i18n.translations[language][key]
       }
-    });
+    })
 
     // Actualizar las descripciones de las recetas
-    document.querySelectorAll('.description p[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (window.i18n.translations[language][key]) {
-            element.textContent = window.i18n.translations[language][key];
-        }
-    });
+    document.querySelectorAll(".description p[data-i18n]").forEach((element) => {
+      const key = element.getAttribute("data-i18n")
+      if (window.i18n.translations[language][key]) {
+        element.textContent = window.i18n.translations[language][key]
+      }
+    })
+
+    // Intentar actualizar el slider de recetas aleatorias si existe la función
+    if (typeof window.updateRandomRecipesSlider === "function") {
+      window.updateRandomRecipesSlider()
+    }
   }
 })
 
