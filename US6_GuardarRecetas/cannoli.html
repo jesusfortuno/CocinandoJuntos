@@ -1,49 +1,10 @@
-// Función para generar un nombre de archivo a partir del título de la receta
-function generarNombreArchivo(titulo) {
-    return titulo
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // Eliminar acentos
-      .replace(/[^\w\s]/g, "") // Eliminar caracteres especiales
-      .replace(/\s+/g, "-") // Reemplazar espacios con guiones
-      .substring(0, 50) // Limitar longitud
-  }
-  
-  // Función para generar el HTML de la receta
-  function generarHTMLReceta(receta) {
-    // Generar lista de ingredientes
-    const ingredientesHTML = receta.ingredientes
-      .split("\n")
-      .map((ingrediente) => `<li>${ingrediente.trim()}</li>`)
-      .join("\n                    ")
-  
-    // Generar lista de pasos
-    const pasosHTML = receta.pasos
-      .split("\n")
-      .map((paso, index) => `<li>${paso.trim()}</li>`)
-      .join("\n                    ")
-  
-    // Determinar la cultura para el breadcrumb (usando el campo con C mayúscula)
-    const culturaBreadcrumb = receta.Cultura || "Otras Culturas"
-  
-    // Determinar la categoría para el breadcrumb como respaldo
-    let categoriaBreadcrumb = receta.categoria || "Platos Principales"
-    if (receta.categoria === "Postre") categoriaBreadcrumb = "Postres"
-    if (receta.categoria === "Entrante") categoriaBreadcrumb = "Entrantes"
-    if (receta.categoria === "Desayuno") categoriaBreadcrumb = "Desayunos"
-    if (receta.categoria === "Merienda") categoriaBreadcrumb = "Meriendas"
-    if (receta.categoria === "Cena") categoriaBreadcrumb = "Cenas"
-    if (receta.categoria === "Sopa") categoriaBreadcrumb = "Sopas"
-    if (receta.categoria === "Ensalada") categoriaBreadcrumb = "Ensaladas"
-  
-    // Generar el HTML completo
-    return `<!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="es">
   
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>${receta.titulo} - Cocinando Juntos</title>
+      <title>Cannoli - Cocinando Juntos</title>
       <link rel="stylesheet" href="global.css">
       <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
       <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -75,19 +36,19 @@ function generarNombreArchivo(titulo) {
       <main>
           <div class="breadcrumb">
               <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                  href="./../US1_PantallaInicio/culturas.html">Cultura ${culturaBreadcrumb}</a> > ${receta.titulo}
+                  href="./../US1_PantallaInicio/cultura-italiana.html">Cultura Italiana</a> > Cannoli
           </div>
   
           <div class="recipe-title">
-              <h1>${receta.titulo} <span class="recipe-rating" id="recipeRating"></span></h1>
+              <h1>Cannoli <span class="recipe-rating" id="recipeRating"></span></h1>
           </div>
   
           <div class="recipe-main-content">
               <!-- Columna izquierda: Foto principal y carrusel debajo -->
               <div class="recipe-left-column">
                   <div class="recipe-photo">
-                      <a href="../US1_PantallaInicio/Imagenes/placeholder.jpg" target="_blank">
-                          <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="${receta.titulo}"
+                      <a href="../US1_PantallaInicio/Imagenes/Italia/cannoli.png" target="_blank">
+                          <img src="../US1_PantallaInicio/Imagenes/Italia/cannoli.png" alt="Cannoli"
                               style="aspect-ratio: 1024/576; object-fit: cover;">
                       </a>
                   </div>
@@ -95,8 +56,8 @@ function generarNombreArchivo(titulo) {
                   <!-- Carrusel de imágenes debajo de la foto principal -->
                   <div class="image-carousel-container">
                       <div class="image-thumbnails" id="imageThumbnails">
-                          <div class="thumbnail active" data-index="0" data-src="../US1_PantallaInicio/Imagenes/placeholder.jpg">
-                              <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="${receta.titulo} 1">
+                          <div class="thumbnail active" data-index="0" data-src="../US1_PantallaInicio/Imagenes/Italia/cannoli.png">
+                              <img src="../US1_PantallaInicio/Imagenes/Italia/cannoli.png" alt="Cannoli 1">
                           </div>
                       </div>
                   </div>
@@ -106,16 +67,18 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-center-column">
                   <div class="recipe-info">
                       <div class="recipe-tags">
-                          <span class="tag">Dificultad: ${receta.dificultad}</span>
-                          <span class="tag">Tiempo: ${receta.tiempo}</span>
-                          <span class="tag">Categoría: ${receta.categoria}</span>
-                          ${receta.Cultura ? `<span class="tag">Cultura: ${receta.Cultura}</span>` : ""}
+                          <span class="tag">Dificultad: Media</span>
+                          <span class="tag">Tiempo: 40</span>
+                          <span class="tag">Categoría: Merienda</span>
+                          <!-- Eliminamos la referencia a cultura para evitar errores -->
                       </div>
   
                       <div class="recipe-actions">
-                          <button class="button favorite-btn" data-receta-id="${receta.id}">❤️ Añadir a Favoritos</button>
+                          <button class="button favorite-btn" data-receta-id="17">❤️ Añadir a Favoritos</button>
                           <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                       </div>
+                      
+                      <!-- Eliminamos la sección de descripción -->
                   </div>
               </div>
   
@@ -123,7 +86,7 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-right-column">
                   <div class="recipe-video">
                       <iframe id="recipeVideo" width="96%" height="223" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                          title="${receta.titulo}" frameborder="0"
+                          title="Cannoli" frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowfullscreen>
                       </iframe>
@@ -135,14 +98,30 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-ingredients">
                   <h2>Ingredientes</h2>
                   <ul>
-                      ${ingredientesHTML}
+                      <li>150 g - Harina de trigo</li>
+                    <li>20 g - Azúcar</li>
+                    <li>35 g - Mantequilla</li>
+                    <li>35 g - Vino Marsala o vino de Oporto</li>
+                    <li>1 cucharadita - Cacao en polvo</li>
+                    <li>1 cucharadita - Vinagre de vino blanco</li>
+                    <li>1 unidad - Huevo M</li>
+                    <li>1 pizca - Sal</li>
+                    <li>600 g - Ricotta o requesón para el relleno</li>
+                    <li>200 g - Azúcar para el relleno</li>
+                    <li>75 g - Chips de chocolate para el relleno</li>
                   </ul>
               </div>
   
               <div class="recipe-steps">
                   <h2>Pasos para la Receta</h2>
                   <ol>
-                      ${pasosHTML}
+                    <li>Primero hay que hacer la masa. Para ello mezclamos todos los secos en un bol y hacemos un hueco en el medio con la mano o una cuchara.</li>
+                    <li>Introducimos en ese hueco el Marsala, la mantequilla en pomada, el vinagre y la mitad del huevo batido. Mezclamos todo y hacemos una masa homogénea amasando unos minutos, dejando reposar 30 minutos con film transparente en la nevera.</li>
+                    <li>En una encimera espolvoreamos harina para trabajar la masa y que no se pegue. Ponemos la masa encima y trabajamos con el rodillo estirando la masa en un rectángulo. Plegamos ese rectángulo en tres y volvemos a estirar con el rodillo.</li>
+                    <li>Estiramos la masa hasta que tenga un espesor aproximado de un milímetro y cortamos con un cortapastas de unos 12 centímetros de diámetro. Enrollamos el disco formando en un cilindro o cono metálico y donde se juntan las partes del disco de masa, pegar con el huevo batido que hemos reservado.</li>
+                    <li>Freímos en abundante aceite de oliva a unos 165 ºC, no más temperatura, durante dos o tres minutos y sacamos sobre una rejilla metálica para eliminar todo el exceso de aceite.</li>
+                    <li>Quitamos el cilindro o cono y dejamos enfriar sobre papel absorbente, aprovechando para hacer el relleno. Para ello secamos ligeramente la ricotta del suero que pueda traer.</li>
+                    <li>La mezclamos con el azúcar y añadimos el chocolate en chips o rallado, metemos la mezcla en una manga pastelera y cuando las obleas estén bien frías después de fritas, rellenamos y servimos.</li>
                   </ol>
               </div>
           </div>
@@ -262,38 +241,4 @@ function generarNombreArchivo(titulo) {
           });
       </script>
   </body>
-  </html>`
-  }
-  
-  // Función para descargar el HTML como archivo
-  function descargarArchivoHTML(nombreArchivo, contenidoHTML) {
-    // Crear un objeto Blob con el contenido HTML
-    const blob = new Blob([contenidoHTML], { type: "text/html" })
-  
-    // Crear un enlace para descargar el archivo
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${nombreArchivo}.html`
-  
-    // Añadir el enlace al documento, hacer clic en él y luego eliminarlo
-    document.body.appendChild(a)
-    a.click()
-  
-    // Limpiar
-    setTimeout(() => {
-      document.body.removeChild(a)
-      URL.revokeObjectURL(url)
-    }, 0)
-  
-    return true
-  }
-  
-  // Exportar las funciones para usarlas en gestionRecetas.js
-  window.generadorRecetas = {
-    generarNombreArchivo,
-    generarHTMLReceta,
-    descargarArchivoHTML,
-  }
-  
-  
+  </html>

@@ -99,6 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "/US6_GuardarRecetas/coq-au-vin.html": 14,
       "/US6_GuardarRecetas/quiche-lorraine.html": 15,
       "/US6_GuardarRecetas/tostada-francesa.html": 16,
+      "/US6_GuardarRecetas/cannoli.html": 17,
+      "/US6_GuardarRecetas/lasana.html": 18,
     }
 
     // Encontrar el ID correspondiente a la ruta actual

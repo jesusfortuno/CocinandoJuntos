@@ -1,49 +1,10 @@
-// Función para generar un nombre de archivo a partir del título de la receta
-function generarNombreArchivo(titulo) {
-    return titulo
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // Eliminar acentos
-      .replace(/[^\w\s]/g, "") // Eliminar caracteres especiales
-      .replace(/\s+/g, "-") // Reemplazar espacios con guiones
-      .substring(0, 50) // Limitar longitud
-  }
-  
-  // Función para generar el HTML de la receta
-  function generarHTMLReceta(receta) {
-    // Generar lista de ingredientes
-    const ingredientesHTML = receta.ingredientes
-      .split("\n")
-      .map((ingrediente) => `<li>${ingrediente.trim()}</li>`)
-      .join("\n                    ")
-  
-    // Generar lista de pasos
-    const pasosHTML = receta.pasos
-      .split("\n")
-      .map((paso, index) => `<li>${paso.trim()}</li>`)
-      .join("\n                    ")
-  
-    // Determinar la cultura para el breadcrumb (usando el campo con C mayúscula)
-    const culturaBreadcrumb = receta.Cultura || "Otras Culturas"
-  
-    // Determinar la categoría para el breadcrumb como respaldo
-    let categoriaBreadcrumb = receta.categoria || "Platos Principales"
-    if (receta.categoria === "Postre") categoriaBreadcrumb = "Postres"
-    if (receta.categoria === "Entrante") categoriaBreadcrumb = "Entrantes"
-    if (receta.categoria === "Desayuno") categoriaBreadcrumb = "Desayunos"
-    if (receta.categoria === "Merienda") categoriaBreadcrumb = "Meriendas"
-    if (receta.categoria === "Cena") categoriaBreadcrumb = "Cenas"
-    if (receta.categoria === "Sopa") categoriaBreadcrumb = "Sopas"
-    if (receta.categoria === "Ensalada") categoriaBreadcrumb = "Ensaladas"
-  
-    // Generar el HTML completo
-    return `<!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="es">
   
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>${receta.titulo} - Cocinando Juntos</title>
+      <title>Lasaña - Cocinando Juntos</title>
       <link rel="stylesheet" href="global.css">
       <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
       <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -75,19 +36,19 @@ function generarNombreArchivo(titulo) {
       <main>
           <div class="breadcrumb">
               <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                  href="./../US1_PantallaInicio/culturas.html">Cultura ${culturaBreadcrumb}</a> > ${receta.titulo}
+                  href="./../US1_PantallaInicio/cultura-italiana.html">Cultura Italiana</a> > Lasaña
           </div>
   
           <div class="recipe-title">
-              <h1>${receta.titulo} <span class="recipe-rating" id="recipeRating"></span></h1>
+              <h1>Lasaña <span class="recipe-rating" id="recipeRating"></span></h1>
           </div>
   
           <div class="recipe-main-content">
               <!-- Columna izquierda: Foto principal y carrusel debajo -->
               <div class="recipe-left-column">
                   <div class="recipe-photo">
-                      <a href="../US1_PantallaInicio/Imagenes/placeholder.jpg" target="_blank">
-                          <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="${receta.titulo}"
+                      <a href="../US1_PantallaInicio/Imagenes/Italia/lasaña.jpg" target="_blank">
+                          <img src="../US1_PantallaInicio/Imagenes/Italia/lasaña.jpg" alt="Lasaña"
                               style="aspect-ratio: 1024/576; object-fit: cover;">
                       </a>
                   </div>
@@ -95,8 +56,8 @@ function generarNombreArchivo(titulo) {
                   <!-- Carrusel de imágenes debajo de la foto principal -->
                   <div class="image-carousel-container">
                       <div class="image-thumbnails" id="imageThumbnails">
-                          <div class="thumbnail active" data-index="0" data-src="../US1_PantallaInicio/Imagenes/placeholder.jpg">
-                              <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="${receta.titulo} 1">
+                          <div class="thumbnail active" data-index="0" data-src="../US1_PantallaInicio/Imagenes/Italia/lasaña.jpg">
+                              <img src="../US1_PantallaInicio/Imagenes/Italia/lasaña.jpg" alt="Lasaña 1">
                           </div>
                       </div>
                   </div>
@@ -106,16 +67,18 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-center-column">
                   <div class="recipe-info">
                       <div class="recipe-tags">
-                          <span class="tag">Dificultad: ${receta.dificultad}</span>
-                          <span class="tag">Tiempo: ${receta.tiempo}</span>
-                          <span class="tag">Categoría: ${receta.categoria}</span>
-                          ${receta.Cultura ? `<span class="tag">Cultura: ${receta.Cultura}</span>` : ""}
+                          <span class="tag">Dificultad: Media</span>
+                          <span class="tag">Tiempo: 105</span>
+                          <span class="tag">Categoría: Comida</span>
+                          <!-- Eliminamos la referencia a cultura para evitar errores -->
                       </div>
   
                       <div class="recipe-actions">
-                          <button class="button favorite-btn" data-receta-id="${receta.id}">❤️ Añadir a Favoritos</button>
+                          <button class="button favorite-btn" data-receta-id="18">❤️ Añadir a Favoritos</button>
                           <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                       </div>
+                      
+                      <!-- Eliminamos la sección de descripción -->
                   </div>
               </div>
   
@@ -123,7 +86,7 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-right-column">
                   <div class="recipe-video">
                       <iframe id="recipeVideo" width="96%" height="223" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                          title="${receta.titulo}" frameborder="0"
+                          title="Lasaña" frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowfullscreen>
                       </iframe>
@@ -135,14 +98,40 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-ingredients">
                   <h2>Ingredientes</h2>
                   <ul>
-                      ${ingredientesHTML}
+                      <li>2 dientes de ajo</li>
+                    <li>2 cebollas pequeñas o 1 grande</li>
+                    <li>2 ramas de apio</li>
+                    <li>1 zanahoria</li>
+                    <li>50 ml de aceite de oliva virgen extra</li>
+                    <li>1 cucharadita de sal</li>
+                    <li>1 cucharadita de pimienta negra molida</li>
+                    <li>1 cucharada de hierbas provenzales</li>
+                    <li>5 lonchas de beicon</li>
+                    <li>800 g de carne picada de ternera</li>
+                    <li>650 g de tomate natural triturado</li>
+                    <li>15 g de concentrado de tomate</li>
+                    <li>80 g de mantequilla</li>
+                    <li>80 g de harina de trigo</li>
+                    <li>800 ml de leche</li>
+                    <li>1/2 cucharadita de sal</li>
+                    <li>1/4 cucharadita de pimienta blanca molida</li>
+                    <li>12 láminas pasta para lasaña</li>
+                    <li>50 g de queso rallado (tipo gouda, cheddar...)</li>
                   </ul>
               </div>
   
               <div class="recipe-steps">
                   <h2>Pasos para la Receta</h2>
                   <ol>
-                      ${pasosHTML}
+                      <li>Para el relleno, pelamos y picamos finamente 2 dientes de ajo, 2 cebollas pequeñas (o 1 grande), 2 ramas de apio y 1 zanahoria. Calentamos 50 ml de aceite de oliva virgen extra en una cacerola y las pochamos durante 15 minutos a fuego suave junto con 1 cucharadita de sal, 1 cucharadita de pimienta negra molida y 1 cucharada de hierbas provenzales.</li>
+                    <li>Picamos 5 lonchas de beicon y, una vez listas las verduras, lo incorporamos a la cacerola junto con 800 g de carne picada de ternera. Removemos, a fuego alto, durante un par de minutos para soltar la carne y evitar que quede apelmazada.</li>
+                    <li>Cuando la carne haya cambiado de color agregamos 650 g de tomate natural triturado y 15 g de concentrado de tomate. Salpimentamos al gusto, teniendo en cuenta que ya hemos condimentado las verduras, y cocemos el conjunto a fuego bajo durante 45 minutos o hasta obtener una salsa densa, pero jugosa.</li>
+                    <li>Mientras tanto, preparamos la salsa bechamel y, para ello, fundimos 80 g de mantequilla en una sartén honda y agregamos 80 g de harina de trigo. Removemos para integrar ambos ingredientes y formar un roux.</li>
+                    <li>A continuación, agregamos 800 ml de leche poco a poco y, al tiempo que la calentamos a fuego medio, la trabajamos con unas varillas para que se integre sin formar grumos. Condimentamos con media cucharadita de sal y un cuarto de cucharadita de pimienta blanca molida y cocemos, removiendo de vez en cuando, durante unos 10 minutos.</li>
+                    <li>Listo el relleno y la salsa bechamel, el siguiente paso es montar la lasaña. Cubrimos la base de una fuente rectangular con una capa de salsa bechamel, para evitar que se pegue la lasaña al fondo y sea más fácil de porcionar y servir.</li>
+                    <li>Colocamos capas de pasta para lasaña, relleno de carne y un poco de salsa bechamel (opcional) hasta llegar casi al borde de la fuente, terminando con una capa de pasta y regando la lasaña con una cantidad generosa de bechamel.</li>
+                    <li>Espolvoreamos la superficie con 50 g de queso rallado (yo he usado cheddar) y la cocemos en el horno, precalentado a 200 ºC con calor arriba y abajo, durante 30 minutos o el tiempo que indique el paquete de la pasta a utilizar.</li>
+                    <li>Cuando la lasaña esté dorada por la superficie, la retiramos del horno y dejamos que se atempere unos minutos antes de servir.</li>
                   </ol>
               </div>
           </div>
@@ -262,38 +251,4 @@ function generarNombreArchivo(titulo) {
           });
       </script>
   </body>
-  </html>`
-  }
-  
-  // Función para descargar el HTML como archivo
-  function descargarArchivoHTML(nombreArchivo, contenidoHTML) {
-    // Crear un objeto Blob con el contenido HTML
-    const blob = new Blob([contenidoHTML], { type: "text/html" })
-  
-    // Crear un enlace para descargar el archivo
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${nombreArchivo}.html`
-  
-    // Añadir el enlace al documento, hacer clic en él y luego eliminarlo
-    document.body.appendChild(a)
-    a.click()
-  
-    // Limpiar
-    setTimeout(() => {
-      document.body.removeChild(a)
-      URL.revokeObjectURL(url)
-    }, 0)
-  
-    return true
-  }
-  
-  // Exportar las funciones para usarlas en gestionRecetas.js
-  window.generadorRecetas = {
-    generarNombreArchivo,
-    generarHTMLReceta,
-    descargarArchivoHTML,
-  }
-  
-  
+  </html>

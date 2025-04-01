@@ -77,18 +77,18 @@ async function guardarReceta(formData, id = null) {
     const usuario = getUsuario()
     if (!usuario) return
 
+    // Construir el objeto de datos básicos (sin cultura)
     const recetaData = {
       titulo: formData.get("titulo"),
-      // Eliminamos el campo descripción
       dificultad: formData.get("dificultad"),
       tiempo: formData.get("tiempo"),
       categoria: formData.get("categoria"),
-      // Eliminamos el campo cultura para evitar el error
       ingredientes: formData.get("ingredientes"),
       pasos: formData.get("pasos"),
       usuario_id: usuario.id,
     }
 
+    // Intentar guardar la receta sin el campo cultura primero
     let response
     if (id) {
       console.log("Actualizando receta:", id, recetaData)
@@ -117,6 +117,25 @@ async function guardarReceta(formData, id = null) {
         .single()
       if (error) throw error
       receta = data
+    }
+
+    // Intentar actualizar el campo Cultura por separado si está disponible
+    try {
+      const culturaValue = formData.get("cultura")
+      if (culturaValue && receta && receta.id) {
+        // Intentar actualizar solo el campo Cultura
+        const { error: culturaError } = await supabase
+          .from("recetas")
+          .update({ Cultura: culturaValue }) // Nota: "Cultura" con C mayúscula según la estructura de la BD
+          .eq("id", receta.id)
+
+        if (culturaError) {
+          console.warn("No se pudo actualizar el campo Cultura:", culturaError)
+        }
+      }
+    } catch (culturaError) {
+      console.warn("Error al actualizar el campo Cultura:", culturaError)
+      // No interrumpimos el flujo principal si falla la actualización de Cultura
     }
 
     modal.style.display = "none"
@@ -183,7 +202,6 @@ async function editarReceta(id) {
 
     // Llenar el formulario
     document.getElementById("titulo").value = receta.titulo || ""
-    // Eliminamos la asignación al campo descripción
     document.getElementById("dificultad").value = receta.dificultad || ""
     document.getElementById("tiempo").value = receta.tiempo || ""
     document.getElementById("categoria").value = receta.categoria || ""
@@ -193,7 +211,8 @@ async function editarReceta(id) {
     // Verificar si el elemento cultura existe antes de intentar asignarle un valor
     const culturaElement = document.getElementById("cultura")
     if (culturaElement) {
-      culturaElement.value = receta.cultura || ""
+      // Intentar usar el campo Cultura (con C mayúscula) según la estructura de la BD
+      culturaElement.value = receta.Cultura || ""
     }
 
     // Configurar el formulario

@@ -1,49 +1,10 @@
-// Función para generar un nombre de archivo a partir del título de la receta
-function generarNombreArchivo(titulo) {
-    return titulo
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // Eliminar acentos
-      .replace(/[^\w\s]/g, "") // Eliminar caracteres especiales
-      .replace(/\s+/g, "-") // Reemplazar espacios con guiones
-      .substring(0, 50) // Limitar longitud
-  }
-  
-  // Función para generar el HTML de la receta
-  function generarHTMLReceta(receta) {
-    // Generar lista de ingredientes
-    const ingredientesHTML = receta.ingredientes
-      .split("\n")
-      .map((ingrediente) => `<li>${ingrediente.trim()}</li>`)
-      .join("\n                    ")
-  
-    // Generar lista de pasos
-    const pasosHTML = receta.pasos
-      .split("\n")
-      .map((paso, index) => `<li>${paso.trim()}</li>`)
-      .join("\n                    ")
-  
-    // Determinar la cultura para el breadcrumb (usando el campo con C mayúscula)
-    const culturaBreadcrumb = receta.Cultura || "Otras Culturas"
-  
-    // Determinar la categoría para el breadcrumb como respaldo
-    let categoriaBreadcrumb = receta.categoria || "Platos Principales"
-    if (receta.categoria === "Postre") categoriaBreadcrumb = "Postres"
-    if (receta.categoria === "Entrante") categoriaBreadcrumb = "Entrantes"
-    if (receta.categoria === "Desayuno") categoriaBreadcrumb = "Desayunos"
-    if (receta.categoria === "Merienda") categoriaBreadcrumb = "Meriendas"
-    if (receta.categoria === "Cena") categoriaBreadcrumb = "Cenas"
-    if (receta.categoria === "Sopa") categoriaBreadcrumb = "Sopas"
-    if (receta.categoria === "Ensalada") categoriaBreadcrumb = "Ensaladas"
-  
-    // Generar el HTML completo
-    return `<!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="es">
   
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>${receta.titulo} - Cocinando Juntos</title>
+      <title>Pizza Margarita - Cocinando Juntos</title>
       <link rel="stylesheet" href="global.css">
       <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
       <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -75,11 +36,11 @@ function generarNombreArchivo(titulo) {
       <main>
           <div class="breadcrumb">
               <a href="./../US1_PantallaInicio/index.html">Inicio</a> > <a
-                  href="./../US1_PantallaInicio/culturas.html">Cultura ${culturaBreadcrumb}</a> > ${receta.titulo}
+                  href="./../US1_PantallaInicio/culturas.html">Cultura Italia</a> > Pizza Margarita
           </div>
   
           <div class="recipe-title">
-              <h1>${receta.titulo} <span class="recipe-rating" id="recipeRating"></span></h1>
+              <h1>Pizza Margarita <span class="recipe-rating" id="recipeRating"></span></h1>
           </div>
   
           <div class="recipe-main-content">
@@ -87,7 +48,7 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-left-column">
                   <div class="recipe-photo">
                       <a href="../US1_PantallaInicio/Imagenes/placeholder.jpg" target="_blank">
-                          <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="${receta.titulo}"
+                          <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="Pizza Margarita"
                               style="aspect-ratio: 1024/576; object-fit: cover;">
                       </a>
                   </div>
@@ -96,7 +57,7 @@ function generarNombreArchivo(titulo) {
                   <div class="image-carousel-container">
                       <div class="image-thumbnails" id="imageThumbnails">
                           <div class="thumbnail active" data-index="0" data-src="../US1_PantallaInicio/Imagenes/placeholder.jpg">
-                              <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="${receta.titulo} 1">
+                              <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="Pizza Margarita 1">
                           </div>
                       </div>
                   </div>
@@ -106,14 +67,14 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-center-column">
                   <div class="recipe-info">
                       <div class="recipe-tags">
-                          <span class="tag">Dificultad: ${receta.dificultad}</span>
-                          <span class="tag">Tiempo: ${receta.tiempo}</span>
-                          <span class="tag">Categoría: ${receta.categoria}</span>
-                          ${receta.Cultura ? `<span class="tag">Cultura: ${receta.Cultura}</span>` : ""}
+                          <span class="tag">Dificultad: Fácil</span>
+                          <span class="tag">Tiempo: 55</span>
+                          <span class="tag">Categoría: Cena</span>
+                          <span class="tag">Cultura: Italia</span>
                       </div>
   
                       <div class="recipe-actions">
-                          <button class="button favorite-btn" data-receta-id="${receta.id}">❤️ Añadir a Favoritos</button>
+                          <button class="button favorite-btn" data-receta-id="19">❤️ Añadir a Favoritos</button>
                           <button class="button rate-btn" id="rateButton">⭐ Valorar</button>
                       </div>
                   </div>
@@ -123,7 +84,7 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-right-column">
                   <div class="recipe-video">
                       <iframe id="recipeVideo" width="96%" height="223" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                          title="${receta.titulo}" frameborder="0"
+                          title="Pizza Margarita" frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowfullscreen>
                       </iframe>
@@ -135,14 +96,35 @@ function generarNombreArchivo(titulo) {
               <div class="recipe-ingredients">
                   <h2>Ingredientes</h2>
                   <ul>
-                      ${ingredientesHTML}
+                      <li>250 g de harina de fuerza</li>
+                    <li>8 g de levadura fresca de panadero</li>
+                    <li>160 ml de agua</li>
+                    <li>5 g de sal</li>
+                    <li>10 ml de aceite de oliva virgen extra</li>
+                    <li>200 g de tomate triturado</li>
+                    <li>Sal</li>
+                    <li>125 g de queso mozzarella</li>
+                    <li>1 chorro de aceite de oliva virgen extra</li>
+                    <li>8 o 10 hojas de albahaca</li>
                   </ul>
               </div>
   
               <div class="recipe-steps">
                   <h2>Pasos para la Receta</h2>
                   <ol>
-                      ${pasosHTML}
+                      <li>Para la masa, volcamos en un bol 250 g de harina de fuerza. Aparte, deshacemos 8 g de levadura fresca de panadero en un par de cucharadas de agua templada (unos 30 ml). A continuación, vertemos sobre la harina la levadura disuelta y añadimos 130 ml de agua a temperatura ambiente.</li>
+                    <li>Mezclamos un poco los ingredientes del bol y añadimos 5 g de sal a la masa.</li>
+                    <li>Integramos en la masa 10 ml de aceite de oliva virgen extra.</li>
+                    <li>Amasamos todos los ingredientes durante 5 o 6 minutos, hasta que quede una masa lisa. Después, dejamos reposar la masa otros 5 o 6 minutos y repetimos este proceso 3 veces más.</li>
+                    <li>Llevamos la masa a un bol untado con un poco de aceite y lo reservamos para su fermentación en un lugar cálido durante 2 horas.</li>
+                    <li>Pasado este tiempo, desgasificamos la masa y volvemos a hacer una bola con ella. Llevamos la masa a una superficie enharinada y la tapamos con un trapo para que vuelva a fermentar por segunda vez. Para esta segunda fermentación, solo será necesaria 1 hora.</li>
+                    <li>Transcurrido el tiempo de la segunda fermentación, cubrimos con papel de horno la bandeja en la que horneamos la pizza. Volcamos la masa de pizza sobre el papel y comenzamos a estirarla desde dentro hacia afuera hasta que quede redonda y fina, con los bordes un poco más altos que el resto de la superficie.</li>
+                    <li>Para el relleno de la pizza, mezclamos 200 g de tomate triturado con un poco de sal.</li>
+                    <li>Cubrimos la superficie de la pizza con la salsa de tomate sazonada.</li>
+                    <li>Con el horno caliente a máxima potencia, y con calor arriba y abajo, introducimos la pizza solo con la salsa de tomate en el horno y la horneamos 2 minutos. La sacamos del horno y repartimos sobre ella 125 g de queso mozzarella en rodajas.</li>
+                    <li>Horneamos la pizza durante 12 o 13 minutos más y la sacamos del horno. Una vez fuera, vertemos sobre la superficie un chorro de aceite de oliva virgen extra.</li>
+                    <li>Para terminar, repartimos sobre la superficie 8 o 10 hojas de albahaca.</li>
+                    <li>Servimos la pizza margarita recién hecha.</li>
                   </ol>
               </div>
           </div>
@@ -262,38 +244,4 @@ function generarNombreArchivo(titulo) {
           });
       </script>
   </body>
-  </html>`
-  }
-  
-  // Función para descargar el HTML como archivo
-  function descargarArchivoHTML(nombreArchivo, contenidoHTML) {
-    // Crear un objeto Blob con el contenido HTML
-    const blob = new Blob([contenidoHTML], { type: "text/html" })
-  
-    // Crear un enlace para descargar el archivo
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${nombreArchivo}.html`
-  
-    // Añadir el enlace al documento, hacer clic en él y luego eliminarlo
-    document.body.appendChild(a)
-    a.click()
-  
-    // Limpiar
-    setTimeout(() => {
-      document.body.removeChild(a)
-      URL.revokeObjectURL(url)
-    }, 0)
-  
-    return true
-  }
-  
-  // Exportar las funciones para usarlas en gestionRecetas.js
-  window.generadorRecetas = {
-    generarNombreArchivo,
-    generarHTMLReceta,
-    descargarArchivoHTML,
-  }
-  
-  
+  </html>
