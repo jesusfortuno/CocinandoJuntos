@@ -230,26 +230,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlayMenu = document.getElementById("overlayMenu")
 
   if (menuToggle && overlayMenu) {
+    // Asegurarse de que el menú esté inicialmente oculto
+    overlayMenu.classList.remove("active")
+
     menuToggle.addEventListener("click", (e) => {
       e.preventDefault()
+      e.stopPropagation() // Evitar que el clic se propague
       overlayMenu.classList.toggle("active")
       console.log("Menú toggle clicked, active:", overlayMenu.classList.contains("active"))
     })
 
     const closeMenu = document.getElementById("closeMenu")
     if (closeMenu) {
-      closeMenu.addEventListener("click", () => {
+      closeMenu.addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopPropagation() // Evitar que el clic se propague
         overlayMenu.classList.remove("active")
         console.log("Menú cerrado")
       })
     }
 
     // Cerrar al hacer clic fuera del menú
-    overlayMenu.addEventListener("click", function (e) {
-      if (e.target === this) {
-        this.classList.remove("active")
+    document.addEventListener("click", (e) => {
+      if (overlayMenu.classList.contains("active") && !overlayMenu.contains(e.target) && e.target !== menuToggle) {
+        overlayMenu.classList.remove("active")
         console.log("Cerrado por clic fuera")
       }
+    })
+
+    // Evitar que los clics dentro del menú lo cierren
+    overlayMenu.addEventListener("click", (e) => {
+      e.stopPropagation()
     })
   } else {
     console.warn("Elementos del menú no encontrados:", {
@@ -293,6 +304,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Añadir un event listener para el cambio de idioma
   document.addEventListener("languageChanged", (e) => {
     updateSliderPosition() // Actualizar las traducciones cuando cambie el idioma
+
+    // Actualizar las traducciones del menú desplegable
+    if (window.i18n && window.i18n.translations) {
+      const language = e.detail.language
+      const translations = window.i18n.translations[language]
+
+      if (translations) {
+        // Actualizar los textos del menú según el idioma
+        document.querySelectorAll("#overlayMenu [data-i18n]").forEach((element) => {
+          const key = element.getAttribute("data-i18n")
+          if (translations[key]) {
+            element.textContent = translations[key]
+          }
+        })
+      }
+    }
   })
 
   // Exponer la función updateSliderPosition globalmente para que pueda ser llamada desde otros scripts

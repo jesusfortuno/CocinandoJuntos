@@ -17,6 +17,11 @@ const translations = {
     "Dificultad:": "Dificultad:",
     "Ver todas las recetas": "Ver todas las recetas",
 
+    // Notificaciones
+    Notificaciones: "Notificaciones",
+    "Marcar todas como leídas": "Marcar todas como leídas",
+    "No tienes notificaciones": "No tienes notificaciones",
+
     // Hero section
     "Cocinando Juntos": "Cocinando Juntos",
     "Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la gastronomía donde podrás explorar sabores de diferentes culturas.":
@@ -99,6 +104,11 @@ const translations = {
     "Dificultad:": "Dificultat:",
     "Ver todas las recetas": "Veure totes les receptes",
 
+    // Notificaciones
+    Notificaciones: "Notificacions",
+    "Marcar todas como leídas": "Marcar totes com a llegides",
+    "No tienes notificaciones": "No tens notificacions",
+
     // Hero section
     "Cocinando Juntos": "Cuinant Junts",
     "Descubre, comparte y disfruta de recetas de todo el mundo. Una comunidad para amantes de la gastronomía donde podrás explorar sabores de diferentes culturas.":
@@ -180,6 +190,11 @@ const translations = {
     Desayuno: "Breakfast",
     "Dificultad:": "Difficulty:",
     "Ver todas las recetas": "View all recipes",
+
+    // Notificaciones
+    Notificaciones: "Notifications",
+    "Marcar todas como leídas": "Mark all as read",
+    "No tienes notificaciones": "You don't have notifications",
 
     // Hero section
     "Cocinando Juntos": "Cooking Together",
