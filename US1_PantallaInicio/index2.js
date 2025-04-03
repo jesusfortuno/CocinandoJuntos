@@ -2,29 +2,64 @@
 const SUPABASE_URL = "https://uonkcjrokwtgvimjxawm.supabase.co"
 const SUPABASE_API_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvbmtjanJva3d0Z3ZpbWp4YXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg2ODIyNTgsImV4cCI6MjA1NDI1ODI1OH0.fTH7cyyYYQFi5HQc8y-JXAKSY0PL3P1FKy6LymfeTvU"
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
+
+// Asegurarse de que supabase esté disponible
+let supabase
+
+// Función para inicializar Supabase
+function initSupabase() {
+  try {
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
+      console.log("Supabase inicializado correctamente")
+      return true
+    } else {
+      console.error("La biblioteca de Supabase no está cargada")
+      return false
+    }
+  } catch (error) {
+    console.error("Error al inicializar Supabase:", error)
+    return false
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM cargado, inicializando buscador...")
+  console.log("DOM cargado completamente en index2.js")
+
+  // Inicializar Supabase
+  if (!initSupabase()) {
+    console.error("No se pudo inicializar Supabase, el buscador no funcionará")
+    return
+  }
+
   // Inicializar el buscador
   initializeSearchBar()
-
-  // Inicializar el slider (mantenemos la funcionalidad existente)
-  initializeSlider()
 })
 
 // Función para inicializar el buscador
 function initializeSearchBar() {
+  console.log("Inicializando buscador...")
+
   const searchInput = document.getElementById("search-input")
   const searchResults = document.getElementById("search-results")
   const searchButton = document.getElementById("search-button")
   const searchCloseButton = document.getElementById("search-close")
 
-  console.log("Elementos del buscador:", { searchInput, searchResults, searchButton, searchCloseButton })
+  console.log("Elementos del buscador:", {
+    searchInput: searchInput ? "encontrado" : "no encontrado",
+    searchResults: searchResults ? "encontrado" : "no encontrado",
+    searchButton: searchButton ? "encontrado" : "no encontrado",
+    searchCloseButton: searchCloseButton ? "encontrado" : "no encontrado",
+  })
 
   // Verificar que los elementos existan
-  if (!searchInput || !searchResults) {
-    console.error("Error: Elementos del buscador no encontrados")
+  if (!searchInput) {
+    console.error("Error: Elemento search-input no encontrado")
+    return
+  }
+
+  if (!searchResults) {
+    console.error("Error: Elemento search-results no encontrado")
     return
   }
 
@@ -44,14 +79,18 @@ function initializeSearchBar() {
       searchInput.focus()
       performSearch(searchInput.value)
     })
+  } else {
+    console.warn("Botón de búsqueda no encontrado")
   }
 
   // Cerrar resultados cuando se hace clic en el botón de cerrar
   if (searchCloseButton) {
     searchCloseButton.addEventListener("click", () => {
+      console.log("Botón de cerrar clickeado")
       searchInput.value = ""
       searchResults.style.display = "none"
       searchCloseButton.style.display = "none"
+      searchButton.style.display = "block" // Mostrar botón de búsqueda
     })
   }
 
@@ -60,11 +99,17 @@ function initializeSearchBar() {
     console.log("Input detectado:", searchInput.value)
     if (searchInput.value.trim() === "") {
       searchResults.style.display = "none"
-      if (searchCloseButton) searchCloseButton.style.display = "none"
+      if (searchCloseButton) {
+        searchCloseButton.style.display = "none"
+        searchButton.style.display = "block" // Mostrar botón de búsqueda
+      }
       return
     }
 
-    if (searchCloseButton) searchCloseButton.style.display = "block"
+    if (searchCloseButton) {
+      searchCloseButton.style.display = "block"
+      searchButton.style.display = "none" // Ocultar botón de búsqueda
+    }
     searchResults.style.display = "block"
     performSearch(searchInput.value)
   })
@@ -82,6 +127,7 @@ function initializeSearchBar() {
 
   // Escuchar cambios de idioma
   document.addEventListener("languageChanged", (e) => {
+    console.log("Idioma cambiado, actualizando placeholder")
     updateSearchPlaceholder()
 
     // Si hay una búsqueda activa, actualizar los resultados
@@ -94,6 +140,8 @@ function initializeSearchBar() {
   if (searchCloseButton) {
     searchCloseButton.style.display = "none"
   }
+
+  console.log("Buscador inicializado correctamente")
 }
 
 // Función para actualizar el placeholder según el idioma
@@ -251,6 +299,13 @@ function getDifficultyDots(dificultad) {
 // Función para realizar la búsqueda en Supabase
 async function performSearch(query) {
   console.log("Iniciando búsqueda con query:", query)
+
+  // Verificar que Supabase esté inicializado
+  if (!supabase) {
+    console.error("Supabase no está inicializado, no se puede realizar la búsqueda")
+    return
+  }
+
   const searchResults = document.getElementById("search-results")
   if (!searchResults) {
     console.error("Elemento de resultados de búsqueda no encontrado")
@@ -267,21 +322,36 @@ async function performSearch(query) {
   console.log("Realizando búsqueda con query:", query, "idioma:", language)
 
   try {
-    // CORRECCIÓN PRINCIPAL: Simplificar la consulta y usar correctamente el operador ilike
+    // SOLUCIÓN: Usar correctamente la sintaxis de Supabase para búsqueda en múltiples campos
     console.log("Ejecutando consulta a Supabase...")
-    const { data: recetas, error } = await supabase
+
+    // Primero intentamos con la sintaxis .or()
+    let { data: recetas, error } = await supabase
       .from("recetas")
       .select("*")
       .or(`titulo.ilike.%${query}%,categoria.ilike.%${query}%,ingredientes.ilike.%${query}%`)
 
+    // Si hay un error, intentamos con la sintaxis alternativa
     if (error) {
-      console.error("Error de búsqueda:", error.message)
-      searchResults.innerHTML = `
-        <div class="error-message">
-          <p>Error al buscar recetas: ${error.message}</p>
-        </div>
-      `
-      return
+      console.warn("Error con la primera sintaxis, intentando alternativa:", error.message)
+
+      // Intentar con búsqueda solo en título como fallback
+      const { data: recetasFallback, error: errorFallback } = await supabase
+        .from("recetas")
+        .select("*")
+        .ilike("titulo", `%${query}%`)
+
+      if (errorFallback) {
+        console.error("Error en búsqueda fallback:", errorFallback.message)
+        searchResults.innerHTML = `
+          <div class="error-message">
+            <p>Error al buscar recetas: ${errorFallback.message}</p>
+          </div>
+        `
+        return
+      }
+
+      recetas = recetasFallback
     }
 
     console.log("Resultados de búsqueda:", recetas)
@@ -362,13 +432,22 @@ async function performSearch(query) {
   }
 }
 
-// Función para inicializar el slider (mantenemos la funcionalidad existente)
+// Función para inicializar el slider (si existe en la página)
 function initializeSlider() {
   let currentSlide = 0
   const slider = document.querySelector(".slider")
   const slides = document.querySelectorAll(".slide")
+
+  // Si no hay slider, salir de la función
+  if (!slider) {
+    console.log("No se encontró el slider, omitiendo inicialización")
+    return
+  }
+
   const totalSlides = slides.length
   const dotsContainer = document.querySelector(".dots-container")
+
+  console.log("Inicializando slider con", totalSlides, "slides")
 
   // Función para actualizar la visibilidad de las tarjetas según el ancho de la pantalla
   function updateCardsVisibility() {
@@ -452,5 +531,16 @@ function initializeSlider() {
       autoplayInterval = setInterval(() => moveSlide(1), 5000)
     })
   }
+
+  console.log("Slider inicializado correctamente")
 }
+
+// Inicializar el slider si existe en la página
+document.addEventListener("DOMContentLoaded", () => {
+  // Verificar si hay un slider en la página
+  const slider = document.querySelector(".slider")
+  if (slider) {
+    initializeSlider()
+  }
+})
 

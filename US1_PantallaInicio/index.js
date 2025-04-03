@@ -1,23 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM cargado en index.js")
+
   // Configuración del slider de recetas
   const track = document.querySelector(".recipe-track")
   const prevButton = document.querySelector(".prev-button")
   const nextButton = document.querySelector(".next-button")
-  const cards = track ? track.querySelectorAll(".recipe-card") : []
+
+  if (!track) {
+    console.error("No se encontró el elemento .recipe-track")
+    return
+  }
+
+  const cards = track.querySelectorAll(".recipe-card")
   const cardCount = cards.length
+  const cardsToShow = 5 // Mostrar 5 tarjetas a la vez
   let currentIndex = 0
   let autoSlideInterval
   let isAnimating = false // Bandera para evitar clics rápidos
 
   // Verificar si los elementos existen
-  if (!track || !prevButton || !nextButton || cardCount === 0) {
+  if (!prevButton || !nextButton || cardCount === 0) {
     console.error("Error: Elementos del slider no encontrados o no hay tarjetas.")
     return
   }
 
+  console.log("Slider inicializado con", cardCount, "tarjetas")
+
   // Función para actualizar la posición del slider
   function updateSliderPosition() {
-    const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
+    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
     if (currentIndex > maxIndex) currentIndex = maxIndex
 
     // Obtener el idioma actual
@@ -26,8 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Usar un enfoque basado en display en lugar de transform para mayor estabilidad
     cards.forEach((card, index) => {
       // Determinar si la tarjeta debería ser visible
-      const startIndex = currentIndex * 5
-      const endIndex = startIndex + 5
+      const startIndex = currentIndex * cardsToShow
+      const endIndex = startIndex + cardsToShow
       const isVisible = index >= startIndex && index < endIndex
 
       // Aplicar display directamente en lugar de transform
@@ -68,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isAnimating) return
 
       isAnimating = true
-      const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
+      const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
 
       // Avanzar al siguiente grupo o volver al principio
       currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
@@ -103,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Detener el autoplay para evitar conflictos
     clearInterval(autoSlideInterval)
 
-    const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
+    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
     if (currentIndex < maxIndex) {
       currentIndex++
       updateSliderPosition()
@@ -126,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeTimer = setTimeout(() => {
       // No reiniciar a 0 para evitar saltos bruscos
       // Verificar si el índice actual es válido con el nuevo tamaño
-      const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
+      const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
       if (currentIndex > maxIndex) currentIndex = maxIndex
       updateSliderPosition()
     }, 250)
@@ -222,12 +233,14 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.addEventListener("click", (e) => {
       e.preventDefault()
       overlayMenu.classList.toggle("active")
+      console.log("Menú toggle clicked, active:", overlayMenu.classList.contains("active"))
     })
 
     const closeMenu = document.getElementById("closeMenu")
     if (closeMenu) {
       closeMenu.addEventListener("click", () => {
         overlayMenu.classList.remove("active")
+        console.log("Menú cerrado")
       })
     }
 
@@ -235,13 +248,21 @@ document.addEventListener("DOMContentLoaded", () => {
     overlayMenu.addEventListener("click", function (e) {
       if (e.target === this) {
         this.classList.remove("active")
+        console.log("Cerrado por clic fuera")
       }
+    })
+  } else {
+    console.warn("Elementos del menú no encontrados:", {
+      menuToggle: menuToggle ? "encontrado" : "no encontrado",
+      overlayMenu: overlayMenu ? "encontrado" : "no encontrado",
     })
   }
 
   // Asegurar que el footer se muestre correctamente
   function adjustFooterPosition() {
     const footer = document.querySelector("footer")
+    if (!footer) return
+
     const body = document.body
     const html = document.documentElement
 
@@ -273,84 +294,27 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("languageChanged", (e) => {
     updateSliderPosition() // Actualizar las traducciones cuando cambie el idioma
   })
-})
 
-// Añadir esta función al final del archivo para asegurar que el menú hamburguesa funcione correctamente
-document.addEventListener("DOMContentLoaded", () => {
-  // Menú hamburguesa
-  const menuToggle = document.getElementById("menuToggle")
-  const overlayMenu = document.getElementById("overlayMenu")
-  const closeMenu = document.getElementById("closeMenu")
+  // Exponer la función updateSliderPosition globalmente para que pueda ser llamada desde otros scripts
+  window.updateRecipeSliderPosition = updateSliderPosition
 
-  if (menuToggle && overlayMenu) {
-    menuToggle.addEventListener("click", (e) => {
-      e.preventDefault()
-      overlayMenu.classList.toggle("active")
-      console.log("Menú toggle clicked, overlay active:", overlayMenu.classList.contains("active"))
-    })
-
-    if (closeMenu) {
-      closeMenu.addEventListener("click", () => {
-        overlayMenu.classList.remove("active")
-        console.log("Menú cerrado")
-      })
-    }
-
-    // Cerrar al hacer clic fuera del menú
-    overlayMenu.addEventListener("click", function (e) {
-      if (e.target === this) {
-        this.classList.remove("active")
-        console.log("Cerrado por clic fuera")
-      }
-    })
-  } else {
-    console.error("Elementos del menú no encontrados:", { menuToggle, overlayMenu })
-  }
+  console.log("Inicialización de index.js completada")
 })
 
 // Asegurar que esta función se ejecute cuando el DOM esté cargado
-document.addEventListener("DOMContentLoaded", () => {
-  function setupScrollToTop() {
-    const scrollToTopButton = document.querySelector(".scroll-to-top")
+document.addEventListener("DOMContentLoaded", setupScrollToTop)
 
-    if (scrollToTopButton) {
-      console.log("Botón de scroll encontrado:", scrollToTopButton)
-
-      // Usar un manejador de eventos directo y simple
-      scrollToTopButton.onclick = (e) => {
-        e.preventDefault()
-        console.log("Botón de scroll clickeado")
-
-        // Scroll suave hacia arriba
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        })
-      }
-    } else {
-      console.error("Botón de scroll no encontrado")
-    }
+function setupScrollToTop() {
+  const scrollToTopButton = document.getElementById("scrollToTop")
+  if (scrollToTopButton) {
+    scrollToTopButton.addEventListener("click", (e) => {
+      e.preventDefault()
+      console.log("Botón de scroll clickeado")
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    })
   }
-  setupScrollToTop()
-})
-
-// Asegurarse de que no haya conflictos con otros manejadores de eventos
-document.addEventListener("DOMContentLoaded", () => {
-  // Remover cualquier manejador de eventos existente del botón de scroll
-  const scrollBtn = document.getElementById("scrollToTop")
-  if (scrollBtn) {
-    const newScrollBtn = scrollBtn.cloneNode(true)
-    scrollBtn.parentNode.replaceChild(newScrollBtn, scrollBtn)
-  }
-})
-
-// Añadir al final del archivo, justo después de la inicialización del slider
-document.addEventListener("languageChanged", (e) => {
-  if (typeof window.updateRecipeSliderPosition === "function") {
-    window.updateRecipeSliderPosition()
-  }
-})
-
-// Eliminar o comentar la función updateSliderPosition global al final del archivo
-// window.updateSliderPosition = updateSliderPosition;
+}
 
