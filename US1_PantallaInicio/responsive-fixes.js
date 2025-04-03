@@ -4,13 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const track = document.querySelector(".recipe-track")
     const prevButton = document.querySelector(".prev-button")
     const nextButton = document.querySelector(".next-button")
-    const cards = track.querySelectorAll(".recipe-card")
-    const cardCount = cards.length
+    const cards = track?.querySelectorAll(".recipe-card")
 
-    if (!track || !prevButton || !nextButton || cardCount === 0) {
+    if (!track || !prevButton || !nextButton || !cards || cards.length === 0) {
       console.error("Error: Elementos del slider no encontrados o no hay tarjetas.")
       return
     }
+
+    const cardCount = cards.length
 
     // Determinar cuántas tarjetas mostrar según el ancho de la ventana
     function getCardsToShow() {
@@ -23,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let cardsToShow = getCardsToShow()
     let currentIndex = 0
-    let isSliding = false // Declare isSliding here
+    let isSliding = false
 
-    // Reemplazar la función updateSliderPosition en setupResponsiveSlider con esta versión mejorada
+    // Función para actualizar la posición del slider
     function updateSliderPosition() {
       // Calcular el ancho de la tarjeta y el margen
       const cardWidth = cards[0].offsetWidth
@@ -51,8 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nextButton.style.cursor = currentIndex >= maxIndex ? "default" : "pointer"
     }
 
-    // Modificar los event listeners para los botones en setupResponsiveSlider
-    // Reemplazar los event listeners de los botones en setupResponsiveSlider con estas versiones mejoradas
+    // Event listeners para los botones
     prevButton.addEventListener("click", () => {
       if (isSliding) return
       isSliding = true
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 350) // Tiempo suficiente para que termine la animación
     })
 
-    // Reemplazar el event listener de resize en setupResponsiveSlider con esta versión mejorada
+    // Event listener para resize
     window.addEventListener("resize", () => {
       const newCardsToShow = getCardsToShow()
       if (cardsToShow !== newCardsToShow) {
@@ -109,29 +109,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeMenu = document.getElementById("closeMenu")
 
     if (menuToggle && overlayMenu) {
-      // Asegurar que el menú se cierre al hacer clic fuera
+      console.log("Configurando menú desplegable en responsive-fixes.js")
+
+      // Asegurar que el menú esté inicialmente oculto
+      overlayMenu.classList.remove("active")
+
+      // Añadir evento de clic explícito para el botón de menú
+      menuToggle.addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        overlayMenu.classList.toggle("active")
+        console.log("Menú toggle clicked desde responsive-fixes")
+      })
+
+      // Añadir evento para el botón de cerrar
+      if (closeMenu) {
+        closeMenu.addEventListener("click", (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          overlayMenu.classList.remove("active")
+          console.log("Menú cerrado desde responsive-fixes")
+        })
+      }
+
+      // Asegurar que los enlaces del menú funcionen correctamente
+      const menuLinks = overlayMenu.querySelectorAll("a")
+      menuLinks.forEach((link) => {
+        // Eliminar cualquier event listener existente y añadir uno nuevo
+        const newLink = link.cloneNode(true)
+        link.parentNode.replaceChild(newLink, link)
+
+        // Añadir evento de clic para cerrar el menú después de hacer clic en un enlace
+        newLink.addEventListener("click", function () {
+          // No prevenir el comportamiento predeterminado para permitir la navegación
+          console.log("Enlace del menú clickeado:", this.href)
+
+          // Cerrar el menú después de un pequeño retraso para permitir la navegación
+          setTimeout(() => {
+            overlayMenu.classList.remove("active")
+          }, 100)
+        })
+      })
+
+      // Cerrar al hacer clic fuera del menú
       document.addEventListener("click", (e) => {
         if (overlayMenu.classList.contains("active") && !overlayMenu.contains(e.target) && e.target !== menuToggle) {
           overlayMenu.classList.remove("active")
+          console.log("Menú cerrado por clic fuera (responsive-fixes)")
         }
       })
-
-      // Mejorar la accesibilidad con teclado
-      menuToggle.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault()
-          overlayMenu.classList.toggle("active")
-        }
+    } else {
+      console.error("Elementos del menú no encontrados en enhanceMenu:", {
+        menuToggle: menuToggle ? "encontrado" : "no encontrado",
+        overlayMenu: overlayMenu ? "encontrado" : "no encontrado",
       })
-
-      if (closeMenu) {
-        closeMenu.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault()
-            overlayMenu.classList.remove("active")
-          }
-        })
-      }
     }
   }
 
@@ -183,9 +214,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Inicializar todas las mejoras
-  setupResponsiveSlider()
-  enhanceMenu()
-  enhanceScrollButton()
+  try {
+    setupResponsiveSlider()
+  } catch (error) {
+    console.error("Error al configurar el slider responsivo:", error)
+  }
+
+  try {
+    enhanceMenu()
+  } catch (error) {
+    console.error("Error al mejorar el menú:", error)
+  }
+
+  try {
+    enhanceScrollButton()
+  } catch (error) {
+    console.error("Error al mejorar el botón de scroll:", error)
+  }
 
   // Cargar estilos responsivos adicionales
   const responsiveStyles = document.createElement("link")

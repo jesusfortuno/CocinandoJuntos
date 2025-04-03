@@ -257,11 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Cerrado por clic fuera")
       }
     })
-
-    // Evitar que los clics dentro del menú lo cierren
-    overlayMenu.addEventListener("click", (e) => {
-      e.stopPropagation()
-    })
   } else {
     console.warn("Elementos del menú no encontrados:", {
       menuToggle: menuToggle ? "encontrado" : "no encontrado",
