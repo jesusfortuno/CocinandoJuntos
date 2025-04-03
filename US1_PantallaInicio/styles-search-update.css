@@ -1,187 +1,117 @@
-/* Estilos mejorados para el buscador y resultados */
-
-/* Contenedor del buscador */
+/* Estilos para el buscador y resultados de búsqueda */
 .search-container {
   position: relative;
   display: flex;
   align-items: center;
+  width: 300px;
+  margin: 0 auto;
 }
 
-/* Campo de búsqueda */
 #search-input {
-  padding: 0.7rem 1rem;
+  width: 100%;
+  padding: 10px 40px 10px 15px;
   border: 1px solid #d4c3b5;
-  border-radius: 8px;
-  width: 300px;
+  border-radius: 20px;
   font-size: 14px;
+  color: #6b4423;
+  background-color: #fff;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  padding-right: 60px; /* Espacio para los botones */
 }
 
 #search-input:focus {
-  border-color: #6b4423;
-  box-shadow: 0 2px 8px rgba(107, 68, 35, 0.15);
   outline: none;
+  border-color: #8b5d33;
+  box-shadow: 0 0 0 2px rgba(139, 93, 51, 0.2);
 }
 
-/* Botón de búsqueda */
 #search-button {
+  position: absolute;
+  right: 15px;
   background: none;
   border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 35px; /* Posición ajustada */
   color: #6b4423;
+  cursor: pointer;
   font-size: 16px;
-  transition: transform 0.2s ease;
-  z-index: 2;
-}
-
-#search-button:hover {
-  transform: scale(1.1);
 }
 
 #search-close {
   position: absolute;
-  right: 10px;
+  right: 15px;
   background: none;
   border: none;
-  cursor: pointer;
   color: #6b4423;
+  cursor: pointer;
   font-size: 16px;
-  transition: transform 0.2s ease;
-  z-index: 2;
+  display: none;
 }
 
-#search-close:hover {
-  transform: scale(1.1);
-}
-
-/* Contenedor de resultados de búsqueda */
 .search-results {
   position: absolute;
-  top: calc(100% + 5px);
+  top: 100%;
   left: 0;
-  width: 350px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  max-height: 450px;
+  width: 100%;
+  max-height: 400px;
   overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #d4c3b5;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 10px;
   display: none;
-  animation: fadeIn 0.3s ease;
-  border: 1px solid #e0d5c9;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Estilizar la barra de desplazamiento */
-.search-results::-webkit-scrollbar {
-  width: 8px;
-}
-
-.search-results::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.search-results::-webkit-scrollbar-thumb {
-  background: #d4c3b5;
-  border-radius: 10px;
-}
-
-.search-results::-webkit-scrollbar-thumb:hover {
-  background: #6b4423;
-}
-
-/* Encabezado de resultados */
 .search-results-header {
   padding: 12px 15px;
-  background-color: #f8f1e9;
+  font-weight: 600;
   color: #6b4423;
-  font-weight: bold;
-  border-bottom: 1px solid #e0d5c9;
-  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #f0e6dd;
+  background-color: #f8f1e9;
 }
 
-/* Elementos de resultado */
 .result-item {
   display: flex;
-  align-items: center;
   padding: 12px 15px;
-  border-bottom: 1px solid #ffa703;
+  border-bottom: 1px solid #f0e6dd;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.result-item:hover {
-  background-color: #f8f1e9;
-  transform: translateX(5px);
+  transition: background-color 0.2s ease;
 }
 
 .result-item:last-child {
   border-bottom: none;
 }
 
+.result-item:hover {
+  background-color: #f8f1e9;
+}
+
 .result-image {
   width: 60px;
   height: 60px;
+  border-radius: 6px;
   object-fit: cover;
-  border-radius: 8px;
   margin-right: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.result-item:hover .result-image {
-  transform: scale(1.05);
 }
 
 .result-info {
-  display: flex;
-  flex-direction: column;
   flex: 1;
 }
 
 .result-title {
-  font-size: 16px;
-  color: #6b4423;
   font-weight: 600;
-  margin-bottom: 4px;
+  color: #6b4423;
+  margin-bottom: 5px;
 }
 
 .result-category {
   font-size: 13px;
-  color: #8a7a6d;
-  display: flex;
-  align-items: center;
-}
-
-.result-category::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: #ffde00;
-  border-radius: 50%;
-  margin-right: 6px;
+  color: #8b5d33;
+  margin-bottom: 5px;
 }
 
 .result-difficulty {
-  font-size: 12px;
-  color: #8a7a6d;
-  margin-top: 2px;
+  font-size: 13px;
+  color: #6b4423;
   display: flex;
   align-items: center;
 }
@@ -192,72 +122,62 @@
 }
 
 .difficulty-dot {
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: #d4c3b5;
-  margin-right: 2px;
+  background-color: #e0d5c9;
+  margin-right: 3px;
 }
 
 .difficulty-dot.active {
-  background-color: #6b4423;
+  background-color: #8b5d33;
 }
 
-/* Mensaje de no resultados */
 .no-results {
-  padding: 20px 15px;
+  padding: 20px;
   text-align: center;
-  color: #8a7a6d;
-  font-style: italic;
+  color: #6b4423;
 }
 
-/* Botón Ver Todo */
 .ver-todo-button {
+  padding: 12px;
   text-align: center;
-  padding: 14px;
-  background-color: #ffde00;
-  color: #333;
-  font-weight: bold;
+  background-color: #f8f1e9;
+  color: #6b4423;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border-top: 1px solid #e0d5c9;
-  border-radius: 0 0 8px 8px;
+  transition: background-color 0.2s ease;
 }
 
 .ver-todo-button:hover {
-  background-color: #ffd000;
-  color: #000;
+  background-color: #e0d5c9;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-  #search-input {
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .search-container {
+    width: 200px;
+  }
+
+  .search-results {
+    width: 250px;
+    left: -25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    width: 150px;
+  }
+
+  .search-results {
     width: 220px;
-  }
-
-  .search-results {
-    width: 280px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #search-input {
-    width: 170px;
-    padding: 0.6rem 0.8rem;
-    padding-right: 60px; /* Mantener espacio para los botones */
-  }
-
-  .search-results {
-    width: 230px;
+    left: -35px;
   }
 
   .result-image {
     width: 50px;
     height: 50px;
-  }
-
-  .result-title {
-    font-size: 14px;
   }
 }
 

@@ -3,9 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const track = document.querySelector(".recipe-track")
   const prevButton = document.querySelector(".prev-button")
   const nextButton = document.querySelector(".next-button")
-  const cards = track.querySelectorAll(".recipe-card")
+  const cards = track ? track.querySelectorAll(".recipe-card") : []
   const cardCount = cards.length
-  const cardsToShow = 5 // Mostrar 5 tarjetas a la vez
   let currentIndex = 0
   let autoSlideInterval
   let isAnimating = false // Bandera para evitar clics rápidos
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para actualizar la posición del slider
   function updateSliderPosition() {
-    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+    const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
     if (currentIndex > maxIndex) currentIndex = maxIndex
 
     // Obtener el idioma actual
@@ -27,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Usar un enfoque basado en display en lugar de transform para mayor estabilidad
     cards.forEach((card, index) => {
       // Determinar si la tarjeta debería ser visible
-      const startIndex = currentIndex * cardsToShow
-      const endIndex = startIndex + cardsToShow
+      const startIndex = currentIndex * 5
+      const endIndex = startIndex + 5
       const isVisible = index >= startIndex && index < endIndex
 
       // Aplicar display directamente en lugar de transform
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isAnimating) return
 
       isAnimating = true
-      const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+      const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
 
       // Avanzar al siguiente grupo o volver al principio
       currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
@@ -104,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Detener el autoplay para evitar conflictos
     clearInterval(autoSlideInterval)
 
-    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+    const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
     if (currentIndex < maxIndex) {
       currentIndex++
       updateSliderPosition()
@@ -127,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeTimer = setTimeout(() => {
       // No reiniciar a 0 para evitar saltos bruscos
       // Verificar si el índice actual es válido con el nuevo tamaño
-      const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
+      const maxIndex = Math.max(0, Math.ceil(cardCount / 5) - 1)
       if (currentIndex > maxIndex) currentIndex = maxIndex
       updateSliderPosition()
     }, 250)

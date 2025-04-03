@@ -5,6 +5,7 @@ const SUPABASE_API_KEY =
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM cargado, inicializando buscador...")
   // Inicializar el buscador
   initializeSearchBar()
 
@@ -19,20 +20,31 @@ function initializeSearchBar() {
   const searchButton = document.getElementById("search-button")
   const searchCloseButton = document.getElementById("search-close")
 
+  console.log("Elementos del buscador:", { searchInput, searchResults, searchButton, searchCloseButton })
+
+  // Verificar que los elementos existan
+  if (!searchInput || !searchResults) {
+    console.error("Error: Elementos del buscador no encontrados")
+    return
+  }
+
   // Actualizar el placeholder según el idioma actual
   updateSearchPlaceholder()
 
   // Mostrar resultados cuando se hace clic en el botón de búsqueda
-  searchButton.addEventListener("click", () => {
-    if (searchInput.value.trim() === "") {
-      searchResults.style.display = "none"
-      return
-    }
+  if (searchButton) {
+    searchButton.addEventListener("click", () => {
+      console.log("Botón de búsqueda clickeado")
+      if (searchInput.value.trim() === "") {
+        searchResults.style.display = "none"
+        return
+      }
 
-    searchResults.style.display = "block"
-    searchInput.focus()
-    performSearch(searchInput.value)
-  })
+      searchResults.style.display = "block"
+      searchInput.focus()
+      performSearch(searchInput.value)
+    })
+  }
 
   // Cerrar resultados cuando se hace clic en el botón de cerrar
   if (searchCloseButton) {
@@ -45,13 +57,14 @@ function initializeSearchBar() {
 
   // Buscar mientras se escribe
   searchInput.addEventListener("input", () => {
+    console.log("Input detectado:", searchInput.value)
     if (searchInput.value.trim() === "") {
       searchResults.style.display = "none"
-      searchCloseButton.style.display = "none"
+      if (searchCloseButton) searchCloseButton.style.display = "none"
       return
     }
 
-    searchCloseButton.style.display = "block"
+    if (searchCloseButton) searchCloseButton.style.display = "block"
     searchResults.style.display = "block"
     performSearch(searchInput.value)
   })
@@ -237,7 +250,13 @@ function getDifficultyDots(dificultad) {
 
 // Función para realizar la búsqueda en Supabase
 async function performSearch(query) {
+  console.log("Iniciando búsqueda con query:", query)
   const searchResults = document.getElementById("search-results")
+  if (!searchResults) {
+    console.error("Elemento de resultados de búsqueda no encontrado")
+    return
+  }
+
   searchResults.innerHTML = "" // Limpiar resultados anteriores
 
   if (!query || query.trim() === "") {
@@ -245,24 +264,32 @@ async function performSearch(query) {
   }
 
   const language = getCurrentLanguage()
+  console.log("Realizando búsqueda con query:", query, "idioma:", language)
 
   try {
-    // Buscar en la tabla recetas
+    // CORRECCIÓN PRINCIPAL: Simplificar la consulta y usar correctamente el operador ilike
+    console.log("Ejecutando consulta a Supabase...")
     const { data: recetas, error } = await supabase
       .from("recetas")
-      .select("id, titulo, categoria, dificultad")
-      .or(`titulo.ilike.%${query.toLowerCase()}%, categoria.ilike.%${query.toLowerCase()}%`)
-      .limit(10)
+      .select("*")
+      .or(`titulo.ilike.%${query}%,categoria.ilike.%${query}%,ingredientes.ilike.%${query}%`)
 
     if (error) {
       console.error("Error de búsqueda:", error.message)
+      searchResults.innerHTML = `
+        <div class="error-message">
+          <p>Error al buscar recetas: ${error.message}</p>
+        </div>
+      `
       return
     }
 
+    console.log("Resultados de búsqueda:", recetas)
+
     // Filtrar resultados duplicados basados en el ID
-    const recetasUnicas = recetas.filter((receta, index, self) =>
-      index === self.findIndex((r) => r.id === receta.id)
-    )
+    const recetasUnicas = recetas
+      ? recetas.filter((receta, index, self) => index === self.findIndex((r) => r.id === receta.id))
+      : []
 
     // Mostrar resultados
     if (recetasUnicas && recetasUnicas.length > 0) {
@@ -326,7 +353,12 @@ async function performSearch(query) {
       searchResults.appendChild(noResults)
     }
   } catch (error) {
-    console.error("Error:", error)
+    console.error("Error en la búsqueda:", error)
+    searchResults.innerHTML = `
+      <div class="error-message">
+        <p>Error inesperado: ${error.message}</p>
+      </div>
+    `
   }
 }
 
