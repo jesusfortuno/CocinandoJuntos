@@ -146,7 +146,7 @@ function createRecipeCard(receta, language) {
   // Crear el HTML de la tarjeta con el overlay para el hover
   card.innerHTML = `
     <div class="recipe-image">
-      <img src="${imagePath}" alt="${titulo}" onerror="this.src='./Imagenes/default-recipe.jpg'">
+      <img src="${imagePath}" alt="${titulo}">
     </div>
     <div class="recipe-content">
       <h3 data-i18n="${receta.titulo}">${titulo}</h3>
