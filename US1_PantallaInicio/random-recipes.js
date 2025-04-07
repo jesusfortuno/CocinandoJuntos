@@ -56,7 +56,7 @@ function getImagePath(receta) {
   }
 
   // Imagen por defecto
-  return "./Imagenes/default-recipe.jpg"
+  return "./Imagenes/China/pollo-agridulce.jpg"
 }
 
 // Función para traducir la descripción de la receta

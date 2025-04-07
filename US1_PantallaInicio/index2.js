@@ -177,7 +177,7 @@ function getImagePath(titulo) {
     "Pollo Agridulce": "./Imagenes/China/pollo-agridulce.jpg",
     "Sweet and Sour Chicken": "./Imagenes/China/pollo-agridulce.jpg", // Versión en inglés
     "Pollastre Agredolç": "./Imagenes/China/pollo-agridulce.jpg", // Versión en catalán
-    "Paella": "./Imagenes/España/paella.png",
+    Paella: "./Imagenes/España/paella.png",
     "Crepas Dulces": "./Imagenes/Francia/crepas-dulces.jpg",
     "Sweet Crepes": "./Imagenes/Francia/crepas-dulces.jpg", // Versión en inglés
     "Creps Dolços": "./Imagenes/Francia/crepas-dulces.jpg", // Versión en catalán
@@ -202,7 +202,7 @@ function getImagePath(titulo) {
     "Batido Energético": "./Imagenes/Francia/coq-au-vin.jpg",
     "Sopa Wonton": "./Imagenes/China/fideos-salteados.jpg",
     "Wonton Soup": "./Imagenes/China/fideos-salteados.jpg", // Versión en inglés
-    "patata": "./Imagenes/Espa��a/tortilla-patatas.jpeg",
+    patata: "./Imagenes/Espa��a/tortilla-patatas.jpeg",
   }
 
   // Buscar coincidencia exacta
@@ -374,7 +374,6 @@ async function performSearch(query) {
         resultItem.classList.add("result-item")
 
         // Obtener imagen específica para esta receta
-        // CORRECCIÓN: Usar la función getImagePath con el título como parámetro
         const imageSrc = getImagePath(receta.titulo)
 
         // Traducir categoría y dificultad
@@ -409,7 +408,7 @@ async function performSearch(query) {
       verTodoButton.classList.add("ver-todo-button")
       verTodoButton.textContent = translate("Ver todas las recetas", language)
       verTodoButton.addEventListener("click", () => {
-        window.location.href = `./../Platos.html`
+        window.location.href = `./busqueda.html?q=${query}`
       })
       searchResults.appendChild(verTodoButton)
     } else {
