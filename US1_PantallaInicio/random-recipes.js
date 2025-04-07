@@ -25,50 +25,34 @@ function getImagePath(receta) {
     "Galletas de Sésamo": "./Imagenes/China/galletas-de-sesamo.jpg",
     "Sesame Cookies": "./Imagenes/China/galletas-de-sesamo.jpg",
     "Galetes de Sèsam": "./Imagenes/China/galletas-de-sesamo.jpg",
-    "Bollitos Chinos": "./Imagenes/China/bollitos-chinos.jpg",
+    "Bolitas Chinas": "./Imagenes/China/bollitos-chinos.jpg",
     "Chinese Buns": "./Imagenes/China/bollitos-chinos.jpg",
     "Panets Xinesos": "./Imagenes/China/bollitos-chinos.jpg",
     "Fideos Salteados": "./Imagenes/China/fideos-salteados.jpg",
     "Stir-Fried Noodles": "./Imagenes/China/fideos-salteados.jpg",
     "Fideus Saltats": "./Imagenes/China/fideos-salteados.jpg",
-    "Sopa Wonton": "./Imagenes/China/sopa-wonton.jpg",
-    "Wonton Soup": "./Imagenes/China/sopa-wonton.jpg",
-    "Sopa de Wonton": "./Imagenes/China/sopa-wonton.jpg",
-    Paella: "./Imagenes/España/paella.png",
-    "Bizcocho Capuccino": "./Imagenes/España/bizcocho.jpg",
-    "Cappuccino Cake": "./Imagenes/España/bizcocho.jpg",
-    "Churros con Chocolate": "./Imagenes/España/churros.jpg",
+    "Paella": "./Imagenes/España/paella.png",
+    "Bizcocho Capuccino": "./Imagenes/Italia/bizcocho-capuccino.jpg",
+    "Cappuccino Cake": "./Imagenes/Italia/bizcocho-capuccino.jpg",
+    "Churros con Chocolate": "./Imagenes/España/churros-chocolate.jpg",
     "Crepas Dulces": "./Imagenes/Francia/crepas-dulces.jpg",
     "Sweet Crepes": "./Imagenes/Francia/crepas-dulces.jpg",
-    "Tortilla Española": "./Imagenes/España/tortilla-patatas.jpeg",
+    "Tortilla de Patatas": "./Imagenes/España/tortilla-patatas.jpeg",
     "Spanish Omelette": "./Imagenes/España/tortilla-patatas.jpeg",
-    "Quiche Lorraine": "./Imagenes/Francia/quiche-lorraine.jpg",
-    "Bolitas Chinas": "./Imagenes/China/bollitos-chinos.jpg",
+    "Quiche Lorraine": "./Imagenes/Francia/quiche-lorraine.pn.webp",
     "Coq au Vin": "./Imagenes/Francia/coq-au-vin.jpg",
+    "Arepa Venezolana": "./Imagenes/Venezuela/arepa-venezolana.jpg",
+    "Pan con Tomate": "./Imagenes/España/pan-tomate.jpg",
+    "Tostada Francesa": "./Imagenes/Francia/tostada-francesa.jpg",
+    "Cannoli": "./Imagenes/Italia/cannoli.jpg",
+    "Lasaña": "./Imagenes/Italia/lasaña.jpg",
+    "Pizza Margarita": "./Imagenes/Italia/pizza-margarita.jpg",
   }
 
-  // Mapeo de categorías a imágenes
-  const categoryImages = {
-    Desayuno: "./Imagenes/China/bollitos-chinos.jpg",
-    Breakfast: "./Imagenes/China/bollitos-chinos.jpg",
-    Comida: "./Imagenes/China/pollo-agridulce.jpg",
-    Lunch: "./Imagenes/China/pollo-agridulce.jpg",
-    Merienda: "./Imagenes/China/galletas-de-sesamo.jpg",
-    Snack: "./Imagenes/China/galletas-de-sesamo.jpg",
-    Cena: "./Imagenes/China/fideos-salteados.jpg",
-    Dinner: "./Imagenes/China/fideos-salteados.jpg",
-    Sopa: "./Imagenes/China/sopa-wonton.jpg",
-    Soup: "./Imagenes/China/sopa-wonton.jpg",
-  }
 
   // Primero intentar encontrar una imagen por título exacto
   if (titleImages[receta.titulo]) {
     return titleImages[receta.titulo]
-  }
-
-  // Luego intentar por categoría
-  if (categoryImages[receta.categoria]) {
-    return categoryImages[receta.categoria]
   }
 
   // Imagen por defecto
