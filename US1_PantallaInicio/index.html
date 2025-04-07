@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,7 @@
             </a>
             <a href="#" id="logout-btn" class="auth-buttons" data-i18n="Cerrar Sesión">Cerrar Sesión</a>
         </div>
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+        <a href="../login.html" id="auth-button" class="auth-buttons" data-i18n="Iniciar Sesión">Iniciar Sesión</a>
         <div class="menu-icon" id="menuToggle">☰</div>
     </nav>
 
@@ -83,6 +83,7 @@
         <section class="hero-video-section">
             <div class="video-container">
                 <video autoplay muted loop id="hero-video">
+                    <source src="./Videos/cooking-video.mp4" type="video/mp4">
                     Tu navegador no soporta videos HTML5.
                 </video>
                 <div class="video-overlay">
@@ -133,7 +134,7 @@
                 <div class="recipe-slider">
                     <div class="recipe-track">
                         <div class="loading-indicator">
-                            <p>Cargando recetas...</p>
+                            <p><i class="fas fa-spinner fa-spin"></i> Cargando recetas...</p>
                         </div>
                     </div>
                     <button class="slider-nav prev-button">❮</button>
@@ -146,30 +147,30 @@
     <footer>
         <div class="footer-container">
             <div class="footer-links">
-                <h3>Sobre Nosotros</h3>
+                <h3 data-i18n="Sobre Nosotros">Sobre Nosotros</h3>
                 <ul>
-                    <li><a href="./quienes-somos.html">Quiénes Somos</a></li>
-                    <li><a href="./contacto.html">Contacto</a></li>
+                    <li><a href="./quienes-somos.html" data-i18n="Quiénes Somos">Quiénes Somos</a></li>
+                    <li><a href="./contacto.html" data-i18n="Contacto">Contacto</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h3>Legal</h3>
+                <h3 data-i18n="Legal">Legal</h3>
                 <ul>
-                    <li><a href="./politica-privacidad.html">Política de Privacidad</a></li>
-                    <li><a href="./terminos-condiciones.html">Términos y Condiciones</a></li>
-                    <li><a href="./politica-cookies.html">Política de Cookies</a></li>
-                    <li><a href="./aviso-legal.html">Aviso Legal</a></li>
+                    <li><a href="./politica-privacidad.html" data-i18n="Política de Privacidad">Política de Privacidad</a></li>
+                    <li><a href="./terminos-condiciones.html" data-i18n="Términos y Condiciones">Términos y Condiciones</a></li>
+                    <li><a href="./politica-cookies.html" data-i18n="Política de Cookies">Política de Cookies</a></li>
+                    <li><a href="./aviso-legal.html" data-i18n="Aviso Legal">Aviso Legal</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h3>Comunidad</h3>
+                <h3 data-i18n="Comunidad">Comunidad</h3>
                 <ul>
-                    <li><a href="./Platos.html">Recetas</a></li>
-                    <li><a href="./chefs.html">Chefs</a></li>
+                    <li><a href="./Platos.html" data-i18n="Recetas">Recetas</a></li>
+                    <li><a href="./chefs.html" data-i18n="Chefs">Chefs</a></li>
                 </ul>
             </div>
             <div class="footer-social">
-                <h3>Síguenos</h3>
+                <h3 data-i18n="Síguenos">Síguenos</h3>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/" target="_blank">
                         <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram">
@@ -194,10 +195,10 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-bottom-content">
-                <p class="copyright">© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+                <p class="copyright">© 2025 Cocinando Juntos - <span data-i18n="Todos los derechos reservados">Todos los derechos reservados</span></p>
                 <div class="footer-bottom-right">
                     <div class="language-selector">
-                        <label for="language">Idioma:</label>
+                        <label for="language" data-i18n="Idioma:">Idioma:</label>
                         <select id="language">
                             <option value="es">Español</option>
                             <option value="ca">Català</option>
@@ -218,8 +219,6 @@
         const userInfo = document.getElementById("user-info");
         const authButton = document.getElementById("auth-button");
         const userProfileLink = document.getElementById("user-profile-link");
-
-        console.log("Datos del usuario:", usuario); // Para depuración
 
         // Si el usuario está registrado en localStorage
         if (usuario) {
@@ -251,3 +250,4 @@
     </script>
 </body>
 </html>
+
