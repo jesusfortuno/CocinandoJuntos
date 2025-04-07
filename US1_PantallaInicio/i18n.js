@@ -55,6 +55,11 @@ const translations = {
     "Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos.":
       "Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos.",
     "Leer más": "Leer más",
+    "Ensalada Fresca": "Ensalada Fresca",
+    "Tacos Mexicanos": "Tacos Mexicanos",
+    "Smoothie de Frutas": "Smoothie de Frutas",
+    "Pasta al Pesto": "Pasta al Pesto",
+    "Batido Energético": "Batido Energético",
 
     // Categorías
     Media: "Media",
@@ -87,7 +92,8 @@ const translations = {
     Chefs: "Chefs",
     Síguenos: "Síguenos",
     "Idioma:": "Idioma:",
-    "Todos los derechos reservados": "Todos los derechos reservados",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados":
+      "© 2025 Cocinando Juntos - Todos los derechos reservados",
   },
 
   // Catalán
@@ -127,21 +133,26 @@ const translations = {
 
     // Recetas
     "Pollo Agridulce": "Pollastre Agredolç",
-    "Delicioso plato de pollo agridulce con un toque especial. Una combinación perfecta de sabores dulces y ácidos que te transportará a l'auténtica cocina xinesa.":
+    "Delicioso plato de pollo agridulce con un toque especial. Una combinación perfecta de sabores dulces y ácidos que te transportará a la auténtica cocina china.":
       "Deliciós plat de pollastre agredolç amb un toc especial. Una combinació perfecta de sabors dolços i àcids que et transportarà a l'autèntica cuina xinesa.",
     "Galletas de Sésamo": "Galetes de Sèsam",
     "Crujientes galletas con semillas de sésamo, una deliciosa receta tradicional china. Perfectas para acompañar el té o como snack en cualquier momento del día.":
       "Cruixents galetes amb llavors de sèsam, una deliciosa recepta tradicional xinesa. Perfectes per acompanyar el te o com a snack en qualsevol moment del dia.",
     "Bollitos Chinos": "Panets Xinesos",
-    "Suaves y esponjosos panets al vapor, farcits de delicioses barreges. Un esmorzar tradicional de la cuina xinesa que t'encantarà.":
+    "Suaves y esponjosos bollitos al vapor, rellenos de deliciosas mezclas. Un desayuno tradicional de la cocina china que te encantará.":
       "Suaus i esponjosos panets al vapor, farcits de delicioses barreges. Un esmorzar tradicional de la cuina xinesa que t'encantarà.",
     "Fideos Salteados": "Fideus Saltats",
-    "Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y sabroso que te transportará a las calles de la Xina.":
+    "Fideos salteados con verduras crujientes y una salsa especial. Un plato rápido y sabroso que te transportará a las calles de China.":
       "Fideus saltats amb verdures cruixents i una salsa especial. Un plat ràpid i saborós que et transportarà als carrers de la Xina.",
     "Sopa Wonton": "Sopa Wonton",
-    "Reconfortante sopa con wontons casolans farcits de carn i gambes. Un plat tradicional xinès perfecte per a dies freds.":
+    "Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos.":
       "Reconfortant sopa amb wontons casolans farcits de carn i gambes. Un plat tradicional xinès perfecte per a dies freds.",
     "Leer más": "Llegir més",
+    "Ensalada Fresca": "Amanida Fresca",
+    "Tacos Mexicanos": "Tacos Mexicans",
+    "Smoothie de Frutas": "Smoothie de Fruites",
+    "Pasta al Pesto": "Pasta al Pesto",
+    "Batido Energético": "Batut Energètic",
 
     // Categorías
     Media: "Mitjana",
@@ -174,7 +185,7 @@ const translations = {
     Chefs: "Xefs",
     Síguenos: "Segueix-nos",
     "Idioma:": "Idioma:",
-    "Todos los derechos reservados": "Tots els drets reservats",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cuinant Junts - Tots els drets reservats",
   },
 
   // Inglés
@@ -229,6 +240,11 @@ const translations = {
     "Reconfortante sopa con wontons caseros rellenos de carne y camarones. Un plato tradicional chino perfecto para días fríos.":
       "Comforting soup with homemade wontons filled with meat and shrimp. A traditional Chinese dish perfect for cold days.",
     "Leer más": "Read more",
+    "Ensalada Fresca": "Fresh Salad",
+    "Tacos Mexicanos": "Mexican Tacos",
+    "Smoothie de Frutas": "Fruit Smoothie",
+    "Pasta al Pesto": "Pesto Pasta",
+    "Batido Energético": "Energy Shake",
 
     // Categorías
     Media: "Medium",
@@ -261,7 +277,7 @@ const translations = {
     Chefs: "Chefs",
     Síguenos: "Follow Us",
     "Idioma:": "Language:",
-    "Todos los derechos reservados": "All rights reserved",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cooking Together - All rights reserved",
   },
 }
 
@@ -286,68 +302,39 @@ function getCurrentLanguage() {
   return "es"
 }
 
-// Función para preparar los elementos para la traducción
-function prepareElementsForTranslation() {
-  // Lista de selectores para elementos que contienen texto a traducir
-  const textSelectors = [
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "p",
-    "a:not(.culture-card)", // Excluir los enlaces de culture-card
-    "button",
-    "label",
-    "span",
-    "li",
-    "option",
-    ".recipe-meta span",
-  ]
+// Función para traducir todos los elementos con atributo data-i18n
+function translatePage(language) {
+  if (!translations[language]) {
+    console.error(`El idioma ${language} no está soportado.`)
+    return
+  }
 
-  // Seleccionar todos los elementos de texto
-  const textElements = document.querySelectorAll(textSelectors.join(", "))
-
-  // Para cada elemento, añadir el atributo data-i18n con el texto original
-  textElements.forEach((element) => {
-    // Ignorar elementos que ya tienen el atributo o están vacíos
-    // También ignorar elementos dentro de .culture-card que no sean h3
-    const isInCultureCard = element.closest(".culture-card") && element.tagName !== "H3"
-    if (!element.hasAttribute("data-i18n") && element.textContent.trim() && !isInCultureCard) {
-      const text = element.textContent.trim()
-
-      // Verificar si el texto existe en las traducciones
-      if (translations.es[text]) {
-        element.setAttribute("data-i18n", text)
+  const elements = document.querySelectorAll("[data-i18n]")
+  elements.forEach((element) => {
+    const key = element.getAttribute("data-i18n")
+    if (translations[language][key]) {
+      // Si es un input con placeholder
+      if (element.hasAttribute("placeholder")) {
+        element.setAttribute("placeholder", translations[language][key])
+      } else {
+        // Para otros elementos, actualizar el contenido de texto
+        element.textContent = translations[language][key]
       }
     }
   })
 
-  // Manejar los placeholders de los inputs
-  document.querySelectorAll("input[placeholder]").forEach((input) => {
-    const placeholder = input.placeholder
-    if (translations.es[placeholder]) {
-      input.setAttribute("data-i18n", placeholder)
-    }
-  })
+  // Actualizar el selector de idioma
+  const languageSelector = document.getElementById("language")
+  if (languageSelector) {
+    languageSelector.value = language
+  }
+
+  // Disparar un evento personalizado para notificar que el idioma ha cambiado
+  document.dispatchEvent(new CustomEvent("languageChanged", { detail: { language } }))
 }
 
-// Función para asegurar que las imágenes se carguen correctamente
-function ensureImagesLoaded() {
-  // Forzar la recarga de imágenes en las tarjetas de cultura
-  document.querySelectorAll(".culture-card img").forEach((img) => {
-    const src = img.getAttribute("src")
-    if (src) {
-      // Forzar recarga añadiendo un parámetro de tiempo
-      img.setAttribute("src", src + "?t=" + new Date().getTime())
-    }
-  })
-}
-
-// Función para cambiar el idioma de la página
+// Función para cambiar el idioma
 function changeLanguage(lang) {
-  // Verificar si el idioma está soportado
   if (!translations[lang]) {
     console.error(`El idioma ${lang} no está soportado.`)
     return
@@ -356,47 +343,17 @@ function changeLanguage(lang) {
   // Guardar la preferencia de idioma
   localStorage.setItem("language", lang)
 
-  // Obtener todas las traducciones para el idioma seleccionado
-  const texts = translations[lang]
-
-  // Traducir todos los elementos de texto en la página
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
-    const key = element.getAttribute("data-i18n")
-    if (texts[key]) {
-      // Si el elemento es un input con placeholder
-      if (element.placeholder !== undefined) {
-        element.placeholder = texts[key]
-      }
-      // Para otros elementos, actualizar el contenido
-      else {
-        element.textContent = texts[key]
-      }
-    }
-  })
-
-  // Actualizar el selector de idioma
-  const languageSelector = document.getElementById("language")
-  if (languageSelector) {
-    languageSelector.value = lang
-  }
-
-  // Asegurar que las imágenes se carguen correctamente
-  ensureImagesLoaded()
-
-  // Disparar un evento personalizado para notificar que el idioma ha cambiado
-  document.dispatchEvent(new CustomEvent("languageChanged", { detail: { language: lang } }))
+  // Aplicar las traducciones
+  translatePage(lang)
 }
 
 // Función para inicializar el sistema de internacionalización
 function initI18n() {
-  // Añadir atributos data-i18n a todos los elementos de texto
-  prepareElementsForTranslation()
-
   // Obtener el idioma actual
   const currentLang = getCurrentLanguage()
 
   // Aplicar las traducciones iniciales
-  changeLanguage(currentLang)
+  translatePage(currentLang)
 
   // Configurar el evento de cambio de idioma en el selector
   const languageSelector = document.getElementById("language")
@@ -413,6 +370,7 @@ window.i18n = {
   changeLanguage: changeLanguage,
   getCurrentLanguage: getCurrentLanguage,
   translations: translations,
+  translatePage: translatePage,
 }
 
 // Inicializar cuando el DOM esté cargado
