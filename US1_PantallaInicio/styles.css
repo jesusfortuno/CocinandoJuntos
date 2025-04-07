@@ -6,8 +6,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* Modificar estos estilos del footer para corregir el problema de desplazamiento */
-
 html,
 body {
   height: 100%;
@@ -71,6 +69,13 @@ nav {
   cursor: pointer;
   font-size: 24px;
   color: #6b4423;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-icon:hover {
+  background-color: rgba(107, 68, 35, 0.1);
 }
 
 main {
@@ -122,7 +127,6 @@ main {
   padding: 0 2rem;
 }
 
-/* Modificación para la sección de platos por cultura */
 .culture-dishes {
   background-color: #fff;
   padding: 1rem 2rem;
@@ -131,17 +135,12 @@ main {
   text-align: center;
   width: 100%;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  position: relative;
 }
 
-/* Scroll horizontal para culturas en pantallas pequeñas y medianas */
+/* Nuevo scroll horizontal para culturas */
 .culture-scroll {
   display: flex;
-  gap: 1.5rem;
+  gap: 3rem;
   padding: 1rem 0;
   width: 100%;
   overflow-x: auto;
@@ -149,18 +148,14 @@ main {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
-  justify-content: center; /* Centrar las tarjetas */
 }
 
 .culture-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
 
-/* Asegurar que las imágenes de las tarjetas de cultura se muestren correctamente */
 .culture-card {
-  flex: 0 0 200px; /* Tamaño fijo en pantallas pequeñas */
-  max-width: 250px;
-  text-align: center;
+  flex: 0 0 250px; /* Ancho fijo, no shrink, no grow */
   position: relative;
   border-radius: 10px;
   overflow: hidden;
@@ -170,16 +165,16 @@ main {
   color: inherit;
   background-color: white;
   height: 250px;
-  display: flex;
-  flex-direction: column; /* Asegurar que los elementos se apilen verticalmente */
+}
+
+.culture-card:hover {
+  transform: translateY(-5px);
 }
 
 .culture-card img {
   width: 100%;
   height: 80%;
   object-fit: cover;
-  display: block; /* Asegurar que la imagen se muestre como bloque */
-  min-height: 200px; /* Altura mínima para evitar colapso */
 }
 
 .culture-card h3 {
@@ -192,33 +187,6 @@ main {
   text-align: center;
   font-size: 1.2rem;
   color: #6b4423;
-  z-index: 2; /* Asegurar que el texto esté por encima de la imagen */
-}
-
-/* Media queries para ajustar el comportamiento en diferentes tamaños de pantalla */
-@media screen and (min-width: 768px) {
-  .culture-scroll {
-    flex-wrap: wrap; /* Permitir que las tarjetas se envuelvan en filas */
-    overflow-x: visible; /* Desactivar el scroll horizontal en pantallas más grandes */
-    justify-content: center; /* Centrar las tarjetas */
-  }
-
-  .culture-card {
-    flex: 0 0 calc(33.333% - 1rem); /* 3 tarjetas por fila en tablets */
-    margin-bottom: 1rem;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .culture-scroll {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-
-  .culture-card {
-    flex: 0 0 calc(16.666% - 1.7rem); /* 6 tarjetas en una fila en pantallas grandes */
-  }
 }
 
 /* Nuevo slider de recetas */
@@ -240,7 +208,6 @@ main {
   overflow: hidden;
 }
 
-/* Ajustes para la sección de recetas */
 .recipe-track {
   display: flex;
   justify-content: center;
@@ -260,7 +227,7 @@ main {
   transition: all 0.3s ease;
   margin: 0;
   width: calc(20% - 2rem);
-  display: block; /* Cambiar de none a block para que todas las tarjetas sean visibles */
+  display: none;
   cursor: pointer;
 }
 
@@ -431,28 +398,16 @@ main {
 }
 
 /* Modificar los estilos del footer */
-/* Footer Styles - Versión mejorada */
 footer {
-  background: linear-gradient(135deg, #8b5d33 0%, #6b4423 100%);
+  background: linear-gradient(to bottom, #8b5d33, #6b4423);
   color: white;
-  padding: 3rem 0 0;
+  padding: 3rem 0 0; /* Eliminar padding bottom */
   position: relative;
   width: 100%;
   margin-top: auto;
   min-height: fit-content;
   height: auto;
   overflow: visible;
-  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
-}
-
-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(to right, #f8f1e9, #d4c3b5, #f8f1e9);
 }
 
 .footer-container {
@@ -464,271 +419,6 @@ footer::before {
   padding: 0 2rem;
 }
 
-.footer-links {
-  flex: 1;
-  min-width: auto;
-  margin: 0;
-}
-
-.footer-links h3 {
-  margin-bottom: 1.5rem;
-  font-size: 1.3rem;
-  position: relative;
-  padding-bottom: 0.8rem;
-  color: #f8f1e9;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.footer-links h3::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 40px;
-  height: 2px;
-  background-color: #f8f1e9;
-}
-
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links ul li {
-  margin: 0.8rem 0;
-  transition: transform 0.3s ease;
-}
-
-.footer-links ul li:hover {
-  transform: translateX(5px);
-}
-
-.footer-links ul li a {
-  color: #f8f1e9;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
-  display: block;
-  opacity: 0.9;
-}
-
-.footer-links ul li a:hover {
-  color: #ffffff;
-  opacity: 1;
-}
-
-.footer-social {
-  flex: 1;
-  min-width: auto;
-  margin: 0;
-}
-
-.footer-social h3 {
-  margin-bottom: 1.5rem;
-  font-size: 1.3rem;
-  position: relative;
-  padding-bottom: 0.8rem;
-  color: #f8f1e9;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.footer-social h3::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 40px;
-  height: 2px;
-  background-color: #f8f1e9;
-}
-
-.social-icons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.social-icons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-icons a:hover {
-  background-color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.social-icons a img {
-  width: 20px;
-  height: 20px;
-  filter: brightness(0) invert(1);
-  transition: filter 0.3s ease;
-}
-
-.social-icons a:hover img {
-  filter: brightness(0);
-}
-
-/* Nuevo estilo para el footer bottom */
-.footer-bottom {
-  width: 100%;
-  padding: 1.5rem 0;
-  margin-top: 2rem;
-  background: rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-/* Contenedor para el copyright, selector de idioma y botón de scroll */
-.footer-bottom-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.copyright {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Nuevo contenedor para el selector de idioma y el botón de scroll */
-.footer-bottom-right {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.language-selector {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.language-selector label {
-  margin-right: 0.5rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-}
-
-.language-selector select {
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.language-selector select:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.language-selector select option {
-  background-color: #6b4423;
-  color: #fff;
-}
-
-/* Ajustar el botón de scroll - Eliminar el fondo marrón */
-.scroll-to-top {
-  position: fixed !important;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background: transparent !important;
-  border: none;
-  cursor: pointer;
-  z-index: 9999;
-  display: none;
-  transition: opacity 0.3s ease;
-  padding: 0;
-}
-
-.scroll-to-top .scroll-gif {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-/* Añadir estas clases para controlar la visibilidad */
-.scroll-to-top.visible {
-  display: flex;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive Footer */
-@media screen and (max-width: 992px) {
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  .footer-bottom-content {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .footer-bottom-right {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-
-  .footer-links,
-  .footer-social {
-    text-align: center;
-  }
-
-  .footer-links h3::after,
-  .footer-social h3::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .social-icons {
-    justify-content: center;
-  }
-
-  .footer-bottom-right {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
 .footer-links {
   flex: 1;
   min-width: 200px;
@@ -1021,16 +711,6 @@ footer::before {
   }
 
   .video-overlay p {
-    font-size: 1rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .hero-btn {
-    padding: 0.7rem 1.5rem;
     font-size: 1rem;
   }
 }
@@ -1369,8 +1049,8 @@ footer::before {
 
 /* Eliminar la regla que oculta las recetas adicionales */
 /* .recipe-card:nth-child(n+6) {
-    display: none;
-  } */
+  display: none;
+} */
 
 /* Media queries para responsividad */
 @media screen and (max-width: 1200px) {
@@ -1476,6 +1156,29 @@ footer::before {
 .recipe-card {
   position: relative;
   /* Resto de estilos se mantienen igual */
+}
+
+/* Footer Styles */
+footer {
+  background: linear-gradient(to bottom, #8b5d33, #6b4423);
+  color: white;
+  padding: 3rem 0 0; /* Eliminar padding bottom */
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: auto;
+  min-height: fit-content;
+  height: auto;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, #f8f1e9, #d4c3b5, #f8f1e9);
 }
 
 .footer-container {
@@ -1926,59 +1629,57 @@ input:checked + .slider:before {
 }
 
 /* Ajustar el botón de scroll */
-/* Modificar los estilos del botón de scroll para quitar el cuadrado marrón */
-/* Reemplazar los estilos actuales de .scroll-to-top y .scroll-gif con estos: */
-
 .scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: transparent; /* Eliminar el fondo marrón */
-  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  z-index: 1000;
-  transition: opacity 0.3s ease;
+  transition: transform 0.3s ease;
+  background: transparent; /* Eliminar el fondo marrón */
   padding: 0;
+  margin: 0;
+  z-index: 100; /* Asegurar que esté por encima de otros elementos */
+  position: relative;
+  text-decoration: none; /* Eliminar subrayado del enlace */
 }
 
-.scroll-to-top .scroll-gif {
+.scroll-gif {
   width: 40px;
   height: 40px;
-  display: block;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
 }
 
-.scroll-to-top:hover {
-  opacity: 0.8;
+.scroll-to-top:hover .scroll-gif {
+  transform: scale(1.2);
 }
 
-.scroll-to-top:focus {
-  outline: none;
-}
-
-/* Eliminar el pseudo-elemento ::after que podría estar creando un fondo adicional */
+/* Añadir un efecto visual para indicar que es clickeable */
 .scroll-to-top::after {
-  display: none;
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: -1;
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .scroll-gif {
-    width: 40px;
-    height: 40px;
-  }
+.scroll-to-top:hover::after {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
 }
 
-/* Estilos del menú desplegable - Actualizados para coincidir con "Recetas Dificultad Fácil" */
-/* Estilos del menú desplegable - Completamente reescritos para hacerlo horizontal */
+/* Estilos del menú desplegable - Actualizados para coincidir con la imagen de referencia */
+/* Nuevo estilo para el menú horizontal */
 .overlay-menu {
   display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
+  position: static;
   width: 100%;
   background-color: #f8f1e9;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  text-align: center;
+  border-bottom: 1px solid #e0d5c9;
+  z-index: 999;
 }
 
 .overlay-menu.active {
@@ -1987,13 +1688,50 @@ input:checked + .slider:before {
 
 .overlay-content {
   display: flex;
-  justify-content: center;
-  padding: 1.5rem;
-  flex-wrap: nowrap;
+  justify-content: space-around;
+  padding: 20px 40px;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative; /* Añadido para posicionar el botón de cierre */
 }
 
+.menu-section {
+  flex: 1;
+  padding: 0 15px;
+}
+
+.menu-section h3 {
+  color: #6b4423;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e0d5c9;
+  padding-bottom: 10px;
+}
+
+.menu-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-section ul li {
+  margin: 10px 0;
+}
+
+.menu-section ul li a {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+  display: block;
+}
+
+.menu-section ul li a:hover {
+  color: #6b4423;
+}
+
+/* Botón de cierre del menú */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -2003,7 +1741,6 @@ input:checked + .slider:before {
   color: #6b4423;
   background: transparent;
   border: none;
-  padding: 0;
   width: 30px;
   height: 30px;
   display: flex;
@@ -2016,79 +1753,27 @@ input:checked + .slider:before {
   color: #8b5d33;
 }
 
-.menu-section {
-  flex: 1;
-  padding: 0 1.5rem;
-  border-right: 1px solid #e0d5c9;
-}
-
-.menu-section:last-child {
-  border-right: none;
-}
-
-.menu-section h3 {
-  color: #6b4423;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.menu-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-.menu-section ul li {
-  margin: 0.5rem 0;
-}
-
-.menu-section ul li a {
-  color: #666;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s;
-  display: inline-block;
-  padding: 0.3rem 0;
-}
-
-.menu-section ul li a:hover {
-  color: #6b4423;
-  text-decoration: underline;
-}
-
-/* Estilos para el botón del menú hamburguesa */
-.menu-icon {
-  cursor: pointer;
-  font-size: 24px;
-  color: #6b4423;
-  padding: 5px 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.menu-icon:hover {
-  background-color: rgba(107, 68, 35, 0.1);
-}
-
 /* Estilos responsivos para el menú */
 @media screen and (max-width: 768px) {
   .overlay-content {
     flex-direction: column;
-    padding: 1rem;
+    padding: 15px;
   }
 
   .menu-section {
-    padding: 0.5rem 0;
-    border-right: none;
-    border-bottom: 1px solid #e0d5c9;
-    margin-bottom: 0.5rem;
+    margin-bottom: 15px;
   }
 
   .menu-section:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .menu-section h3 {
+    margin-bottom: 10px;
+  }
+
+  .menu-section ul li {
+    margin: 8px 0;
   }
 }
 

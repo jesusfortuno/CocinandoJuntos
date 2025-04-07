@@ -151,15 +151,26 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.className = "recipe-overlay"
 
       // Obtener información de la receta
-      const title = card.querySelector("h3")?.textContent || "Receta"
-      const description =
-        card.querySelector(".description p")?.textContent ||
-        "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."
+      const titleElement = card.querySelector("h3")
+      const title = titleElement ? titleElement.textContent || "Receta" : "Receta"
+      const descriptionElement = card.querySelector(".description p")
+      const description = descriptionElement
+        ? descriptionElement.textContent
+        : "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."
 
       // Crear contenido del overlay
+      const titleDataI18n =
+        titleElement && titleElement.hasAttribute("data-i18n") ? titleElement.getAttribute("data-i18n") : ""
+
+      const descriptionDataI18n =
+        descriptionElement && descriptionElement.hasAttribute("data-i18n")
+          ? descriptionElement.getAttribute("data-i18n")
+          : ""
+
       overlay.innerHTML = `
-        <h3 class="title">${title}</h3>
-        <p>${description}</p>
+        &lt;h3 class="title" ${titleDataI18n ? `data-i18n="${titleDataI18n}"` : ""}&gt;${title}&lt;/h3&gt;
+        &lt;p ${descriptionDataI18n ? `data-i18n="${descriptionDataI18n}"` : ""}&gt;${description}&lt;/p&gt;
+        &lt;a href="#" class="read-more" data-i18n="Leer más"&gt;Leer más&lt;/a&gt;
       `
 
       // Añadir overlay a la tarjeta
@@ -199,35 +210,27 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   // Funcionalidad para el botón de scroll hacia arriba
-  // Usar una función independiente para asegurar que se ejecute correctamente
-  function setupScrollToTop() {
-    const scrollToTopButton = document.querySelector(".scroll-to-top")
+  const scrollToTopButton = document.querySelector(".scroll-to-top")
+  if (scrollToTopButton) {
+    console.log("Botón de scroll encontrado:", scrollToTopButton)
 
-    if (scrollToTopButton) {
-      console.log("Botón de scroll encontrado:", scrollToTopButton)
+    scrollToTopButton.addEventListener("click", () => {
+      console.log("Botón de scroll clickeado")
 
-      // Usar un manejador de eventos directo y simple
-      scrollToTopButton.onclick = (e) => {
-        e.preventDefault()
-        console.log("Botón de scroll clickeado")
-
-        // Scroll suave hacia arriba
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        })
-      }
-    } else {
-      console.error("Botón de scroll no encontrado")
-    }
+      // Scroll suave hacia arriba
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    })
+  } else {
+    console.error("Botón de scroll no encontrado")
   }
-
-  // Ejecutar la configuración del botón de scroll
-  setupScrollToTop()
 
   // Añadir funcionalidad para el menú desplegable
   const menuToggle = document.getElementById("menuToggle")
   const overlayMenu = document.getElementById("overlayMenu")
+  const closeMenu = document.getElementById("closeMenu")
 
   if (menuToggle && overlayMenu) {
     // Asegurarse de que el menú esté inicialmente oculto
@@ -236,11 +239,12 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.addEventListener("click", (e) => {
       e.preventDefault()
       e.stopPropagation() // Evitar que el clic se propague
+
+      // Alternar la clase active
       overlayMenu.classList.toggle("active")
-      console.log("Menú toggle clicked, active:", overlayMenu.classList.contains("active"))
+      console.log("Menú toggle clicked, overlay active:", overlayMenu.classList.contains("active"))
     })
 
-    const closeMenu = document.getElementById("closeMenu")
     if (closeMenu) {
       closeMenu.addEventListener("click", (e) => {
         e.preventDefault()
@@ -258,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   } else {
-    console.warn("Elementos del menú no encontrados:", {
+    console.error("Elementos del menú no encontrados:", {
       menuToggle: menuToggle ? "encontrado" : "no encontrado",
       overlayMenu: overlayMenu ? "encontrado" : "no encontrado",
     })
@@ -267,8 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Asegurar que el footer se muestre correctamente
   function adjustFooterPosition() {
     const footer = document.querySelector("footer")
-    if (!footer) return
-
     const body = document.body
     const html = document.documentElement
 
@@ -296,47 +298,10 @@ document.addEventListener("DOMContentLoaded", () => {
   adjustFooterPosition()
   window.addEventListener("resize", adjustFooterPosition)
 
-  // Añadir un event listener para el cambio de idioma
-  document.addEventListener("languageChanged", (e) => {
-    updateSliderPosition() // Actualizar las traducciones cuando cambie el idioma
-
-    // Actualizar las traducciones del menú desplegable
-    if (window.i18n && window.i18n.translations) {
-      const language = e.detail.language
-      const translations = window.i18n.translations[language]
-
-      if (translations) {
-        // Actualizar los textos del menú según el idioma
-        document.querySelectorAll("#overlayMenu [data-i18n]").forEach((element) => {
-          const key = element.getAttribute("data-i18n")
-          if (translations[key]) {
-            element.textContent = translations[key]
-          }
-        })
-      }
-    }
-  })
-
-  // Exponer la función updateSliderPosition globalmente para que pueda ser llamada desde otros scripts
-  window.updateRecipeSliderPosition = updateSliderPosition
-
-  console.log("Inicialización de index.js completada")
-})
-
-// Asegurar que esta función se ejecute cuando el DOM esté cargado
-document.addEventListener("DOMContentLoaded", setupScrollToTop)
-
-function setupScrollToTop() {
-  const scrollToTopButton = document.getElementById("scrollToTop")
-  if (scrollToTopButton) {
-    scrollToTopButton.addEventListener("click", (e) => {
-      e.preventDefault()
-      console.log("Botón de scroll clickeado")
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    })
+  // Aplicar traducciones iniciales si el sistema i18n está disponible
+  if (window.i18n && typeof window.i18n.translatePage === "function") {
+    const currentLanguage = localStorage.getItem("language") || "es"
+    window.i18n.translatePage(currentLanguage)
   }
-}
+})
 
