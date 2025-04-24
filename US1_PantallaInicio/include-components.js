@@ -10,175 +10,195 @@ document.addEventListener("DOMContentLoaded", () => {
       return false
     }
   
-    // Modificar la sección del logo para que se vea mejor
+    // Barra de navegación mejorada con diseño más moderno
     const navHTML = `
-  <nav style="background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; padding: 0.8rem 2rem; display: flex; align-items: center;">
-      <a href="index.html" class="logo" style="width: 80px; height: 80px; margin-right: 2rem; display: flex; align-items: center;">
+  <nav style="background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; padding: 0.8rem 2rem; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(107, 68, 35, 0.05);">
+      <a href="index.html" class="logo" style="width: 80px; height: 80px; margin-right: 2rem; display: flex; align-items: center; transition: transform 0.3s ease;">
           <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">
       </a>
       
-      <!-- Buscador con botón - Estilo actualizado para coincidir con la imagen de referencia -->
+      <!-- Buscador con botón - Estilo actualizado y mejorado -->
       <div class="search-container" style="position: relative; flex-grow: 1; max-width: 600px; margin: 0 auto;">
           <input type="text" id="search-input" placeholder="Cercar receptes..." data-i18n="Buscar recetas..." 
-                 style="width: 100%; padding: 0.6rem 2.5rem 0.6rem 1rem; border: 1px solid #e0d5c9; border-radius: 20px; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <button id="search-button" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #6b4423; cursor: pointer;">
+                 style="width: 100%; padding: 0.8rem 2.5rem 0.8rem 1.2rem; border: 1px solid #e0d5c9; border-radius: 24px; background-color: #fff; box-shadow: 0 2px 8px rgba(107, 68, 35, 0.08); font-size: 0.95rem; transition: all 0.3s ease;">
+          <button id="search-button" type="button" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #6b4423; cursor: pointer; font-size: 1rem;">
               <i class="fas fa-search"></i>
           </button>
-          <button id="search-close" type="button" style="display: none; position: absolute; right: 40px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666; cursor: pointer;">
+          <button id="search-close" type="button" style="display: none; position: absolute; right: 42px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666; cursor: pointer;">
               <i class="fas fa-times"></i>
           </button>
           
           <!-- Contenedor para resultados de búsqueda -->
-          <div id="search-results" class="search-results" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; border: 1px solid #e0d5c9; border-radius: 0 0 10px 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 100; max-height: 400px; overflow-y: auto;">
+          <div id="search-results" class="search-results" style="display: none; position: absolute; top: calc(100% + 8px); left: 0; width: 100%; background: white; border: 1px solid #e0d5c9; border-radius: 12px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); z-index: 100; max-height: 400px; overflow-y: auto;">
               <!-- Los resultados se cargarán dinámicamente aquí -->
           </div>
       </div>
   
-      <!-- Icono de notificaciones - Actualizado para coincidir con la imagen de referencia -->
-      <div class="notification-container" style="position: relative; margin-left: auto; margin-right: 15px;">
-          <a href="#" id="notification-button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
-              <i class="fas fa-bell" style="font-size: 1.2rem; color: #6b4423;"></i>
-          </a>
-          <div id="notification-dropdown" style="display: none; position: absolute; top: 100%; right: 0; width: 300px; background: white; border: 1px solid #e0d5c9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 100; padding: 1rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #e0d5c9; padding-bottom: 10px;">
-                  <h3 style="margin: 0; font-size: 1rem; color: #6b4423;" data-i18n="Notificaciones">Notificaciones</h3>
-                  <button id="mark-all-read" style="background: none; border: none; color: #6b4423; cursor: pointer; font-size: 0.8rem; text-decoration: underline;" data-i18n="Marcar todas como leídas">Marcar todas como leídas</button>
-              </div>
-              <div id="notification-list" style="max-height: 300px; overflow-y: auto;">
-                  <div class="empty-notification" style="text-align: center; padding: 1rem; color: #666;" data-i18n="No tienes notificaciones">No tienes notificaciones</div>
+      <div style="display: flex; align-items: center; margin-left: auto; gap: 15px;">
+          <!-- 1. Icono de notificaciones -->
+          <div class="notification-container" style="position: relative;">
+              <a href="#" id="notification-button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; transition: background-color 0.3s ease; position: relative; background-color: rgba(107, 68, 35, 0.05);">
+                  <i class="fas fa-bell" style="font-size: 1.5rem; color: #6b4423;"></i>
+              </a>
+              <div id="notification-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: -10px; width: 320px; background: white; border: 1px solid #e0d5c9; border-radius: 12px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); z-index: 100; padding: 0; overflow: hidden;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #e0d5c9; background-color: #f9f5f0;">
+                      <h3 style="margin: 0; font-size: 1rem; color: #6b4423; font-weight: 600;" data-i18n="Notificaciones">Notificaciones</h3>
+                      <button id="mark-all-read" style="background: none; border: none; color: #6b4423; cursor: pointer; font-size: 0.8rem; text-decoration: underline; padding: 5px;" data-i18n="Marcar todas como leídas">Marcar todas como leídas</button>
+                  </div>
+                  <div id="notification-list" style="max-height: 350px; overflow-y: auto; padding: 0;">
+                      <div class="empty-notification" style="text-align: center; padding: 2rem 1rem; color: #666;" data-i18n="No tienes notificaciones">No tienes notificaciones</div>
+                  </div>
               </div>
           </div>
+  
+          <!-- 2. Sección del user-info para mostrar usuario según el tipo -->
+          <div id="user-info" class="user-info" style="display: none; align-items: center; gap: 12px; background-color: rgba(107, 68, 35, 0.05); padding: 6px 12px; border-radius: 24px; transition: all 0.3s ease;">
+              <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              <a href="#" id="user-profile-link" style="text-decoration: none;">
+                  <span id="user-name" style="color: #333; font-weight: 500; font-size: 0.95rem;">Nombre del usuario</span>
+              </a>
+              <a href="#" id="logout-btn" class="auth-buttons" data-i18n="Cerrar Sesión" style="color: #6b4423; text-decoration: none; font-size: 0.85rem; opacity: 0.8;">Cerrar Sesión</a>
+          </div>
+  
+          <!-- 3. Botón de inicio de sesión (alternativa al user-info) -->
+          <a href="../login.html" id="auth-button" class="auth-buttons" data-i18n="Iniciar Sesión" style="color: #6b4423; text-decoration: none; font-weight: 500; background-color: rgba(107, 68, 35, 0.08); padding: 8px 16px; border-radius: 20px; transition: all 0.3s ease;">Iniciar Sesión</a>
+  
+          <!-- 4. Menú hamburguesa -->
+          <div class="menu-icon" id="menuToggle" style="font-size: 1.5rem; color: #6b4423; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color 0.3s ease;">☰</div>
       </div>
-  
-      <!-- Sección del user-info para mostrar usuario según el tipo -->
-      <div id="user-info" class="user-info" style="display: none; align-items: center; gap: 10px;">
-          <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;">
-          <a href="#" id="user-profile-link" style="text-decoration: none;">
-              <span id="user-name" style="color: #333;">Nombre del usuario</span>
-          </a>
-          <a href="#" id="logout-btn" class="auth-buttons" data-i18n="Cerrar Sesión" style="color: #6b4423; text-decoration: none; margin-left: 10px;">Cerrar Sesión</a>
-      </div>
-  
-      <a href="../login.html" id="auth-button" class="auth-buttons" data-i18n="Iniciar Sesión" style="color: #6b4423; text-decoration: none; margin-left: auto; font-weight: 500;">Iniciar Sesión</a>
-  
-      <div class="menu-icon" id="menuToggle" style="margin-left: 15px; font-size: 1.5rem; color: #6b4423; cursor: pointer;">☰</div>
   </nav>
   
-  <!-- El menú desplegable debe estar aquí, fuera del nav -->
-  <div class="overlay-menu" id="overlayMenu" style="display: none; width: 100%; background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; z-index: 999;">
-      <div class="overlay-content" style="display: flex; justify-content: space-around; padding: 20px 40px; max-width: 1200px; margin: 0 auto; position: relative;">
-          <div class="close-btn" id="closeMenu" style="position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer; color: #6b4423;">×</div>
-          <div class="menu-section" style="flex: 1; padding: 0 15px;">
-              <h3 data-i18n="Culturas Gastronómicas" style="color: #6b4423; margin-bottom: 15px; font-size: 1.1rem; font-weight: 600; border-bottom: 1px solid #e0d5c9; padding-bottom: 10px;">Culturas Gastronómicas</h3>
+  <!-- El menú desplegable mejorado -->
+  <div class="overlay-menu" id="overlayMenu" style="display: none; width: 100%; background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      <div class="overlay-content" style="display: flex; justify-content: space-around; padding: 30px 40px; max-width: 1200px; margin: 0 auto; position: relative;">
+          <div class="close-btn" id="closeMenu" style="position: absolute; top: 15px; right: 15px; font-size: 24px; cursor: pointer; color: #6b4423; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color 0.3s ease;">×</div>
+          
+          <div class="menu-section" style="flex: 1; padding: 0 20px;">
+              <h3 data-i18n="Culturas Gastronómicas" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Culturas Gastronómicas</h3>
               <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin: 10px 0;"><a href="cultura-china.html" data-i18n="China" style="color: #666; text-decoration: none; font-size: 0.95rem;">China</a></li>
-                  <li style="margin: 10px 0;"><a href="cultura-española.html" data-i18n="España" style="color: #666; text-decoration: none; font-size: 0.95rem;">España</a></li>
-                  <li style="margin: 10px 0;"><a href="cultura-francesa.html" data-i18n="Francia" style="color: #666; text-decoration: none; font-size: 0.95rem;">Francia</a></li>
-                  <li style="margin: 10px 0;"><a href="cultura-italiana.html" data-i18n="Italia" style="color: #666; text-decoration: none; font-size: 0.95rem;">Italia</a></li>
-                  <li style="margin: 10px 0;"><a href="cultura-japonesa.html" data-i18n="Japón" style="color: #666; text-decoration: none; font-size: 0.95rem;">Japón</a></li>
-                  <li style="margin: 10px 0;"><a href="cultura-venezolana.html" data-i18n="Venezuela" style="color: #666; text-decoration: none; font-size: 0.95rem;">Venezuela</a></li>
+                  <li style="margin: 12px 0;"><a href="cultura-china.html" data-i18n="China" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">China</a></li>
+                  <li style="margin: 12px 0;"><a href="cultura-española.html" data-i18n="España" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">España</a></li>
+                  <li style="margin: 12px 0;"><a href="cultura-francesa.html" data-i18n="Francia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Francia</a></li>
+                  <li style="margin: 12px 0;"><a href="cultura-italiana.html" data-i18n="Italia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Italia</a></li>
+                  <li style="margin: 12px 0;"><a href="cultura-japonesa.html" data-i18n="Japón" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Japón</a></li>
+                  <li style="margin: 12px 0;"><a href="cultura-venezolana.html" data-i18n="Venezuela" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Venezuela</a></li>
               </ul>
           </div>
-          <div class="menu-section" style="flex: 1; padding: 0 15px;">
-              <h3 data-i18n="Tipo de Plato" style="color: #6b4423; margin-bottom: 15px; font-size: 1.1rem; font-weight: 600; border-bottom: 1px solid #e0d5c9; padding-bottom: 10px;">Tipo de Plato</h3>
+          
+          <div class="menu-section" style="flex: 1; padding: 0 20px;">
+              <h3 data-i18n="Tipo de Plato" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Tipo de Plato</h3>
               <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin: 10px 0;"><a href="../US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno" style="color: #666; text-decoration: none; font-size: 0.95rem;">Desayuno</a></li>
-                  <li style="margin: 10px 0;"><a href="../US12_MenuNavegacion/comidas.html" data-i18n="Comida" style="color: #666; text-decoration: none; font-size: 0.95rem;">Comida</a></li>
-                  <li style="margin: 10px 0;"><a href="../US12_MenuNavegacion/merienda.html" data-i18n="Merienda" style="color: #666; text-decoration: none; font-size: 0.95rem;">Merienda</a></li>
-                  <li style="margin: 10px 0;"><a href="../US12_MenuNavegacion/cena.html" data-i18n="Cena" style="color: #666; text-decoration: none; font-size: 0.95rem;">Cena</a></li>
+                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Desayuno</a></li>
+                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/comidas.html" data-i18n="Comida" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Comida</a></li>
+                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/merienda.html" data-i18n="Merienda" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Merienda</a></li>
+                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/cena.html" data-i18n="Cena" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Cena</a></li>
               </ul>
           </div>
-          <div class="menu-section" style="flex: 1; padding: 0 15px;">
-              <h3 data-i18n="Dificultad de la Receta" style="color: #6b4423; margin-bottom: 15px; font-size: 1.1rem; font-weight: 600; border-bottom: 1px solid #e0d5c9; padding-bottom: 10px;">Dificultad de la Receta</h3>
+          
+          <div class="menu-section" style="flex: 1; padding: 0 20px;">
+              <h3 data-i18n="Dificultad de la Receta" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Dificultad de la Receta</h3>
               <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin: 10px 0;"><a href="../US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil" style="color: #666; text-decoration: none; font-size: 0.95rem;">Fácil</a></li>
-                  <li style="margin: 10px 0;"><a href="../US12_MenuNavegacion/dificultad-media.html" data-i18n="Media" style="color: #666; text-decoration: none; font-size: 0.95rem;">Media</a></li>
-                  <li style="margin: 10px 0;"><a href="../US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil" style="color: #666; text-decoration: none; font-size: 0.95rem;">Difícil</a></li>
+                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Fácil</a></li>
+                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/dificultad-media.html" data-i18n="Media" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Media</a></li>
+                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Difícil</a></li>
               </ul>
           </div>
       </div>
   </div>
   `
   
-    // Footer HTML content
     const footerHTML = `
-  <footer style="background-color: #8b5d33; color: white; padding: 3rem 0 0; margin-top: auto;">
-      <div style="display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 2rem; flex-wrap: wrap;">
-          <!-- Columna 1: Sobre Nosotros -->
-          <div style="flex: 1; min-width: 150px; margin-bottom: 2rem;">
-              <h3 style="color: white; font-size: 1.2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem;" data-i18n="Sobre Nosotros">Sobre Nosotros</h3>
-              <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin-bottom: 0.8rem;"><a href="./quienes-somos.html" data-i18n="Quiénes Somos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Quiénes Somos</a></li>
-                  <li style="margin-bottom: 0.8rem;"><a href="./contacto.html" data-i18n="Contacto" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Contacto</a></li>
-              </ul>
+  <footer style="background: linear-gradient(to right, #8b5d33, #6b4423); color: white; padding: 2rem 0 0; margin-top: auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.1);">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+          <!-- Encabezado del footer con logo y descripción - Más compacto -->
+          <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem;">
+              <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 80px; height: auto; filter: brightness(0) invert(1); opacity: 0.9;">
+              <p style="margin-left: 1.5rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; max-width: 600px; line-height: 1.5;">
+                  Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.
+              </p>
           </div>
+          
+          <!-- Secciones del footer - Más compactas -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 2rem;">
+              <!-- Columna 1: Sobre Nosotros -->
+              <div>
+                  <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Sobre Nosotros">Sobre Nosaltres</h3>
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                      <li style="margin-bottom: 0.6rem;"><a href="./quienes-somos.html" data-i18n="Quiénes Somos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Qui Som</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./contacto.html" data-i18n="Contacto" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Contacte</a></li>
+                  </ul>
+              </div>
   
-          <!-- Columna 2: Legal -->
-          <div style="flex: 1; min-width: 150px; margin-bottom: 2rem;">
-              <h3 style="color: white; font-size: 1.2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem;" data-i18n="Legal">Legal</h3>
-              <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin-bottom: 0.8rem;"><a href="./politica_privacidad.html" data-i18n="Política de Privacidad" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Política de Privacidad</a></li>
-                  <li style="margin-bottom: 0.8rem;"><a href="./terminos_condiciones.html" data-i18n="Términos y Condiciones" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Términos y Condiciones</a></li>
-                  <li style="margin-bottom: 0.8rem;"><a href="./politica_cookies.html" data-i18n="Política de Cookies" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Política de Cookies</a></li>
-                  <li style="margin-bottom: 0.8rem;"><a href="./aviso_legal.html" data-i18n="Aviso Legal" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Aviso Legal</a></li>
-              </ul>
-          </div>
+              <!-- Columna 2: Legal -->
+              <div>
+                  <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Legal">Legal</h3>
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                      <li style="margin-bottom: 0.6rem;"><a href="./politica_privacidad.html" data-i18n="Política de Privacidad" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Política de Privacitat</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./terminos_condiciones.html" data-i18n="Términos y Condiciones" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Termes i Condicions</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./politica_cookies.html" data-i18n="Política de Cookies" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Política de Cookies</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./aviso_legal.html" data-i18n="Aviso Legal" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Avís Legal</a></li>
+                  </ul>
+              </div>
   
-          <!-- Columna 3: Comunidad -->
-          <div style="flex: 1; min-width: 150px; margin-bottom: 2rem;">
-              <h3 style="color: white; font-size: 1.2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem;" data-i18n="Comunidad">Comunidad</h3>
-              <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin-bottom: 0.8rem;"><a href="./../Platos.html" data-i18n="Recetas" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Recetas</a></li>
-                  <li style="margin-bottom: 0.8rem;"><a href="./chefs.html" data-i18n="Chefs" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Chefs</a></li>
-              </ul>
-          </div>
+              <!-- Columna 3: Comunidad -->
+              <div>
+                  <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Comunidad">Comunitat</h3>
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                      <li style="margin-bottom: 0.6rem;"><a href="./../Platos.html" data-i18n="Recetas" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Receptes</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./chefs.html" data-i18n="Chefs" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Xefs</a></li>
+                  </ul>
+              </div>
   
-          <!-- Columna 4: Redes Sociales -->
-          <div style="flex: 1; min-width: 150px; margin-bottom: 2rem;">
-              <h3 style="color: white; font-size: 1.2rem; margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem;" data-i18n="Síguenos">Síguenos</h3>
-              <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                  <a href="https://www.instagram.com/" aria-label="Instagram" style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;">
-                      <i class="fab fa-instagram" style="color: white;"></i>
-                  </a>
-                  <a href="https://www.facebook.com/" aria-label="Facebook" style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;">
-                      <i class="fab fa-facebook-f" style="color: white;"></i>
-                  </a>
-                  <a href="https://twitter.com/" aria-label="Twitter" style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;">
-                      <i class="fab fa-twitter" style="color: white;"></i>
-                  </a>
-                  <a href="https://www.youtube.com/" aria-label="YouTube" style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;">
-                      <i class="fab fa-youtube" style="color: white;"></i>
-                  </a>
-                  <a href="https://www.pinterest.com/" aria-label="Pinterest" style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;">
-                      <i class="fab fa-pinterest-p" style="color: white;"></i>
-                  </a>
-                  <a href="https://www.tiktok.com/" aria-label="TikTok" style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;">
-                      <i class="fab fa-tiktok" style="color: white;"></i>
-                  </a>
+              <!-- Columna 4: Redes Sociales - Reorganizadas en 2 filas de 3 -->
+              <div>
+                  <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Síguenos">Segueix-nos</h3>
+                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px;">
+                      <a href="https://www.instagram.com/" aria-label="Instagram" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                          <i class="fab fa-instagram" style="color: white; font-size: 1.2rem;"></i>
+                      </a>
+                      <a href="https://www.facebook.com/" aria-label="Facebook" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                          <i class="fab fa-facebook-f" style="color: white; font-size: 1.2rem;"></i>
+                      </a>
+                      <a href="https://twitter.com/" aria-label="Twitter" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                          <i class="fab fa-twitter" style="color: white; font-size: 1.2rem;"></i>
+                      </a>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                      <a href="https://www.youtube.com/" aria-label="YouTube" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                          <i class="fab fa-youtube" style="color: white; font-size: 1.2rem;"></i>
+                      </a>
+                      <a href="https://www.pinterest.com/" aria-label="Pinterest" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                          <i class="fab fa-pinterest-p" style="color: white; font-size: 1.2rem;"></i>
+                      </a>
+                      <a href="https://www.tiktok.com/" aria-label="TikTok" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                          <i class="fab fa-tiktok" style="color: white; font-size: 1.2rem;"></i>
+                      </a>
+                  </div>
               </div>
           </div>
       </div>
   
-      <!-- Footer Bottom -->
-      <div style="background-color: rgba(0, 0, 0, 0.2); padding: 1.5rem 0; text-align: center; margin-top: 2rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-              <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;" data-i18n="© 2025 Cocinando Juntos - Todos los derechos reservados">
-                  © 2025 Cocinando Juntos - Todos los derechos reservados
+      <!-- Footer Bottom - Más compacto -->
+      <div style="background-color: rgba(0, 0, 0, 0.2); padding: 1rem 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; flex-wrap: wrap; gap: 1rem;">
+              <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
+                  © 2025 Cuinant Junts - Tots els drets reservats
               </div>
+              
               <!-- Footer bottom right -->
-              <div style="display: flex; align-items: center; gap: 15px;">
+              <div style="display: flex; align-items: center; gap: 20px;">
                   <div class="language-selector" style="display: flex; align-items: center; gap: 10px;">
-                      <label for="language" data-i18n="Idioma:" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Idioma:</label>
-                      <select id="language" style="background-color: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.9rem;">
+                      <label for="language" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Idioma:</label>
+                      <select id="language" style="background-color: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.2); padding: 6px 10px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease;">
                           <option value="es">Español</option>
                           <option value="en">English</option>
-                          <option value="ca">Català</option>
+                          <option value="ca" selected>Català</option>
                       </select>
                   </div>
                   
                   <!-- Botón de scroll -->
-                  <button type="button" id="scrollToTop" class="scroll-to-top" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; justify-content: center; align-items: center;">
-                    <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif" style="width: 40px; height: 40px; border-radius: 50%;">
+                  <button type="button" id="scrollToTop" class="scroll-to-top" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: transform 0.3s ease;">
+                    <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif" style="width: 35px; height: 35px; border-radius: 50%;">
                   </button>
               </div>
           </div>
@@ -195,6 +215,69 @@ document.addEventListener("DOMContentLoaded", () => {
     if (includeHTML("footer-placeholder", footerHTML)) {
       setupFooterFunctionality()
     }
+  
+    // Añadir estilos para efectos hover
+    const style = document.createElement("style")
+    style.textContent = `
+      /* Efectos hover para la barra de navegación */
+      .logo:hover {
+        transform: scale(1.05);
+      }
+      
+      #search-input:focus {
+        box-shadow: 0 2px 12px rgba(107, 68, 35, 0.15);
+        border-color: #d4c3b5;
+      }
+      
+      #notification-button:hover {
+        background-color: rgba(107, 68, 35, 0.08);
+      }
+      
+      #auth-button:hover {
+        background-color: rgba(107, 68, 35, 0.15);
+      }
+      
+      .menu-icon:hover {
+        background-color: rgba(107, 68, 35, 0.08);
+      }
+      
+      .close-btn:hover {
+        background-color: rgba(107, 68, 35, 0.08);
+      }
+      
+      /* Efectos hover para el menú desplegable */
+      .menu-section a:hover {
+        color: #6b4423;
+        padding-left: 5px;
+      }
+      
+      /* Efectos hover para el footer */
+      footer a:hover {
+        color: #fff !important;
+      }
+      
+      footer .social-icons a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+      }
+      
+      #scrollToTop:hover {
+        transform: scale(1.1);
+      }
+      
+      footer button:hover {
+        background-color: #fff;
+      }
+      
+      #language:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .notification-item:hover {
+        background-color: rgba(107, 68, 35, 0.08) !important;
+      }
+    `
+    document.head.appendChild(style)
   })
   
   // Configurar funcionalidad de la navegación
@@ -231,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
       authButton.style.display = "block"
     }
   
-    // Menú desplegable
+    // Menú desplegable - Arreglado
     const menuToggle = document.getElementById("menuToggle")
     const overlayMenu = document.getElementById("overlayMenu")
     const closeMenu = document.getElementById("closeMenu")
@@ -259,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Configurar notificaciones
     setupNotifications()
   
-    // Configurar buscador
+    // Configurar buscador - Versión simplificada sin Supabase
     setupSearchFunctionality()
   }
   
@@ -334,7 +417,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderNotifications() {
       if (notifications.length === 0) {
         notificationList.innerHTML = `
-          <div class="empty-notification" style="text-align: center; padding: 1rem; color: #666;" data-i18n="No tienes notificaciones">
+          <div class="empty-notification" style="text-align: center; padding: 2rem 1rem; color: #666;" data-i18n="No tienes notificaciones">
             No tienes notificaciones
           </div>
         `
@@ -349,10 +432,11 @@ document.addEventListener("DOMContentLoaded", () => {
       sortedNotifications.forEach((notification) => {
         const notificationItem = document.createElement("div")
         notificationItem.className = "notification-item"
-        notificationItem.style.padding = "10px"
+        notificationItem.style.padding = "15px"
         notificationItem.style.borderBottom = "1px solid #e0d5c9"
         notificationItem.style.cursor = "pointer"
         notificationItem.style.backgroundColor = notification.read ? "transparent" : "rgba(107, 68, 35, 0.05)"
+        notificationItem.style.transition = "background-color 0.2s ease"
   
         // Formatear fecha
         const notificationDate = new Date(notification.date)
@@ -365,10 +449,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
         notificationItem.innerHTML = `
           <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <h4 style="margin: 0 0 5px 0; font-size: 0.9rem; color: #6b4423;">${notification.title}</h4>
-            <span style="font-size: 0.7rem; color: #999;">${formattedDate}</span>
+            <h4 style="margin: 0 0 8px 0; font-size: 0.95rem; color: #6b4423; font-weight: 600;">${notification.title}</h4>
+            <span style="font-size: 0.75rem; color: #999; margin-left: 10px;">${formattedDate}</span>
           </div>
-          <p style="margin: 0; font-size: 0.8rem; color: #666;">${notification.message}</p>
+          <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">${notification.message}</p>
         `
   
         // Marcar como leída al hacer clic
@@ -425,7 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateNotificationCount()
   }
   
-  // Configurar funcionalidad del buscador
+  // Configurar funcionalidad del buscador - Versión simplificada sin Supabase
   function setupSearchFunctionality() {
     const searchInput = document.getElementById("search-input")
     const searchButton = document.getElementById("search-button")
@@ -447,21 +531,47 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.placeholder = "Cercar receptes..."
     }
   
-    // Inicializar Supabase
-    const SUPABASE_URL = "https://uonkcjrokwtgvimjxawm.supabase.co"
-    const SUPABASE_API_KEY =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvbmtjanJva3d0Z3ZpbWp4YXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg2ODIyNTgsImV4cCI6MjA1NDI1ODI1OH0.fTH7cyyYYQFi5HQc8y-JXAKSY0PL3P1FKy6LymfeTvU"
+    // Datos de ejemplo para búsqueda local (sin Supabase)
+    const recetasEjemplo = [
+      {
+        id: 1,
+        titulo: "Pollo Agridulce",
+        categoria: "China",
+        dificultad: "Media",
+        ingredientes: "pollo, piña, pimiento, salsa agridulce",
+      },
+      {
+        id: 2,
+        titulo: "Paella",
+        categoria: "España",
+        dificultad: "Difícil",
+        ingredientes: "arroz, azafrán, mariscos, pollo",
+      },
+      {
+        id: 3,
+        titulo: "Crepas Dulces",
+        categoria: "Francia",
+        dificultad: "Fácil",
+        ingredientes: "harina, huevos, leche, azúcar",
+      },
+      {
+        id: 4,
+        titulo: "Bizcocho Capuccino",
+        categoria: "Italia",
+        dificultad: "Media",
+        ingredientes: "harina, huevos, café, chocolate",
+      },
+      {
+        id: 5,
+        titulo: "Arepa Venezolana",
+        categoria: "Venezuela",
+        dificultad: "Fácil",
+        ingredientes: "harina de maíz, agua, sal",
+      },
+    ]
   
-    let supabase
-    try {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
-      console.log("Supabase inicializado correctamente")
-    } catch (error) {
-      console.error("Error al inicializar Supabase:", error)
-    }
-  
-    // Función para realizar la búsqueda
-    async function performSearch(query) {
+    // Función para realizar la búsqueda local
+    function performSearch(query) {
       if (!query || query.trim() === "") {
         searchResults.style.display = "none"
         return
@@ -471,22 +581,16 @@ document.addEventListener("DOMContentLoaded", () => {
       searchResults.style.display = "block"
   
       try {
-        // Realizar búsqueda en Supabase
-        const { data: recetas, error } = await supabase
-          .from("recetas")
-          .select("*")
-          .or(`titulo.ilike.%${query}%,categoria.ilike.%${query}%,ingredientes.ilike.%${query}%`)
-          .limit(5)
-  
-        if (error) {
-          console.error("Error en la búsqueda:", error)
-          searchResults.innerHTML = `
-            <div style="text-align: center; padding: 20px; color: #e74c3c;">
-              Error al buscar. Inténtalo de nuevo.
-            </div>
-          `
-          return
-        }
+        // Filtrar recetas que coincidan con la búsqueda
+        const queryLower = query.toLowerCase()
+        const recetas = recetasEjemplo
+          .filter(
+            (receta) =>
+              receta.titulo.toLowerCase().includes(queryLower) ||
+              receta.categoria.toLowerCase().includes(queryLower) ||
+              receta.ingredientes.toLowerCase().includes(queryLower),
+          )
+          .slice(0, 5) // Limitar a 5 resultados
   
         // Mostrar resultados
         if (recetas && recetas.length > 0) {
@@ -494,7 +598,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
           // Encabezado de resultados
           searchResults.innerHTML = `
-            <div style="padding: 10px 15px; border-bottom: 1px solid #e0d5c9; font-weight: bold; color: #6b4423;">
+            <div style="padding: 12px 15px; border-bottom: 1px solid #e0d5c9; font-weight: 600; color: #6b4423; background-color: #f9f5f0;">
               ${getTranslation("Resultados para", language)} "${query}"
             </div>
           `
@@ -504,7 +608,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const resultItem = document.createElement("div")
             resultItem.className = "result-item"
             resultItem.style.display = "flex"
-            resultItem.style.padding = "10px 15px"
+            resultItem.style.padding = "12px 15px"
             resultItem.style.borderBottom = "1px solid #e0d5c9"
             resultItem.style.cursor = "pointer"
             resultItem.style.transition = "background-color 0.2s"
@@ -527,11 +631,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const difficultyDots = getDifficultyDots(receta.dificultad)
   
             resultItem.innerHTML = `
-              <img src="${imageSrc}" alt="${receta.titulo}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
+              <img src="${imageSrc}" alt="${receta.titulo}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
               <div style="flex: 1;">
-                <div style="font-weight: bold; color: #333; margin-bottom: 5px;">${receta.titulo}</div>
+                <div style="font-weight: 600; color: #333; margin-bottom: 5px; font-size: 0.95rem;">${receta.titulo}</div>
                 <div style="display: flex; gap: 10px; font-size: 0.8rem;">
-                  <span style="color: #6b4423; background: #f9f5f0; padding: 2px 8px; border-radius: 10px;">${categoriaTraducida}</span>
+                  <span style="color: #6b4423; background: #f9f5f0; padding: 3px 10px; border-radius: 12px;">${categoriaTraducida}</span>
                   <span style="color: #6b4423;">${getTranslation("Dificultad:", language)} ${difficultyDots}</span>
                 </div>
               </div>
@@ -548,13 +652,22 @@ document.addEventListener("DOMContentLoaded", () => {
   
           // Añadir botón "Ver todas las recetas"
           const verTodoButton = document.createElement("div")
-          verTodoButton.style.padding = "10px 15px"
+          verTodoButton.style.padding = "12px 15px"
           verTodoButton.style.textAlign = "center"
           verTodoButton.style.color = "#6b4423"
-          verTodoButton.style.fontWeight = "bold"
+          verTodoButton.style.fontWeight = "600"
           verTodoButton.style.cursor = "pointer"
           verTodoButton.style.borderTop = "1px solid #e0d5c9"
+          verTodoButton.style.backgroundColor = "#f9f5f0"
+          verTodoButton.style.transition = "background-color 0.2s"
           verTodoButton.textContent = getTranslation("Ver todas las recetas", localStorage.getItem("language") || "es")
+  
+          verTodoButton.addEventListener("mouseenter", () => {
+            verTodoButton.style.backgroundColor = "#f0e9e0"
+          })
+          verTodoButton.addEventListener("mouseleave", () => {
+            verTodoButton.style.backgroundColor = "#f9f5f0"
+          })
   
           verTodoButton.addEventListener("click", () => {
             window.location.href = `./busqueda.html?q=${encodeURIComponent(query)}`
@@ -564,10 +677,10 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           // No hay resultados
           searchResults.innerHTML = `
-            <div style="text-align: center; padding: 20px; color: #666;">
-              <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px; color: #d4c3b5;"></i>
-              <p>${getTranslation("No se encontraron resultados", localStorage.getItem("language") || "es")} "${query}"</p>
-              <p style="font-size: 13px; margin-top: 5px;">${getTranslation("Intenta con otra búsqueda", localStorage.getItem("language") || "es")}</p>
+            <div style="text-align: center; padding: 25px 20px; color: #666;">
+              <i class="fas fa-search" style="font-size: 24px; margin-bottom: 15px; color: #d4c3b5;"></i>
+              <p style="margin-bottom: 8px;">${getTranslation("No se encontraron resultados", localStorage.getItem("language") || "es")} "${query}"</p>
+              <p style="font-size: 13px; margin-top: 5px; color: #999;">${getTranslation("Intenta con otra búsqueda", localStorage.getItem("language") || "es")}</p>
             </div>
           `
         }
@@ -583,9 +696,49 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Función para obtener traducciones
     function getTranslation(text, language) {
-      if (window.i18n && window.i18n.translations && window.i18n.translations[language]) {
-        return window.i18n.translations[language][text] || text
+      const translations = {
+        es: {
+          "Resultados para": "Resultados para",
+          "No se encontraron resultados": "No se encontraron resultados para",
+          "Intenta con otra búsqueda": "Intenta con otra búsqueda",
+          "Ver todas las recetas": "Ver todas las recetas",
+          "Dificultad:": "Dificultad:",
+          China: "China",
+          España: "España",
+          Francia: "Francia",
+          Italia: "Italia",
+          Venezuela: "Venezuela",
+        },
+        en: {
+          "Resultados para": "Results for",
+          "No se encontraron resultados": "No results found for",
+          "Intenta con otra búsqueda": "Try another search",
+          "Ver todas las recetas": "View all recipes",
+          "Dificultad:": "Difficulty:",
+          China: "China",
+          España: "Spain",
+          Francia: "France",
+          Italia: "Italy",
+          Venezuela: "Venezuela",
+        },
+        ca: {
+          "Resultados para": "Resultats per a",
+          "No se encontraron resultados": "No s'han trobat resultats per a",
+          "Intenta con otra búsqueda": "Intenta amb una altra cerca",
+          "Ver todas las recetas": "Veure totes les receptes",
+          "Dificultad:": "Dificultat:",
+          China: "Xina",
+          España: "Espanya",
+          Francia: "França",
+          Italia: "Itàlia",
+          Venezuela: "Veneçuela",
+        },
       }
+  
+      if (translations[language] && translations[language][text]) {
+        return translations[language][text]
+      }
+  
       return text
     }
   
@@ -604,19 +757,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "Cappuccino Cake": "./Imagenes/Italia/bizcocho-capuccino.jpg",
         "Pastís de Capuccino": "./Imagenes/Italia/bizcocho-capuccino.jpg",
         "Arepa Venezolana": "./Imagenes/Venezuela/arepa-venezolana.jpg",
-        "Galletas de Sésamo": "./Imagenes/China/galletas-de-sesamo.jpg",
-        "Sesame Cookies": "./Imagenes/China/galletas-de-sesamo.jpg",
-        "Galetes de Sèsam": "./Imagenes/China/galletas-de-sesamo.jpg",
-        "Bollitos Chinos": "./Imagenes/China/bollitos-chinos.jpg",
-        "Chinese Buns": "./Imagenes/China/bollitos-chinos.jpg",
-        "Panets Xinesos": "./Imagenes/China/bollitos-chinos.jpg",
-        "Fideos Salteados": "./Imagenes/China/fideos-salteados.jpg",
-        "Stir-Fried Noodles": "./Imagenes/China/fideos-salteados.jpg",
-        "Fideus Saltats": "./Imagenes/China/fideos-salteados.jpg",
-        "Tortilla de Patatas": "./Imagenes/España/tortilla-patatas.jpeg",
-        "Pan con Tomate": "./Imagenes/España/pan-con-tomate.jpg",
-        "Sopa Wonton": "./Imagenes/China/fideos-salteados.jpg",
-        "Wonton Soup": "./Imagenes/China/fideos-salteados.jpg",
       }
   
       // Buscar coincidencia exacta
@@ -624,11 +764,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return imageMap[titulo]
       }
   
-      // Buscar coincidencia parcial
-      for (const key in imageMap) {
-        if (titulo.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(titulo.toLowerCase())) {
-          return imageMap[key]
-        }
+      // Imagen por defecto según categoría
+      if (titulo.toLowerCase().includes("china")) {
+        return "./Imagenes/China/pollo-agridulce.jpg"
+      } else if (titulo.toLowerCase().includes("españa") || titulo.toLowerCase().includes("paella")) {
+        return "./Imagenes/España/paella.png"
+      } else if (titulo.toLowerCase().includes("francia") || titulo.toLowerCase().includes("crepa")) {
+        return "./Imagenes/Francia/crepas-dulces.jpg"
+      } else if (titulo.toLowerCase().includes("italia") || titulo.toLowerCase().includes("bizcocho")) {
+        return "./Imagenes/Italia/bizcocho-capuccino.jpg"
+      } else if (titulo.toLowerCase().includes("venezuela") || titulo.toLowerCase().includes("arepa")) {
+        return "./Imagenes/Venezuela/arepa-venezolana.jpg"
       }
   
       // Imagen por defecto
@@ -649,21 +795,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Mapeo de títulos específicos a URLs específicas
       const urlMap = {
         "pollo-agridulce": "./../US6_GuardarRecetas/pollo-agridulce.html",
-        "sweet-and-sour-chicken": "./../US6_GuardarRecetas/pollo-agridulce.html",
-        "pollastre-agredolc": "./../US6_GuardarRecetas/pollo-agridulce.html",
         paella: "./../US6_GuardarRecetas/paella.html",
         "crepas-dulces": "./../US6_GuardarRecetas/crepas-dulces.html",
-        "sweet-crepes": "./../US6_GuardarRecetas/crepas-dulces.html",
-        "creps-dolcos": "./../US6_GuardarRecetas/crepas-dulces.html",
         "bizcocho-capuccino": "./../US6_GuardarRecetas/bizcocho-capuccino.html",
-        "cappuccino-cake": "./../US6_GuardarRecetas/bizcocho-capuccino.html",
-        "pastis-de-capuccino": "./../US6_GuardarRecetas/bizcocho-capuccino.html",
         "arepa-venezolana": "./../US6_GuardarRecetas/arepa-venezolana.html",
-        "galletas-de-sesamo": "./../US6_GuardarRecetas/galletas-de-sesamo.html",
-        "sesame-cookies": "./../US6_GuardarRecetas/galletas-de-sesamo.html",
-        "galetes-de-sesam": "./../US6_GuardarRecetas/galletas-de-sesamo.html",
-        "tortilla-de-patatas": "./../US6_GuardarRecetas/tortilla-de-patatas.html",
-        "pan-con-tomate": "./../US6_GuardarRecetas/pan-con-tomate.html",
       }
   
       // Si existe una URL específica para este slug, usarla
