@@ -1,0 +1,69 @@
+<!-- MENU NAVEGACIÓN -->
+<nav>
+    <a href="index.html" class="logo">
+        <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+    </a>
+    <!-- Buscador con botón -->
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar recetas..." data-i18n="Buscar recetas...">
+        <button id="search-button" type="button">
+            <i class="fas fa-search"></i>
+        </button>
+        <button id="search-close" type="button">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Contenedor para resultados de búsqueda -->
+        <div id="search-results" class="search-results">
+            <!-- Los resultados se cargarán dinámicamente aquí -->
+        </div>
+    </div>
+
+    <!-- Sección del user-info para mostrar usuario según el tipo -->
+    <div id="user-info" class="user-info" style="display: none;">
+        <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
+        <a href="#" id="user-profile-link">
+            <span id="user-name">Nombre del usuario</span>
+        </a>
+        <a href="#" id="logout-btn" class="auth-buttons" data-i18n="Cerrar Sesión">Cerrar Sesión</a>
+    </div>
+
+    <a href="../login.html" id="auth-button" class="auth-buttons" data-i18n="Iniciar Sesión">Iniciar Sesión</a>
+
+    <div class="menu-icon" id="menuToggle">☰</div>
+</nav>
+
+<!-- El menú desplegable debe estar aquí, fuera del nav -->
+<div class="overlay-menu" id="overlayMenu">
+    <div class="overlay-content">
+        <div class="close-btn" id="closeMenu">×</div>
+        <div class="menu-section">
+            <h3 data-i18n="Culturas Gastronómicas">Culturas Gastronómicas</h3>
+            <ul>
+                <li><a href="cultura-china.html" data-i18n="China">China</a></li>
+                <li><a href="cultura-española.html" data-i18n="España">España</a></li>
+                <li><a href="cultura-francesa.html" data-i18n="Francia">Francia</a></li>
+                <li><a href="cultura-italiana.html" data-i18n="Italia">Italia</a></li>
+                <li><a href="cultura-japonesa.html" data-i18n="Japón">Japón</a></li>
+                <li><a href="cultura-venezolana.html" data-i18n="Venezuela">Venezuela</a></li>
+            </ul>
+        </div>
+        <div class="menu-section">
+            <h3 data-i18n="Tipo de Plato">Tipo de Plato</h3>
+            <ul>
+                <li><a href="../US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno">Desayuno</a></li>
+                <li><a href="../US12_MenuNavegacion/comidas.html" data-i18n="Comida">Comida</a></li>
+                <li><a href="../US12_MenuNavegacion/merienda.html" data-i18n="Merienda">Merienda</a></li>
+                <li><a href="../US12_MenuNavegacion/cena.html" data-i18n="Cena">Cena</a></li>
+            </ul>
+        </div>
+        <div class="menu-section">
+            <h3 data-i18n="Dificultad de la Receta">Dificultad de la Receta</h3>
+            <ul>
+                <li><a href="../US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil">Fácil</a></li>
+                <li><a href="../US12_MenuNavegacion/dificultad-media.html" data-i18n="Media">Media</a></li>
+                <li><a href="../US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil">Difícil</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
