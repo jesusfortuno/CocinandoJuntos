@@ -16,74 +16,8 @@
       <script src="responsive-fixes.js" defer></script>
   </head>
 <body>
-  <nav>
-      <a href="index.html" class="logo">
-          <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-      </a>
-      <!-- Buscador con botón -->
-      <div class="search-container">
-          <input type="text" id="search-input" placeholder="Buscar recetas..." data-i18n="Buscar recetas...">
-          <button id="search-button" type="button">
-              <i class="fas fa-search"></i>
-          </button>
-          <button id="search-close" type="button">
-              <i class="fas fa-times"></i>
-          </button>
-          
-          <!-- Contenedor para resultados de búsqueda -->
-          <div id="search-results" class="search-results">
-              <!-- Los resultados se cargarán dinámicamente aquí -->
-          </div>
-      </div>
-
-      <!-- Modificar la sección del user-info para mostrar solo un usuario según el tipo -->
-      <div id="user-info" class="user-info" style="display: none;">
-          <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-          <a href="#" id="user-profile-link">
-              <span id="user-name">Nombre del usuario</span>
-          </a>
-          <a href="#" id="logout-btn" class="auth-buttons" data-i18n="Cerrar Sesión">Cerrar Sesión</a>
-      </div>
-
-      <a href="../login.html" id="auth-button" class="auth-buttons" data-i18n="Iniciar Sesión">Iniciar Sesión</a>
-
-      <div class="menu-icon" id="menuToggle">☰</div>
-  </nav>
-
-  <!-- El menú desplegable debe estar aquí, fuera del nav -->
-  <div class="overlay-menu" id="overlayMenu">
-    <div class="overlay-content">
-        <div class="close-btn" id="closeMenu">×</div>
-        <div class="menu-section">
-            <h3 data-i18n="Culturas Gastronómicas">Culturas Gastronómicas</h3>
-            <ul>
-                <li><a href="cultura-china.html" data-i18n="China">China</a></li>
-                <li><a href="cultura-española.html" data-i18n="España">España</a></li>
-                <li><a href="cultura-francesa.html" data-i18n="Francia">Francia</a></li>
-                <li><a href="cultura-italiana.html" data-i18n="Italia">Italia</a></li>
-                <li><a href="cultura-japonesa.html" data-i18n="Japón">Japón</a></li>
-                <li><a href="cultura-venezolana.html" data-i18n="Venezuela">Venezuela</a></li>
-            </ul>
-        </div>
-        <div class="menu-section">
-            <h3 data-i18n="Tipo de Plato">Tipo de Plato</h3>
-            <ul>
-                <li><a href="../US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno">Desayuno</a></li>
-                <li><a href="../US12_MenuNavegacion/comidas.html" data-i18n="Comida">Comida</a></li>
-                <li><a href="../US12_MenuNavegacion/merienda.html" data-i18n="Merienda">Merienda</a></li>
-                <li><a href="../US12_MenuNavegacion/cena.html" data-i18n="Cena">Cena</a></li>
-            </ul>
-        </div>
-        <div class="menu-section">
-            <h3 data-i18n="Dificultad de la Receta">Dificultad de la Receta</h3>
-            <ul>
-                <li><a href="../US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil">Fácil</a></li>
-                <li><a href="../US12_MenuNavegacion/dificultad-media.html" data-i18n="Media">Media</a></li>
-                <li><a href="../US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil">Difícil</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+  <!-- Placeholder para la navegación -->
+  <div id="nav-placeholder"></div>
 
   <main>
       <section class="hero-video-section">
@@ -150,88 +84,8 @@
         </div>
     </main>
 
-  <footer>
-      <div class="footer-container">
-          <!-- Columna 1: Sobre Nosotros -->
-          <div class="footer-links">
-              <h3 data-i18n="Sobre Nosotros">Sobre Nosotros</h3>
-              <ul>
-                  <li><a href="./quienes-somos.html" data-i18n="Quiénes Somos">Quiénes Somos</a></li>
-                  <li><a href="./contacto.html" data-i18n="Contacto">Contacto</a></li>
-              </ul>
-          </div>
-
-          <!-- Columna 2: Legal -->
-          <div class="footer-links">
-              <h3 data-i18n="Legal">Legal</h3>
-              <ul>
-                  <li><a href="./politica_privacidad.html" data-i18n="Política de Privacidad">Política de Privacidad</a></li>
-                  <li><a href="./terminos_condiciones.html" data-i18n="Términos y Condiciones">Términos y Condiciones</a></li>
-                  <li><a href="./politica_cookies.html" data-i18n="Política de Cookies">Política de Cookies</a></li>
-                  <li><a href="./aviso_legal.html" data-i18n="Aviso Legal">Aviso Legal</a></li>
-              </ul>
-          </div>
-
-          <!-- Columna 3: Comunidad -->
-          <div class="footer-links">
-              <h3 data-i18n="Comunidad">Comunidad</h3>
-              <ul>
-                  <li><a href="./../Platos.html" data-i18n="Recetas">Recetas</a></li>
-                  <li><a href="./chefs.html" data-i18n="Chefs">Chefs</a></li>
-              </ul>
-          </div>
-
-          <!-- Columna 4: Redes Sociales -->
-          <div class="footer-social">
-              <h3 data-i18n="Síguenos">Síguenos</h3>
-              <div class="social-icons">
-                  <a href="https://www.instagram.com/" aria-label="Instagram">
-                      <img src="./Imagenes/logos/pngtree-instagram-icon-instagram-logo-png-image_3584853.png" alt="Instagram">
-                  </a>
-                  <a href="https://www.facebook.com/" aria-label="Facebook">
-                      <img src="./Imagenes/logos/2023_Facebook_icon.svg.png" alt="Facebook">
-                  </a>
-                  <a href="https://x.com/" aria-label="Twitter">
-                      <img src="./Imagenes/logos/Logo_of_Twitter.svg.png" alt="Twitter">
-                  </a>
-                  <a href="https://www.youtube.com/" aria-label="YouTube">
-                      <img src="./Imagenes/logos/youtube.png" alt="YouTube">
-                  </a>
-                  <a href="https://es.pinterest.com/" aria-label="Pinterest">
-                      <img src="./Imagenes/logos/51LdjRWonGL.png" alt="Pinterest">
-                  </a>
-                  <a href="https://www.tiktok.com/es/" aria-label="TikTok">
-                      <img src="./Imagenes/logos/tiktok-6338432_1280.webp" alt="TikTok">
-                  </a>
-              </div>
-          </div>
-      </div>
-
-      <!-- Footer Bottom -->
-      <div class="footer-bottom">
-          <div class="footer-bottom-content">
-              <div class="copyright" data-i18n="© 2025 Cocinando Juntos - Todos los derechos reservados">
-                  © 2025 Cocinando Juntos - Todos los derechos reservados
-              </div>
-              <!-- Dentro del footer-bottom-right -->
-              <div class="footer-bottom-right">
-                  <div class="language-selector">
-                      <label for="language" data-i18n="Idioma:">Idioma:</label>
-                      <select id="language">
-                          <option value="es">Español</option>
-                          <option value="en">English</option>
-                          <option value="ca">Català</option>
-                      </select>
-                  </div>
-                  
-                  <!-- Modificar el botón de scroll para asegurar que funcione correctamente -->
-                  <button type="button" id="scrollToTop" class="scroll-to-top" style="background: none; border: none; padding: 0; cursor: pointer;">
-                    <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif">
-                  </button>
-              </div>
-          </div>
-      </div>
-  </footer>
+  <!-- Placeholder para el footer -->
+  <div id="footer-placeholder"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <!-- Cargar primero el archivo de traducciones -->
@@ -304,6 +158,6 @@
   </script>
   <!-- Cargar el script principal al final -->
   <script src="index.js"></script>
+  <script src="include-components.js" defer></script>
 </body>
 </html>
-
