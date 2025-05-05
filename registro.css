@@ -112,3 +112,51 @@ select:focus {
   background-color: #d9c4a6;
   color: #5a3e2b;
 }
+
+/* Reglas responsive */
+@media screen and (max-width: 480px) {
+  .register-container {
+    width: 90%;
+    padding: 20px;
+    margin: 0 15px;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .register-button,
+  .volver-inicio-btn {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .register-container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.3em;
+  }
+
+  input,
+  select,
+  .register-button,
+  .volver-inicio-btn {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+
+  .register-form {
+    gap: 10px;
+  }
+
+  label {
+    font-size: 0.9em;
+  }
+}
