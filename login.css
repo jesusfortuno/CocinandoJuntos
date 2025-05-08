@@ -98,21 +98,37 @@ input:focus {
   color: #8c5a38;
 }
 
-/* Nuevo estilo para el botón de volver al inicio */
-.volver-inicio-btn {
-  display: block;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #a97c50;
-  color: white;
+.links-container a {
+  color: #a97c50;
   text-decoration: none;
-  border-radius: 5px;
-  border: 1px solid #c7a17a;
   font-weight: bold;
-  font-size: 1.1em;
+  transition: all 0.3s ease;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.links-container a:hover {
+  background-color: #e8d3b5;
+  color: #5a3e2b;
+  text-decoration: underline;
+}
+
+/* Estilo unificado para el botón de volver al inicio */
+.volver-inicio-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: transparent;
+  color: #a97c50;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 1px solid #a97c50;
+  font-weight: bold;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
 }
 
 .volver-inicio-btn:hover {
-  background-color: #d9c4a6;
+  background-color: #e8d3b5;
   color: #5a3e2b;
 }
