@@ -27,7 +27,13 @@
             
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil">
+                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil" id="profile-image">
+                    <div class="upload-overlay">
+                        <label for="profile-upload" class="upload-btn">
+                            <span>Cambiar foto</span>
+                        </label>
+                        <input type="file" id="profile-upload" accept="image/*" style="display: none;">
+                    </div>
                 </div>
                 <span id="profile-user-name">Nombre del Usuario</span>
             </div>
@@ -35,10 +41,17 @@
             <div class="profile-info">
                 <h3>Información Personal</h3>
                 <p>
+                    <strong>Nombre:</strong>
+                    <span id="display-username">Nombre del Usuario</span>
+                </p>
+                <p>
                     <strong>Email:</strong>
                     <span id="user-email">usuario@ejemplo.com</span>
                 </p>
-                <button class="primary-btn">Cambiar Contraseña</button>
+                <div class="profile-actions">
+                    <button class="primary-btn" id="edit-profile-btn">Editar Perfil</button>
+                    <button class="primary-btn cambiar-contrasena-btn">Cambiar Contraseña</button>
+                </div>
             </div>
         </section>
 
@@ -97,6 +110,23 @@
         </div>
     </div>
 
+    <!-- Modal de Edición de Perfil -->
+    <div id="profile-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Editar Perfil</h2>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label for="edit-username">Nombre de usuario:</label>
+                    <input type="text" id="edit-username" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Guardar Cambios</button>
+                    <button type="button" class="secondary-btn" onclick="closeProfileModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <p>2025 Cocinando Juntos - Todos los derechos reservados</p>
     </footer>
@@ -105,4 +135,3 @@
     <script src="usuario.js"></script>
 </body>
 </html>
-
