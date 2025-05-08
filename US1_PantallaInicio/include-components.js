@@ -108,9 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
   `
   
     const footerHTML = `
-  <footer style="background: linear-gradient(to right, #8b5d33, #6b4423); color: white; padding: 2rem 0 0; margin-top: auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.1);">
+  <footer style="background: linear-gradient(to right, #8b5d33, #6b4423); color: white; padding: 2rem 0 0; margin-top: auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); position: relative; width: 100%; min-height: fit-content;">
       <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-          <!-- Encabezado del footer con logo y descripción - Más compacto -->
+          <!-- Encabezado del footer con logo y descripción -->
           <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem;">
               <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 80px; height: auto; filter: brightness(0) invert(1); opacity: 0.9;">
               <p style="margin-left: 1.5rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; max-width: 600px; line-height: 1.5;">
@@ -118,14 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {
               </p>
           </div>
           
-          <!-- Secciones del footer - Más compactas -->
+          <!-- Secciones del footer -->
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 2rem;">
               <!-- Columna 1: Sobre Nosotros -->
               <div>
                   <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Sobre Nosotros">Sobre Nosaltres</h3>
                   <ul style="list-style: none; padding: 0; margin: 0;">
-                      <li style="margin-bottom: 0.6rem;"><a href="./quienes-somos.html" data-i18n="Quiénes Somos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Qui Som</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./contacto.html" data-i18n="Contacto" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Contacte</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./quienes-somos.html" data-i18n="Quiénes Somos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Qui Som</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./contacto.html" data-i18n="Contacto" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Contacte</a></li>
                   </ul>
               </div>
   
@@ -133,10 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
               <div>
                   <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Legal">Legal</h3>
                   <ul style="list-style: none; padding: 0; margin: 0;">
-                      <li style="margin-bottom: 0.6rem;"><a href="./politica_privacidad.html" data-i18n="Política de Privacidad" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Política de Privacitat</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./terminos_condiciones.html" data-i18n="Términos y Condiciones" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Termes i Condicions</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./politica_cookies.html" data-i18n="Política de Cookies" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Política de Cookies</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./aviso_legal.html" data-i18n="Aviso Legal" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Avís Legal</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./politica_privacidad.html" data-i18n="Política de Privacidad" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Política de Privacitat</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./terminos_condiciones.html" data-i18n="Términos y Condiciones" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Termes i Condicions</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./politica_cookies.html" data-i18n="Política de Cookies" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Política de Cookies</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./aviso_legal.html" data-i18n="Aviso Legal" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Avís Legal</a></li>
                   </ul>
               </div>
   
@@ -144,15 +144,15 @@ document.addEventListener("DOMContentLoaded", () => {
               <div>
                   <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Comunidad">Comunitat</h3>
                   <ul style="list-style: none; padding: 0; margin: 0;">
-                      <li style="margin-bottom: 0.6rem;"><a href="./../Platos.html" data-i18n="Recetas" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Receptes</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./chefs.html" data-i18n="Chefs" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s ease;">Xefs</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./../Platos.html" data-i18n="Recetas" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Receptes</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="./chefs.html" data-i18n="Chefs" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Xefs</a></li>
                   </ul>
               </div>
   
-              <!-- Columna 4: Redes Sociales - Reorganizadas en 2 filas de 3 -->
+              <!-- Columna 4: Redes Sociales -->
               <div>
                   <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Síguenos">Segueix-nos</h3>
-                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px;">
+                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                       <a href="https://www.instagram.com/" aria-label="Instagram" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                           <i class="fab fa-instagram" style="color: white; font-size: 1.2rem;"></i>
                       </a>
@@ -162,8 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
                       <a href="https://twitter.com/" aria-label="Twitter" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                           <i class="fab fa-twitter" style="color: white; font-size: 1.2rem;"></i>
                       </a>
-                  </div>
-                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                       <a href="https://www.youtube.com/" aria-label="YouTube" style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                           <i class="fab fa-youtube" style="color: white; font-size: 1.2rem;"></i>
                       </a>
@@ -178,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
       </div>
   
-      <!-- Footer Bottom - Más compacto -->
+      <!-- Footer Bottom -->
       <div style="background-color: rgba(0, 0, 0, 0.2); padding: 1rem 0;">
           <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; flex-wrap: wrap; gap: 1rem;">
               <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
@@ -207,14 +205,12 @@ document.addEventListener("DOMContentLoaded", () => {
   `
   
     // Include the navigation
-    if (includeHTML("nav-placeholder", navHTML)) {
-      setupNavFunctionality()
-    }
+    includeHTML("nav-placeholder", navHTML);
+    setupNavFunctionality();
   
     // Include the footer
-    if (includeHTML("footer-placeholder", footerHTML)) {
-      setupFooterFunctionality()
-    }
+    includeHTML("footer-placeholder", footerHTML);
+    setupFooterFunctionality();
   
     // Añadir estilos para efectos hover
     const style = document.createElement("style")
