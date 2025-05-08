@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Barra de navegación mejorada con diseño más moderno
     const navHTML = `
   <nav style="background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; padding: 0.8rem 2rem; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(107, 68, 35, 0.05);">
-      <a href="index.html" class="logo" style="width: 80px; height: 80px; margin-right: 2rem; display: flex; align-items: center; transition: transform 0.3s ease;">
-          <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">
+      <a href="/US1_PantallaInicio/index.html" class="logo" style="width: 80px; height: 80px; margin-right: 2rem; display: flex; align-items: center; transition: transform 0.3s ease;">
+          <img src="/US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">
       </a>
       
       <!-- Buscador con botón - Estilo actualizado y mejorado -->
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
           <!-- 2. Sección del user-info para mostrar usuario según el tipo -->
           <div id="user-info" class="user-info" style="display: none; align-items: center; gap: 12px; background-color: rgba(107, 68, 35, 0.05); padding: 6px 12px; border-radius: 24px; transition: all 0.3s ease;">
-              <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              <img src="/US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
               <a href="#" id="user-profile-link" style="text-decoration: none;">
                   <span id="user-name" style="color: #333; font-weight: 500; font-size: 0.95rem;">Nombre del usuario</span>
               </a>
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
   
           <!-- 3. Botón de inicio de sesión (alternativa al user-info) -->
-          <a href="../login.html" id="auth-button" class="auth-buttons" data-i18n="Iniciar Sesión" style="color: #6b4423; text-decoration: none; font-weight: 500; background-color: rgba(107, 68, 35, 0.08); padding: 8px 16px; border-radius: 20px; transition: all 0.3s ease;">Iniciar Sesión</a>
+          <a href="/login.html" id="auth-button" class="auth-buttons" data-i18n="Iniciar Sesión" style="color: #6b4423; text-decoration: none; font-weight: 500; background-color: rgba(107, 68, 35, 0.08); padding: 8px 16px; border-radius: 20px; transition: all 0.3s ease;">Iniciar Sesión</a>
   
           <!-- 4. Menú hamburguesa -->
           <div class="menu-icon" id="menuToggle" style="font-size: 1.5rem; color: #6b4423; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color 0.3s ease;">☰</div>
@@ -76,31 +76,31 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="menu-section" style="flex: 1; padding: 0 20px;">
               <h3 data-i18n="Culturas Gastronómicas" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Culturas Gastronómicas</h3>
               <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin: 12px 0;"><a href="cultura-china.html" data-i18n="China" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">China</a></li>
-                  <li style="margin: 12px 0;"><a href="cultura-española.html" data-i18n="España" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">España</a></li>
-                  <li style="margin: 12px 0;"><a href="cultura-francesa.html" data-i18n="Francia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Francia</a></li>
-                  <li style="margin: 12px 0;"><a href="cultura-italiana.html" data-i18n="Italia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Italia</a></li>
-                  <li style="margin: 12px 0;"><a href="cultura-japonesa.html" data-i18n="Japón" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Japón</a></li>
-                  <li style="margin: 12px 0;"><a href="cultura-venezolana.html" data-i18n="Venezuela" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Venezuela</a></li>
+                  <li style="margin: 12px 0;"><a href="/US1_PantallaInicio/cultura-china.html" data-i18n="China" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">China</a></li>
+                  <li style="margin: 12px 0;"><a href="/US1_PantallaInicio/cultura-española.html" data-i18n="España" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">España</a></li>
+                  <li style="margin: 12px 0;"><a href="/US1_PantallaInicio/cultura-francesa.html" data-i18n="Francia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Francia</a></li>
+                  <li style="margin: 12px 0;"><a href="/US1_PantallaInicio/cultura-italiana.html" data-i18n="Italia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Italia</a></li>
+                  <li style="margin: 12px 0;"><a href="/US1_PantallaInicio/cultura-japonesa.html" data-i18n="Japón" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Japón</a></li>
+                  <li style="margin: 12px 0;"><a href="/US1_PantallaInicio/cultura-venezolana.html" data-i18n="Venezuela" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Venezuela</a></li>
               </ul>
           </div>
           
           <div class="menu-section" style="flex: 1; padding: 0 20px;">
               <h3 data-i18n="Tipo de Plato" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Tipo de Plato</h3>
               <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Desayuno</a></li>
-                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/comidas.html" data-i18n="Comida" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Comida</a></li>
-                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/merienda.html" data-i18n="Merienda" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Merienda</a></li>
-                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/cena.html" data-i18n="Cena" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Cena</a></li>
+                  <li style="margin: 12px 0;"><a href="/US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Desayuno</a></li>
+                  <li style="margin: 12px 0;"><a href="/US12_MenuNavegacion/comidas.html" data-i18n="Comida" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Comida</a></li>
+                  <li style="margin: 12px 0;"><a href="/US12_MenuNavegacion/merienda.html" data-i18n="Merienda" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Merienda</a></li>
+                  <li style="margin: 12px 0;"><a href="/US12_MenuNavegacion/cena.html" data-i18n="Cena" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Cena</a></li>
               </ul>
           </div>
           
           <div class="menu-section" style="flex: 1; padding: 0 20px;">
               <h3 data-i18n="Dificultad de la Receta" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Dificultad de la Receta</h3>
               <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Fácil</a></li>
-                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/dificultad-media.html" data-i18n="Media" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Media</a></li>
-                  <li style="margin: 12px 0;"><a href="../US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Difícil</a></li>
+                  <li style="margin: 12px 0;"><a href="/US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Fácil</a></li>
+                  <li style="margin: 12px 0;"><a href="/US12_MenuNavegacion/dificultad-media.html" data-i18n="Media" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Media</a></li>
+                  <li style="margin: 12px 0;"><a href="/US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Difícil</a></li>
               </ul>
           </div>
       </div>
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
           <!-- Encabezado del footer con logo y descripción -->
           <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem;">
-              <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 80px; height: auto; filter: brightness(0) invert(1); opacity: 0.9;">
+              <img src="/US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 80px; height: auto; filter: brightness(0) invert(1); opacity: 0.9;">
               <p style="margin-left: 1.5rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; max-width: 600px; line-height: 1.5;">
                   Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.
               </p>
@@ -124,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
               <div>
                   <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Sobre Nosotros">Sobre Nosaltres</h3>
                   <ul style="list-style: none; padding: 0; margin: 0;">
-                      <li style="margin-bottom: 0.6rem;"><a href="./quienes-somos.html" data-i18n="Quiénes Somos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Qui Som</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./contacto.html" data-i18n="Contacto" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Contacte</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/US1_PantallaInicio/quienes-somos.html" data-i18n="Quiénes Somos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Qui Som</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/US1_PantallaInicio/contacto.html" data-i18n="Contacto" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Contacte</a></li>
                   </ul>
               </div>
   
@@ -133,10 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
               <div>
                   <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Legal">Legal</h3>
                   <ul style="list-style: none; padding: 0; margin: 0;">
-                      <li style="margin-bottom: 0.6rem;"><a href="./politica_privacidad.html" data-i18n="Política de Privacidad" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Política de Privacitat</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./terminos_condiciones.html" data-i18n="Términos y Condiciones" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Termes i Condicions</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./politica_cookies.html" data-i18n="Política de Cookies" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Política de Cookies</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./aviso_legal.html" data-i18n="Aviso Legal" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Avís Legal</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/US1_PantallaInicio/politica_privacidad.html" data-i18n="Política de Privacidad" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Política de Privacitat</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/US1_PantallaInicio/terminos_condiciones.html" data-i18n="Términos y Condiciones" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Termes i Condicions</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/US1_PantallaInicio/politica_cookies.html" data-i18n="Política de Cookies" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Política de Cookies</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/US1_PantallaInicio/aviso_legal.html" data-i18n="Aviso Legal" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Avís Legal</a></li>
                   </ul>
               </div>
   
@@ -144,8 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
               <div>
                   <h3 style="color: white; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; font-weight: 600;" data-i18n="Comunidad">Comunitat</h3>
                   <ul style="list-style: none; padding: 0; margin: 0;">
-                      <li style="margin-bottom: 0.6rem;"><a href="./../Platos.html" data-i18n="Recetas" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Receptes</a></li>
-                      <li style="margin-bottom: 0.6rem;"><a href="./chefs.html" data-i18n="Chefs" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Xefs</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/Platos.html" data-i18n="Recetas" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Receptes</a></li>
+                      <li style="margin-bottom: 0.6rem;"><a href="/US1_PantallaInicio/chefs.html" data-i18n="Chefs" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 3px 0; transition: all 0.3s ease;">Xefs</a></li>
                   </ul>
               </div>
   
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   
                   <!-- Botón de scroll -->
                   <button type="button" id="scrollToTop" class="scroll-to-top" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: transform 0.3s ease;">
-                    <img src="./Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif" style="width: 35px; height: 35px; border-radius: 50%;">
+                    <img src="/US1_PantallaInicio/Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif" style="width: 35px; height: 35px; border-radius: 50%;">
                   </button>
               </div>
           </div>
