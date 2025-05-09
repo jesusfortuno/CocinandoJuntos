@@ -1,79 +1,80 @@
 <footer style="background-color: #6b4423; color: white; padding: 2rem 0;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-        <div style="text-align: center; margin-bottom: 1rem;">
-            <p>Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.</p>
-        </div>
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 2rem;">
-            <div>
-                <h4>Sobre Nosotros</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li><a href="./quienes-somos.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Qui Som</a></li>
-                    <li><a href="./contacto.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Contacte</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Legal</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li><a href="./politica_privacidad.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Política de Privacitat</a></li>
-                    <li><a href="./terminos_condiciones.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Termes i Condicions</a></li>
-                    <li><a href="./politica_cookies.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Política de Cookies</a></li>
-                    <li><a href="./aviso_legal.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Avís Legal</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Comunidad</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li><a href="./../Platos.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Receptes</a></li>
-                    <li><a href="./chefs.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Xefs</a></li>
-                </ul>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 1rem;">
-            <p>© 2025 Cuinant Junts - Tots els drets reservats</p>
-        </div>
-    </div>
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div style="text-align: center; margin-bottom: 1rem;">
+          <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 80px; height: auto; filter: brightness(0) invert(1); opacity: 0.9; margin-bottom: 1rem;">
+          <p>Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.</p>
+      </div>
+      <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 2rem;">
+          <div>
+              <h4>Sobre Nosotros</h4>
+              <ul style="list-style: none; padding: 0;">
+                  <li><a href="./quienes-somos.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Qui Som</a></li>
+                  <li><a href="./contacto.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Contacte</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Legal</h4>
+              <ul style="list-style: none; padding: 0;">
+                  <li><a href="./politica_privacidad.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Política de Privacitat</a></li>
+                  <li><a href="./terminos_condiciones.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Termes i Condicions</a></li>
+                  <li><a href="./politica_cookies.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Política de Cookies</a></li>
+                  <li><a href="./aviso_legal.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Avís Legal</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Comunidad</h4>
+              <ul style="list-style: none; padding: 0;">
+                  <li><a href="../Platos.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Receptes</a></li>
+                  <li><a href="./chefs.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Xefs</a></li>
+              </ul>
+          </div>
+      </div>
+      <div style="text-align: center; margin-top: 1rem;">
+          <p>© 2025 Cuinant Junts - Tots els drets reservats</p>
+      </div>
+  </div>
 </footer>
 
 <script>
 // Configurar funcionalidad del footer
 function setupFooterFunctionality() {
-  // Selector de idioma
-  const languageSelector = document.getElementById("language")
-  if (languageSelector) {
-    // Establecer el idioma actual
-    const currentLanguage = localStorage.getItem("language") || "ca"
-    languageSelector.value = currentLanguage
+// Selector de idioma
+const languageSelector = document.getElementById("language")
+if (languageSelector) {
+  // Establecer el idioma actual
+  const currentLanguage = localStorage.getItem("language") || "ca"
+  languageSelector.value = currentLanguage
 
-    languageSelector.addEventListener("change", function () {
-      const selectedLanguage = this.value
-      console.log("Cambiando idioma a:", selectedLanguage)
-      localStorage.setItem("language", selectedLanguage)
+  languageSelector.addEventListener("change", function () {
+    const selectedLanguage = this.value
+    console.log("Cambiando idioma a:", selectedLanguage)
+    localStorage.setItem("language", selectedLanguage)
 
-      // Llamar a la función de cambio de idioma si existe
-      if (typeof window.changeLanguage === "function") {
-        window.changeLanguage(selectedLanguage)
-      } else if (window.i18n && typeof window.i18n.changeLanguage === "function") {
-        window.i18n.changeLanguage(selectedLanguage)
-      } else if (window.i18n && typeof window.i18n.translatePage === "function") {
-        window.i18n.translatePage(selectedLanguage)
-      } else {
-        // Recargar la página como fallback
-        window.location.reload()
-      }
+    // Llamar a la función de cambio de idioma si existe
+    if (typeof window.changeLanguage === "function") {
+      window.changeLanguage(selectedLanguage)
+    } else if (window.i18n && typeof window.i18n.changeLanguage === "function") {
+      window.i18n.changeLanguage(selectedLanguage)
+    } else if (window.i18n && typeof window.i18n.translatePage === "function") {
+      window.i18n.translatePage(selectedLanguage)
+    } else {
+      // Recargar la página como fallback
+      window.location.reload()
+    }
+  })
+}
+
+// Botón de scroll
+const scrollBtn = document.getElementById("scrollToTop")
+if (scrollBtn) {
+  scrollBtn.addEventListener("click", (e) => {
+    e.preventDefault()
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
     })
-  }
-
-  // Botón de scroll
-  const scrollBtn = document.getElementById("scrollToTop")
-  if (scrollBtn) {
-    scrollBtn.addEventListener("click", (e) => {
-      e.preventDefault()
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    })
-  }
+  })
+}
 }
 
 // Ejecutar la configuración cuando el DOM esté cargado
