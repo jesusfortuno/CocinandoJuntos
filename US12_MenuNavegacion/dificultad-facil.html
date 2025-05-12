@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../notification-styles.css">
     <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Línea única para incluir componentes -->
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
 <body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
     <div id="nav-placeholder"></div>
@@ -31,7 +33,7 @@
         <!-- Filtros -->
         <div class="filters">
             <div class="filter-group">
-                <button class="filter-button active" onclick="window.location.href='./Platos.html'">Mejor Valoradas</button>
+                <button class="filter-button active" onclick="window.location.href='../Platos.html'">Mejor Valoradas</button>
             </div>            
             <div class="filter-group">
                 <button class="filter-button" id="filter-btn">Filtros</button>
@@ -182,59 +184,10 @@
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
-    <script src="../US1_PantallaInicio/index.js"></script>
-    <script src="../US1_PantallaInicio/include-components.js"></script>
-    <script type="module" src="../favoritos.js"></script>
-    <script type="module" src="../valorar.js"></script>
     <script>
-        // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
-        
-        console.log("Datos del usuario:", usuario); // Para depuración
-    
-        // Si el usuario está registrado en localStorage
-        if (usuario) {
-            // Mostrar la información del usuario
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username || "Usuario";
-            authButton.style.display = "none";
-            
-            // Agregar funcionalidad de cerrar sesión
-            document.getElementById("logout-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.reload();
-            });
-        } else {
-            // Si no hay usuario, mostrar el botón de login
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
-        }
-
-        // Funcionalidad del menú desplegable
+        // Funcionalidad de filtros
         document.addEventListener('DOMContentLoaded', () => {
             // Menú desplegable
-            document.getElementById('menuToggle').addEventListener('click', function(e) {
-                e.preventDefault();
-                const overlayMenu = document.getElementById('overlayMenu');
-                overlayMenu.classList.add('active');
-            });
-
-            document.getElementById('closeMenu').addEventListener('click', function() {
-                const overlayMenu = document.getElementById('overlayMenu');
-                overlayMenu.classList.remove('active');
-            });
-
-            // Cerrar al hacer clic fuera del menú
-            document.getElementById('overlayMenu').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
-            });
-
-            // Funcionalidad de filtros
             const filterBtn = document.getElementById("filter-btn");
             const filterOptions = document.getElementById("filter-options");
             const applyFilterBtn = document.getElementById("apply-filters");

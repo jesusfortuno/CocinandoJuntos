@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../notification-styles.css">
     <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Línea única para incluir componentes -->
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
 
 <body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
@@ -20,7 +22,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-profile">
-                <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil"
+                <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil"
                     class="admin-profile-pic">
                 <span class="admin-name" id="sidebar-admin-name">Nombre usuario</span>
                 <span class="admin-role">Administrador</span>
@@ -118,36 +120,37 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../US1_PantallaInicio/index.js" defer></script>
-    <script src="../US1_PantallaInicio/include-components.js" defer></script>
-    <script type="module" src="../favoritos.js"></script>
-    <script type="module" src="../valorar.js"></script>
     <script src="adminStats.js"></script>
 
     <script>
         // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const welcomeName = document.getElementById("welcome-name");
-        const sidebarAdminName = document.getElementById("sidebar-admin-name");
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            const welcomeName = document.getElementById("welcome-name");
+            const sidebarAdminName = document.getElementById("sidebar-admin-name");
 
-        if (usuario) {
-            console.log('Usuario encontrado:', usuario);
-            welcomeName.textContent = usuario.username;
-            sidebarAdminName.textContent = usuario.username;
-        } else {
-            console.log('No se encontró usuario en localStorage');
-            window.location.href = "../login.html";
-        }
+            if (usuario) {
+                console.log('Usuario encontrado:', usuario);
+                welcomeName.textContent = usuario.username;
+                sidebarAdminName.textContent = usuario.username;
+            } else {
+                console.log('No se encontró usuario en localStorage');
+                window.location.href = "../login.html";
+            }
 
-        // Simulación de datos para la demostración
-        document.getElementById("total-recetas").textContent = "124";
-        document.getElementById("total-usuarios").textContent = "356";
-        document.getElementById("total-comentarios").textContent = "892";
+            // Simulación de datos para la demostración
+            document.getElementById("total-recetas").textContent = "124";
+            document.getElementById("total-usuarios").textContent = "356";
+            document.getElementById("total-comentarios").textContent = "892";
 
-        // Función para alternar la visibilidad del sidebar en móviles
-        document.getElementById("mobile-menu-toggle").addEventListener("click", function () {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('sidebar-open');
+            // Función para alternar la visibilidad del sidebar en móviles
+            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener("click", function () {
+                    const sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.toggle('sidebar-open');
+                });
+            }
         });
     </script>
 </body>
