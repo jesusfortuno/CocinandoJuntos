@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Chef | Cocinando Juntos</title>
+    <link rel="stylesheet" href="chef-page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="notification-styles.css">
+</head>
+
+<body>
+    <!-- Navegador original -->
+    <nav class="top-nav">
+        <a href="US1_PantallaInicio/index.html" class="logo">
+            <img src="US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        </a>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar recetas..." data-i18n="Buscar recetas...">
+            <button id="search-button" type="button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div id="user-info" class="user-info" style="display: none;">
+            <img src="US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
+                class="user-icon">
+            <span id="user-name">Nombre del Usuario</span>
+            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
+        </div>
+
+        <a href="login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
+        <div class="menu-icon" id="mobile-menu-toggle">☰</div>
+    </nav>
+
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <img src="US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil"
+                    class="chef-profile-pic">
+                <span class="chef-name" id="sidebar-chef-name">Nombre usuario</span>
+                <span class="chef-role">Chef</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" data-tab="mis-recetas"><i class="fas fa-utensils"></i> Mis Recetas</a>
+                    </li>
+                    <li>
+                        <a href="#" data-tab="nueva-receta"><i class="fas fa-plus-circle"></i> Nueva Receta</a>
+                    </li>
+                    <li>
+                        <a href="#" data-tab="comentarios"><i class="fas fa-comments"></i> Comentarios</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-pane active">
+                <div class="page-title">
+                    <h1>Panel de Chef</h1>
+                    <p>Bienvenido de nuevo, <span id="welcome-name">Chef</span></p>
+                </div>
+
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon recipes-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Mis Recetas</h3>
+                            <p id="total-recetas" class="stat-value">0</p>
+                            <span class="stat-trend positive"><i class="fas fa-arrow-up"></i> 12% este mes</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon comments-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Comentarios</h3>
+                            <p id="total-comentarios" class="stat-value">0</p>
+                            <span class="stat-trend positive"><i class="fas fa-arrow-up"></i> 5% este mes</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon favorites-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Favoritos</h3>
+                            <p id="total-favoritos" class="stat-value">0</p>
+                            <span class="stat-trend positive"><i class="fas fa-arrow-up"></i> 8% este mes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h2>Acciones Rápidas</h2>
+                    <div class="action-buttons">
+                        <a href="#" class="action-button" id="quick-add-recipe">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Añadir Receta</span>
+                        </a>
+                        <a href="#" class="action-button" id="quick-view-comments">
+                            <i class="fas fa-comments"></i>
+                            <span>Ver Comentarios</span>
+                        </a>
+                        <a href="#" class="action-button" id="quick-edit-profile">
+                            <i class="fas fa-user-edit"></i>
+                            <span>Editar Perfil</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Actividad Reciente</h2>
+                    <div class="activity-list" id="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Nuevo comentario en <a href="#">Paella Valenciana</a></p>
+                                <span class="activity-time">Hace 2 horas</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>A 5 personas les gustó tu <a href="#">Tortilla Española</a></p>
+                                <span class="activity-time">Hace 1 día</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Publicaste una nueva receta: <a href="#">Gazpacho Andaluz</a></p>
+                                <span class="activity-time">Hace 3 días</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mis Recetas Tab -->
+            <div id="mis-recetas" class="tab-pane">
+                <div class="page-title">
+                    <h1>Mis Recetas</h1>
+                    <p>Gestiona tus creaciones culinarias</p>
+                </div>
+
+                <div class="search-filter">
+                    <input type="text" id="recipe-search" placeholder="Buscar en mis recetas...">
+                    <select id="recipe-filter">
+                        <option value="all">Todas las culturas</option>
+                        <option value="China">China</option>
+                        <option value="España">España</option>
+                        <option value="Francia">Francia</option>
+                        <option value="Italia">Italia</option>
+                        <option value="Japón">Japón</option>
+                        <option value="Venezuela">Venezuela</option>
+                    </select>
+                </div>
+
+                <div class="recipes-container" id="recipes-list">
+                    <!-- Las recetas se cargarán dinámicamente aquí -->
+                    <div class="loading-recipes">
+                        <i class="fas fa-spinner fa-spin"></i> Cargando tus recetas...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nueva Receta Tab -->
+            <div id="nueva-receta" class="tab-pane">
+                <div class="page-title">
+                    <h1>Nueva Receta</h1>
+                    <p>Comparte tu creatividad culinaria con el mundo</p>
+                </div>
+
+                <form id="recipe-form" class="recipe-form">
+                    <div class="form-group">
+                        <label for="titulo">Título de la Receta*</label>
+                        <input type="text" id="titulo" name="titulo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción*</label>
+                        <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="dificultad">Dificultad*</label>
+                            <select id="dificultad" name="dificultad" required>
+                                <option value="">Seleccionar</option>
+                                <option value="Fácil">Fácil</option>
+                                <option value="Media">Media</option>
+                                <option value="Difícil">Difícil</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="tiempo">Tiempo de Preparación*</label>
+                            <input type="text" id="tiempo" name="tiempo" placeholder="Ej: 30 minutos" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="categoria">Categoría*</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="">Seleccionar</option>
+                                <option value="Desayuno">Desayuno</option>
+                                <option value="Comida">Comida</option>
+                                <option value="Merienda">Merienda</option>
+                                <option value="Cena">Cena</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group half">
+                            <label for="cultura">Cultura Gastronómica*</label>
+                            <select id="cultura" name="cultura" required>
+                                <option value="">Seleccionar</option>
+                                <option value="China">China</option>
+                                <option value="España">España</option>
+                                <option value="Francia">Francia</option>
+                                <option value="Italia">Italia</option>
+                                <option value="Japón">Japón</option>
+                                <option value="Venezuela">Venezuela</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredientes">Ingredientes* (Uno por línea)</label>
+                        <textarea id="ingredientes" name="ingredientes" rows="5" required
+                            placeholder="200g de harina&#10;2 huevos&#10;100ml de leche"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pasos">Pasos de Preparación* (Uno por línea)</label>
+                        <textarea id="pasos" name="pasos" rows="5" required
+                            placeholder="1. Mezclar los ingredientes secos&#10;2. Añadir los huevos y la leche&#10;3. Hornear a 180°C por 30 minutos"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagen">Imagen de la Receta (URL)</label>
+                        <input type="url" id="imagen" name="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+                        <p class="form-help">Deja en blanco para usar una imagen predeterminada</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="preview-btn" class="secondary-btn">Vista Previa</button>
+                        <button type="submit" id="submit-btn" class="primary-btn">Publicar Receta</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Comentarios Tab -->
+            <div id="comentarios" class="tab-pane">
+                <div class="page-title">
+                    <h1>Comentarios</h1>
+                    <p>Gestiona los comentarios de tus recetas</p>
+                </div>
+
+                <div class="comments-filter">
+                    <select id="comments-recipe-filter">
+                        <option value="all">Todas las recetas</option>
+                        <!-- Se cargarán dinámicamente las recetas -->
+                    </select>
+                    <select id="comments-status-filter">
+                        <option value="all">Todos los comentarios</option>
+                        <option value="new">Nuevos</option>
+                        <option value="read">Leídos</option>
+                    </select>
+                </div>
+
+                <div class="comments-container" id="comments-list">
+                    <!-- Los comentarios se cargarán dinámicamente aquí -->
+                    <div class="loading-comments">
+                        <i class="fas fa-spinner fa-spin"></i> Cargando comentarios...
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
+    </footer>
+
+    <!-- Modal para editar receta -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Editar Receta</h2>
+            <form id="edit-recipe-form" class="recipe-form">
+                <input type="hidden" id="edit-id" name="id">
+
+                <div class="form-group">
+                    <label for="edit-titulo">Título de la Receta*</label>
+                    <input type="text" id="edit-titulo" name="titulo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-descripcion">Descripción*</label>
+                    <textarea id="edit-descripcion" name="descripcion" rows="3" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="edit-dificultad">Dificultad*</label>
+                        <select id="edit-dificultad" name="dificultad" required>
+                            <option value="Fácil">Fácil</option>
+                            <option value="Media">Media</option>
+                            <option value="Difícil">Difícil</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group half">
+                        <label for="edit-tiempo">Tiempo de Preparación*</label>
+                        <input type="text" id="edit-tiempo" name="tiempo" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="edit-categoria">Categoría*</label>
+                        <select id="edit-categoria" name="categoria" required>
+                            <option value="Desayuno">Desayuno</option>
+                            <option value="Comida">Comida</option>
+                            <option value="Merienda">Merienda</option>
+                            <option value="Cena">Cena</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group half">
+                        <label for="edit-cultura">Cultura Gastronómica*</label>
+                        <select id="edit-cultura" name="cultura" required>
+                            <option value="China">China</option>
+                            <option value="España">España</option>
+                            <option value="Francia">Francia</option>
+                            <option value="Italia">Italia</option>
+                            <option value="Japón">Japón</option>
+                            <option value="Venezuela">Venezuela</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-ingredientes">Ingredientes* (Uno por línea)</label>
+                    <textarea id="edit-ingredientes" name="ingredientes" rows="5" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-pasos">Pasos de Preparación* (Uno por línea)</label>
+                    <textarea id="edit-pasos" name="pasos" rows="5" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-imagen">Imagen de la Receta (URL)</label>
+                    <input type="url" id="edit-imagen" name="imagen">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="delete-recipe-btn" class="danger-btn">Eliminar Receta</button>
+                    <button type="submit" class="primary-btn">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de vista previa -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content preview-content">
+            <span class="close-modal">&times;</span>
+            <h2>Vista Previa de la Receta</h2>
+            <div id="recipe-preview" class="recipe-preview">
+                <!-- La vista previa se cargará aquí -->
+            </div>
+            <div class="form-actions">
+                <button type="button" id="back-to-edit" class="secondary-btn">Volver a Editar</button>
+                <button type="button" id="confirm-publish" class="primary-btn">Publicar Receta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmación de eliminación -->
+    <div id="confirm-delete-modal" class="modal">
+        <div class="modal-content confirm-modal">
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que deseas eliminar esta receta? Esta acción no se puede deshacer.</p>
+            <div class="form-actions">
+                <button type="button" id="cancel-delete" class="secondary-btn">Cancelar</button>
+                <button type="button" id="confirm-delete" class="danger-btn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación de éxito -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="chef-page.js"></script>
+    <script>
+        // Verificar que el usuario sea chef
+        document.addEventListener("DOMContentLoaded", function () {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+            // Si no hay usuario o el usuario no tiene rol chef, redirigir
+            if (!usuario || usuario.rol !== "chef") {
+                console.log("Acceso no autorizado a la página de chef");
+                alert("No tienes permisos para acceder a esta página");
+                window.location.href = "US1_PantallaInicio/index.html";
+            } else {
+                console.log("Usuario chef verificado:", usuario.username);
+                // Mostrar información del usuario
+                document.getElementById("user-info").style.display = "flex";
+                document.getElementById("user-name").textContent = usuario.username;
+                document.getElementById("welcome-name").textContent = usuario.username;
+                document.getElementById("sidebar-chef-name").textContent = usuario.username;
+                document.getElementById("auth-button").style.display = "none";
+
+                // Configurar el botón de cierre de sesión
+                document.getElementById("logout-btn").addEventListener("click", function (e) {
+                    e.preventDefault();
+                    localStorage.removeItem("usuario");
+                    window.location.href = "US1_PantallaInicio/index.html";
+                });
+            }
+
+            // Función para alternar la visibilidad del sidebar en móviles
+            document.getElementById("mobile-menu-toggle").addEventListener("click", function () {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('sidebar-open');
+            });
+
+            // Navegación por pestañas
+            const tabLinks = document.querySelectorAll('.sidebar-nav a');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const tabId = this.getAttribute('data-tab');
+
+                    // Ocultar todas las pestañas
+                    document.querySelectorAll('.tab-pane').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+
+                    // Desactivar todos los enlaces
+                    tabLinks.forEach(link => {
+                        link.parentElement.classList.remove('active');
+                    });
+
+                    // Activar la pestaña seleccionada
+                    document.getElementById(tabId).classList.add('active');
+                    this.parentElement.classList.add('active');
+                });
+            });
+
+            // Acciones rápidas
+            document.getElementById('quick-add-recipe').addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector('[data-tab="nueva-receta"]').click();
+            });
+
+            document.getElementById('quick-view-comments').addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector('[data-tab="comentarios"]').click();
+            });
+
+            document.getElementById('quick-edit-profile').addEventListener('click', function (e) {
+                e.preventDefault();
+                // Aquí podrías abrir un modal para editar el perfil
+                alert('Funcionalidad de edición de perfil en desarrollo');
+            });
+        });
+    </script>
+</body>
+
+</html>
