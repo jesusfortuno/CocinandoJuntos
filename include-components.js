@@ -303,18 +303,377 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     `
   document.head.appendChild(style)
+
+  // Crear archivos CSS faltantes
+  createMissingCssFiles()
 })
+
+// Función para crear archivos CSS faltantes
+function createMissingCssFiles() {
+  // Crear styles-recipes.css si no existe
+  if (!document.querySelector('link[href*="styles-recipes.css"]')) {
+    const recipesStyle = document.createElement("link")
+    recipesStyle.rel = "stylesheet"
+    recipesStyle.href = "styles-recipes.css"
+    document.head.appendChild(recipesStyle)
+
+    // Crear el contenido del archivo
+    const styleContent = document.createElement("style")
+    styleContent.textContent = `
+      /* Estilos para las tarjetas de recetas */
+      .recipe-card {
+        background-color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        width: 280px;
+        margin: 0 15px;
+        flex-shrink: 0;
+      }
+      
+      .recipe-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+      
+      .recipe-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+      
+      .recipe-card .content {
+        padding: 15px;
+      }
+      
+      .recipe-card h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.2rem;
+        color: #333;
+      }
+      
+      .recipe-card .meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      
+      .recipe-card .category {
+        background-color: #f9f5f0;
+        color: #6b4423;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+      }
+      
+      .recipe-card .difficulty {
+        font-size: 0.8rem;
+        color: #666;
+      }
+      
+      .recipe-card .description {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 15px;
+        line-height: 1.4;
+      }
+      
+      .recipe-card .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+      }
+      
+      .recipe-card .tag {
+        background-color: #f0e9e0;
+        color: #8b5d33;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.75rem;
+      }
+      
+      .recipe-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
+        color: white;
+        padding: 20px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+        opacity: 0;
+      }
+      
+      .recipe-card:hover .recipe-overlay,
+      .recipe-overlay.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      .recipe-overlay .title {
+        font-size: 1.3rem;
+        margin: 0 0 10px 0;
+        font-weight: 600;
+      }
+      
+      .recipe-overlay p {
+        font-size: 0.9rem;
+        margin: 0 0 15px 0;
+        line-height: 1.4;
+      }
+      
+      .recipe-overlay .read-more {
+        align-self: flex-start;
+        background-color: #6b4423;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: background-color 0.3s ease;
+      }
+      
+      .recipe-overlay .read-more:hover {
+        background-color: #8b5d33;
+      }
+      
+      /* Estilos para el slider de recetas */
+      .recipe-slider {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding: 20px 0;
+      }
+      
+      .recipe-track {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+      
+      .slider-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        z-index: 10;
+        font-size: 1.2rem;
+        color: #6b4423;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      
+      .slider-nav:hover {
+        background-color: #f9f5f0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      }
+      
+      .prev-button {
+        left: 10px;
+      }
+      
+      .next-button {
+        right: 10px;
+      }
+      
+      .loading-indicator {
+        width: 100%;
+        text-align: center;
+        padding: 30px;
+        color: #6b4423;
+      }
+      
+      .loading-indicator i {
+        margin-right: 10px;
+      }
+    `
+    document.head.appendChild(styleContent)
+  }
+
+  // Crear styles-responsive.css si no existe
+  if (!document.querySelector('link[href*="styles-responsive.css"]')) {
+    const responsiveStyle = document.createElement("link")
+    responsiveStyle.rel = "stylesheet"
+    responsiveStyle.href = "styles-responsive.css"
+    document.head.appendChild(responsiveStyle)
+
+    // Crear el contenido del archivo
+    const styleContent = document.createElement("style")
+    styleContent.textContent = `
+      /* Estilos responsivos para diferentes tamaños de pantalla */
+      
+      /* Tablets y pantallas medianas */
+      @media (max-width: 992px) {
+        .content-wrapper {
+          padding: 0 20px;
+        }
+        
+        .culture-scroll {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .recipe-card {
+          width: 250px;
+        }
+        
+        .recipe-filters .filter-group {
+          flex-wrap: wrap;
+        }
+        
+        .recipe-filters .filter {
+          margin-bottom: 10px;
+        }
+        
+        nav {
+          padding: 0.8rem 1rem;
+        }
+        
+        .search-container {
+          max-width: 400px;
+        }
+        
+        footer {
+          padding: 1.5rem 0 0;
+        }
+        
+        footer > div > div {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+      }
+      
+      /* Móviles y pantallas pequeñas */
+      @media (max-width: 768px) {
+        .hero-video-section .video-overlay h1 {
+          font-size: 2.5rem;
+        }
+        
+        .hero-video-section .video-overlay p {
+          font-size: 1rem;
+        }
+        
+        .hero-buttons {
+          flex-direction: column;
+          gap: 15px;
+        }
+        
+        .hero-btn {
+          width: 100%;
+          text-align: center;
+        }
+        
+        .culture-scroll {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+        }
+        
+        .recipe-slider {
+          padding: 10px 0;
+        }
+        
+        .recipe-card {
+          width: 220px;
+          margin: 0 10px;
+        }
+        
+        .recipe-card img {
+          height: 150px;
+        }
+        
+        .recipe-card h3 {
+          font-size: 1.1rem;
+        }
+        
+        .recipe-card .description {
+          font-size: 0.85rem;
+        }
+        
+        .slider-nav {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+        
+        .search-container {
+          max-width: 100%;
+          margin: 10px 0;
+        }
+        
+        nav {
+          flex-wrap: wrap;
+        }
+        
+        .logo {
+          width: 60px;
+          height: 60px;
+        }
+        
+        footer > div > div {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      /* Móviles muy pequeños */
+      @media (max-width: 480px) {
+        .hero-video-section .video-overlay h1 {
+          font-size: 2rem;
+        }
+        
+        .hero-video-section .video-overlay p {
+          font-size: 0.9rem;
+        }
+        
+        .culture-scroll {
+          grid-template-columns: 1fr;
+        }
+        
+        .recipe-card {
+          width: 100%;
+          margin: 0 0 15px 0;
+        }
+        
+        .recipe-slider {
+          padding: 0;
+        }
+        
+        .slider-nav {
+          width: 30px;
+          height: 30px;
+          font-size: 0.9rem;
+        }
+        
+        .recipe-filters h2 {
+          font-size: 1.3rem;
+        }
+        
+        .recipe-filters .filter {
+          padding: 5px 10px;
+          font-size: 0.8rem;
+        }
+      }
+    `
+    document.head.appendChild(styleContent)
+  }
+}
 
 // Configurar funcionalidad de la navegación
 function setupNavFunctionality() {
-  // Usuario y login
-  const usuario = JSON.parse(localStorage.getItem("usuario"))
-  const userInfo = document.getElementById("user-info")
-  const authButton = document.getElementById("auth-button")
-  const userProfileLink = document.getElementById("user-profile-link")
-  const logoutBtn = document.getElementById("logout-btn")
-
-  // Determinar la ruta base para cargar los componentes
+  // Obtener la ruta base para cargar los componentes
   const scriptTag = document.querySelector('script[src*="include-components"]')
   const scriptSrc = scriptTag ? scriptTag.getAttribute("src") : ""
   let pathToRoot = ""
@@ -327,34 +686,47 @@ function setupNavFunctionality() {
     }
   }
 
-  if (usuario) {
-    userInfo.style.display = "flex"
-    document.getElementById("user-name").textContent = usuario.username || "Usuario"
-    authButton.style.display = "none"
+  // Usuario y login
+  const usuario = JSON.parse(localStorage.getItem("usuario") || "null")
+  const userInfo = document.getElementById("user-info")
+  const authButton = document.getElementById("auth-button")
+  const userProfileLink = document.getElementById("user-profile-link")
+  const logoutBtn = document.getElementById("logout-btn")
 
-    // Determinar tipo de usuario y enlace correcto
-    if (usuario.rol === "chef") {
-      // Si es chef, enlazar a la página de chef
-      userProfileLink.href = `${pathToRoot}chef-page.html`
-      console.log("Usuario con rol chef detectado, redirigiendo a chef-page.html")
-    } else if (usuario.username === "admin") {
-      userProfileLink.href = `${pathToRoot}US10_PaginaAdmin/PaginaAdmin.html`
+  if (userInfo && authButton) {
+    if (usuario) {
+      userInfo.style.display = "flex"
+      if (document.getElementById("user-name")) {
+        document.getElementById("user-name").textContent = usuario.username || "Usuario"
+      }
+      authButton.style.display = "none"
+
+      // Determinar tipo de usuario y enlace correcto
+      if (userProfileLink) {
+        if (usuario.rol === "chef") {
+          // Si es chef, enlazar a la página de chef
+          userProfileLink.href = `${pathToRoot}chef-page.html`
+          console.log("Usuario con rol chef detectado, redirigiendo a chef-page.html")
+        } else if (usuario.username === "admin") {
+          userProfileLink.href = `${pathToRoot}US10_PaginaAdmin/PaginaAdmin.html`
+        } else {
+          // Si es usuario normal, enlazar a la página de perfil
+          userProfileLink.href = `${pathToRoot}US7_PaginaDeUsuario/usuario.html`
+        }
+      }
+
+      // Funcionalidad de cierre de sesión
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", (e) => {
+          e.preventDefault()
+          localStorage.removeItem("usuario")
+          window.location.reload()
+        })
+      }
     } else {
-      // Si es usuario normal, enlazar a la página de perfil
-      userProfileLink.href = `${pathToRoot}US7_PaginaDeUsuario/usuario.html`
+      userInfo.style.display = "none"
+      authButton.style.display = "block"
     }
-
-    // Funcionalidad de cierre de sesión
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", (e) => {
-        e.preventDefault()
-        localStorage.removeItem("usuario")
-        window.location.reload()
-      })
-    }
-  } else {
-    userInfo.style.display = "none"
-    authButton.style.display = "block"
   }
 
   // Menú desplegable - Arreglado
@@ -385,7 +757,7 @@ function setupNavFunctionality() {
   // Configurar notificaciones
   setupNotifications()
 
-  // Configurar buscador - Versión simplificada sin Supabase
+  // Configurar buscador con Supabase
   setupSearchFunctionality()
 }
 
@@ -393,16 +765,16 @@ function setupNavFunctionality() {
 function setupNotifications() {
   const notificationButton = document.getElementById("notification-button")
   const notificationDropdown = document.getElementById("notification-dropdown")
-  const notificationBadge = document.getElementById("notification-badge")
   const notificationList = document.getElementById("notification-list")
   const markAllReadBtn = document.getElementById("mark-all-read")
 
   if (!notificationButton || !notificationDropdown || !notificationList) {
+    console.log("Elementos de notificaciones no encontrados, se omite la configuración")
     return
   }
 
   // Cargar notificaciones del localStorage o crear un array vacío
-  let notifications = JSON.parse(localStorage.getItem("notifications")) || []
+  let notifications = JSON.parse(localStorage.getItem("notifications") || "[]")
 
   // Si no hay notificaciones en localStorage, crear algunas de ejemplo
   if (!notifications.length) {
@@ -552,7 +924,7 @@ function setupNotifications() {
   updateNotificationCount()
 }
 
-// Configurar funcionalidad del buscador - Versión simplificada sin Supabase
+// Configurar funcionalidad del buscador con Supabase
 function setupSearchFunctionality() {
   const searchInput = document.getElementById("search-input")
   const searchButton = document.getElementById("search-button")
@@ -562,6 +934,19 @@ function setupSearchFunctionality() {
   if (!searchInput || !searchButton || !searchResults) {
     console.error("Elementos del buscador no encontrados")
     return
+  }
+
+  // Obtener la ruta base para cargar los componentes
+  const scriptTag = document.querySelector('script[src*="include-components"]')
+  const scriptSrc = scriptTag ? scriptTag.getAttribute("src") : ""
+  let pathToRoot = ""
+
+  if (scriptSrc) {
+    const parts = scriptSrc.split("/")
+    const depth = parts.length - 1
+    if (depth > 0) {
+      pathToRoot = Array(depth).fill("..").join("/") + "/"
+    }
   }
 
   // Actualizar el placeholder según el idioma
@@ -574,47 +959,251 @@ function setupSearchFunctionality() {
     searchInput.placeholder = "Cercar receptes..."
   }
 
-  // Datos de ejemplo para búsqueda local (sin Supabase)
-  const recetasEjemplo = [
-    {
-      id: 1,
-      titulo: "Pollo Agridulce",
-      categoria: "China",
-      dificultad: "Media",
-      ingredientes: "pollo, piña, pimiento, salsa agridulce",
-    },
-    {
-      id: 2,
-      titulo: "Paella",
-      categoria: "España",
-      dificultad: "Difícil",
-      ingredientes: "arroz, azafrán, mariscos, pollo",
-    },
-    {
-      id: 3,
-      titulo: "Crepas Dulces",
-      categoria: "Francia",
-      dificultad: "Fácil",
-      ingredientes: "harina, huevos, leche, azúcar",
-    },
-    {
-      id: 4,
-      titulo: "Bizcocho Capuccino",
-      categoria: "Italia",
-      dificultad: "Media",
-      ingredientes: "harina, huevos, café, chocolate",
-    },
-    {
-      id: 5,
-      titulo: "Arepa Venezolana",
-      categoria: "Venezuela",
-      dificultad: "Fácil",
-      ingredientes: "harina de maíz, agua, sal",
-    },
-  ]
+  // Configuración de Supabase
+  const SUPABASE_URL = "https://uonkcjrokwtgvimjxawm.supabase.co"
+  const SUPABASE_API_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvbmtjanJva3d0Z3ZpbWp4YXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg2ODIyNTgsImV4cCI6MjA1NDI1ODI1OH0.fTH7cyyYYQFi5HQc8y-JXAKSY0PL3P1FKy6LymfeTvU"
 
-  // Función para realizar la búsqueda local
-  function performSearch(query) {
+  // Inicializar Supabase
+  let supabase
+  try {
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
+      console.log("Supabase inicializado correctamente para búsqueda")
+    } else {
+      console.error("La biblioteca de Supabase no está cargada para búsqueda")
+      // Usar datos de ejemplo como fallback
+      useFallbackSearch()
+      return
+    }
+  } catch (error) {
+    console.error("Error al inicializar Supabase para búsqueda:", error)
+    // Usar datos de ejemplo como fallback
+    useFallbackSearch()
+    return
+  }
+
+  // Función para realizar la búsqueda con Supabase
+  async function performSearch(query) {
+    if (!query || query.trim() === "") {
+      searchResults.style.display = "none"
+      return
+    }
+
+    searchResults.innerHTML = '<div style="text-align: center; padding: 20px;">Buscando...</div>'
+    searchResults.style.display = "block"
+
+    try {
+      // Realizar búsqueda en Supabase
+      const { data: recetas, error } = await supabase
+        .from("recetas")
+        .select("id, titulo, descripcion, dificultad, categoria")
+        .or(
+          `titulo.ilike.%${query}%, descripcion.ilike.%${query}%, ingredientes.ilike.%${query}%, categoria.ilike.%${query}%`,
+        )
+        .limit(5)
+
+      if (error) {
+        throw error
+      }
+
+      // Mostrar resultados
+      if (recetas && recetas.length > 0) {
+        const language = localStorage.getItem("language") || "es"
+
+        // Encabezado de resultados
+        searchResults.innerHTML = `
+            <div style="padding: 12px 15px; border-bottom: 1px solid #e0d5c9; font-weight: 600; color: #6b4423; background-color: #f9f5f0;">
+              ${getTranslation("Resultados para", language)} "${query}"
+            </div>
+          `
+
+        // Crear elementos para cada receta
+        recetas.forEach((receta) => {
+          const resultItem = document.createElement("div")
+          resultItem.className = "result-item"
+          resultItem.style.display = "flex"
+          resultItem.style.padding = "12px 15px"
+          resultItem.style.borderBottom = "1px solid #e0d5c9"
+          resultItem.style.cursor = "pointer"
+          resultItem.style.transition = "background-color 0.2s"
+
+          // Hover effect
+          resultItem.addEventListener("mouseenter", () => {
+            resultItem.style.backgroundColor = "#f9f5f0"
+          })
+          resultItem.addEventListener("mouseleave", () => {
+            resultItem.style.backgroundColor = "transparent"
+          })
+
+          // Obtener imagen para la receta
+          const imageSrc = getImagePath(receta.titulo, receta.categoria)
+
+          // Traducir categoría y dificultad
+          const categoriaTraducida = getTranslation(receta.categoria, language) || receta.categoria
+
+          // Crear indicador visual de dificultad
+          const difficultyDots = getDifficultyDots(receta.dificultad)
+
+          resultItem.innerHTML = `
+              <img src="${imageSrc}" alt="${receta.titulo}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: #333; margin-bottom: 5px; font-size: 0.95rem;">${receta.titulo}</div>
+                <div style="display: flex; gap: 10px; font-size: 0.8rem;">
+                  <span style="color: #6b4423; background: #f9f5f0; padding: 3px 10px; border-radius: 12px;">${categoriaTraducida}</span>
+                  <span style="color: #6b4423;">${getTranslation("Dificultad:", language)} ${difficultyDots}</span>
+                </div>
+              </div>
+            `
+
+          // Añadir evento de clic para navegar a la receta
+          resultItem.addEventListener("click", () => {
+            const recipeUrl = getRecipeUrl(receta)
+            window.location.href = recipeUrl
+          })
+
+          searchResults.appendChild(resultItem)
+        })
+
+        // Añadir botón "Ver todas las recetas"
+        const verTodoButton = document.createElement("div")
+        verTodoButton.style.padding = "12px 15px"
+        verTodoButton.style.textAlign = "center"
+        verTodoButton.style.color = "#6b4423"
+        verTodoButton.style.fontWeight = "600"
+        verTodoButton.style.cursor = "pointer"
+        verTodoButton.style.borderTop = "1px solid #e0d5c9"
+        verTodoButton.style.backgroundColor = "#f9f5f0"
+        verTodoButton.style.transition = "background-color 0.2s"
+        verTodoButton.textContent = getTranslation("Ver todas las recetas", localStorage.getItem("language") || "es")
+
+        verTodoButton.addEventListener("mouseenter", () => {
+          verTodoButton.style.backgroundColor = "#f0e9e0"
+        })
+        verTodoButton.addEventListener("mouseleave", () => {
+          verTodoButton.style.backgroundColor = "#f9f5f0"
+        })
+
+        verTodoButton.addEventListener("click", () => {
+          window.location.href = `${pathToRoot}US1_PantallaInicio/busqueda.html?q=${encodeURIComponent(query)}`
+        })
+
+        searchResults.appendChild(verTodoButton)
+      } else {
+        // No hay resultados
+        searchResults.innerHTML = `
+            <div style="text-align: center; padding: 25px 20px; color: #666;">
+              <i class="fas fa-search" style="font-size: 24px; margin-bottom: 15px; color: #d4c3b5;"></i>
+              <p style="margin-bottom: 8px;">${getTranslation("No se encontraron resultados", localStorage.getItem("language") || "es")} "${query}"</p>
+              <p style="font-size: 13px; margin-top: 5px; color: #999;">${getTranslation("Intenta con otra búsqueda", localStorage.getItem("language") || "es")}</p>
+            </div>
+          `
+      }
+    } catch (error) {
+      console.error("Error en la búsqueda:", error)
+      searchResults.innerHTML = `
+          <div style="text-align: center; padding: 20px; color: #e74c3c;">
+            Error inesperado. Inténtalo de nuevo.
+          </div>
+        `
+      // Usar datos de ejemplo como fallback
+      useFallbackSearch()
+    }
+  }
+
+  // Función para usar búsqueda con datos de ejemplo como fallback
+  function useFallbackSearch() {
+    // Datos de ejemplo para búsqueda local (sin Supabase)
+    const recetasEjemplo = [
+      {
+        id: 1,
+        titulo: "Pollo Agridulce",
+        categoria: "China",
+        dificultad: "Media",
+        ingredientes: "pollo, piña, pimiento, salsa agridulce",
+      },
+      {
+        id: 2,
+        titulo: "Paella",
+        categoria: "España",
+        dificultad: "Difícil",
+        ingredientes: "arroz, azafrán, mariscos, pollo",
+      },
+      {
+        id: 3,
+        titulo: "Crepas Dulces",
+        categoria: "Francia",
+        dificultad: "Fácil",
+        ingredientes: "harina, huevos, leche, azúcar",
+      },
+      {
+        id: 4,
+        titulo: "Bizcocho Capuccino",
+        categoria: "Italia",
+        dificultad: "Media",
+        ingredientes: "harina, huevos, café, chocolate",
+      },
+      {
+        id: 5,
+        titulo: "Arepa Venezolana",
+        categoria: "Venezuela",
+        dificultad: "Fácil",
+        ingredientes: "harina de maíz, agua, sal",
+      },
+    ]
+
+    // Reemplazar la función de búsqueda con una versión local
+    searchButton.addEventListener("click", () => {
+      const query = searchInput.value.trim()
+      performLocalSearch(query, recetasEjemplo)
+      if (query) {
+        searchClose.style.display = "block"
+      }
+    })
+
+    if (searchClose) {
+      searchClose.addEventListener("click", () => {
+        searchResults.style.display = "none"
+        searchInput.value = ""
+        searchClose.style.display = "none"
+      })
+    }
+
+    // Buscar al presionar Enter
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const query = searchInput.value.trim()
+        performLocalSearch(query, recetasEjemplo)
+        if (query) {
+          searchClose.style.display = "block"
+        }
+      }
+    })
+
+    // Buscar mientras se escribe (con debounce)
+    let debounceTimer
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim()
+
+      // Mostrar/ocultar botón de cerrar
+      if (query) {
+        searchClose.style.display = "block"
+      } else {
+        searchClose.style.display = "none"
+        searchResults.style.display = "none"
+        return
+      }
+
+      // Debounce para no hacer demasiadas peticiones
+      clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(() => {
+        performLocalSearch(query, recetasEjemplo)
+      }, 300)
+    })
+  }
+
+  // Función para realizar búsqueda local con datos de ejemplo
+  function performLocalSearch(query, recetasEjemplo) {
     if (!query || query.trim() === "") {
       searchResults.style.display = "none"
       return
@@ -665,7 +1254,7 @@ function setupSearchFunctionality() {
           })
 
           // Obtener imagen para la receta
-          const imageSrc = getImagePath(receta.titulo)
+          const imageSrc = getImagePath(receta.titulo, receta.categoria)
 
           // Traducir categoría y dificultad
           const categoriaTraducida = getTranslation(receta.categoria, language) || receta.categoria
@@ -713,7 +1302,7 @@ function setupSearchFunctionality() {
         })
 
         verTodoButton.addEventListener("click", () => {
-          window.location.href = `./busqueda.html?q=${encodeURIComponent(query)}`
+          window.location.href = `${pathToRoot}US1_PantallaInicio/busqueda.html?q=${encodeURIComponent(query)}`
         })
 
         searchResults.appendChild(verTodoButton)
@@ -728,7 +1317,7 @@ function setupSearchFunctionality() {
           `
       }
     } catch (error) {
-      console.error("Error en la búsqueda:", error)
+      console.error("Error en la búsqueda local:", error)
       searchResults.innerHTML = `
           <div style="text-align: center; padding: 20px; color: #e74c3c;">
             Error inesperado. Inténtalo de nuevo.
@@ -767,7 +1356,7 @@ function setupSearchFunctionality() {
       ca: {
         "Resultados para": "Resultats per a",
         "No se encontraron resultados": "No s'han trobat resultats per a",
-        "Intenta con otra cerca": "Intenta amb una altra cerca",
+        "Intenta con otra búsqueda": "Intenta amb una altra cerca",
         "Ver todas las recetas": "Veure totes les receptes",
         "Dificultad:": "Dificultat:",
         China: "Xina",
@@ -785,8 +1374,8 @@ function setupSearchFunctionality() {
     return text
   }
 
-  // Función para obtener la ruta de la imagen según el título
-  function getImagePath(titulo) {
+  // Función para obtener la ruta de la imagen según el título y categoría
+  function getImagePath(titulo, categoria) {
     // Mapeo de títulos a rutas de imágenes
     const imageMap = {
       "Pollo Agridulce": `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`,
@@ -808,20 +1397,57 @@ function setupSearchFunctionality() {
     }
 
     // Imagen por defecto según categoría
-    if (titulo.toLowerCase().includes("china")) {
+    if (categoria) {
+      const categoriaLower = categoria.toLowerCase()
+      if (categoriaLower.includes("china")) {
+        return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`
+      } else if (
+        categoriaLower.includes("españa") ||
+        categoriaLower.includes("spain") ||
+        categoriaLower.includes("espanya")
+      ) {
+        return `${pathToRoot}US1_PantallaInicio/Imagenes/España/paella.png`
+      } else if (
+        categoriaLower.includes("francia") ||
+        categoriaLower.includes("france") ||
+        categoriaLower.includes("frança")
+      ) {
+        return `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`
+      } else if (
+        categoriaLower.includes("italia") ||
+        categoriaLower.includes("italy") ||
+        categoriaLower.includes("itàlia")
+      ) {
+        return `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`
+      } else if (categoriaLower.includes("venezuela") || categoriaLower.includes("veneçuela")) {
+        return `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`
+      } else if (
+        categoriaLower.includes("japón") ||
+        categoriaLower.includes("japan") ||
+        categoriaLower.includes("japó")
+      ) {
+        return `${pathToRoot}US1_PantallaInicio/Imagenes/Japon/sushi.jpeg`
+      }
+    }
+
+    // Imagen por defecto basada en el título
+    const tituloLower = titulo.toLowerCase()
+    if (tituloLower.includes("china") || tituloLower.includes("pollo")) {
       return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`
-    } else if (titulo.toLowerCase().includes("españa") || titulo.toLowerCase().includes("paella")) {
+    } else if (tituloLower.includes("españa") || tituloLower.includes("paella")) {
       return `${pathToRoot}US1_PantallaInicio/Imagenes/España/paella.png`
-    } else if (titulo.toLowerCase().includes("francia") || titulo.toLowerCase().includes("crepa")) {
+    } else if (tituloLower.includes("francia") || tituloLower.includes("crepa")) {
       return `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`
-    } else if (titulo.toLowerCase().includes("italia") || titulo.toLowerCase().includes("bizcocho")) {
+    } else if (tituloLower.includes("italia") || tituloLower.includes("bizcocho")) {
       return `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`
-    } else if (titulo.toLowerCase().includes("venezuela") || titulo.toLowerCase().includes("arepa")) {
+    } else if (tituloLower.includes("venezuela") || tituloLower.includes("arepa")) {
       return `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`
+    } else if (tituloLower.includes("japón") || tituloLower.includes("sushi")) {
+      return `${pathToRoot}US1_PantallaInicio/Imagenes/Japon/sushi.jpeg`
     }
 
     // Imagen por defecto
-    return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`
+    return `${pathToRoot}US1_PantallaInicio/Imagenes/placeholder-recipe.jpg`
   }
 
   // Función para obtener la URL de la receta

@@ -1,0 +1,152 @@
+/* Estilos responsivos para diferentes tamaños de pantalla */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+    .content-wrapper {
+      padding: 0 20px;
+    }
+  
+    .culture-scroll {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .recipe-card {
+      width: 250px;
+    }
+  
+    .recipe-filters .filter-group {
+      flex-wrap: wrap;
+    }
+  
+    .recipe-filters .filter {
+      margin-bottom: 10px;
+    }
+  
+    nav {
+      padding: 0.8rem 1rem;
+    }
+  
+    .search-container {
+      max-width: 400px;
+    }
+  
+    footer {
+      padding: 1.5rem 0 0;
+    }
+  
+    footer > div > div {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+  
+  /* Móviles y pantallas pequeñas */
+  @media (max-width: 768px) {
+    .hero-video-section .video-overlay h1 {
+      font-size: 2.5rem;
+    }
+  
+    .hero-video-section .video-overlay p {
+      font-size: 1rem;
+    }
+  
+    .hero-buttons {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .hero-btn {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .culture-scroll {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  
+    .recipe-slider {
+      padding: 10px 0;
+    }
+  
+    .recipe-card {
+      width: 220px;
+      margin: 0 10px;
+    }
+  
+    .recipe-card img {
+      height: 150px;
+    }
+  
+    .recipe-card h3 {
+      font-size: 1.1rem;
+    }
+  
+    .recipe-card .description {
+      font-size: 0.85rem;
+    }
+  
+    .slider-nav {
+      width: 35px;
+      height: 35px;
+      font-size: 1rem;
+    }
+  
+    .search-container {
+      max-width: 100%;
+      margin: 10px 0;
+    }
+  
+    nav {
+      flex-wrap: wrap;
+    }
+  
+    .logo {
+      width: 60px;
+      height: 60px;
+    }
+  
+    footer > div > div {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Móviles muy pequeños */
+  @media (max-width: 480px) {
+    .hero-video-section .video-overlay h1 {
+      font-size: 2rem;
+    }
+  
+    .hero-video-section .video-overlay p {
+      font-size: 0.9rem;
+    }
+  
+    .culture-scroll {
+      grid-template-columns: 1fr;
+    }
+  
+    .recipe-card {
+      width: 100%;
+      margin: 0 0 15px 0;
+    }
+  
+    .recipe-slider {
+      padding: 0;
+    }
+  
+    .slider-nav {
+      width: 30px;
+      height: 30px;
+      font-size: 0.9rem;
+    }
+  
+    .recipe-filters h2 {
+      font-size: 1.3rem;
+    }
+  
+    .recipe-filters .filter {
+      padding: 5px 10px;
+      font-size: 0.8rem;
+    }
+  }
+  
