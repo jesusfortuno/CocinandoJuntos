@@ -1,35 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cultura China - Cocinando Juntos</title>
     <link rel="stylesheet" href="styles2.css">
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        
+        /* Estilos para mantener el diseño original */
+        .culture-header {
+            text-align: left;
+            padding: 1rem 0;
+        }
+        
+        .culture-header h1 {
+            font-size: 2rem;
+            color: #6b4423;
+            margin-bottom: 0.5rem;
+        }
+        
+        .culture-description p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .recipe-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: white;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .recipe-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .recipe-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .recipe-card:hover .recipe-image img {
+            transform: scale(1.05);
+        }
+        
+        .recipe-card h3 {
+            padding: 1rem;
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .recipe-meta {
+            display: flex;
+            padding: 0 1rem 1rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .difficulty, .time, .category {
+            background: #f8f1e9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #6b4423;
+        }
+    </style>
 </head>
-
-<body>
-    <!--MENU NAVEGACIÓN-->
-    <nav>
-        <a href="index.html">
-            <div class="logo">
-                <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-            </div>
-        </a>
-
-        <input type="text" class="search-bar" placeholder="Buscar recetas...">
-
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <a href="../US7_PaginaDeUsuario/usuario.html"><span id="user-name">Nombre del Usuario</span></a>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-
-        <div class="menu-icon" id="menuToggle">☰</div>
-    </nav>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
     <!-- El menú desplegable debe estar aquí, fuera del nav -->
     <div class="overlay-menu" id="overlayMenu">
@@ -179,11 +235,9 @@
             </div>
         </div>
     </main>
-
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
-
+    <div id="footer-placeholder"></div>
+    <script src="index.js" defer></script>
+    <script src="include-components.js" defer></script>
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -278,7 +332,5 @@
             });
         });
     </script>
-    <script src="index.js"></script>
 </body>
-
 </html>

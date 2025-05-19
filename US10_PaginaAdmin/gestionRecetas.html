@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Recetas | Cocinando Juntos</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Estilos adicionales para el botón de generar HTML */
@@ -57,26 +61,8 @@
     </style>
 </head>
 
-<body>
-    <!-- Navegador superior -->
-    <nav class="top-nav">
-        <a href="./../US1_PantallaInicio/index.html" class="logo">
-            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar..." class="search-bar">
-        </div>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
-                class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons" style="display: none;">Iniciar Sesión</a>
-        <div class="menu-icon" id="mobile-menu-toggle">☰</div>
-    </nav>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
     <div class="layout-container">
         <!-- Sidebar -->
@@ -235,31 +221,37 @@
         </div>
     </div>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
-    <!-- Scripts de Supabase -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../US1_PantallaInicio/index.js" defer></script>
+    <script src="../US1_PantallaInicio/include-components.js" defer></script>
+    <script type="module" src="../favoritos.js"></script>
+    <script type="module" src="../valorar.js"></script>
     <script src="gestionRecetas.js"></script>
     <script>
         // Manejo del modal de instrucciones
         const instructionsModal = document.getElementById("instructions-modal");
         const showInstructionsBtn = document.getElementById("show-instructions-btn");
         const closeInstructionsBtn = document.getElementById("close-instructions");
-        
-        showInstructionsBtn.addEventListener("click", function() {
-            instructionsModal.style.display = "block";
-        });
-        
-        closeInstructionsBtn.addEventListener("click", function() {
-            instructionsModal.style.display = "none";
-        });
-        
-        window.addEventListener("click", function(event) {
-            if (event.target == instructionsModal) {
-                instructionsModal.style.display = "none";
-            }
+
+        // Obtener el usuario desde localStorage
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const sidebarAdminName = document.getElementById("sidebar-admin-name");
+
+        if (usuario) {
+            console.log('Usuario encontrado:', usuario);
+            sidebarAdminName.textContent = usuario.username;
+        } else {
+            console.log('No se encontró usuario en localStorage');
+            window.location.href = "../login.html";
+        }
+
+        // Función para alternar la visibilidad del sidebar en móviles
+        document.getElementById("mobile-menu-toggle").addEventListener("click", function () {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('sidebar-open');
         });
     </script>
 </body>

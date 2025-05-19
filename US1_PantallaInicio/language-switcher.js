@@ -1,47 +1,52 @@
 // Script para manejar el cambio de idioma en la interfaz
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Referencia al selector de idioma
-  const languageSelector = document.getElementById("language")
+  // Esperar un momento para asegurarse de que el footer se ha cargado
+  setTimeout(() => {
+    // Referencia al selector de idioma
+    const languageSelector = document.getElementById("language")
 
-  // Verificar si el selector existe
-  if (!languageSelector) {
-    console.error("No se encontró el selector de idioma")
-    return
-  }
-
-  // Cargar el idioma guardado si existe
-  const savedLanguage = localStorage.getItem("language")
-  if (savedLanguage) {
-    languageSelector.value = savedLanguage
-
-    // Aplicar traducciones inmediatamente si el sistema i18n está disponible
-    if (window.i18n && typeof window.i18n.translatePage === "function") {
-      window.i18n.translatePage(savedLanguage)
+    // Verificar si el selector existe
+    if (!languageSelector) {
+      console.warn("No se encontró el selector de idioma. Puede que el footer aún no se haya cargado.")
+      return
     }
-  }
 
-  // Evento para cambiar el idioma cuando se selecciona una opción
-  languageSelector.addEventListener("change", function () {
-    const selectedLanguage = this.value
+    // Cargar el idioma guardado si existe
+    const savedLanguage = localStorage.getItem("language")
+    if (savedLanguage) {
+      languageSelector.value = savedLanguage
 
-    // Guardar la preferencia de idioma
-    localStorage.setItem("language", selectedLanguage)
-
-    // Cambiar el idioma de la página
-    if (window.i18n && typeof window.i18n.changeLanguage === "function") {
-      window.i18n.changeLanguage(selectedLanguage)
-    } else {
-      console.error("El sistema de internacionalización no está inicializado correctamente")
-      // Intentar recargar la página como fallback
-      window.location.reload()
+      // Aplicar traducciones inmediatamente si el sistema i18n está disponible
+      if (window.i18n && typeof window.i18n.translatePage === "function") {
+        window.i18n.translatePage(savedLanguage)
+      }
     }
-  })
 
-  // Actualizar elementos dinámicos cuando cambia el idioma
-  document.addEventListener("languageChanged", (e) => {
-    updateDynamicElements(e.detail.language)
-  })
+    // Evento para cambiar el idioma cuando se selecciona una opción
+    languageSelector.addEventListener("change", function () {
+      const selectedLanguage = this.value
+
+      // Guardar la preferencia de idioma
+      localStorage.setItem("language", selectedLanguage)
+
+      // Cambiar el idioma de la página
+      if (window.i18n && typeof window.i18n.changeLanguage === "function") {
+        window.i18n.changeLanguage(selectedLanguage)
+      } else if (window.i18n && typeof window.i18n.translatePage === "function") {
+        window.i18n.translatePage(selectedLanguage)
+      } else {
+        console.error("El sistema de internacionalización no está inicializado correctamente")
+        // Intentar recargar la página como fallback
+        window.location.reload()
+      }
+    })
+
+    // Actualizar elementos dinámicos cuando cambia el idioma
+    document.addEventListener("languageChanged", (e) => {
+      updateDynamicElements(e.detail ? e.detail.language : localStorage.getItem("language") || "es")
+    })
+  }, 500) // Esperar 500ms para asegurar que el footer se ha cargado
 
   // Función para actualizar elementos que se generan dinámicamente
   function updateDynamicElements(language) {
@@ -49,7 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Actualizar el placeholder del buscador
     const searchInput = document.getElementById("search-input")
-    if (searchInput && window.i18n.translations[language]["Buscar recetas..."]) {
+    if (
+      searchInput &&
+      window.i18n &&
+      window.i18n.translations &&
+      window.i18n.translations[language] &&
+      window.i18n.translations[language]["Buscar recetas..."]
+    ) {
       searchInput.placeholder = window.i18n.translations[language]["Buscar recetas..."]
     }
 
@@ -72,7 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const elementsToTranslate = card.querySelectorAll("[data-i18n]")
       elementsToTranslate.forEach((element) => {
         const key = element.getAttribute("data-i18n")
-        if (window.i18n.translations[language][key]) {
+        if (
+          window.i18n &&
+          window.i18n.translations &&
+          window.i18n.translations[language] &&
+          window.i18n.translations[language][key]
+        ) {
           element.textContent = window.i18n.translations[language][key]
         }
       })
@@ -80,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Actualizar el copyright en el footer
     const copyright = document.querySelector(".copyright")
-    if (copyright) {
+    if (copyright && window.i18n && window.i18n.translations && window.i18n.translations[language]) {
       const year = new Date().getFullYear()
       if (window.i18n.translations[language]["© 2025 Cocinando Juntos - Todos los derechos reservados"]) {
         copyright.textContent =
@@ -96,25 +112,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (title && title.hasAttribute("data-i18n")) {
         const key = title.getAttribute("data-i18n")
-        if (window.i18n.translations[language][key]) {
+        if (
+          window.i18n &&
+          window.i18n.translations &&
+          window.i18n.translations[language] &&
+          window.i18n.translations[language][key]
+        ) {
           title.textContent = window.i18n.translations[language][key]
         }
       }
 
       if (description && description.hasAttribute("data-i18n")) {
         const key = description.getAttribute("data-i18n")
-        if (window.i18n.translations[language][key]) {
+        if (
+          window.i18n &&
+          window.i18n.translations &&
+          window.i18n.translations[language] &&
+          window.i18n.translations[language][key]
+        ) {
           description.textContent = window.i18n.translations[language][key]
         }
       }
 
       if (readMore && readMore.hasAttribute("data-i18n")) {
         const key = readMore.getAttribute("data-i18n")
-        if (window.i18n.translations[language][key]) {
+        if (
+          window.i18n &&
+          window.i18n.translations &&
+          window.i18n.translations[language] &&
+          window.i18n.translations[language][key]
+        ) {
           readMore.textContent = window.i18n.translations[language][key]
         }
       }
     })
   }
 })
-

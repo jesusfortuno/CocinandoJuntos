@@ -13,6 +13,12 @@ html, body {
     color: #5a3d2b;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 /* Navegador superior */
 .top-nav {
     background-color: #f8f1e9;
@@ -114,8 +120,11 @@ html, body {
 /* Layout principal */
 .layout-container {
     display: flex;
-    min-height: calc(100vh - 90px - 50px); /* Altura total - altura nav - altura footer */
+    flex: 1;
     margin-top: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
 }
 
 /* Sidebar */
@@ -484,7 +493,8 @@ footer {
     text-align: center;
     padding: 1rem;
     width: 100%;
-    margin-top: 1rem;
+    position: relative;
+    z-index: 0;
 }
 
 /* Responsive */
@@ -495,10 +505,14 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .layout-container {
+        margin-left: 0;
+    }
+    
     .sidebar {
         position: fixed;
         left: -260px;
-        height: calc(100vh - 90px);
+        height: 100%;
         z-index: 99;
     }
     

@@ -6,29 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios | Cocinando Juntos</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
-    <!-- Navegador superior -->
-    <nav class="top-nav">
-        <a href="./../US1_PantallaInicio/index.html" class="logo">
-            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar..." class="search-bar">
-        </div>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
-                class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons" style="display: none;">Iniciar Sesión</a>
-        <div class="menu-icon" id="mobile-menu-toggle">☰</div>
-    </nav>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
     <div class="layout-container">
         <!-- Sidebar -->
@@ -179,38 +165,25 @@
         </div>
     </div>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
-    <!-- Scripts de Supabase -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../US1_PantallaInicio/index.js" defer></script>
+    <script src="../US1_PantallaInicio/include-components.js" defer></script>
+    <script type="module" src="../favoritos.js"></script>
+    <script type="module" src="../valorar.js"></script>
     <script src="gestionUsuarios.js"></script>
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
         const sidebarAdminName = document.getElementById("sidebar-admin-name");
 
         if (usuario) {
             console.log('Usuario encontrado:', usuario);
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username;
             sidebarAdminName.textContent = usuario.username;
-            authButton.style.display = "none";
-
-            // Configurar el botón de cierre de sesión
-            document.getElementById("logout-btn").addEventListener("click", function (e) {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.href = "./../US1_PantallaInicio/index.html";
-            });
         } else {
             console.log('No se encontró usuario en localStorage');
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
-            // Redirigir a la página de inicio de sesión
             window.location.href = "../login.html";
         }
 
@@ -249,35 +222,6 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        });
-
-        // Editar usuario
-        editBtns.forEach(btn => {
-            btn.addEventListener("click", function () {
-                const userId = this.getAttribute("data-id");
-                document.getElementById("modal-title").textContent = "Editar Usuario";
-                // Aquí normalmente cargarías los datos del usuario
-                modal.style.display = "block";
-            });
-        });
-
-        // Eliminar usuario
-        deleteBtns.forEach(btn => {
-            btn.addEventListener("click", function () {
-                const userId = this.getAttribute("data-id");
-                if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
-                    // Aquí normalmente eliminarías el usuario
-                    console.log("Eliminando usuario con ID:", userId);
-                }
-            });
-        });
-
-        // Envío del formulario
-        document.getElementById("user-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            // Aquí normalmente guardarías los datos del usuario
-            console.log("Guardando usuario...");
-            modal.style.display = "none";
         });
     </script>
 </body>

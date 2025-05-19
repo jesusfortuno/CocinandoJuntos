@@ -6,29 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Comentarios | Cocinando Juntos</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
-    <!-- Navegador superior -->
-    <nav class="top-nav">
-        <a href="./../US1_PantallaInicio/index.html" class="logo">
-            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar..." class="search-bar">
-        </div>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
-                class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-        <div class="menu-icon" id="mobile-menu-toggle">☰</div>
-    </nav>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
     <div class="layout-container">
         <!-- Sidebar -->
@@ -187,37 +173,25 @@
         </div>
     </div>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
-    <!-- Scripts de Supabase -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../US1_PantallaInicio/index.js" defer></script>
+    <script src="../US1_PantallaInicio/include-components.js" defer></script>
+    <script type="module" src="../favoritos.js"></script>
+    <script type="module" src="../valorar.js"></script>
     <script src="gestionComentarios.js"></script>
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
         const sidebarAdminName = document.getElementById("sidebar-admin-name");
 
         if (usuario) {
             console.log('Usuario encontrado:', usuario);
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username;
             sidebarAdminName.textContent = usuario.username;
-            authButton.style.display = "none";
-
-            // Configurar el botón de cierre de sesión
-            document.getElementById("logout-btn").addEventListener("click", function (e) {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.href = "./../US1_PantallaInicio/index.html";
-            });
         } else {
             console.log('No se encontró usuario en localStorage');
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
             window.location.href = "../login.html";
         }
 
@@ -248,102 +222,6 @@
             const selectedCheckboxes = document.querySelectorAll(".comment-checkbox:checked");
             if (selectedCheckboxes.length === 0) {
                 alert("No hay comentarios seleccionados");
-                return;
-            }
-
-            if (confirm(`¿Estás seguro de que deseas aprobar ${selectedCheckboxes.length} comentarios?`)) {
-                // Aquí normalmente aprobarías los comentarios
-                console.log("Aprobando comentarios seleccionados");
-            }
-        });
-
-        // Eliminar todos los seleccionados
-        document.getElementById("delete-all-btn").addEventListener("click", function () {
-            const selectedCheckboxes = document.querySelectorAll(".comment-checkbox:checked");
-            if (selectedCheckboxes.length === 0) {
-                alert("No hay comentarios seleccionados");
-                return;
-            }
-
-            if (confirm(`¿Estás seguro de que deseas eliminar ${selectedCheckboxes.length} comentarios?`)) {
-                // Aquí normalmente eliminarías los comentarios
-                console.log("Eliminando comentarios seleccionados");
-            }
-        });
-
-        // Ver comentario
-        viewBtns.forEach(btn => {
-            btn.addEventListener("click", function () {
-                const commentId = this.getAttribute("data-id");
-                // Aquí normalmente cargarías los datos del comentario
-                document.getElementById("comment-user").textContent = commentId === "1" ? "María López" : "Juan Pérez";
-                document.getElementById("comment-recipe").textContent = commentId === "1" ? "Tortilla Española" : "Gazpacho Andaluz";
-                document.getElementById("comment-text").textContent = commentId === "1"
-                    ? "¡Excelente receta! La hice el fin de semana y quedó deliciosa."
-                    : "Muy refrescante para el verano. Añadí un poco más de ajo y quedó perfecto.";
-                document.getElementById("comment-date").textContent = commentId === "1" ? "12/05/2025" : "10/05/2025";
-                document.getElementById("comment-status").textContent = commentId === "1" ? "Aprobado" : "Pendiente";
-
-                // Mostrar/ocultar botón de aprobar según el estado
-                document.getElementById("approve-comment-btn").style.display = commentId === "1" ? "none" : "inline-block";
-
-                modal.style.display = "block";
-            });
-        });
-
-        // Cerrar modal
-        closeBtn.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-
-        closeDetailsBtn.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-
-        // Cerrar modal al hacer clic fuera del contenido
-        window.addEventListener("click", function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        });
-
-        // Aprobar comentario desde el botón en la tabla
-        approveBtns.forEach(btn => {
-            btn.addEventListener("click", function () {
-                const commentId = this.getAttribute("data-id");
-                if (confirm("¿Estás seguro de que deseas aprobar este comentario?")) {
-                    // Aquí normalmente aprobarías el comentario
-                    console.log("Aprobando comentario con ID:", commentId);
-                }
-            });
-        });
-
-        // Eliminar comentario desde el botón en la tabla
-        deleteBtns.forEach(btn => {
-            btn.addEventListener("click", function () {
-                const commentId = this.getAttribute("data-id");
-                if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
-                    // Aquí normalmente eliminarías el comentario
-                    console.log("Eliminando comentario con ID:", commentId);
-                }
-            });
-        });
-
-        // Aprobar comentario desde el modal
-        document.getElementById("approve-comment-btn").addEventListener("click", function () {
-            if (confirm("¿Estás seguro de que deseas aprobar este comentario?")) {
-                // Aquí normalmente aprobarías el comentario
-                console.log("Aprobando comentario desde el modal");
-                modal.style.display = "none";
-            }
-        });
-
-        // Eliminar comentario desde el modal
-        document.getElementById("delete-comment-btn").addEventListener("click", function () {
-            if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
-                // Aquí normalmente eliminarías el comentario
-                console.log("Eliminando comentario desde el modal");
-                modal.style.display = "none";
             }
         });
     </script>

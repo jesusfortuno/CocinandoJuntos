@@ -6,31 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración | Cocinando Juntos</title>
     <link rel="stylesheet" href="PaginaAdmin.css">
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Línea única para incluir componentes -->
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
 
-<body>
-    <!-- Navegador original -->
-    <nav class="top-nav">
-        <a href="./../US1_PantallaInicio/index.html" class="logo">
-            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
-                class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-        <div class="menu-icon" id="mobile-menu-toggle">☰</div>
-    </nav>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
     <div class="layout-container">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-profile">
-                <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil"
+                <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil"
                     class="admin-profile-pic">
                 <span class="admin-name" id="sidebar-admin-name">Nombre usuario</span>
                 <span class="admin-role">Administrador</span>
@@ -124,52 +116,41 @@
         </main>
     </div>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
-    <!-- Scripts de Supabase -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="adminStats.js"></script>
 
     <script>
         // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
-        const welcomeName = document.getElementById("welcome-name");
-        const sidebarAdminName = document.getElementById("sidebar-admin-name");
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            const welcomeName = document.getElementById("welcome-name");
+            const sidebarAdminName = document.getElementById("sidebar-admin-name");
 
-        if (usuario) {
-            console.log('Usuario encontrado:', usuario);
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username;
-            welcomeName.textContent = usuario.username;
-            sidebarAdminName.textContent = usuario.username;
-            authButton.style.display = "none";
+            if (usuario) {
+                console.log('Usuario encontrado:', usuario);
+                welcomeName.textContent = usuario.username;
+                sidebarAdminName.textContent = usuario.username;
+            } else {
+                console.log('No se encontró usuario en localStorage');
+                window.location.href = "../login.html";
+            }
 
-            // Configurar el botón de cierre de sesión
-            document.getElementById("logout-btn").addEventListener("click", function (e) {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.href = "./../US1_PantallaInicio/index.html";
-            });
-        } else {
-            console.log('No se encontró usuario en localStorage');
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
-            window.location.href = "../login.html";
-        }
+            // Simulación de datos para la demostración
+            document.getElementById("total-recetas").textContent = "124";
+            document.getElementById("total-usuarios").textContent = "356";
+            document.getElementById("total-comentarios").textContent = "892";
 
-        // Simulación de datos para la demostración
-        document.getElementById("total-recetas").textContent = "124";
-        document.getElementById("total-usuarios").textContent = "356";
-        document.getElementById("total-comentarios").textContent = "892";
-
-        // Función para alternar la visibilidad del sidebar en móviles
-        document.getElementById("mobile-menu-toggle").addEventListener("click", function () {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('sidebar-open');
+            // Función para alternar la visibilidad del sidebar en móviles
+            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener("click", function () {
+                    const sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.toggle('sidebar-open');
+                });
+            }
         });
     </script>
 </body>
