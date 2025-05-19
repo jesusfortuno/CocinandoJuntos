@@ -64,7 +64,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
     font-size: 1.1em;
     font-weight: bold;
     margin-top: 15px;
@@ -72,7 +72,8 @@
   }
   
   button:hover {
-    background-color: #8c5a38;
+    background-color: #d9c4a6;
+    color: #5a3e2b;
   }
   
   .links-container {
@@ -81,40 +82,47 @@
     color: #8c5a38;
   }
   
-  /* Reglas responsive */
-  @media screen and (max-width: 480px) {
-    .container {
-      width: 90%;
-      padding: 20px;
-      margin: 0 15px;
-    }
-  
-    h1 {
-      font-size: 1.5em;
-    }
-  
-    button {
-      font-size: 1em;
-    }
-  
-    .links-container {
-      font-size: 0.9em;
-    }
+  /* Estilos para los enlaces */
+  .links-container a {
+    color: #a97c50;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    padding: 2px 5px;
+    border-radius: 3px;
   }
   
-  @media screen and (max-width: 320px) {
-    .container {
-      padding: 15px;
-    }
+  .links-container a:hover {
+    background-color: #e8d3b5;
+    color: #5a3e2b;
+    text-decoration: underline;
+  }
   
-    h1 {
-      font-size: 1.3em;
-    }
+  /* Estilo unificado para el botón de volver al inicio */
+  .volver-inicio-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: transparent;
+    color: #a97c50;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid #a97c50;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+  }
   
-    input,
-    select,
-    button {
-      padding: 8px;
-    }
+  .volver-inicio-btn:hover {
+    background-color: #e8d3b5;
+    color: #5a3e2b;
+  }
+  
+  /* Añadir logo */
+  .logo img {
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+    margin-bottom: 20px;
   }
   

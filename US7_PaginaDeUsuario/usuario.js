@@ -87,39 +87,39 @@ document.addEventListener("DOMContentLoaded", () => {
       // Función para eliminar de favoritos
       window.eliminarDeFavoritos = async (recetaId) => {
         try {
-          const usuarioGuardado = localStorage.getItem("usuario");
+          const usuarioGuardado = localStorage.getItem("usuario")
           if (!usuarioGuardado) {
-            alert("Debes iniciar sesión para eliminar recetas de favoritos");
-            return false;
+            alert("Debes iniciar sesión para eliminar recetas de favoritos")
+            return false
           }
 
-          const usuario = JSON.parse(usuarioGuardado);
+          const usuario = JSON.parse(usuarioGuardado)
 
           // Intentar eliminar con una consulta más simple
           const { error } = await supabase
             .from("favoritos")
             .delete()
             .eq("receta_id", recetaId)
-            .eq("usuario_id", usuario.id);
+            .eq("usuario_id", usuario.id)
 
           if (error) {
-            console.error("Error al eliminar de favoritos:", error);
-            throw error;
+            console.error("Error al eliminar de favoritos:", error)
+            throw error
           }
 
           // Eliminar visualmente de la página
-          const recetaElemento = document.querySelector(`.recipe[data-receta-id="${recetaId}"]`);
+          const recetaElemento = document.querySelector(`.recipe[data-receta-id="${recetaId}"]`)
           if (recetaElemento) {
-            recetaElemento.remove();
+            recetaElemento.remove()
           }
 
-          console.log("Receta eliminada correctamente");
-          alert("Receta eliminada de favoritos");
-          return true;
+          console.log("Receta eliminada correctamente")
+          alert("Receta eliminada de favoritos")
+          return true
         } catch (error) {
-          console.error("Error inesperado:", error);
-          alert("Error al eliminar la receta de favoritos: " + error.message);
-          return false;
+          console.error("Error inesperado:", error)
+          alert("Error al eliminar la receta de favoritos: " + error.message)
+          return false
         }
       }
       // Modificar la generación de recetas para añadir botón de eliminar
@@ -195,6 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Función para generar estrellas según la valoración
       function generarEstrellas(valoracion) {
+        // Si la valoración es nula o 0, no mostrar estrellas
+        if (!valoracion) {
+          return ""
+        }
+
         let estrellas = ""
         for (let i = 1; i <= 5; i++) {
           estrellas += i <= valoracion ? "★" : "☆"
@@ -218,28 +223,33 @@ document.addEventListener("DOMContentLoaded", () => {
       comentarios.forEach((c) => {
         const nombreReceta = c.recetas?.titulo || `Receta ${c.id_receta}`
         const fechaFormateada = formatearFecha(c.fecha_comentario)
+
+        // Generar estrellas solo si hay valoración
         const estrellas = generarEstrellas(c.valoracion)
+        const valoracionHTML = c.valoracion
+          ? `<div class="valoracion">
+            <span class="estrellas">${estrellas}</span>
+            <span class="valor">${c.valoracion}/5</span>
+          </div>`
+          : ""
 
         const comentarioElement = document.createElement("div")
         comentarioElement.classList.add("comentario-item")
-        comentarioElement.setAttribute('data-comentario-id', c.id_comentario)
+        comentarioElement.setAttribute("data-comentario-id", c.id_comentario)
 
         comentarioElement.innerHTML = `
-              <div class="comentario-header">
-                  <span class="nombre-receta">${nombreReceta}</span>
-                  <div class="valoracion">
-                      <span class="estrellas">${estrellas}</span>
-                      <span class="valor">${c.valoracion}/5</span>
-                  </div>
-              </div>
-              <p class="comentario-texto">${c.comentario || "Sin comentario"}</p>
-              <p class="comentario-fecha">${fechaFormateada}</p>
-              <div class="comentario-actions">
-                  <button onclick="eliminarComentario(${c.id_comentario})" class="delete-comment-btn">
-                      Eliminar
-                  </button>
-              </div>
-          `
+          <div class="comentario-header">
+            <span class="nombre-receta" onclick="irAReceta(${c.id_receta}, '${nombreReceta}')">${nombreReceta}</span>
+            ${valoracionHTML}
+          </div>
+          <p class="comentario-texto">${c.comentario || "Sin comentario"}</p>
+          <p class="comentario-fecha">${fechaFormateada}</p>
+          <div class="comentario-actions">
+            <button onclick="eliminarComentario(${c.id_comentario})" class="delete-comment-btn">
+              Eliminar
+            </button>
+          </div>
+        `
 
         comentariosContainer.appendChild(comentarioElement)
       })
@@ -325,8 +335,19 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchComentariosValoraciones(usuario.id)
 
     // Event listener para el botón de cambiar contraseña
-    changePasswordBtn.addEventListener("click", () => {
-      passwordModal.style.display = "flex"
+    const changePasswordBtns = document.querySelectorAll(".primary-btn, .cambiar-contrasena-btn")
+    changePasswordBtns.forEach((btn) => {
+      if (btn.textContent.includes("Cambiar Contraseña") || btn.classList.contains("cambiar-contrasena-btn")) {
+        btn.addEventListener("click", () => {
+          // Cerrar el modal de edición de perfil si está abierto
+          if (profileModal) {
+            profileModal.style.display = "none"
+          }
+
+          // Abrir el modal de cambio de contraseña
+          passwordModal.style.display = "flex"
+        })
+      }
     })
 
     // Event listener para cerrar el modal
@@ -388,29 +409,141 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mover la función eliminarComentario al scope global
   window.eliminarComentario = async (idComentario) => {
     try {
-      const confirmacion = confirm("¿Estás seguro de que deseas eliminar este comentario?");
-      if (!confirmacion) return;
+      const confirmacion = confirm("¿Estás seguro de que deseas eliminar este comentario?")
+      if (!confirmacion) return
 
-      const { error } = await supabase
-        .from('comentarios')
-        .delete()
-        .eq('id_comentario', idComentario);
+      const { error } = await supabase.from("comentarios").delete().eq("id_comentario", idComentario)
 
       if (error) {
-        throw error;
+        throw error
       }
 
       // Eliminar el comentario del DOM
-      const comentarioElement = document.querySelector(`[data-comentario-id="${idComentario}"]`);
+      const comentarioElement = document.querySelector(`[data-comentario-id="${idComentario}"]`)
       if (comentarioElement) {
-        comentarioElement.remove();
+        comentarioElement.remove()
       }
 
-      alert('Comentario eliminado con éxito');
+      alert("Comentario eliminado con éxito")
     } catch (error) {
-      console.error('Error al eliminar el comentario:', error);
-      alert('Error al eliminar el comentario');
+      console.error("Error al eliminar el comentario:", error)
+      alert("Error al eliminar el comentario")
     }
-  };
-})
+  }
 
+  // Función para ir a la receta al hacer clic en el comentario
+  window.irAReceta = (recetaId, titulo) => {
+    const recetaUrl = `../US6_GuardarRecetas/${titulo.toLowerCase().replace(/\s+/g, "-")}.html?id=${recetaId}`
+    window.location.href = recetaUrl
+  }
+
+  // Referencias a los nuevos elementos
+  const editProfileBtn = document.getElementById("edit-profile-btn")
+  const profileModal = document.getElementById("profile-modal")
+  const editProfileForm = document.getElementById("edit-profile-form")
+  const profileUpload = document.getElementById("profile-upload")
+
+  // Función para cerrar el modal de edición de perfil
+  window.closeProfileModal = () => {
+    profileModal.style.display = "none"
+  }
+
+  if (usuario) {
+    // Mostrar el nombre de usuario en el nuevo campo
+    document.getElementById("display-username").textContent = usuario.username || "Usuario"
+
+    // Event listener para el botón de editar perfil
+    editProfileBtn.addEventListener("click", () => {
+      // Cerrar el modal de contraseña si está abierto
+      passwordModal.style.display = "none"
+
+      // Abrir el modal de edición de perfil
+      document.getElementById("edit-username").value = usuario.username || ""
+      profileModal.style.display = "flex"
+    })
+
+    // Event listener para el formulario de edición de perfil
+    editProfileForm.addEventListener("submit", async (e) => {
+      e.preventDefault()
+
+      const newUsername = document.getElementById("edit-username").value
+
+      try {
+        // Actualizar el nombre de usuario en la base de datos
+        const { data, error } = await supabase
+          .from("usuarios")
+          .update({ username: newUsername })
+          .eq("id", usuario.id)
+          .select()
+
+        if (error) throw error
+
+        // Actualizar el usuario en localStorage
+        usuario.username = newUsername
+        localStorage.setItem("usuario", JSON.stringify(usuario))
+
+        // Actualizar la interfaz
+        document.getElementById("user-name").textContent = newUsername
+        document.getElementById("profile-user-name").textContent = newUsername
+        document.getElementById("display-username").textContent = newUsername
+
+        alert("¡Perfil actualizado con éxito!")
+        closeProfileModal()
+      } catch (error) {
+        console.error("Error al actualizar el perfil:", error)
+        alert("Error al actualizar el perfil: " + error.message)
+      }
+    })
+
+    // Event listener para la subida de fotos de perfil
+    profileUpload.addEventListener("change", async (e) => {
+      const file = e.target.files[0]
+      if (!file) return
+
+      try {
+        // Crear un nombre único para el archivo
+        const fileExt = file.name.split(".").pop()
+        const fileName = `${usuario.id}-${Date.now()}.${fileExt}`
+        const filePath = `avatars/${fileName}`
+
+        // Subir el archivo a Supabase Storage
+        const { data: uploadData, error: uploadError } = await supabase.storage.from("avatars").upload(filePath, file)
+
+        if (uploadError) throw uploadError
+
+        // Obtener la URL pública del archivo
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from("avatars").getPublicUrl(filePath)
+
+        // Actualizar la URL del avatar en la base de datos
+        const { data, error } = await supabase
+          .from("usuarios")
+          .update({ avatar_url: publicUrl })
+          .eq("id", usuario.id)
+          .select()
+
+        if (error) throw error
+
+        // Actualizar el usuario en localStorage
+        usuario.avatar_url = publicUrl
+        localStorage.setItem("usuario", JSON.stringify(usuario))
+
+        // Actualizar las imágenes en la interfaz
+        document.getElementById("profile-image").src = publicUrl
+        document.querySelector(".user-icon").src = publicUrl
+
+        alert("¡Foto de perfil actualizada con éxito!")
+      } catch (error) {
+        console.error("Error al subir la foto de perfil:", error)
+        alert("Error al subir la foto de perfil: " + error.message)
+      }
+    })
+  }
+
+  // Código para cargar la foto de perfil si existe
+  if (usuario && usuario.avatar_url) {
+    document.getElementById("profile-image").src = usuario.avatar_url
+    document.querySelector(".user-icon").src = usuario.avatar_url
+  }
+})
