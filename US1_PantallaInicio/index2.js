@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Inicializar el buscador
   initializeSearchBar()
+
+  // Configurar el enlace del perfil
+  configurarEnlacePerfil()
 })
 
 // Función para inicializar el buscador
@@ -202,7 +205,7 @@ function getImagePath(titulo) {
     "Batido Energético": "./Imagenes/Francia/coq-au-vin.jpg",
     "Sopa Wonton": "./Imagenes/China/fideos-salteados.jpg",
     "Wonton Soup": "./Imagenes/China/fideos-salteados.jpg", // Versión en inglés
-    patata: "./Imagenes/Espa��a/tortilla-patatas.jpeg",
+    patata: "./Imagenes/Espaa/tortilla-patatas.jpeg",
   }
 
   // Buscar coincidencia exacta
@@ -544,3 +547,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
+// Función para configurar el enlace del perfil de usuario según el rol
+function configurarEnlacePerfil() {
+  const userProfileLink = document.getElementById("user-profile-link")
+  if (userProfileLink) {
+    userProfileLink.addEventListener("click", (e) => {
+      e.preventDefault()
+      const usuario = JSON.parse(localStorage.getItem("usuario"))
+      if (usuario && usuario.rol === "chef") {
+        window.location.href = "../chef-page.html"
+      } else {
+        window.location.href = "../US7_PaginaDeUsuario/usuario.html"
+      }
+    })
+  }
+}

@@ -303,5 +303,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentLanguage = localStorage.getItem("language") || "es"
     window.i18n.translatePage(currentLanguage)
   }
-})
 
+  // Buscar la sección donde se maneja el clic en el nombre de usuario o donde se configura el enlace del perfil
+  // Probablemente está en una función que se ejecuta cuando el documento está cargado
+  // Añadir una condición para verificar el rol del usuario
+
+  // Buscar algo como:
+  // document.getElementById("user-profile-link").href = "US7_PaginaDeUsuario/usuario.html";
+
+  // Y reemplazarlo con:
+  const usuarioActual = JSON.parse(localStorage.getItem("usuario"))
+  const userProfileLink = document.getElementById("user-profile-link")
+  if (userProfileLink) {
+    if (usuarioActual && usuarioActual.rol === "chef") {
+      userProfileLink.href = "chef-page.html"
+    } else {
+      userProfileLink.href = "US7_PaginaDeUsuario/usuario.html"
+    }
+  }
+})

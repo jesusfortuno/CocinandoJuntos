@@ -65,7 +65,7 @@
                   </a>
                   <a href="cultura-venezolana.html" class="culture-card">
                       <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="Cocina Venezolana">
-                      <h3 data-i18n="Venezuela">Venezuela</h3>
+                      <h3 data-i18n="Venezuela</h3>
                   </a>
               </div>
           </section>
@@ -111,7 +111,11 @@
       authButton.style.display = "none";
 
       // Determinar el tipo de usuario y establecer el enlace correcto
-      if (usuario.username === "admin") {
+      if (usuario.rol === "chef") {
+          // Si es chef, enlazar a la página de chef
+          userProfileLink.href = "../chef-page.html";
+          console.log("Usuario con rol chef detectado, redirigiendo a chef-page.html");
+      } else if (usuario.rol === "admin" || usuario.username === "admin") {
           // Si es admin, enlazar a la página de administrador
           userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
       } else {
@@ -159,6 +163,10 @@
   </script>
   <!-- Cargar el script principal al final -->
   <script src="index.js"></script>
+<<<<<<< HEAD
   <script src="include-components.js" defer></script>
+=======
+  <script src="../navigation-handler.js"></script>
+>>>>>>> US24_USUARIOCHEF
 </body>
 </html>
