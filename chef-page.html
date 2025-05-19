@@ -8,30 +8,36 @@
     <link rel="stylesheet" href="chef-page.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="notification-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="chef-page.js" defer></script>
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
 
 <body>
-    <!-- Navegador original -->
-    <nav class="top-nav">
-        <a href="US1_PantallaInicio/index.html" class="logo">
-            <img src="US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Buscar recetas..." data-i18n="Buscar recetas...">
-            <button id="search-button" type="button">
-                <i class="fas fa-search"></i>
-            </button>
-        </div>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon"
-                class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
+    <!-- Placeholder para la navegación -->
+    <div id="nav-placeholder"></div>
 
-        <a href="login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-        <div class="menu-icon" id="mobile-menu-toggle">☰</div>
-    </nav>
+    <!-- Espacio de separación -->
+    <div style="height: 20px;"></div>
+
+    <style>
+        #logout-btn {
+        background-color: transparent !important;
+        color: #6b4423 !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        transition: all 0.3s ease !important;
+        border-radius: 20px !important;
+        background-color: rgba(107, 68, 35, 0.08) !important;
+        font-size: 0.85rem !important;
+        opacity: 0.8 !important;
+        padding: 8px 16px !important;
+        }
+
+        #footer-placeholder {
+            margin-top: 40px;
+        }
+    </style>
 
     <div class="layout-container">
         <!-- Sidebar -->
@@ -300,9 +306,8 @@
         </main>
     </div>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <!-- Placeholder para el footer -->
+    <div id="footer-placeholder"></div>
 
     <!-- Modal para editar receta -->
     <div id="edit-modal" class="modal">
