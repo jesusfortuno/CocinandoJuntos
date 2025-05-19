@@ -32,15 +32,24 @@ function getImagePath(titulo, categoria) {
 
   // Mapeo de títulos a rutas de imágenes
   const imageMap = {
-    "Pollo Agridulce": `Imagenes/China/pollo-agridulce.jpg`,
-    Paella: `Imagenes/España/paella.png`,
-    "Tortilla de Patatas": `Imagenes/España/tortilla-patatas.jpeg`,
-    "Crepas Dulces": `Imagenes/Francia/crepas-dulces.jpg`,
-    "Coq au Vin": `Imagenes/Francia/coq-au-vin.jpg`,
-    "Bizcocho Capuccino": `Imagenes/Italia/bizcocho-capuccino.jpg`,
-    "Pizza Margarita": `Imagenes/Italia/pizza-margarita.jpg`,
-    Sushi: `Imagenes/Japon/sushi.jpeg`,
-    "Arepa Venezolana": `Imagenes/Venezuela/arepa-venezolana.jpg`,
+    "Pollo Agridulce": `../Imagenes/China/pollo-agridulce.jpg`,
+    "Paella": `../Imagenes/España/paella.png`,
+    "Tortilla de Patatas": `../Imagenes/España/tortilla-patatas.jpeg`,
+    "Crepas Dulces": `../Imagenes/Francia/crepas-dulces.jpg`,
+    "Coq au Vin": `../Imagenes/Francia/coq-au-vin.jpg`,
+    "Bizcocho Capuccino": `../Imagenes/Italia/bizcocho-capuccino.jpg`,
+    "Pizza Margarita": `../Imagenes/Italia/pizza-margarita.jpg`,
+    "Sushi": `../Imagenes/Japon/sushi.jpeg`,
+    "Arepa Venezolana": `../Imagenes/Venezuela/arepa-venezolana.jpg`,
+    "Galletas de Sésamo": `../Imagenes/China/galletas-de-sesamo.jpg`,
+    "Bolitas Chinas": `../Imagenes/China/bollitos-chinos.jpg`,
+    "Fideos Salteados": `../Imagenes/China/fideos-salteados.jpg`,
+    "Pan con Tomate": `../Imagenes/España/pan-tomate.jpg`,
+    "Churros con Chocolate": `../Imagenes/España/churros-chocolate.jpg`,
+    "Quiche Lorraine": `../Imagenes/Francia/quiche-lorraine.pn.webp`,
+    "Tostada Francesa": `../Imagenes/Francia/tostada-francesa.jpg`,
+    "Cannoli": `../Imagenes/Italia/cannoli.png`,
+    "Lasaña": `../Imagenes/Italia/lasaña.jpg`,
   }
 
   // Buscar coincidencia exacta
