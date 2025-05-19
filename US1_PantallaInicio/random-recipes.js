@@ -17,19 +17,6 @@ function shuffleArray(array) {
 
 // Función para obtener la ruta de la imagen según el título y categoría
 function getImagePath(titulo, categoria) {
-  // Obtener la ruta base para cargar los componentes
-  const scriptTag = document.querySelector('script[src*="random-recipes.js"]')
-  const scriptSrc = scriptTag ? scriptTag.getAttribute("src") : ""
-  let pathToRoot = ""
-
-  if (scriptSrc) {
-    const parts = scriptSrc.split("/")
-    const depth = parts.length - 1
-    if (depth > 0) {
-      pathToRoot = Array(depth).fill("..").join("/") + "/"
-    }
-  }
-
   // Mapeo de títulos a rutas de imágenes
   const imageMap = {
     "Pollo Agridulce": `../Imagenes/China/pollo-agridulce.jpg`,
@@ -61,93 +48,38 @@ function getImagePath(titulo, categoria) {
   if (categoria) {
     const categoriaLower = categoria.toLowerCase()
     if (categoriaLower.includes("china")) {
-      return `Imagenes/China/pollo-agridulce.jpg`
+      return "./Imagenes/China/pollo-agridulce.jpg"
     } else if (
       categoriaLower.includes("españa") ||
       categoriaLower.includes("spain") ||
       categoriaLower.includes("espanya")
     ) {
-      return `Imagenes/España/paella.png`
+      return "./Imagenes/España/paella.png"
     } else if (
       categoriaLower.includes("francia") ||
       categoriaLower.includes("france") ||
       categoriaLower.includes("frança")
     ) {
-      return `Imagenes/Francia/crepas-dulces.jpg`
+      return "./Imagenes/Francia/crepas-dulces.jpg"
     } else if (
       categoriaLower.includes("italia") ||
       categoriaLower.includes("italy") ||
       categoriaLower.includes("itàlia")
     ) {
-      return `Imagenes/Italia/pizza-margarita.jpg`
+      return "./Imagenes/Italia/pizza-margarita.jpg"
     } else if (categoriaLower.includes("venezuela") || categoriaLower.includes("veneçuela")) {
-      return `Imagenes/Venezuela/arepa-venezolana.jpg`
+      return "./Imagenes/Venezuela/arepa-venezolana.jpg"
     } else if (
       categoriaLower.includes("japón") ||
       categoriaLower.includes("japan") ||
       categoriaLower.includes("japó")
     ) {
-      return `Imagenes/Japon/sushi.jpeg`
+      return "./Imagenes/Japon/sushi.jpeg"
     }
   }
 
-  // Imagen por defecto basada en el título
-  const tituloLower = titulo.toLowerCase()
-  if (tituloLower.includes("pollo")) {
-    return `Imagenes/China/pollo-agridulce.jpg`
-  } else if (tituloLower.includes("paella")) {
-    return `Imagenes/España/paella.png`
-  } else if (tituloLower.includes("tortilla")) {
-    return `Imagenes/España/tortilla-patatas.jpeg`
-  } else if (tituloLower.includes("crepa")) {
-    return `Imagenes/Francia/crepas-dulces.jpg`
-  } else if (tituloLower.includes("coq")) {
-    return `Imagenes/Francia/coq-au-vin.jpg`
-  } else if (tituloLower.includes("bizcocho")) {
-    return `Imagenes/Italia/bizcocho-capuccino.jpg`
-  } else if (tituloLower.includes("pizza")) {
-    return `Imagenes/Italia/pizza-margarita.jpg`
-  } else if (tituloLower.includes("sushi")) {
-    return `Imagenes/Japon/sushi.jpeg`
-  } else if (tituloLower.includes("arepa")) {
-    return `Imagenes/Venezuela/arepa-venezolana.jpg`
-  }
-
   // Imagen por defecto
-  return `Imagenes/placeholder-recipe.jpg`
-}
-
-// Función para obtener la URL de la receta
-function getRecipeUrl(receta) {
-  // Convertir el título a un formato de URL amigable
-  const slug = receta.titulo
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "")
-    .replace(/--+/g, "-")
-    .replace(/^-+/, "")
-    .replace(/-+$/, "")
-
-  // Mapeo de títulos específicos a URLs específicas
-  const urlMap = {
-    "pollo-agridulce": `../US6_GuardarRecetas/pollo-agridulce.html`,
-    paella: `../US6_GuardarRecetas/paella.html`,
-    "tortilla-de-patatas": `../US6_GuardarRecetas/tortilla-de-patatas.html`,
-    "crepas-dulces": `../US6_GuardarRecetas/crepas-dulces.html`,
-    "coq-au-vin": `../US6_GuardarRecetas/coq-au-vin.html`,
-    "bizcocho-capuccino": `../US6_GuardarRecetas/bizcocho-capuccino.html`,
-    "pizza-margarita": `../US6_GuardarRecetas/pizza-margarita.html`,
-    sushi: `../US6_GuardarRecetas/sushi.html`,
-    "arepa-venezolana": `../US6_GuardarRecetas/arepa-venezolana.html`,
-  }
-
-  // Si existe una URL específica para este slug, usarla
-  if (urlMap[slug]) {
-    return urlMap[slug]
-  }
-
-  // URL genérica basada en el ID de la receta
-  return `../US6_GuardarRecetas/receta.html?id=${receta.id}`
+  return "./Imagenes/placeholder-recipe.jpg"
 }
 
 // Función para convertir nivel de dificultad a puntos visuales
@@ -162,205 +94,162 @@ function getDifficultyDots(dificultad) {
     nivel = 3
   }
 
-  let dotsHTML = '<span style="display: inline-flex; gap: 2px;">'
-
-  for (let i = 1; i <= 3; i++) {
-    if (i <= nivel) {
-      dotsHTML +=
-        '<span style="width: 8px; height: 8px; background-color: #6b4423; border-radius: 50%; display: inline-block;"></span>'
-    } else {
-      dotsHTML +=
-        '<span style="width: 8px; height: 8px; background-color: #d4c3b5; border-radius: 50%; display: inline-block;"></span>'
-    }
-  }
-
-  dotsHTML += "</span>"
-  return dotsHTML
+  return `
+    <div class="difficulty-dots">
+      <span class="dot ${nivel >= 1 ? "dot-filled" : "dot-empty"}"></span>
+      <span class="dot ${nivel >= 2 ? "dot-filled" : "dot-empty"}"></span>
+      <span class="dot ${nivel >= 3 ? "dot-filled" : "dot-empty"}"></span>
+    </div>
+  `
 }
 
 // Función para crear una tarjeta de receta
 function createRecipeCard(receta) {
   const card = document.createElement("div")
   card.className = "recipe-card"
+  card.setAttribute("data-recipe-id", receta.id)
+  card.setAttribute("data-culture", receta.categoria || "Internacional")
+  card.setAttribute("data-time", receta.tiempo || "30")
+  card.setAttribute("data-difficulty", receta.dificultad || "Media")
 
   // Obtener imagen para la receta
-  const imageSrc = getImagePath(receta.titulo, receta.categoria)
+  const imageSrc = receta.imagen_url || getImagePath(receta.titulo, receta.categoria)
+
+  // Descripción para el overlay
+  const descripcion = receta.descripcion || "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."
 
   // Crear el contenido de la tarjeta
   card.innerHTML = `
-    <img src="${imageSrc}" alt="${receta.titulo}">
-    <div class="content">
+    <div class="recipe-image">
+      <img src="${imageSrc}" alt="${receta.titulo}" loading="lazy">
+    </div>
+    <div class="recipe-content">
       <h3>${receta.titulo}</h3>
-      <div class="meta">
-        <span class="category">${receta.categoria}</span>
-        <span class="difficulty">Dificultad: ${getDifficultyDots(receta.dificultad)}</span>
-      </div>
-      <div class="description">
-        <p>${receta.descripcion ? receta.descripcion.substring(0, 100) + "..." : "Deliciosa receta tradicional."}</p>
-      </div>
-      <div class="tags">
-        <span class="tag">${receta.tiempo || "30 min"}</span>
+      <div class="recipe-meta">
+        <div class="meta-row">
+          <span class="category">${receta.categoria || "Comida"}</span>
+          <span class="time">${receta.tiempo || "30"} min</span>
+        </div>
+        <div class="meta-row">
+          <span class="difficulty">Dificultad: ${getDifficultyDots(receta.dificultad || "Media")}</span>
+        </div>
       </div>
     </div>
     <div class="recipe-overlay">
-      <h3 class="title">${receta.titulo}</h3>
-      <p>${receta.descripcion || "Deliciosa receta tradicional con ingredientes frescos y sabores únicos."}</p>
-      <a href="${getRecipeUrl(receta)}" class="read-more">Leer más</a>
+      <div class="overlay-content">
+        <h3 class="title">${receta.titulo}</h3>
+        <p>${descripcion}</p>
+        <button class="read-more">Leer más</button>
+      </div>
     </div>
   `
 
-  // Añadir eventos de hover
-  card.addEventListener("mouseenter", () => {
-    const overlay = card.querySelector(".recipe-overlay")
-    if (overlay) overlay.classList.add("active")
-  })
-
-  card.addEventListener("mouseleave", () => {
-    const overlay = card.querySelector(".recipe-overlay")
-    if (overlay) overlay.classList.remove("active")
-  })
-
   // Añadir evento de clic para ir a la página de la receta
+  card.querySelector(".read-more").addEventListener("click", (e) => {
+    e.stopPropagation() // Evitar que el clic se propague a la tarjeta
+    window.location.href = `/US6_GuardarRecetas/receta.html?id=${receta.id}`
+  })
+
   card.addEventListener("click", () => {
-    window.location.href = getRecipeUrl(receta)
+    window.location.href = `/US6_GuardarRecetas/receta.html?id=${receta.id}`
   })
 
   return card
 }
 
 // Función para inicializar el slider
-function initializeSlider() {
+function initializeRecipeSlider() {
   const track = document.querySelector(".recipe-track")
   const prevButton = document.querySelector(".prev-button")
   const nextButton = document.querySelector(".next-button")
-  const cards = track.querySelectorAll(".recipe-card")
-  const cardCount = cards.length
-  let cardsToShow = getCardsToShow() // Función para determinar cuántas tarjetas mostrar según el ancho de la pantalla
-  let currentIndex = 0
-  let autoSlideInterval
-  let isAnimating = false
 
-  // Verificar si los elementos existen
-  if (!prevButton || !nextButton || cardCount === 0) {
-    console.error("Error: Elementos del slider no encontrados o no hay tarjetas.")
+  if (!track || !prevButton || !nextButton) {
+    console.error("Error: No se encontraron los elementos del slider")
     return
   }
 
-  console.log("Slider inicializado con", cardCount, "tarjetas")
+  const cards = track.querySelectorAll(".recipe-card")
+  const cardCount = cards.length
 
-  // Función para actualizar la posición del slider
-  function updateSliderPosition() {
-    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
-    if (currentIndex > maxIndex) currentIndex = maxIndex
+  if (cardCount === 0) {
+    console.error("Error: No hay tarjetas de recetas")
+    return
+  }
 
-    // Usar un enfoque basado en display en lugar de transform para mayor estabilidad
+  console.log(`Slider inicializado con ${cardCount} tarjetas`)
+
+  // Variables para controlar el estado del slider
+  let currentPage = 0
+  let cardsPerPage = getCardsPerPage()
+  let totalPages = Math.ceil(cardCount / cardsPerPage)
+
+  // Función para determinar cuántas tarjetas mostrar por página según el ancho de la ventana
+  function getCardsPerPage() {
+    const windowWidth = window.innerWidth
+    if (windowWidth >= 1400) return 5 // Mostrar 5 tarjetas en pantallas muy grandes
+    if (windowWidth >= 1100) return 4 // Mostrar 4 tarjetas en pantallas grandes
+    if (windowWidth >= 768) return 3 // Mostrar 3 tarjetas en pantallas medianas
+    if (windowWidth >= 576) return 2 // Mostrar 2 tarjetas en pantallas pequeñas
+    return 1 // Mostrar 1 tarjeta en pantallas muy pequeñas
+  }
+
+  // Función para actualizar la visualización del slider
+  function updateSlider() {
+    // Recalcular el número total de páginas
+    totalPages = Math.ceil(cardCount / cardsPerPage)
+
+    // Asegurarse de que la página actual sea válida
+    if (currentPage >= totalPages) {
+      currentPage = Math.max(0, totalPages - 1)
+    }
+
+    // Calcular qué tarjetas deben mostrarse en la página actual
+    const startIdx = currentPage * cardsPerPage
+    const endIdx = Math.min(startIdx + cardsPerPage, cardCount)
+
+    // Mostrar/ocultar tarjetas según la página actual
     cards.forEach((card, index) => {
-      // Determinar si la tarjeta debería ser visible
-      const startIndex = currentIndex * cardsToShow
-      const endIndex = startIndex + cardsToShow
-      const isVisible = index >= startIndex && index < endIndex
-
-      // Aplicar display directamente en lugar de transform
-      card.style.display = isVisible ? "block" : "none"
+      if (index >= startIdx && index < endIdx) {
+        card.style.display = "block"
+      } else {
+        card.style.display = "none"
+      }
     })
 
     // Actualizar estado de los botones de navegación
-    prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1"
-    prevButton.style.cursor = currentIndex === 0 ? "default" : "pointer"
-    nextButton.style.opacity = currentIndex >= Math.max(0, Math.ceil(cardCount / cardsToShow) - 1) ? "0.5" : "1"
-    nextButton.style.cursor =
-      currentIndex >= Math.max(0, Math.ceil(cardCount / cardsToShow) - 1) ? "default" : "pointer"
-
-    // Permitir nuevos clics después de un tiempo
-    setTimeout(() => {
-      isAnimating = false
-    }, 300)
-  }
-
-  // Función para determinar cuántas tarjetas mostrar según el ancho de la pantalla
-  function getCardsToShow() {
-    const windowWidth = window.innerWidth
-    if (windowWidth < 576) return 1 // Móviles pequeños
-    if (windowWidth < 768) return 2 // Móviles y tablets pequeñas
-    if (windowWidth < 992) return 3 // Tablets y pantallas medianas
-    if (windowWidth < 1200) return 4 // Pantallas grandes
-    return 5 // Pantallas muy grandes
-  }
-
-  // Función para iniciar el autoplay
-  function startAutoSlide() {
-    // Limpiar cualquier intervalo existente para evitar múltiples intervalos
-    clearInterval(autoSlideInterval)
-
-    autoSlideInterval = setInterval(() => {
-      // No hacer nada si hay una animación en curso
-      if (isAnimating) return
-
-      isAnimating = true
-      const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
-
-      // Avanzar al siguiente grupo o volver al principio
-      currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0
-      updateSliderPosition()
-    }, 25000) // Intervalo de 25 segundos
+    prevButton.style.opacity = currentPage === 0 ? "0.5" : "1"
+    prevButton.style.cursor = currentPage === 0 ? "default" : "pointer"
+    nextButton.style.opacity = currentPage >= totalPages - 1 ? "0.5" : "1"
+    nextButton.style.cursor = currentPage >= totalPages - 1 ? "default" : "pointer"
   }
 
   // Evento para el botón anterior
   prevButton.addEventListener("click", () => {
-    // Evitar clics durante la animación
-    if (isAnimating) return
-    isAnimating = true
-
-    // Detener el autoplay para evitar conflictos
-    clearInterval(autoSlideInterval)
-
-    if (currentIndex > 0) {
-      currentIndex--
-      updateSliderPosition()
-    } else {
-      isAnimating = false // Permitir nuevos clics si no hay cambio
+    if (currentPage > 0) {
+      currentPage--
+      updateSlider()
     }
-
-    // Reiniciar el autoplay
-    startAutoSlide()
   })
 
   // Evento para el botón siguiente
   nextButton.addEventListener("click", () => {
-    // Evitar clics durante la animación
-    if (isAnimating) return
-    isAnimating = true
-
-    // Detener el autoplay para evitar conflictos
-    clearInterval(autoSlideInterval)
-
-    const maxIndex = Math.max(0, Math.ceil(cardCount / cardsToShow) - 1)
-    if (currentIndex < maxIndex) {
-      currentIndex++
-      updateSliderPosition()
-    } else {
-      isAnimating = false // Permitir nuevos clics si no hay cambio
+    if (currentPage < totalPages - 1) {
+      currentPage++
+      updateSlider()
     }
-
-    // Reiniciar el autoplay
-    startAutoSlide()
   })
 
-  // Evento para redimensionar la ventana
+  // Actualizar cuando cambie el tamaño de la ventana
   window.addEventListener("resize", () => {
-    // Actualizar el número de tarjetas a mostrar
-    const newCardsToShow = getCardsToShow()
-    if (newCardsToShow !== cardsToShow) {
-      // Si cambia el número de tarjetas a mostrar, actualizar y reiniciar el slider
-      cardsToShow = newCardsToShow
-      currentIndex = 0
-      updateSliderPosition()
+    const newCardsPerPage = getCardsPerPage()
+    if (newCardsPerPage !== cardsPerPage) {
+      cardsPerPage = newCardsPerPage
+      updateSlider()
     }
   })
 
-  // Inicializar slider
-  updateSliderPosition()
-  startAutoSlide()
+  // Inicializar el slider
+  updateSlider()
 }
 
 // Función para cargar recetas de ejemplo como fallback
@@ -376,7 +265,7 @@ function loadFallbackRecipes() {
         "Delicioso pollo agridulce al estilo chino, con una salsa perfectamente equilibrada entre dulce y ácido, acompañado de piña y pimientos.",
       dificultad: "Media",
       categoria: "China",
-      tiempo: "45 min",
+      tiempo: "45",
     },
     {
       id: 2,
@@ -385,7 +274,7 @@ function loadFallbackRecipes() {
         "Auténtica paella valenciana con arroz, azafrán, pollo, conejo y verduras de temporada. Un plato emblemático de la cocina española.",
       dificultad: "Difícil",
       categoria: "España",
-      tiempo: "1h 30min",
+      tiempo: "90",
     },
     {
       id: 3,
@@ -394,7 +283,7 @@ function loadFallbackRecipes() {
         "Delicadas crepas francesas servidas con una variedad de rellenos dulces como Nutella, fresas frescas y plátano.",
       dificultad: "Fácil",
       categoria: "Francia",
-      tiempo: "30 min",
+      tiempo: "30",
     },
     {
       id: 4,
@@ -403,7 +292,7 @@ function loadFallbackRecipes() {
         "Clásico francés de pollo cocinado lentamente en vino tinto con champiñones, tocino y hierbas aromáticas.",
       dificultad: "Media",
       categoria: "Francia",
-      tiempo: "2h",
+      tiempo: "120",
     },
     {
       id: 5,
@@ -412,7 +301,7 @@ function loadFallbackRecipes() {
         "Esponjoso bizcocho con sabor a café, cubierto con una deliciosa crema de mascarpone y espolvoreado con cacao.",
       dificultad: "Media",
       categoria: "Italia",
-      tiempo: "1h",
+      tiempo: "60",
     },
     {
       id: 6,
@@ -421,7 +310,7 @@ function loadFallbackRecipes() {
         "La clásica pizza italiana con salsa de tomate, mozzarella fresca, albahaca y un chorrito de aceite de oliva virgen extra.",
       dificultad: "Fácil",
       categoria: "Italia",
-      tiempo: "45 min",
+      tiempo: "45",
     },
     {
       id: 7,
@@ -430,7 +319,7 @@ function loadFallbackRecipes() {
         "Variedad de rollos de sushi frescos con pescado de temporada, aguacate y pepino, acompañados de wasabi y salsa de soja.",
       dificultad: "Difícil",
       categoria: "Japón",
-      tiempo: "1h 30min",
+      tiempo: "90",
     },
     {
       id: 8,
@@ -438,7 +327,7 @@ function loadFallbackRecipes() {
       descripcion: "Tradicionales arepas venezolanas rellenas de carne mechada, aguacate, queso y frijoles negros.",
       dificultad: "Fácil",
       categoria: "Venezuela",
-      tiempo: "40 min",
+      tiempo: "40",
     },
     {
       id: 9,
@@ -447,9 +336,66 @@ function loadFallbackRecipes() {
         "La clásica tortilla española con patatas, cebolla y huevos. Perfecta para cualquier momento del día.",
       dificultad: "Media",
       categoria: "España",
-      tiempo: "45 min",
+      tiempo: "45",
+    },
+    {
+      id: 10,
+      titulo: "Cannoli",
+      descripcion:
+        "Deliciosos tubos de masa frita rellenos de una cremosa mezcla de ricotta, azúcar y trozos de chocolate. Un postre italiano clásico.",
+      dificultad: "Media",
+      categoria: "Italia",
+      tiempo: "60",
+    },
+    {
+      id: 11,
+      titulo: "Lasaña",
+      descripcion:
+        "Capas de pasta intercaladas con salsa boloñesa, bechamel y queso, horneadas hasta conseguir una textura perfecta.",
+      dificultad: "Media",
+      categoria: "Italia",
+      tiempo: "105",
+    },
+    {
+      id: 12,
+      titulo: "Churros con Chocolate",
+      descripcion:
+        "Deliciosos churros crujientes por fuera y tiernos por dentro, acompañados de una taza de chocolate caliente espeso.",
+      dificultad: "Media",
+      categoria: "España",
+      tiempo: "35",
+    },
+    {
+      id: 13,
+      titulo: "Fideos Salteados",
+      descripcion:
+        "Fideos salteados al wok con verduras crujientes, brotes de soja, salsa de soja y un toque de jengibre fresco.",
+      dificultad: "Media",
+      categoria: "China",
+      tiempo: "40",
+    },
+    {
+      id: 14,
+      titulo: "Pan con Tomate",
+      descripcion:
+        "Tradicional pan con tomate español, frotado con ajo y tomate maduro, rociado con aceite de oliva y sal. Simple pero delicioso.",
+      dificultad: "Fácil",
+      categoria: "España",
+      tiempo: "15",
+    },
+    {
+      id: 15,
+      titulo: "Tostada Francesa",
+      descripcion:
+        "Pan empapado en una mezcla de huevo, leche y canela, dorado a la perfección y servido con sirope de arce y frutas frescas.",
+      dificultad: "Fácil",
+      categoria: "Francia",
+      tiempo: "20",
     },
   ]
+
+  // Mezclar las recetas aleatoriamente
+  const recetasAleatorias = shuffleArray(recetasEjemplo)
 
   // Limpiar el contenedor
   const recipeTrack = document.querySelector(".recipe-track")
@@ -458,7 +404,7 @@ function loadFallbackRecipes() {
   }
 
   // Crear tarjetas de recetas
-  recetasEjemplo.forEach((receta) => {
+  recetasAleatorias.forEach((receta) => {
     const recipeCard = createRecipeCard(receta)
     if (recipeTrack) {
       recipeTrack.appendChild(recipeCard)
@@ -466,7 +412,7 @@ function loadFallbackRecipes() {
   })
 
   // Inicializar el slider
-  initializeSlider()
+  initializeRecipeSlider()
 }
 
 // Función para cargar estilos necesarios
@@ -521,31 +467,37 @@ async function loadRandomRecipes() {
       throw new Error("No se encontraron recetas en la base de datos")
     }
 
+    // Mezclar las recetas aleatoriamente
+    const recetasAleatorias = shuffleArray(recetas)
+
     // Limpiar el contenedor de recetas
     recipeTrack.innerHTML = ""
 
     // Añadir las recetas al contenedor
-    recetas.forEach((receta) => {
+    recetasAleatorias.forEach((receta) => {
       const recipeCard = createRecipeCard(receta)
       recipeTrack.appendChild(recipeCard)
     })
 
     // Inicializar el slider
-    initializeSlider()
+    initializeRecipeSlider()
 
-    console.log(`✅ Se han cargado ${recetas.length} recetas aleatorias`)
+    console.log(`✅ Se han cargado ${recetasAleatorias.length} recetas aleatorias`)
   } catch (error) {
     console.error("Error al cargar las recetas:", error)
+
+    // Mostrar mensaje de error
     const recipeTrack = document.querySelector(".recipe-track")
     if (recipeTrack) {
       recipeTrack.innerHTML = `
         <div class="error-message">
-          <p>Error al cargar las recetas. Por favor, intenta recargar la página.</p>
+          <p><i class="fas fa-exclamation-circle"></i> Error al cargar las recetas. Cargando recetas de ejemplo...</p>
         </div>
       `
     }
-    // Usar datos de ejemplo como fallback
-    loadFallbackRecipes()
+
+    // Usar datos de ejemplo como fallback después de un breve retraso
+    setTimeout(loadFallbackRecipes, 1000)
   }
 }
 
@@ -562,6 +514,13 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     // Si Supabase no está cargado, esperar un poco y volver a intentar
     console.log("Esperando a que Supabase se cargue...")
-    setTimeout(loadRandomRecipes, 1000)
+    setTimeout(() => {
+      if (window.supabase) {
+        loadRandomRecipes()
+      } else {
+        console.warn("Supabase no se cargó correctamente. Usando recetas de ejemplo.")
+        loadFallbackRecipes()
+      }
+    }, 1500)
   }
 })

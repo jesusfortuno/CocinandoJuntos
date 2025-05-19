@@ -6,9 +6,13 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    width: 280px;
-    margin: 0 15px;
+    width: 435px; /* Aumentado el ancho */
+    height: 350px; /* Aumentado la altura */
+    margin: 0 8px;
     flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
   }
   
   .recipe-card:hover {
@@ -16,107 +20,142 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
   
-  .recipe-card img {
+  .recipe-image {
+    position: relative;
     width: 100%;
-    height: 180px;
+    height: 170px; /* Aumentado para tarjetas más grandes */
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .recipe-image img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
   }
   
-  .recipe-card .content {
+  .recipe-card:hover .recipe-image img {
+    transform: scale(1.05);
+  }
+  
+  .recipe-content {
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
   }
   
-  .recipe-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.2rem;
+  .recipe-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.15rem;
     color: #333;
+    font-weight: 600;
+    line-height: 1.3;
   }
   
-  .recipe-card .meta {
+  .recipe-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  
+  .meta-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
   }
   
-  .recipe-card .category {
+  .difficulty {
+    font-size: 0.85rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+  }
+  
+  .category {
     background-color: #f9f5f0;
     color: #6b4423;
-    padding: 3px 10px;
-    border-radius: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
     font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
   }
   
-  .recipe-card .difficulty {
-    font-size: 0.8rem;
-    color: #666;
-  }
-  
-  .recipe-card .description {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 15px;
-    line-height: 1.4;
-  }
-  
-  .recipe-card .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
-  }
-  
-  .recipe-card .tag {
+  .time {
     background-color: #f0e9e0;
     color: #8b5d33;
-    padding: 2px 8px;
+    padding: 3px 8px;
     border-radius: 10px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-top: auto;
   }
   
+  /* Estilos para el overlay */
   .recipe-overlay {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
     color: white;
-    padding: 20px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 100%;
     opacity: 0;
+    visibility: hidden; /* Añadido para asegurar que no sea interactivo cuando está oculto */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 2;
   }
   
-  .recipe-card:hover .recipe-overlay,
-  .recipe-overlay.active {
-    transform: translateY(0);
+  .recipe-card:hover .recipe-overlay {
     opacity: 1;
+    visibility: visible; /* Hacerlo visible e interactivo al hacer hover */
+  }
+  
+  .overlay-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
   
   .recipe-overlay .title {
-    font-size: 1.3rem;
-    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    margin: 0 0 8px 0;
     font-weight: 600;
+    color: white;
+    width: 100%;
+    text-align: center;
   }
   
   .recipe-overlay p {
-    font-size: 0.9rem;
-    margin: 0 0 15px 0;
+    font-size: 0.85rem;
+    margin: 0 0 12px 0;
     line-height: 1.4;
+    color: white;
   }
   
   .recipe-overlay .read-more {
-    align-self: flex-start;
+    align-self: center;
     background-color: #6b4423;
     color: white;
-    padding: 5px 15px;
+    padding: 5px 12px;
     border-radius: 20px;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-block; /* Asegurar que se muestre como un bloque en línea */
+    margin-top: 8px;
   }
   
   .recipe-overlay .read-more:hover {
@@ -129,11 +168,19 @@
     width: 100%;
     overflow: hidden;
     padding: 20px 0;
+    margin: 20px 0;
   }
   
   .recipe-track {
     display: flex;
+    justify-content: center; /* Centrar las recetas */
+    align-items: center;
     transition: transform 0.5s ease;
+    padding: 10px 0;
+    gap: 12px; /* Reducido el espacio entre tarjetas */
+    width: 100%;
+    max-width: 1600px; /* Aumentado el ancho máximo */
+    margin: 0 auto; /* Centrar el contenedor */
   }
   
   .slider-nav {
@@ -159,14 +206,15 @@
   .slider-nav:hover {
     background-color: #f9f5f0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    color: #8b5d33;
   }
   
   .prev-button {
-    left: 10px;
+    left: 15px; /* Posición de la flecha izquierda */
   }
   
   .next-button {
-    right: 10px;
+    right: 15px; /* Posición de la flecha derecha */
   }
   
   .loading-indicator {
@@ -178,5 +226,61 @@
   
   .loading-indicator i {
     margin-right: 10px;
+  }
+  
+  .error-message {
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    color: #e74c3c;
+  }
+  
+  /* Indicadores de dificultad */
+  .difficulty-dots {
+    display: inline-flex;
+    gap: 2px;
+    margin-left: 4px;
+  }
+  
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .dot-filled {
+    background-color: #6b4423;
+  }
+  
+  .dot-empty {
+    background-color: #d4c3b5;
+  }
+  
+  /* Estilos para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .recipe-card {
+      width: 210px;
+      height: 330px;
+    }
+  
+    .recipe-image {
+      height: 150px;
+    }
+  
+    .recipe-content h3 {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .recipe-card {
+      width: 190px;
+      height: 310px;
+    }
+  
+    .recipe-image {
+      height: 140px;
+    }
   }
   
