@@ -1,39 +1,41 @@
 // Script para incluir componentes comunes en todas las páginas
 document.addEventListener("DOMContentLoaded", () => {
   // Obtener qué componentes incluir desde el atributo data-include
-  const scriptTag = document.querySelector('script[src*="include-components"]');
-  const componentsToInclude = scriptTag ? (scriptTag.getAttribute('data-include') || 'nav,footer').split(',') : ['nav', 'footer'];
-  
+  const scriptTag = document.querySelector('script[src*="include-components"]')
+  const componentsToInclude = scriptTag
+    ? (scriptTag.getAttribute("data-include") || "nav,footer").split(",")
+    : ["nav", "footer"]
+
   // Function to include HTML content
   function includeHTML(elementId, htmlContent) {
-    const element = document.getElementById(elementId);
+    const element = document.getElementById(elementId)
     if (element) {
-      element.innerHTML = htmlContent;
-      return true;
+      element.innerHTML = htmlContent
+      return true
     }
-    return false;
+    return false
   }
 
   // Determinar la ruta base para cargar los componentes
   // Esto es crucial para que funcione desde cualquier subdirectorio
-  const scriptSrc = scriptTag ? scriptTag.getAttribute('src') : '';
-  let pathToRoot = '';
-  
+  const scriptSrc = scriptTag ? scriptTag.getAttribute("src") : ""
+  let pathToRoot = ""
+
   // Calcular la ruta relativa a la raíz del proyecto
   if (scriptSrc) {
-    const parts = scriptSrc.split('/');
+    const parts = scriptSrc.split("/")
     // Contar cuántos niveles de profundidad hay
-    const depth = parts.length - 1;
+    const depth = parts.length - 1
     if (depth > 0) {
       // Crear la ruta relativa adecuada (../ por cada nivel)
-      pathToRoot = Array(depth).fill('..').join('/') + '/';
+      pathToRoot = Array(depth).fill("..").join("/") + "/"
     }
   }
 
-  console.log("Ruta base para componentes:", pathToRoot);
+  console.log("Ruta base para componentes:", pathToRoot)
 
   // Barra de navegación
-  if (componentsToInclude.includes('nav')) {
+  if (componentsToInclude.includes("nav")) {
     // Cargar el contenido directamente desde el HTML en lugar de hacer fetch
     const navHTML = `
     <nav style="background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; padding: 0.8rem 2rem; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(107, 68, 35, 0.05);">
@@ -129,14 +131,14 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </div>
     </div>
-    `;
+    `
 
-    includeHTML("nav-placeholder", navHTML);
-    setupNavFunctionality();
+    includeHTML("nav-placeholder", navHTML)
+    setupNavFunctionality()
   }
 
   // Pie de página
-  if (componentsToInclude.includes('footer')) {
+  if (componentsToInclude.includes("footer")) {
     // Cargar el contenido directamente desde el HTML en lugar de hacer fetch
     const footerHTML = `
     <footer style="background: linear-gradient(to right, #8b5d33, #6b4423); color: white; padding: 2rem 0 0; margin-top: auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); position: relative; width: 100%; min-height: fit-content;">
@@ -233,14 +235,14 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </div>
     </footer>
-    `;
+    `
 
-    includeHTML("footer-placeholder", footerHTML);
-    setupFooterFunctionality();
+    includeHTML("footer-placeholder", footerHTML)
+    setupFooterFunctionality()
   }
 
   // Añadir estilos para efectos hover
-  const style = document.createElement("style");
+  const style = document.createElement("style")
   style.textContent = `
       /* Efectos hover para la barra de navegación */
       .logo:hover {
@@ -299,116 +301,108 @@ document.addEventListener("DOMContentLoaded", () => {
       .notification-item:hover {
         background-color: rgba(107, 68, 35, 0.08) !important;
       }
-    `;
-  document.head.appendChild(style);
-});
+    `
+  document.head.appendChild(style)
+})
 
 // Configurar funcionalidad de la navegación
 function setupNavFunctionality() {
   // Usuario y login
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
-  const userInfo = document.getElementById("user-info");
-  const authButton = document.getElementById("auth-button");
-  const userProfileLink = document.getElementById("user-profile-link");
-  const logoutBtn = document.getElementById("logout-btn");
+  const usuario = JSON.parse(localStorage.getItem("usuario"))
+  const userInfo = document.getElementById("user-info")
+  const authButton = document.getElementById("auth-button")
+  const userProfileLink = document.getElementById("user-profile-link")
+  const logoutBtn = document.getElementById("logout-btn")
+
+  // Determinar la ruta base para cargar los componentes
+  const scriptTag = document.querySelector('script[src*="include-components"]')
+  const scriptSrc = scriptTag ? scriptTag.getAttribute("src") : ""
+  let pathToRoot = ""
+
+  if (scriptSrc) {
+    const parts = scriptSrc.split("/")
+    const depth = parts.length - 1
+    if (depth > 0) {
+      pathToRoot = Array(depth).fill("..").join("/") + "/"
+    }
+  }
 
   if (usuario) {
-    userInfo.style.display = "flex";
-    document.getElementById("user-name").textContent = usuario.username || "Usuario";
-    authButton.style.display = "none";
+    userInfo.style.display = "flex"
+    document.getElementById("user-name").textContent = usuario.username || "Usuario"
+    authButton.style.display = "none"
 
     // Determinar tipo de usuario y enlace correcto
-    if (usuario.username === "admin") {
-      // Obtener la ruta base para los enlaces
-      const scriptTag = document.querySelector('script[src*="include-components"]');
-      const scriptSrc = scriptTag ? scriptTag.getAttribute('src') : '';
-      let pathToRoot = '';
-      
-      if (scriptSrc) {
-        const parts = scriptSrc.split('/');
-        const depth = parts.length - 1;
-        if (depth > 0) {
-          pathToRoot = Array(depth).fill('..').join('/') + '/';
-        }
-      }
-      
-      userProfileLink.href = `${pathToRoot}US10_PaginaAdmin/PaginaAdmin.html`;
+    if (usuario.rol === "chef") {
+      // Si es chef, enlazar a la página de chef
+      userProfileLink.href = `${pathToRoot}chef-page.html`
+      console.log("Usuario con rol chef detectado, redirigiendo a chef-page.html")
+    } else if (usuario.username === "admin") {
+      userProfileLink.href = `${pathToRoot}US10_PaginaAdmin/PaginaAdmin.html`
     } else {
-      // Obtener la ruta base para los enlaces
-      const scriptTag = document.querySelector('script[src*="include-components"]');
-      const scriptSrc = scriptTag ? scriptTag.getAttribute('src') : '';
-      let pathToRoot = '';
-      
-      if (scriptSrc) {
-        const parts = scriptSrc.split('/');
-        const depth = parts.length - 1;
-        if (depth > 0) {
-          pathToRoot = Array(depth).fill('..').join('/') + '/';
-        }
-      }
-      
-      userProfileLink.href = `${pathToRoot}US7_PaginaDeUsuario/usuario.html`;
+      // Si es usuario normal, enlazar a la página de perfil
+      userProfileLink.href = `${pathToRoot}US7_PaginaDeUsuario/usuario.html`
     }
 
     // Funcionalidad de cierre de sesión
     if (logoutBtn) {
       logoutBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        localStorage.removeItem("usuario");
-        window.location.reload();
-      });
+        e.preventDefault()
+        localStorage.removeItem("usuario")
+        window.location.reload()
+      })
     }
   } else {
-    userInfo.style.display = "none";
-    authButton.style.display = "block";
+    userInfo.style.display = "none"
+    authButton.style.display = "block"
   }
 
   // Menú desplegable - Arreglado
-  const menuToggle = document.getElementById("menuToggle");
-  const overlayMenu = document.getElementById("overlayMenu");
-  const closeMenu = document.getElementById("closeMenu");
+  const menuToggle = document.getElementById("menuToggle")
+  const overlayMenu = document.getElementById("overlayMenu")
+  const closeMenu = document.getElementById("closeMenu")
 
   if (menuToggle && overlayMenu) {
     menuToggle.addEventListener("click", (e) => {
-      e.preventDefault();
-      overlayMenu.style.display = overlayMenu.style.display === "none" ? "block" : "none";
-    });
+      e.preventDefault()
+      overlayMenu.style.display = overlayMenu.style.display === "none" ? "block" : "none"
+    })
 
     if (closeMenu) {
       closeMenu.addEventListener("click", () => {
-        overlayMenu.style.display = "none";
-      });
+        overlayMenu.style.display = "none"
+      })
     }
 
     // Cerrar al hacer clic fuera del menú
     document.addEventListener("click", (e) => {
       if (overlayMenu.style.display === "block" && !overlayMenu.contains(e.target) && e.target !== menuToggle) {
-        overlayMenu.style.display = "none";
+        overlayMenu.style.display = "none"
       }
-    });
+    })
   }
 
   // Configurar notificaciones
-  setupNotifications();
+  setupNotifications()
 
   // Configurar buscador - Versión simplificada sin Supabase
-  setupSearchFunctionality();
+  setupSearchFunctionality()
 }
 
 // Modificar la función setupNotifications para que coincida con la imagen de referencia
 function setupNotifications() {
-  const notificationButton = document.getElementById("notification-button");
-  const notificationDropdown = document.getElementById("notification-dropdown");
-  const notificationBadge = document.getElementById("notification-badge");
-  const notificationList = document.getElementById("notification-list");
-  const markAllReadBtn = document.getElementById("mark-all-read");
+  const notificationButton = document.getElementById("notification-button")
+  const notificationDropdown = document.getElementById("notification-dropdown")
+  const notificationBadge = document.getElementById("notification-badge")
+  const notificationList = document.getElementById("notification-list")
+  const markAllReadBtn = document.getElementById("mark-all-read")
 
   if (!notificationButton || !notificationDropdown || !notificationList) {
-    return;
+    return
   }
 
   // Cargar notificaciones del localStorage o crear un array vacío
-  let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+  let notifications = JSON.parse(localStorage.getItem("notifications")) || []
 
   // Si no hay notificaciones en localStorage, crear algunas de ejemplo
   if (!notifications.length) {
@@ -427,38 +421,38 @@ function setupNotifications() {
         read: false,
         date: new Date(Date.now() - 86400000).toISOString(), // 1 día atrás
       },
-    ];
-    localStorage.setItem("notifications", JSON.stringify(notifications));
+    ]
+    localStorage.setItem("notifications", JSON.stringify(notifications))
   }
 
   // Actualizar el contador de notificaciones
   function updateNotificationCount() {
-    const unreadCount = notifications.filter((n) => !n.read).length;
+    const unreadCount = notifications.filter((n) => !n.read).length
     if (unreadCount > 0) {
       // Crear el badge si no existe
       if (!document.getElementById("notification-badge")) {
-        const badge = document.createElement("span");
-        badge.id = "notification-badge";
-        badge.style.position = "absolute";
-        badge.style.top = "-5px";
-        badge.style.right = "-5px";
-        badge.style.backgroundColor = "#e74c3c";
-        badge.style.color = "white";
-        badge.style.borderRadius = "50%";
-        badge.style.width = "16px";
-        badge.style.height = "16px";
-        badge.style.fontSize = "10px";
-        badge.style.display = "flex";
-        badge.style.alignItems = "center";
-        badge.style.justifyContent = "center";
-        badge.textContent = unreadCount > 9 ? "9+" : unreadCount;
-        notificationButton.appendChild(badge);
+        const badge = document.createElement("span")
+        badge.id = "notification-badge"
+        badge.style.position = "absolute"
+        badge.style.top = "-5px"
+        badge.style.right = "-5px"
+        badge.style.backgroundColor = "#e74c3c"
+        badge.style.color = "white"
+        badge.style.borderRadius = "50%"
+        badge.style.width = "16px"
+        badge.style.height = "16px"
+        badge.style.fontSize = "10px"
+        badge.style.display = "flex"
+        badge.style.alignItems = "center"
+        badge.style.justifyContent = "center"
+        badge.textContent = unreadCount > 9 ? "9+" : unreadCount
+        notificationButton.appendChild(badge)
       } else {
-        document.getElementById("notification-badge").textContent = unreadCount > 9 ? "9+" : unreadCount;
-        document.getElementById("notification-badge").style.display = "flex";
+        document.getElementById("notification-badge").textContent = unreadCount > 9 ? "9+" : unreadCount
+        document.getElementById("notification-badge").style.display = "flex"
       }
     } else if (document.getElementById("notification-badge")) {
-      document.getElementById("notification-badge").style.display = "none";
+      document.getElementById("notification-badge").style.display = "none"
     }
   }
 
@@ -469,32 +463,32 @@ function setupNotifications() {
           <div class="empty-notification" style="text-align: center; padding: 2rem 1rem; color: #666;" data-i18n="No tienes notificaciones">
             No tienes notificaciones
           </div>
-        `;
-      return;
+        `
+      return
     }
 
-    notificationList.innerHTML = "";
+    notificationList.innerHTML = ""
 
     // Ordenar notificaciones por fecha (más recientes primero)
-    const sortedNotifications = [...notifications].sort((a, b) => new Date(b.date) - new Date(a.date));
+    const sortedNotifications = [...notifications].sort((a, b) => new Date(b.date) - new Date(a.date))
 
     sortedNotifications.forEach((notification) => {
-      const notificationItem = document.createElement("div");
-      notificationItem.className = "notification-item";
-      notificationItem.style.padding = "15px";
-      notificationItem.style.borderBottom = "1px solid #e0d5c9";
-      notificationItem.style.cursor = "pointer";
-      notificationItem.style.backgroundColor = notification.read ? "transparent" : "rgba(107, 68, 35, 0.05)";
-      notificationItem.style.transition = "background-color 0.2s ease";
+      const notificationItem = document.createElement("div")
+      notificationItem.className = "notification-item"
+      notificationItem.style.padding = "15px"
+      notificationItem.style.borderBottom = "1px solid #e0d5c9"
+      notificationItem.style.cursor = "pointer"
+      notificationItem.style.backgroundColor = notification.read ? "transparent" : "rgba(107, 68, 35, 0.05)"
+      notificationItem.style.transition = "background-color 0.2s ease"
 
       // Formatear fecha
-      const notificationDate = new Date(notification.date);
+      const notificationDate = new Date(notification.date)
       const formattedDate = notificationDate.toLocaleDateString(undefined, {
         day: "numeric",
         month: "short",
         hour: "2-digit",
         minute: "2-digit",
-      });
+      })
 
       notificationItem.innerHTML = `
           <div style="display: flex; justify-content: space-between; align-items: flex-start;">
@@ -502,44 +496,44 @@ function setupNotifications() {
             <span style="font-size: 0.75rem; color: #999; margin-left: 10px;">${formattedDate}</span>
           </div>
           <p style="margin: 0; font-size: 0.85rem; color: #666; line-height: 1.4;">${notification.message}</p>
-        `;
+        `
 
       // Marcar como leída al hacer clic
       notificationItem.addEventListener("click", () => {
         if (!notification.read) {
-          notification.read = true;
-          localStorage.setItem("notifications", JSON.stringify(notifications));
-          notificationItem.style.backgroundColor = "transparent";
-          updateNotificationCount();
+          notification.read = true
+          localStorage.setItem("notifications", JSON.stringify(notifications))
+          notificationItem.style.backgroundColor = "transparent"
+          updateNotificationCount()
         }
-      });
+      })
 
-      notificationList.appendChild(notificationItem);
-    });
+      notificationList.appendChild(notificationItem)
+    })
   }
 
   // Mostrar/ocultar el dropdown de notificaciones
   notificationButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const isVisible = notificationDropdown.style.display === "block";
-    notificationDropdown.style.display = isVisible ? "none" : "block";
+    e.preventDefault()
+    e.stopPropagation()
+    const isVisible = notificationDropdown.style.display === "block"
+    notificationDropdown.style.display = isVisible ? "none" : "block"
 
     if (!isVisible) {
-      renderNotifications();
+      renderNotifications()
     }
-  });
+  })
 
   // Marcar todas como leídas
   if (markAllReadBtn) {
     markAllReadBtn.addEventListener("click", () => {
       notifications.forEach((notification) => {
-        notification.read = true;
-      });
-      localStorage.setItem("notifications", JSON.stringify(notifications));
-      renderNotifications();
-      updateNotificationCount();
-    });
+        notification.read = true
+      })
+      localStorage.setItem("notifications", JSON.stringify(notifications))
+      renderNotifications()
+      updateNotificationCount()
+    })
   }
 
   // Cerrar el dropdown al hacer clic fuera
@@ -550,34 +544,34 @@ function setupNotifications() {
       e.target !== notificationButton &&
       !notificationButton.contains(e.target)
     ) {
-      notificationDropdown.style.display = "none";
+      notificationDropdown.style.display = "none"
     }
-  });
+  })
 
   // Inicializar
-  updateNotificationCount();
+  updateNotificationCount()
 }
 
 // Configurar funcionalidad del buscador - Versión simplificada sin Supabase
 function setupSearchFunctionality() {
-  const searchInput = document.getElementById("search-input");
-  const searchButton = document.getElementById("search-button");
-  const searchClose = document.getElementById("search-close");
-  const searchResults = document.getElementById("search-results");
+  const searchInput = document.getElementById("search-input")
+  const searchButton = document.getElementById("search-button")
+  const searchClose = document.getElementById("search-close")
+  const searchResults = document.getElementById("search-results")
 
   if (!searchInput || !searchButton || !searchResults) {
-    console.error("Elementos del buscador no encontrados");
-    return;
+    console.error("Elementos del buscador no encontrados")
+    return
   }
 
   // Actualizar el placeholder según el idioma
-  const currentLanguage = localStorage.getItem("language") || "es";
+  const currentLanguage = localStorage.getItem("language") || "es"
   if (currentLanguage === "es") {
-    searchInput.placeholder = "Buscar recetas...";
+    searchInput.placeholder = "Buscar recetas..."
   } else if (currentLanguage === "en") {
-    searchInput.placeholder = "Search recipes...";
+    searchInput.placeholder = "Search recipes..."
   } else if (currentLanguage === "ca") {
-    searchInput.placeholder = "Cercar receptes...";
+    searchInput.placeholder = "Cercar receptes..."
   }
 
   // Datos de ejemplo para búsqueda local (sin Supabase)
@@ -617,21 +611,21 @@ function setupSearchFunctionality() {
       dificultad: "Fácil",
       ingredientes: "harina de maíz, agua, sal",
     },
-  ];
+  ]
 
   // Función para realizar la búsqueda local
   function performSearch(query) {
     if (!query || query.trim() === "") {
-      searchResults.style.display = "none";
-      return;
+      searchResults.style.display = "none"
+      return
     }
 
-    searchResults.innerHTML = '<div style="text-align: center; padding: 20px;">Buscando...</div>';
-    searchResults.style.display = "block";
+    searchResults.innerHTML = '<div style="text-align: center; padding: 20px;">Buscando...</div>'
+    searchResults.style.display = "block"
 
     try {
       // Filtrar recetas que coincidan con la búsqueda
-      const queryLower = query.toLowerCase();
+      const queryLower = query.toLowerCase()
       const recetas = recetasEjemplo
         .filter(
           (receta) =>
@@ -639,45 +633,45 @@ function setupSearchFunctionality() {
             receta.categoria.toLowerCase().includes(queryLower) ||
             receta.ingredientes.toLowerCase().includes(queryLower),
         )
-        .slice(0, 5); // Limitar a 5 resultados
+        .slice(0, 5) // Limitar a 5 resultados
 
       // Mostrar resultados
       if (recetas && recetas.length > 0) {
-        const language = localStorage.getItem("language") || "es";
+        const language = localStorage.getItem("language") || "es"
 
         // Encabezado de resultados
         searchResults.innerHTML = `
             <div style="padding: 12px 15px; border-bottom: 1px solid #e0d5c9; font-weight: 600; color: #6b4423; background-color: #f9f5f0;">
               ${getTranslation("Resultados para", language)} "${query}"
             </div>
-          `;
+          `
 
         // Crear elementos para cada receta
         recetas.forEach((receta) => {
-          const resultItem = document.createElement("div");
-          resultItem.className = "result-item";
-          resultItem.style.display = "flex";
-          resultItem.style.padding = "12px 15px";
-          resultItem.style.borderBottom = "1px solid #e0d5c9";
-          resultItem.style.cursor = "pointer";
-          resultItem.style.transition = "background-color 0.2s";
+          const resultItem = document.createElement("div")
+          resultItem.className = "result-item"
+          resultItem.style.display = "flex"
+          resultItem.style.padding = "12px 15px"
+          resultItem.style.borderBottom = "1px solid #e0d5c9"
+          resultItem.style.cursor = "pointer"
+          resultItem.style.transition = "background-color 0.2s"
 
           // Hover effect
           resultItem.addEventListener("mouseenter", () => {
-            resultItem.style.backgroundColor = "#f9f5f0";
-          });
+            resultItem.style.backgroundColor = "#f9f5f0"
+          })
           resultItem.addEventListener("mouseleave", () => {
-            resultItem.style.backgroundColor = "transparent";
-          });
+            resultItem.style.backgroundColor = "transparent"
+          })
 
           // Obtener imagen para la receta
-          const imageSrc = getImagePath(receta.titulo);
+          const imageSrc = getImagePath(receta.titulo)
 
           // Traducir categoría y dificultad
-          const categoriaTraducida = getTranslation(receta.categoria, language) || receta.categoria;
+          const categoriaTraducida = getTranslation(receta.categoria, language) || receta.categoria
 
           // Crear indicador visual de dificultad
-          const difficultyDots = getDifficultyDots(receta.dificultad);
+          const difficultyDots = getDifficultyDots(receta.dificultad)
 
           resultItem.innerHTML = `
               <img src="${imageSrc}" alt="${receta.titulo}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -688,41 +682,41 @@ function setupSearchFunctionality() {
                   <span style="color: #6b4423;">${getTranslation("Dificultad:", language)} ${difficultyDots}</span>
                 </div>
               </div>
-            `;
+            `
 
           // Añadir evento de clic para navegar a la receta
           resultItem.addEventListener("click", () => {
-            const recipeUrl = getRecipeUrl(receta);
-            window.location.href = recipeUrl;
-          });
+            const recipeUrl = getRecipeUrl(receta)
+            window.location.href = recipeUrl
+          })
 
-          searchResults.appendChild(resultItem);
-        });
+          searchResults.appendChild(resultItem)
+        })
 
         // Añadir botón "Ver todas las recetas"
-        const verTodoButton = document.createElement("div");
-        verTodoButton.style.padding = "12px 15px";
-        verTodoButton.style.textAlign = "center";
-        verTodoButton.style.color = "#6b4423";
-        verTodoButton.style.fontWeight = "600";
-        verTodoButton.style.cursor = "pointer";
-        verTodoButton.style.borderTop = "1px solid #e0d5c9";
-        verTodoButton.style.backgroundColor = "#f9f5f0";
-        verTodoButton.style.transition = "background-color 0.2s";
-        verTodoButton.textContent = getTranslation("Ver todas las recetas", localStorage.getItem("language") || "es");
+        const verTodoButton = document.createElement("div")
+        verTodoButton.style.padding = "12px 15px"
+        verTodoButton.style.textAlign = "center"
+        verTodoButton.style.color = "#6b4423"
+        verTodoButton.style.fontWeight = "600"
+        verTodoButton.style.cursor = "pointer"
+        verTodoButton.style.borderTop = "1px solid #e0d5c9"
+        verTodoButton.style.backgroundColor = "#f9f5f0"
+        verTodoButton.style.transition = "background-color 0.2s"
+        verTodoButton.textContent = getTranslation("Ver todas las recetas", localStorage.getItem("language") || "es")
 
         verTodoButton.addEventListener("mouseenter", () => {
-          verTodoButton.style.backgroundColor = "#f0e9e0";
-        });
+          verTodoButton.style.backgroundColor = "#f0e9e0"
+        })
         verTodoButton.addEventListener("mouseleave", () => {
-          verTodoButton.style.backgroundColor = "#f9f5f0";
-        });
+          verTodoButton.style.backgroundColor = "#f9f5f0"
+        })
 
         verTodoButton.addEventListener("click", () => {
-          window.location.href = `./busqueda.html?q=${encodeURIComponent(query)}`;
-        });
+          window.location.href = `./busqueda.html?q=${encodeURIComponent(query)}`
+        })
 
-        searchResults.appendChild(verTodoButton);
+        searchResults.appendChild(verTodoButton)
       } else {
         // No hay resultados
         searchResults.innerHTML = `
@@ -731,15 +725,15 @@ function setupSearchFunctionality() {
               <p style="margin-bottom: 8px;">${getTranslation("No se encontraron resultados", localStorage.getItem("language") || "es")} "${query}"</p>
               <p style="font-size: 13px; margin-top: 5px; color: #999;">${getTranslation("Intenta con otra búsqueda", localStorage.getItem("language") || "es")}</p>
             </div>
-          `;
+          `
       }
     } catch (error) {
-      console.error("Error en la búsqueda:", error);
+      console.error("Error en la búsqueda:", error)
       searchResults.innerHTML = `
           <div style="text-align: center; padding: 20px; color: #e74c3c;">
             Error inesperado. Inténtalo de nuevo.
           </div>
-        `;
+        `
     }
   }
 
@@ -773,7 +767,7 @@ function setupSearchFunctionality() {
       ca: {
         "Resultados para": "Resultats per a",
         "No se encontraron resultados": "No s'han trobat resultats per a",
-        "Intenta con otra búsqueda": "Intenta amb una altra cerca",
+        "Intenta con otra cerca": "Intenta amb una altra cerca",
         "Ver todas las recetas": "Veure totes les receptes",
         "Dificultad:": "Dificultat:",
         China: "Xina",
@@ -782,30 +776,17 @@ function setupSearchFunctionality() {
         Italia: "Itàlia",
         Venezuela: "Veneçuela",
       },
-    };
-
-    if (translations[language] && translations[language][text]) {
-      return translations[language][text];
     }
 
-    return text;
+    if (translations[language] && translations[language][text]) {
+      return translations[language][text]
+    }
+
+    return text
   }
 
   // Función para obtener la ruta de la imagen según el título
   function getImagePath(titulo) {
-    // Obtener la ruta base
-    const scriptTag = document.querySelector('script[src*="include-components"]');
-    const scriptSrc = scriptTag ? scriptTag.getAttribute('src') : '';
-    let pathToRoot = '';
-    
-    if (scriptSrc) {
-      const parts = scriptSrc.split('/');
-      const depth = parts.length - 1;
-      if (depth > 0) {
-        pathToRoot = Array(depth).fill('..').join('/') + '/';
-      }
-    }
-
     // Mapeo de títulos a rutas de imágenes
     const imageMap = {
       "Pollo Agridulce": `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`,
@@ -819,45 +800,32 @@ function setupSearchFunctionality() {
       "Cappuccino Cake": `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`,
       "Pastís de Capuccino": `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`,
       "Arepa Venezolana": `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`,
-    };
+    }
 
     // Buscar coincidencia exacta
     if (imageMap[titulo]) {
-      return imageMap[titulo];
+      return imageMap[titulo]
     }
 
     // Imagen por defecto según categoría
     if (titulo.toLowerCase().includes("china")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`;
+      return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`
     } else if (titulo.toLowerCase().includes("españa") || titulo.toLowerCase().includes("paella")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/España/paella.png`;
+      return `${pathToRoot}US1_PantallaInicio/Imagenes/España/paella.png`
     } else if (titulo.toLowerCase().includes("francia") || titulo.toLowerCase().includes("crepa")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`;
+      return `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`
     } else if (titulo.toLowerCase().includes("italia") || titulo.toLowerCase().includes("bizcocho")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`;
+      return `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`
     } else if (titulo.toLowerCase().includes("venezuela") || titulo.toLowerCase().includes("arepa")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`;
+      return `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`
     }
 
     // Imagen por defecto
-    return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`;
+    return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`
   }
 
   // Función para obtener la URL de la receta
   function getRecipeUrl(receta) {
-    // Obtener la ruta base
-    const scriptTag = document.querySelector('script[src*="include-components"]');
-    const scriptSrc = scriptTag ? scriptTag.getAttribute('src') : '';
-    let pathToRoot = '';
-    
-    if (scriptSrc) {
-      const parts = scriptSrc.split('/');
-      const depth = parts.length - 1;
-      if (depth > 0) {
-        pathToRoot = Array(depth).fill('..').join('/') + '/';
-      }
-    }
-
     // Convertir el título a un formato de URL amigable
     const slug = receta.titulo
       .toLowerCase()
@@ -865,7 +833,7 @@ function setupSearchFunctionality() {
       .replace(/[^\w-]+/g, "")
       .replace(/--+/g, "-")
       .replace(/^-+/, "")
-      .replace(/-+$/, "");
+      .replace(/-+$/, "")
 
     // Mapeo de títulos específicos a URLs específicas
     const urlMap = {
@@ -874,139 +842,139 @@ function setupSearchFunctionality() {
       "crepas-dulces": `${pathToRoot}US6_GuardarRecetas/crepas-dulces.html`,
       "bizcocho-capuccino": `${pathToRoot}US6_GuardarRecetas/bizcocho-capuccino.html`,
       "arepa-venezolana": `${pathToRoot}US6_GuardarRecetas/arepa-venezolana.html`,
-    };
+    }
 
     // Si existe una URL específica para este slug, usarla
     if (urlMap[slug]) {
-      return urlMap[slug];
+      return urlMap[slug]
     }
 
     // URL genérica basada en el ID de la receta
-    return `${pathToRoot}US6_GuardarRecetas/receta.html?id=${receta.id}`;
+    return `${pathToRoot}US6_GuardarRecetas/receta.html?id=${receta.id}`
   }
 
   // Función para convertir nivel de dificultad a puntos visuales
   function getDifficultyDots(dificultad) {
-    let nivel = 0;
+    let nivel = 0
 
     if (dificultad === "Fácil" || dificultad === "Easy" || dificultad === "Fàcil") {
-      nivel = 1;
+      nivel = 1
     } else if (dificultad === "Media" || dificultad === "Medium" || dificultad === "Mitjana") {
-      nivel = 2;
+      nivel = 2
     } else if (dificultad === "Difícil" || dificultad === "Hard" || dificultad === "Difícil") {
-      nivel = 3;
+      nivel = 3
     }
 
-    let dotsHTML = '<span style="display: inline-flex; gap: 2px;">';
+    let dotsHTML = '<span style="display: inline-flex; gap: 2px;">'
 
     for (let i = 1; i <= 3; i++) {
       if (i <= nivel) {
         dotsHTML +=
-          '<span style="width: 8px; height: 8px; background-color: #6b4423; border-radius: 50%; display: inline-block;"></span>';
+          '<span style="width: 8px; height: 8px; background-color: #6b4423; border-radius: 50%; display: inline-block;"></span>'
       } else {
         dotsHTML +=
-          '<span style="width: 8px; height: 8px; background-color: #d4c3b5; border-radius: 50%; display: inline-block;"></span>';
+          '<span style="width: 8px; height: 8px; background-color: #d4c3b5; border-radius: 50%; display: inline-block;"></span>'
       }
     }
 
-    dotsHTML += "</span>";
-    return dotsHTML;
+    dotsHTML += "</span>"
+    return dotsHTML
   }
 
   // Eventos del buscador
   searchButton.addEventListener("click", () => {
-    const query = searchInput.value.trim();
-    performSearch(query);
+    const query = searchInput.value.trim()
+    performSearch(query)
     if (query) {
-      searchClose.style.display = "block";
+      searchClose.style.display = "block"
     }
-  });
+  })
 
   if (searchClose) {
     searchClose.addEventListener("click", () => {
-      searchResults.style.display = "none";
-      searchInput.value = "";
-      searchClose.style.display = "none";
-    });
+      searchResults.style.display = "none"
+      searchInput.value = ""
+      searchClose.style.display = "none"
+    })
   }
 
   // Buscar al presionar Enter
   searchInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-      const query = searchInput.value.trim();
-      performSearch(query);
+      const query = searchInput.value.trim()
+      performSearch(query)
       if (query) {
-        searchClose.style.display = "block";
+        searchClose.style.display = "block"
       }
     }
-  });
+  })
 
   // Buscar mientras se escribe (con debounce)
-  let debounceTimer;
+  let debounceTimer
   searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim();
+    const query = searchInput.value.trim()
 
     // Mostrar/ocultar botón de cerrar
     if (query) {
-      searchClose.style.display = "block";
+      searchClose.style.display = "block"
     } else {
-      searchClose.style.display = "none";
-      searchResults.style.display = "none";
-      return;
+      searchClose.style.display = "none"
+      searchResults.style.display = "none"
+      return
     }
 
     // Debounce para no hacer demasiadas peticiones
-    clearTimeout(debounceTimer);
+    clearTimeout(debounceTimer)
     debounceTimer = setTimeout(() => {
-      performSearch(query);
-    }, 300);
-  });
+      performSearch(query)
+    }, 300)
+  })
 
   // Cerrar resultados al hacer clic fuera
   document.addEventListener("click", (e) => {
     if (!e.target.closest(".search-container") && !e.target.closest("#search-results")) {
-      searchResults.style.display = "none";
+      searchResults.style.display = "none"
     }
-  });
+  })
 }
 
 // Configurar funcionalidad del footer
 function setupFooterFunctionality() {
   // Selector de idioma
-  const languageSelector = document.getElementById("language");
+  const languageSelector = document.getElementById("language")
   if (languageSelector) {
     // Establecer el idioma actual
-    const currentLanguage = localStorage.getItem("language") || "es";
-    languageSelector.value = currentLanguage;
+    const currentLanguage = localStorage.getItem("language") || "es"
+    languageSelector.value = currentLanguage
 
     languageSelector.addEventListener("change", function () {
-      const selectedLanguage = this.value;
-      console.log("Cambiando idioma a:", selectedLanguage);
-      localStorage.setItem("language", selectedLanguage);
+      const selectedLanguage = this.value
+      console.log("Cambiando idioma a:", selectedLanguage)
+      localStorage.setItem("language", selectedLanguage)
 
       // Llamar a la función de cambio de idioma si existe
       if (typeof window.changeLanguage === "function") {
-        window.changeLanguage(selectedLanguage);
+        window.changeLanguage(selectedLanguage)
       } else if (window.i18n && typeof window.i18n.changeLanguage === "function") {
-        window.i18n.changeLanguage(selectedLanguage);
+        window.i18n.changeLanguage(selectedLanguage)
       } else if (window.i18n && typeof window.i18n.translatePage === "function") {
-        window.i18n.translatePage(selectedLanguage);
+        window.i18n.translatePage(selectedLanguage)
       } else {
         // Recargar la página como fallback
-        window.location.reload();
+        window.location.reload()
       }
-    });
+    })
   }
 
   // Botón de scroll
-  const scrollBtn = document.getElementById("scrollToTop");
+  const scrollBtn = document.getElementById("scrollToTop")
   if (scrollBtn) {
     scrollBtn.addEventListener("click", (e) => {
-      e.preventDefault();
+      e.preventDefault()
       window.scrollTo({
         top: 0,
         behavior: "smooth",
-      });
-    });
+      })
+    })
   }
 }
