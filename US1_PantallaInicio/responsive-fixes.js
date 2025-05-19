@@ -172,3 +172,6 @@ function setupResponsiveNavigation() {
     
     if (windowWidth < 768) {
 // Móviles
+    }
+  }
+}
