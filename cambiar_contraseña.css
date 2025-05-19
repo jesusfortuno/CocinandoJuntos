@@ -3,19 +3,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    font-family: "Arial", sans-serif;
     background-color: #f7f1e8; /* Fondo beige claro */
     color: #5a3e2b; /* Marrón oscuro */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.container {
+  }
+  
+  .container {
     text-align: center;
     border: 2px solid #c7a17a; /* Borde marrón claro */
     padding: 40px;
@@ -23,24 +23,25 @@ body {
     background-color: #f3e4d6; /* Fondo más claro */
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
+  }
+  
+  h1 {
     margin-bottom: 20px;
     font-size: 1.8em;
     color: #8c5a38; /* Marrón oscuro */
-}
-
-label {
+  }
+  
+  label {
     display: block;
     text-align: left;
     color: #8c5a38; /* Marrón oscuro */
     font-weight: bold;
     margin-top: 10px;
     font-size: 14px;
-}
-
-input, select {
+  }
+  
+  input,
+  select {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -49,13 +50,14 @@ input, select {
     background-color: #ffffff;
     color: #5a3e2b;
     font-size: 1em;
-}
-
-input:focus, select:focus {
+  }
+  
+  input:focus,
+  select:focus {
     outline: 2px solid #8c5a38;
-}
-
-button {
+  }
+  
+  button {
     background-color: #a97c50;
     color: white;
     padding: 10px;
@@ -67,14 +69,52 @@ button {
     font-weight: bold;
     margin-top: 15px;
     width: 100%;
-}
-
-button:hover {
+  }
+  
+  button:hover {
     background-color: #8c5a38;
-}
-
-.links-container {
+  }
+  
+  .links-container {
     margin-top: 20px;
     font-size: 1em;
     color: #8c5a38;
-}
+  }
+  
+  /* Reglas responsive */
+  @media screen and (max-width: 480px) {
+    .container {
+      width: 90%;
+      padding: 20px;
+      margin: 0 15px;
+    }
+  
+    h1 {
+      font-size: 1.5em;
+    }
+  
+    button {
+      font-size: 1em;
+    }
+  
+    .links-container {
+      font-size: 0.9em;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .container {
+      padding: 15px;
+    }
+  
+    h1 {
+      font-size: 1.3em;
+    }
+  
+    input,
+    select,
+    button {
+      padding: 8px;
+    }
+  }
+  

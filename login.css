@@ -116,3 +116,53 @@ input:focus {
   background-color: #d9c4a6;
   color: #5a3e2b;
 }
+
+/* Reglas responsive */
+@media screen and (max-width: 480px) {
+  .login-container {
+    width: 90%;
+    padding: 20px;
+    margin: 0 15px;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .login-button,
+  .volver-inicio-btn {
+    font-size: 1em;
+  }
+
+  .links-container {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .login-container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.3em;
+  }
+
+  .logo-box {
+    padding: 20px;
+  }
+
+  input,
+  .login-button,
+  .volver-inicio-btn {
+    padding: 8px;
+  }
+
+  .links-container {
+    font-size: 0.8em;
+  }
+}
