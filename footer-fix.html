@@ -1,0 +1,75 @@
+<!-- Incluir este fragmento en todas las páginas justo antes del cierre del body -->
+<script>
+    // Script para corregir los enlaces del footer
+    document.addEventListener("DOMContentLoaded", function() {
+      // Obtener todos los enlaces del footer
+      const footerLinks = document.querySelectorAll("footer a");
+      
+      // Función para obtener la ruta base del proyecto
+      function getBaseUrl() {
+        // Obtener la URL actual
+        const currentUrl = window.location.href;
+        
+        // Extraer la parte de la URL hasta la carpeta del proyecto
+        const projectPath = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
+        
+        // Determinar cuántos niveles hay que subir para llegar a la raíz del proyecto
+        const pathParts = window.location.pathname.split('/');
+        let pathToRoot = '';
+        
+        // Buscar el índice de "CocinandoJuntos" en la ruta
+        const projectIndex = pathParts.findIndex(part => 
+          part.toLowerCase() === "cocinandojuntos" || 
+          part.toLowerCase() === "clases"
+        );
+        
+        if (projectIndex !== -1) {
+          // Calcular la ruta a la raíz del proyecto
+          const depth = pathParts.length - projectIndex - 2; // -2 para ajustar por el archivo actual
+          if (depth > 0) {
+            pathToRoot = Array(depth).fill('..').join('/') + '/';
+          }
+        }
+        
+        return pathToRoot;
+      }
+      
+      // Obtener la ruta base
+      const baseUrl = getBaseUrl();
+      console.log("Ruta base detectada:", baseUrl);
+      
+      // Mapa de enlaces y sus destinos correctos
+      const linkMap = {
+        // Sobre Nosotros
+        "Quiénes Somos": baseUrl + "US1_PantallaInicio/quienes-somos.html",
+        "Qui Som": baseUrl + "US1_PantallaInicio/quienes-somos.html",
+        "Contacto": baseUrl + "US1_PantallaInicio/contacto.html",
+        "Contacte": baseUrl + "US1_PantallaInicio/contacto.html",
+        
+        // Legal
+        "Política de Privacidad": baseUrl + "US1_PantallaInicio/politica_privacidad.html",
+        "Política de Privacitat": baseUrl + "US1_PantallaInicio/politica_privacidad.html",
+        "Términos y Condiciones": baseUrl + "US1_PantallaInicio/terminos_condiciones.html",
+        "Termes i Condicions": baseUrl + "US1_PantallaInicio/terminos_condiciones.html",
+        "Política de Cookies": baseUrl + "US1_PantallaInicio/politica_cookies.html",
+        "Aviso Legal": baseUrl + "US1_PantallaInicio/aviso_legal.html",
+        "Avís Legal": baseUrl + "US1_PantallaInicio/aviso_legal.html",
+        
+        // Comunidad
+        "Recetas": baseUrl + "Platos.html",
+        "Receptes": baseUrl + "Platos.html",
+        "Chefs": baseUrl + "US1_PantallaInicio/chefs.html",
+        "Xefs": baseUrl + "US1_PantallaInicio/chefs.html"
+      };
+      
+      // Corregir cada enlace
+      footerLinks.forEach(link => {
+        const linkText = link.textContent.trim();
+        if (linkMap[linkText]) {
+          link.href = linkMap[linkText];
+          console.log(`Enlace "${linkText}" actualizado a: ${link.href}`);
+        }
+      });
+    });
+  </script>
+  
