@@ -8,17 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../include-components.js" data-include="nav,footer"></script>
     <style>
-        
         /* Estilos para mantener el diseño original */
         .culture-header {
             text-align: left;
             padding: 1rem 0;
-        }
-        
-        .culture-header h1 {
-            font-size: 2rem;
-            color: #6b4423;
-            margin-bottom: 0.5rem;
         }
         
         .culture-description p {
@@ -262,44 +255,50 @@
 
         // Código JavaScript directamente en el HTML para asegurar el orden correcto
         document.addEventListener('DOMContentLoaded', () => {
-                // Menú desplegable
+            // Menú desplegable
+            if (document.getElementById('menuToggle')) {
                 document.getElementById('menuToggle').addEventListener('click', function (e) {
                     e.preventDefault();
                     const overlayMenu = document.getElementById('overlayMenu');
                     overlayMenu.classList.toggle('active');
                 });
+            }
 
+            if (document.getElementById('closeMenu')) {
                 document.getElementById('closeMenu').addEventListener('click', function () {
                     const overlayMenu = document.getElementById('overlayMenu');
                     overlayMenu.classList.remove('active');
                 });
+            }
 
-                // Cerrar al hacer clic fuera del menú
+            // Cerrar al hacer clic fuera del menú
+            if (document.getElementById('overlayMenu')) {
                 document.getElementById('overlayMenu').addEventListener('click', function (e) {
                     if (e.target === this) {
                         this.classList.remove('active');
                     }
                 });
-            });
+            }
+        });
 
         // Script para los filtros
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", function() {
             const filterBtn = document.getElementById("filter-btn");
             const filterOptions = document.getElementById("filter-options");
             const applyFiltersBtn = document.getElementById("apply-filters");
 
-            filterBtn.addEventListener("click", () => {
-                filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
+            filterBtn.addEventListener("click", function() {
+                filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
             });
 
-            applyFiltersBtn.addEventListener("click", () => {
+            applyFiltersBtn.addEventListener("click", function() {
                 const selectedCulture = document.getElementById("filter-culture").value;
                 const selectedDifficulty = document.getElementById("filter-difficulty").value;
                 const selectedTime = document.getElementById("filter-time").value;
 
                 const recipes = document.querySelectorAll(".recipe-card");
 
-                recipes.forEach(recipe => {
+                recipes.forEach(function(recipe) {
                     const recipeCulture = recipe.getAttribute("data-culture");
                     const recipeTime = parseInt(recipe.getAttribute("data-time"));
                     const recipeDifficulty = recipe.getAttribute("data-difficulty");
@@ -317,7 +316,7 @@
                     }
 
                     if (matchesCulture && matchesDifficulty && matchesTime) {
-                        recipe.style.display = "inline-block";
+                        recipe.style.display = "block";
                     } else {
                         recipe.style.display = "none";
                     }
@@ -326,7 +325,7 @@
                 filterOptions.style.display = "none";
             });
 
-            document.addEventListener("click", (event) => {
+            document.addEventListener("click", function(event) {
                 if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
                     filterOptions.style.display = "none";
                 }

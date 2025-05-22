@@ -8,6 +8,94 @@
     <link rel="stylesheet" href="styles2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../include-components.js" data-include="nav,footer"></script>
+    <style>
+        /* Estilos para asegurar que las recetas se muestren en una cuadrícula de 4 columnas */
+        .recipes-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 20px !important;
+            margin-top: 2rem !important;
+            width: 100% !important;
+            max-width: 1200px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        
+        .recipe-card {
+            width: 100% !important;
+            margin: 0 !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+            transition: transform 0.3s ease !important;
+            background: white !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        }
+        
+        .recipe-image {
+            width: 100% !important;
+            height: 200px !important;
+            overflow: hidden !important;
+        }
+        
+        .recipe-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            transition: transform 0.3s ease !important;
+        }
+        
+        .recipe-card:hover .recipe-image img {
+            transform: scale(1.05) !important;
+        }
+        
+        .recipe-card h3 {
+            padding: 1rem !important;
+            margin: 0 !important;
+            font-size: 1.1rem !important;
+            color: #333 !important;
+        }
+        
+        .recipe-meta {
+            display: flex !important;
+            padding: 0 1rem 1rem !important;
+            gap: 0.5rem !important;
+            flex-wrap: wrap !important;
+        }
+        
+        .difficulty, .time, .category {
+            background: #f8f1e9 !important;
+            padding: 0.3rem 0.6rem !important;
+            border-radius: 4px !important;
+            font-size: 0.8rem !important;
+            color: #6b4423 !important;
+        }
+        
+        /* Estilos responsivos */
+        @media screen and (max-width: 1200px) {
+            .recipes-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+        
+        @media screen and (max-width: 992px) {
+            .recipes-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .recipes-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
 </head>
 
 <body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
@@ -135,6 +223,58 @@
     <script src="index.js" defer></script>
     <script src="include-components.js" defer></script>
     <script src="../fix-links.js"></script>
+    <script>
+        // Script para los filtros
+        document.addEventListener("DOMContentLoaded", () => {
+            const filterBtn = document.getElementById("filter-btn");
+            const filterOptions = document.getElementById("filter-options");
+            const applyFiltersBtn = document.getElementById("apply-filters");
+
+            filterBtn.addEventListener("click", () => {
+                filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
+            });
+
+            applyFiltersBtn.addEventListener("click", () => {
+                const selectedCulture = document.getElementById("filter-culture").value;
+                const selectedDifficulty = document.getElementById("filter-difficulty").value;
+                const selectedTime = document.getElementById("filter-time").value;
+
+                const recipes = document.querySelectorAll(".recipe-card");
+
+                recipes.forEach(recipe => {
+                    const recipeCulture = recipe.getAttribute("data-culture");
+                    const recipeTime = parseInt(recipe.getAttribute("data-time"));
+                    const recipeDifficulty = recipe.getAttribute("data-difficulty");
+
+                    const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
+                    const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
+                    let matchesTime = false;
+
+                    if (selectedTime === "" ||
+                        (selectedTime === "0-30" && recipeTime <= 30) ||
+                        (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
+                        (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
+                        (selectedTime === "121" && recipeTime > 120)) {
+                        matchesTime = true;
+                    }
+
+                    if (matchesCulture && matchesDifficulty && matchesTime) {
+                        recipe.style.display = "block";
+                    } else {
+                        recipe.style.display = "none";
+                    }
+                });
+
+                filterOptions.style.display = "none";
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
+                    filterOptions.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
