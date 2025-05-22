@@ -20,13 +20,13 @@ function getImagePath(titulo, categoria) {
   // Mapeo de títulos a rutas de imágenes
   const imageMap = {
     "Pollo Agridulce": `../Imagenes/China/pollo-agridulce.jpg`,
-    "Paella": `../Imagenes/España/paella.png`,
+    Paella: `../Imagenes/España/paella.png`,
     "Tortilla de Patatas": `../Imagenes/España/tortilla-patatas.jpeg`,
     "Crepas Dulces": `../Imagenes/Francia/crepas-dulces.jpg`,
     "Coq au Vin": `../Imagenes/Francia/coq-au-vin.jpg`,
     "Bizcocho Capuccino": `../Imagenes/Italia/bizcocho-capuccino.jpg`,
     "Pizza Margarita": `../Imagenes/Italia/pizza-margarita.jpg`,
-    "Sushi": `../Imagenes/Japon/sushi.jpeg`,
+    Sushi: `../Imagenes/Japon/sushi.jpeg`,
     "Arepa Venezolana": `../Imagenes/Venezuela/arepa-venezolana.jpg`,
     "Galletas de Sésamo": `../Imagenes/China/galletas-de-sesamo.jpg`,
     "Bolitas Chinas": `../Imagenes/China/bollitos-chinos.jpg`,
@@ -35,8 +35,8 @@ function getImagePath(titulo, categoria) {
     "Churros con Chocolate": `../Imagenes/España/churros-chocolate.jpg`,
     "Quiche Lorraine": `../Imagenes/Francia/quiche-lorraine.pn.webp`,
     "Tostada Francesa": `../Imagenes/Francia/tostada-francesa.jpg`,
-    "Cannoli": `../Imagenes/Italia/cannoli.png`,
-    "Lasaña": `../Imagenes/Italia/lasaña.jpg`,
+    Cannoli: `../Imagenes/Italia/cannoli.png`,
+    Lasaña: `../Imagenes/Italia/lasaña.jpg`,
   }
 
   // Buscar coincidencia exacta
@@ -147,11 +147,68 @@ function createRecipeCard(receta) {
   // Añadir evento de clic para ir a la página de la receta
   card.querySelector(".read-more").addEventListener("click", (e) => {
     e.stopPropagation() // Evitar que el clic se propague a la tarjeta
-    window.location.href = `/US6_GuardarRecetas/receta.html?id=${receta.id}`
+
+    // Mapeo de títulos específicos a URLs específicas
+    const urlMap = {
+      "Pollo Agridulce": "../US6_GuardarRecetas/pollo-agridulce.html",
+      Paella: "../US6_GuardarRecetas/paella.html",
+      "Crepas Dulces": "../US6_GuardarRecetas/crepas-dulces.html",
+      "Coq au Vin": "../US6_GuardarRecetas/coq-au-vin.html",
+      "Bizcocho Capuccino": "../US6_GuardarRecetas/bizcocho-capuccino.html",
+      "Pizza Margarita": "../US6_GuardarRecetas/pizza-margarita.html",
+      Sushi: "../US6_GuardarRecetas/sushi.html",
+      "Arepa Venezolana": "../US6_GuardarRecetas/arepa-venezolana.html",
+      "Galletas de Sésamo": "../US6_GuardarRecetas/galletas-de-sesamo.html",
+      "Bolitas Chinas": "../US6_GuardarRecetas/bolitas-chinas.html",
+      "Fideos Salteados": "../US6_GuardarRecetas/fideos-salteados.html",
+      "Pan con Tomate": "../US6_GuardarRecetas/pan-con-tomate.html",
+      "Churros con Chocolate": "../US6_GuardarRecetas/churros-chocolate.html",
+      "Quiche Lorraine": "../US6_GuardarRecetas/quiche-lorraine.html",
+      "Tostada Francesa": "../US6_GuardarRecetas/tostada-francesa.html",
+      Cannoli: "../US6_GuardarRecetas/cannoli.html",
+      Lasaña: "../US6_GuardarRecetas/lasana.html",
+      "Tortilla de Patatas": "../US6_GuardarRecetas/tortilla-de-patatas.html",
+    }
+
+    // Si existe una URL específica para este título, usarla
+    if (urlMap[receta.titulo]) {
+      window.location.href = urlMap[receta.titulo]
+    } else {
+      // URL genérica basada en el ID de la receta como fallback
+      window.location.href = `../US6_GuardarRecetas/receta.html?id=${receta.id}`
+    }
   })
 
   card.addEventListener("click", () => {
-    window.location.href = `/US6_GuardarRecetas/receta.html?id=${receta.id}`
+    // Mapeo de títulos específicos a URLs específicas
+    const urlMap = {
+      "Pollo Agridulce": "../US6_GuardarRecetas/pollo-agridulce.html",
+      Paella: "../US6_GuardarRecetas/paella.html",
+      "Crepas Dulces": "../US6_GuardarRecetas/crepas-dulces.html",
+      "Coq au Vin": "../US6_GuardarRecetas/coq-au-vin.html",
+      "Bizcocho Capuccino": "../US6_GuardarRecetas/bizcocho-capuccino.html",
+      "Pizza Margarita": "../US6_GuardarRecetas/pizza-margarita.html",
+      Sushi: "../US6_GuardarRecetas/sushi.html",
+      "Arepa Venezolana": "../US6_GuardarRecetas/arepa-venezolana.html",
+      "Galletas de Sésamo": "../US6_GuardarRecetas/galletas-de-sesamo.html",
+      "Bolitas Chinas": "../US6_GuardarRecetas/bolitas-chinas.html",
+      "Fideos Salteados": "../US6_GuardarRecetas/fideos-salteados.html",
+      "Pan con Tomate": "../US6_GuardarRecetas/pan-con-tomate.html",
+      "Churros con Chocolate": "../US6_GuardarRecetas/churros-chocolate.html",
+      "Quiche Lorraine": "../US6_GuardarRecetas/quiche-lorraine.html",
+      "Tostada Francesa": "../US6_GuardarRecetas/tostada-francesa.html",
+      Cannoli: "../US6_GuardarRecetas/cannoli.html",
+      Lasaña: "../US6_GuardarRecetas/lasana.html",
+      "Tortilla de Patatas": "../US6_GuardarRecetas/tortilla-de-patatas.html",
+    }
+
+    // Si existe una URL específica para este título, usarla
+    if (urlMap[receta.titulo]) {
+      window.location.href = urlMap[receta.titulo]
+    } else {
+      // URL genérica basada en el ID de la receta como fallback
+      window.location.href = `../US6_GuardarRecetas/receta.html?id=${receta.id}`
+    }
   })
 
   return card
