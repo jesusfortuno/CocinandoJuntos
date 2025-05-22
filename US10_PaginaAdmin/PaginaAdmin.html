@@ -6,17 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración | Cocinando Juntos</title>
     <link rel="stylesheet" href="PaginaAdmin.css">
-    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <link rel="stylesheet" href="common.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="../notification-styles.css">
-    <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Línea única para incluir componentes -->
     <script src="../include-components.js" data-include="nav,footer"></script>
+
 </head>
 
-<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+<body>
+
     <div id="nav-placeholder"></div>
+
+    <style>
+        #footer-placeholder {
+            margin-top: 40px;
+        }
+        #nav-placeholder {
+            margin-bottom: 40px;
+        }
+    </style>
 
     <div class="layout-container">
         <!-- Sidebar -->
@@ -127,20 +135,21 @@
             const usuario = JSON.parse(localStorage.getItem("usuario"));
             const welcomeName = document.getElementById("welcome-name");
             const sidebarAdminName = document.getElementById("sidebar-admin-name");
+            const userNameElement = document.getElementById("user-name");
 
             if (usuario) {
                 console.log('Usuario encontrado:', usuario);
-                welcomeName.textContent = usuario.username;
-                sidebarAdminName.textContent = usuario.username;
+                welcomeName.textContent = usuario.username || "Administrador";
+                sidebarAdminName.textContent = usuario.username || "Administrador";
+                userNameElement.textContent = usuario.username || "Administrador";
             } else {
                 console.log('No se encontró usuario en localStorage');
-                window.location.href = "../login.html";
+                // Comentado para permitir ver la página sin redirección
+                // window.location.href = "../login.html";
             }
 
-            // Simulación de datos para la demostración
-            document.getElementById("total-recetas").textContent = "124";
-            document.getElementById("total-usuarios").textContent = "356";
-            document.getElementById("total-comentarios").textContent = "892";
+            // Cargar estadísticas
+            obtenerEstadisticas();
 
             // Función para alternar la visibilidad del sidebar en móviles
             const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
@@ -150,9 +159,18 @@
                     sidebar.classList.toggle('sidebar-open');
                 });
             }
+
+            // Manejar cierre de sesión
+            const logoutBtn = document.getElementById("logout-btn");
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem("usuario");
+                    window.location.href = "../login.html";
+                });
+            }
         });
     </script>
-    <script src="../fix-links.js"></script>
 </body>
 
 </html>
