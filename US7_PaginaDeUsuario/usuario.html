@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Usuario - Cocinando Juntos</title>
+    <script src="../include-components.js" data-include="nav,footer"></script>
     <link rel="stylesheet" href="usuario.css">
     <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="../notification-styles.css">
     <script src="../notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="../include-components.js" data-include="nav,footer"></script>
+    
     <style>
         /* Estilos para corregir el botón de cerrar sesión */
         #logout-btn {
@@ -38,7 +39,7 @@
             
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil" id="profile-image">
+                    <img src="/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil" id="profile-image">
                     <div class="upload-overlay">
                         <label for="profile-upload" class="upload-btn">
                             <span>Cambiar foto</span>
@@ -157,7 +158,7 @@
                 if (navPlaceholder) {
                     const logoLink = navPlaceholder.querySelector('.logo');
                     if (logoLink) {
-                        logoLink.innerHTML = '<img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">';
+                        logoLink.innerHTML = '<img src="/Imagenes/logos/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">';
                     }
                 }
             }, 500);

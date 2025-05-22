@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navHTML = `
     <nav style="background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; padding: 0.8rem 2rem; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(107, 68, 35, 0.05);">
         <a href="${pathToRoot}US1_PantallaInicio/index.html" class="logo" style="width: 80px; height: 80px; margin-right: 2rem; display: flex; align-items: center; transition: transform 0.3s ease;">
-            <img src="${pathToRoot}US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">
+            <img src="${pathToRoot}Imagenes/logos/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">
         </a>
         
         <!-- Buscador con botón - Estilo actualizado y mejorado -->
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
             <!-- 2. Sección del user-info para mostrar usuario según el tipo -->
             <div id="user-info" class="user-info" style="display: none; align-items: center; gap: 12px; background-color: rgba(107, 68, 35, 0.05); padding: 6px 12px; border-radius: 24px; transition: all 0.3s ease;">
-                <img src="${pathToRoot}US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <img src="${pathToRoot}Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                 <a href="#" id="user-profile-link" style="text-decoration: none;">
                     <span id="user-name" style="color: #333; font-weight: 500; font-size: 0.95rem;">Nombre del usuario</span>
                 </a>
@@ -96,40 +96,42 @@ document.addEventListener("DOMContentLoaded", () => {
     
     <!-- El menú desplegable mejorado -->
     <div class="overlay-menu" id="overlayMenu" style="display: none; width: 100%; background-color: #f9f5f0; border-bottom: 1px solid #e0d5c9; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-        <div class="overlay-content" style="display: flex; justify-content: space-around; padding: 30px 40px; max-width: 1200px; margin: 0 auto; position: relative;">
-            <div class="close-btn" id="closeMenu" style="position: absolute; top: 15px; right: 15px; font-size: 24px; cursor: pointer; color: #6b4423; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color 0.3s ease;">×</div>
-            
-            <div class="menu-section" style="flex: 1; padding: 0 20px;">
-                <h3 data-i18n="Culturas Gastronómicas" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Culturas Gastronómicas</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-china.html" data-i18n="China" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">China</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-española.html" data-i18n="España" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">España</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-francesa.html" data-i18n="Francia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Francia</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-italiana.html" data-i18n="Italia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Italia</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-japonesa.html" data-i18n="Japón" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Japón</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-venezolana.html" data-i18n="Venezuela" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Venezuela</a></li>
-                </ul>
-            </div>
-            
-            <div class="menu-section" style="flex: 1; padding: 0 20px;">
-                <h3 data-i18n="Tipo de Plato" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Tipo de Plato</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Desayuno</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/comidas.html" data-i18n="Comida" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Comida</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/merienda.html" data-i18n="Merienda" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Merienda</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/cena.html" data-i18n="Cena" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Cena</a></li>
-                </ul>
-            </div>
-            
-            <div class="menu-section" style="flex: 1; padding: 0 20px;">
-                <h3 data-i18n="Dificultad de la Receta" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Dificultad de la Receta</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Fácil</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/dificultad-media.html" data-i18n="Media" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Media</a></li>
-                    <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Difícil</a></li>
-                </ul>
-            </div>
-        </div>
+      <div class="overlay-content" style="display: flex; flex-direction: row; justify-content: space-around; padding: 30px 40px; max-width: 1200px; margin: 0 auto; position: relative;">
+          <div class="close-btn" id="closeMenu" style="position: absolute; top: 15px; right: 15px; font-size: 24px; cursor: pointer; color: #6b4423; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color 0.3s ease;">×</div>
+          
+          <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
+              <div class="menu-section" style="width: 30%; padding: 0 20px;">
+                  <h3 data-i18n="Culturas Gastronómicas" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Culturas Gastronómicas</h3>
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-china.html" data-i18n="China" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">China</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-española.html" data-i18n="España" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">España</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-francesa.html" data-i18n="Francia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Francia</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-italiana.html" data-i18n="Italia" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Italia</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-japonesa.html" data-i18n="Japón" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Japón</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US1_PantallaInicio/cultura-venezolana.html" data-i18n="Venezuela" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Venezuela</a></li>
+                  </ul>
+              </div>
+              
+              <div class="menu-section" style="width: 30%; padding: 0 20px;">
+                  <h3 data-i18n="Tipo de Plato" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Tipo de Plato</h3>
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Desayuno</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/comidas.html" data-i18n="Comida" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Comida</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/merienda.html" data-i18n="Merienda" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Merienda</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/cena.html" data-i18n="Cena" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Cena</a></li>
+                  </ul>
+              </div>
+              
+              <div class="menu-section" style="width: 30%; padding: 0 20px;">
+                  <h3 data-i18n="Dificultad de la Receta" style="color: #6b4423; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #e0d5c9; padding-bottom: 10px;">Dificultad de la Receta</h3>
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Fácil</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/dificultad-media.html" data-i18n="Media" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Media</a></li>
+                      <li style="margin: 12px 0;"><a href="${pathToRoot}US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil" style="color: #666; text-decoration: none; font-size: 0.95rem; display: block; padding: 5px 0; transition: all 0.2s ease;">Difícil</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
     </div>
     `
 
