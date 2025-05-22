@@ -109,6 +109,70 @@
             display: flex;
             gap: 0.5rem;
         }
+        
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .comment-detail {
+            margin-top: 20px;
+        }
+        
+        .comment-detail h3 {
+            margin-bottom: 5px;
+            color: #6b4423;
+        }
+        
+        .comment-detail p {
+            margin-bottom: 15px;
+        }
+        
+        .comment-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Estilos para comentarios expandibles */
+        .comment-text {
+            max-height: 60px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .comment-text.expanded {
+            max-height: 1000px;
+        }
     </style>
 
     <div id="nav-placeholder"></div>
@@ -151,9 +215,6 @@
             <div class="page-header">
                 <h1>Gestión de Comentarios</h1>
                 <div>
-                    <button id="approve-all-btn" class="btn btn-success">
-                        <i class="fas fa-check-circle"></i> Aprobar Seleccionados
-                    </button>
                     <button id="delete-all-btn" class="btn btn-danger">
                         <i class="fas fa-trash"></i> Eliminar Seleccionados
                     </button>
@@ -175,57 +236,43 @@
                         </tr>
                     </thead>
                     <tbody id="comments-table-body">
-                        <tr>
-                            <td><input type="checkbox" class="comment-checkbox" data-id="1"></td>
-                            <td>1</td>
-                            <td>
-                                <div class="user-info-cell">
-                                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User" class="user-avatar">
-                                    <span>María López</span>
-                                </div>
-                            </td>
-                            <td>Tortilla Española</td>
-                            <td>¡Excelente receta! La hice el fin de semana y quedó deliciosa.</td>
-                            <td>12/05/2025</td>
-                            <td><span class="status-badge status-approved">Aprobado</span></td>
-                            <td class="action-buttons">
-                                <a href="#" class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i> Ver
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="comment-checkbox" data-id="2"></td>
-                            <td>2</td>
-                            <td>
-                                <div class="user-info-cell">
-                                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User" class="user-avatar">
-                                    <span>Juan Pérez</span>
-                                </div>
-                            </td>
-                            <td>Gazpacho Andaluz</td>
-                            <td>Muy refrescante para el verano. Añadí un poco más de ajo y quedó perfecto.</td>
-                            <td>10/05/2025</td>
-                            <td><span class="status-badge status-pending">Pendiente</span></td>
-                            <td class="action-buttons">
-                                <a href="#" class="btn btn-success btn-sm">
-                                    <i class="fas fa-check"></i> Aprobar
-                                </a>
-                                <a href="#" class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i> Ver
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </a>
-                            </td>
-                        </tr>
+                        <!-- Los comentarios se cargarán dinámicamente aquí -->
                     </tbody>
                 </table>
             </div>
         </main>
+    </div>
+
+    <!-- Modal para ver detalles del comentario -->
+    <div id="comment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-details">&times;</span>
+            <h2>Detalle del Comentario</h2>
+            <div class="comment-detail">
+                <h3>Usuario</h3>
+                <p id="comment-user">Nombre de Usuario</p>
+                
+                <h3>Receta</h3>
+                <p id="comment-recipe">Nombre de la Receta</p>
+                
+                <h3>Comentario</h3>
+                <p id="comment-text">Texto del comentario</p>
+                
+                <h3>Fecha</h3>
+                <p id="comment-date">01/01/2025</p>
+                
+                <h3>Estado</h3>
+                <p id="comment-status">Aprobado</p>
+            </div>
+            <div class="comment-actions">
+                <button id="toggle-visibility-btn" class="btn btn-primary">
+                    <i class="fas fa-eye-slash"></i> Cambiar Visibilidad
+                </button>
+                <button id="delete-comment-btn" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
     </div>
 
     <div id="footer-placeholder"></div>
@@ -233,40 +280,6 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="gestionComentarios.js"></script>
-
-    <script>
-        // Obtener el usuario desde localStorage
-        document.addEventListener('DOMContentLoaded', () => {
-            const usuario = JSON.parse(localStorage.getItem("usuario"));
-            const sidebarAdminName = document.getElementById("sidebar-admin-name");
-
-            if (usuario) {
-                console.log('Usuario encontrado:', usuario);
-                sidebarAdminName.textContent = usuario.username || "Administrador";
-            } else {
-                console.log('No se encontró usuario en localStorage');
-                // Comentado para permitir ver la página sin redirección
-                // window.location.href = "../login.html";
-            }
-
-            // Función para alternar la visibilidad del sidebar en móviles
-            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
-            if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener("click", function () {
-                    const sidebar = document.querySelector('.sidebar');
-                    sidebar.classList.toggle('sidebar-open');
-                });
-            }
-
-            // Seleccionar todos los comentarios
-            document.getElementById("select-all").addEventListener("change", function () {
-                const checkboxes = document.querySelectorAll(".comment-checkbox");
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = this.checked;
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

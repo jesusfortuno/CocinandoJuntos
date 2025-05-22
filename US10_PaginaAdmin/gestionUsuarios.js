@@ -5,201 +5,327 @@ const SUPABASE_API_KEY =
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
 
 // Elementos del DOM
-const modal = document.getElementById("user-modal")
+const usersTableBody = document.getElementById("users-table-body")
 const addUserBtn = document.getElementById("add-user-btn")
+const modal = document.getElementById("user-modal")
 const closeBtn = document.querySelector(".close")
 const userForm = document.getElementById("user-form")
-const usersTableBody = document.getElementById("users-table-body")
-
-// Obtener usuario del localStorage
-function getUsuario() {
-  const usuario = localStorage.getItem("usuario")
-  if (!usuario) {
-    window.location.href = "../login.html"
-    return null
-  }
-  return JSON.parse(usuario)
-}
+const cancelFormBtn = document.getElementById("cancel-form")
 
 // Cargar usuarios
 async function cargarUsuarios() {
   try {
+    console.log("Cargando usuarios...")
     const { data: usuarios, error } = await supabase.from("usuarios").select("*").order("id", { ascending: true })
 
-    if (error) throw error
+    if (error) {
+      console.error("Error al cargar usuarios:", error)
+      throw error
+    }
+
+    if (!usersTableBody) {
+      console.error("No se encontró el elemento usersTableBody")
+      return
+    }
 
     usersTableBody.innerHTML = ""
 
     if (!usuarios || usuarios.length === 0) {
       usersTableBody.innerHTML = `
-                <tr>
-                    <td colspan="5" class="text-center">No hay usuarios disponibles</td>
-                </tr>
-            `
+        <tr>
+          <td colspan="6" class="text-center">No hay usuarios disponibles</td>
+        </tr>
+      `
       return
     }
 
+    console.log("Usuarios cargados:", usuarios)
+
     usuarios.forEach((usuario) => {
       const row = document.createElement("tr")
+
+      // Determinar la clase de badge para el rol
+      let rolClass = "role-user"
+      let rolText = "Usuario"
+
+      if (usuario.rol === "admin") {
+        rolClass = "role-admin"
+        rolText = "Administrador"
+      } else if (usuario.rol === "chef") {
+        rolClass = "role-chef"
+        rolText = "Chef"
+      }
+
       row.innerHTML = `
-                <td>${usuario.id}</td>
-                <td>${usuario.username || ""}</td>
-                <td>${usuario.email || ""}</td>
-                <td><span class="role-badge role-${usuario.rol}">${usuario.rol}</span></td>
-                <td class="action-buttons">
-                    <button class="edit-btn" onclick="editarUsuario('${usuario.id}')">Editar</button>
-                    <button class="delete-btn" onclick="eliminarUsuario('${usuario.id}')">Eliminar</button>
-                </td>
-            `
+        <td>${usuario.id}</td>
+        <td>
+          <div class="user-info-cell">
+            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" 
+                 alt="${usuario.username}" 
+                 class="user-avatar">
+            <span>${usuario.username || ""}</span>
+          </div>
+        </td>
+        <td>${usuario.email || ""}</td>
+        <td><span class="role-badge ${rolClass}">${rolText}</span></td>
+        <td><span class="status-badge status-active">Activo</span></td>
+        <td>
+          <div class="action-buttons">
+            <button class="btn btn-info btn-sm edit-user" data-id="${usuario.id}">
+              <i class="fas fa-edit"></i> Editar
+            </button>
+            <button class="btn btn-danger btn-sm delete-user" data-id="${usuario.id}">
+              <i class="fas fa-trash"></i> Eliminar
+            </button>
+          </div>
+        </td>
+      `
       usersTableBody.appendChild(row)
+    })
+
+    // Añadir event listeners a los botones
+    document.querySelectorAll(".edit-user").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const userId = this.getAttribute("data-id")
+        editarUsuario(userId)
+      })
+    })
+
+    document.querySelectorAll(".delete-user").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const userId = this.getAttribute("data-id")
+        eliminarUsuario(userId)
+      })
     })
   } catch (error) {
     console.error("Error al cargar usuarios:", error)
-    alert("Error al cargar los usuarios: " + error.message)
+    if (usersTableBody) {
+      usersTableBody.innerHTML = `
+        <tr>
+          <td colspan="6" class="text-center">Error al cargar usuarios: ${error.message}</td>
+        </tr>
+      `
+    }
   }
 }
 
 // Guardar usuario
-async function guardarUsuario(formData, id = null) {
-  try {
-    const usuario = getUsuario()
-    if (!usuario) return
+async function guardarUsuario(event) {
+  event.preventDefault()
 
-    const userData = {
-      username: formData.get("username"),
-      email: formData.get("email"),
-      rol: formData.get("rol"),
+  try {
+    // Verificar si hay un usuario en localStorage
+    const usuarioJSON = localStorage.getItem("usuario")
+    if (!usuarioJSON) {
+      alert("Debes iniciar sesión para realizar esta acción")
+      return
     }
 
-    // Solo incluir password si se proporciona uno nuevo
-    const password = formData.get("password")
+    const currentUser = JSON.parse(usuarioJSON)
+
+    // Obtener los valores del formulario
+    const username = document.getElementById("username").value
+    const email = document.getElementById("email").value
+    const password = document.getElementById("password").value
+    const rol = document.getElementById("rol").value
+    const userId = document.getElementById("user-id").value
+
+    // Construir el objeto de datos básicos
+    const userData = {
+      username: username,
+      email: email,
+      rol: rol,
+    }
+
+    // Añadir password solo si se proporciona uno nuevo
     if (password) {
       userData.password = password
     }
 
+    console.log("Datos del usuario a guardar:", userData)
+
     let response
-    if (id) {
-      console.log("Actualizando usuario:", id, userData)
-      response = await supabase.from("usuarios").update(userData).eq("id", id)
+    if (userId) {
+      console.log("Actualizando usuario ID:", userId)
+      response = await supabase.from("usuarios").update(userData).eq("id", userId)
     } else {
+      // Para nuevos usuarios, la contraseña es obligatoria
       if (!password) {
-        throw new Error("La contraseña es requerida para nuevos usuarios")
+        alert("La contraseña es obligatoria para nuevos usuarios")
+        return
       }
-      console.log("Creando nuevo usuario:", userData)
+      console.log("Creando nuevo usuario")
       response = await supabase.from("usuarios").insert([userData])
     }
 
-    if (response.error) throw response.error
+    if (response.error) {
+      console.error("Error en la respuesta de Supabase:", response.error)
+      throw response.error
+    }
+
+    console.log("Respuesta de Supabase:", response)
 
     modal.style.display = "none"
     await cargarUsuarios()
-    alert(`Usuario ${id ? "actualizado" : "añadido"} con éxito`)
+    alert(`Usuario ${userId ? "actualizado" : "añadido"} con éxito`)
   } catch (error) {
     console.error("Error al guardar usuario:", error)
-    alert("Error al guardar el usuario: " + error.message)
+    alert("Error al guardar el usuario: " + (error.message || "Error desconocido"))
   }
 }
 
 // Editar usuario
 async function editarUsuario(id) {
   try {
-    const usuario = getUsuario()
-    if (!usuario) return
+    console.log("Cargando usuario para editar, ID:", id)
 
-    console.log("Cargando usuario para editar:", id)
     const { data: user, error } = await supabase.from("usuarios").select("*").eq("id", id).single()
 
-    if (error) throw error
-    if (!user) throw new Error("No se encontró el usuario")
+    if (error) {
+      console.error("Error al obtener usuario:", error)
+      throw error
+    }
 
-    // Llenar el formulario
+    if (!user) {
+      console.error("No se encontró el usuario con ID:", id)
+      throw new Error("No se encontró el usuario")
+    }
+
+    console.log("Usuario cargado:", user)
+
+    // Llenar el formulario con valores predeterminados si algún campo es null
     document.getElementById("username").value = user.username || ""
     document.getElementById("email").value = user.email || ""
-    document.getElementById("rol").value = user.rol || "user"
     document.getElementById("password").value = "" // Limpiar el campo de contraseña
+    document.getElementById("rol").value = user.rol || "user"
+    document.getElementById("user-id").value = user.id
 
     // Configurar el formulario
     document.getElementById("modal-title").textContent = "Editar Usuario"
-    userForm.dataset.mode = "edit"
-    userForm.dataset.userId = id
-
     modal.style.display = "block"
   } catch (error) {
     console.error("Error al cargar usuario para editar:", error)
-    alert("Error al cargar el usuario: " + error.message)
+    alert("Error al cargar el usuario: " + (error.message || "Error desconocido"))
   }
 }
 
+// Eliminar usuario
 async function eliminarUsuario(id) {
   try {
-    const usuario = getUsuario();
-    if (!usuario) return;
+    // Verificar si hay un usuario en localStorage
+    const usuarioJSON = localStorage.getItem("usuario")
+    if (!usuarioJSON) {
+      alert("Debes iniciar sesión para realizar esta acción")
+      return
+    }
 
-    console.log("Rol del usuario:", usuario.rol); // Verifica el rol del usuario
+    const currentUser = JSON.parse(usuarioJSON)
 
-    if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return;
+    // Evitar que un usuario se elimine a sí mismo
+    if (currentUser.id === id) {
+      alert("No puedes eliminar tu propio usuario")
+      return
+    }
 
-    console.log("Eliminando usuario:", id);
-    const { error } = await supabase.from("usuarios").delete().eq("id", id);
+    if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return
 
-    if (error) throw error;
+    console.log("Eliminando usuario ID:", id)
 
-    await cargarUsuarios();
-    alert("Usuario eliminado con éxito");
+    const { error } = await supabase.from("usuarios").delete().eq("id", id)
+
+    if (error) {
+      console.error("Error al eliminar usuario:", error)
+      throw error
+    }
+
+    await cargarUsuarios()
+    alert("Usuario eliminado con éxito")
   } catch (error) {
-    console.error("Error al eliminar usuario:", error);
-    alert("Error al eliminar el usuario: " + error.message);
+    console.error("Error al eliminar usuario:", error)
+    alert("Error al eliminar el usuario: " + (error.message || "Error desconocido"))
+  }
+}
+
+// Limpiar formulario
+function limpiarFormulario() {
+  if (!userForm) {
+    console.error("No se encontró el formulario de usuarios")
+    return
+  }
+
+  userForm.reset()
+
+  const userIdElement = document.getElementById("user-id")
+  if (userIdElement) {
+    userIdElement.value = ""
+  }
+
+  const modalTitleElement = document.getElementById("modal-title")
+  if (modalTitleElement) {
+    modalTitleElement.textContent = "Añadir Nuevo Usuario"
   }
 }
 
 // Event Listeners
-userForm.onsubmit = async (e) => {
-  e.preventDefault()
-  const formData = new FormData(userForm)
-  const mode = userForm.dataset.mode
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Documento cargado, inicializando gestión de usuarios...")
 
-  try {
-    if (mode === "edit") {
-      const userId = userForm.dataset.userId
-      if (!userId) throw new Error("ID de usuario no válido")
-      await guardarUsuario(formData, userId)
-    } else {
-      await guardarUsuario(formData)
+  // Cargar usuarios
+  cargarUsuarios()
+
+  // Configurar usuario
+  const usuarioJSON = localStorage.getItem("usuario")
+  if (usuarioJSON) {
+    const usuario = JSON.parse(usuarioJSON)
+    const sidebarAdminName = document.getElementById("sidebar-admin-name")
+    if (sidebarAdminName) {
+      sidebarAdminName.textContent = usuario.username || usuario.email || "Administrador"
     }
-  } catch (error) {
-    console.error("Error en el formulario:", error)
-    alert("Error: " + error.message)
+  } else {
+    console.warn("No se encontró usuario en localStorage")
   }
-}
 
-addUserBtn.onclick = () => {
-  userForm.reset()
-  document.getElementById("modal-title").textContent = "Añadir Nuevo Usuario"
-  userForm.dataset.mode = "add"
-  delete userForm.dataset.userId
-  modal.style.display = "block"
-}
-
-closeBtn.onclick = () => {
-  modal.style.display = "none"
-}
-
-window.onclick = (event) => {
-  if (event.target == modal) {
-    modal.style.display = "none"
+  // Evento para añadir usuario
+  if (addUserBtn) {
+    addUserBtn.addEventListener("click", () => {
+      limpiarFormulario()
+      modal.style.display = "block"
+    })
+  } else {
+    console.error("No se encontró el botón de añadir usuario")
   }
-}
 
-// Inicializar la aplicación
-function inicializar() {
-  const usuario = getUsuario()
-  if (usuario) {
-    document.getElementById("user-info").style.display = "flex"
-    document.getElementById("user-name").textContent = usuario.username || usuario.email || "Usuario"
-    cargarUsuarios()
+  // Evento para cerrar modal
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none"
+    })
+  } else {
+    console.error("No se encontró el botón de cerrar modal")
   }
-}
 
-// Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", inicializar)
+  // Evento para cancelar formulario
+  if (cancelFormBtn) {
+    cancelFormBtn.addEventListener("click", () => {
+      modal.style.display = "none"
+    })
+  } else {
+    console.error("No se encontró el botón de cancelar formulario")
+  }
 
+  // Evento para guardar usuario
+  if (userForm) {
+    userForm.addEventListener("submit", guardarUsuario)
+  } else {
+    console.error("No se encontró el formulario de usuarios")
+  }
+
+  // Cerrar modal al hacer clic fuera
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none"
+    }
+  })
+
+  console.log("Inicialización de gestión de usuarios completada")
+})

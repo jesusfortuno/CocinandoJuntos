@@ -5,168 +5,283 @@ const SUPABASE_API_KEY =
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
 
 // Elementos del DOM
-const modal = document.getElementById("recipe-modal")
+const recipesTableBody = document.getElementById("recipes-table-body")
 const addRecipeBtn = document.getElementById("add-recipe-btn")
+const modal = document.getElementById("recipe-modal")
 const closeBtn = document.querySelector(".close")
 const recipeForm = document.getElementById("recipe-form")
-const recipesTableBody = document.getElementById("recipes-table-body")
-
-// Obtener usuario del localStorage
-function getUsuario() {
-  const usuario = localStorage.getItem("usuario")
-  if (!usuario) {
-    window.location.href = "../login.html"
-    return null
-  }
-  return JSON.parse(usuario)
-}
+const cancelFormBtn = document.getElementById("cancel-form")
+const showInstructionsBtn = document.getElementById("show-instructions-btn")
+const instructionsModal = document.getElementById("instructions-modal")
+const closeInstructionsBtn = document.getElementById("close-instructions")
 
 // Cargar recetas
 async function cargarRecetas() {
   try {
     const { data: recetas, error } = await supabase.from("recetas").select("*").order("id", { ascending: false })
 
-    if (error) throw error
+    if (error) {
+      console.error("Error al cargar recetas:", error)
+      throw error
+    }
+
+    if (!recipesTableBody) {
+      console.error("No se encontró el elemento recipesTableBody")
+      return
+    }
 
     recipesTableBody.innerHTML = ""
 
     if (!recetas || recetas.length === 0) {
       recipesTableBody.innerHTML = `
-                <tr>
-                    <td colspan="7" class="text-center">No hay recetas disponibles</td>
-                </tr>
-            `
+        <tr>
+          <td colspan="7" class="text-center">No hay recetas disponibles</td>
+        </tr>
+      `
       return
     }
 
     recetas.forEach((receta) => {
       const row = document.createElement("tr")
+
+      // Determinar la clase de badge para la dificultad
+      let dificultadClass = "badge-success"
+      if (receta.dificultad === "Media") dificultadClass = "badge-warning"
+      if (receta.dificultad === "Difícil") dificultadClass = "badge-danger"
+
       row.innerHTML = `
-                <td>${receta.id}</td>
-                <td>
-                    <img src="${receta.imagen || "./../US1_PantallaInicio/Imagenes/placeholder.jpg"}" alt="${receta.titulo}" 
-                    style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
-                </td>
-                <td>${receta.titulo || ""}</td>
-                <td><span class="badge badge-primary">${receta.categoria || ""}</span></td>
-                <td><span class="badge badge-${receta.dificultad === "Fácil" ? "success" : receta.dificultad === "Media" ? "warning" : "danger"}">${receta.dificultad || ""}</span></td>
-                <td>${receta.tiempo || ""}</td>
-                <td class="table-actions">
-                    <button class="btn btn-info btn-sm edit-recipe" onclick="editarReceta(${receta.id})">
-                        <i class="fas fa-edit"></i> Editar
-                    </button>
-                    <button class="btn btn-danger btn-sm delete-recipe" onclick="eliminarReceta(${receta.id})">
-                        <i class="fas fa-trash"></i> Eliminar
-                    </button>
-                    <button class="btn btn-success btn-sm generate-html" onclick="generarHTML(${receta.id})">
-                        <i class="fas fa-file-code"></i> Generar HTML
-                    </button>
-                </td>
-            `
+        <td>${receta.id}</td>
+        <td>
+          <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" 
+               alt="${receta.titulo}" 
+               style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+        </td>
+        <td>${receta.titulo || ""}</td>
+        <td><span class="badge badge-primary">${receta.categoria || ""}</span></td>
+        <td><span class="badge ${dificultadClass}">${receta.dificultad || ""}</span></td>
+        <td>${receta.tiempo || ""}</td>
+        <td class="action-buttons">
+          <button class="btn btn-info btn-sm edit-recipe" data-id="${receta.id}">
+            <i class="fas fa-edit"></i> Editar
+          </button>
+          <button class="btn btn-danger btn-sm delete-recipe" data-id="${receta.id}">
+            <i class="fas fa-trash"></i> Eliminar
+          </button>
+          <button class="btn btn-success btn-sm generate-html" data-id="${receta.id}">
+            <i class="fas fa-file-code"></i> Generar HTML
+          </button>
+        </td>
+      `
       recipesTableBody.appendChild(row)
+    })
+
+    // Añadir event listeners a los botones
+    document.querySelectorAll(".edit-recipe").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const recetaId = this.getAttribute("data-id")
+        editarReceta(recetaId)
+      })
+    })
+
+    document.querySelectorAll(".delete-recipe").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const recetaId = this.getAttribute("data-id")
+        eliminarReceta(recetaId)
+      })
+    })
+
+    document.querySelectorAll(".generate-html").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const recetaId = this.getAttribute("data-id")
+        generarHTML(recetaId)
+      })
     })
   } catch (error) {
     console.error("Error al cargar recetas:", error)
-    alert("Error al cargar las recetas: " + error.message)
+    if (recipesTableBody) {
+      recipesTableBody.innerHTML = `
+        <tr>
+          <td colspan="7" class="text-center">Error al cargar recetas: ${error.message}</td>
+        </tr>
+      `
+    }
   }
 }
 
 // Guardar receta
-async function guardarReceta(formData, id = null) {
-  try {
-    const usuario = getUsuario()
-    if (!usuario) return
+async function guardarReceta(event) {
+  event.preventDefault()
 
-    // Construir el objeto de datos básicos (sin cultura)
-    const recetaData = {
-      titulo: formData.get("titulo"),
-      dificultad: formData.get("dificultad"),
-      tiempo: formData.get("tiempo"),
-      categoria: formData.get("categoria"),
-      ingredientes: formData.get("ingredientes"),
-      pasos: formData.get("pasos"),
-      usuario_id: usuario.id,
+  try {
+    // Verificar si hay un usuario en localStorage
+    const usuarioJSON = localStorage.getItem("usuario")
+    if (!usuarioJSON) {
+      alert("Debes iniciar sesión para realizar esta acción")
+      return
     }
 
-    // Intentar guardar la receta sin el campo cultura primero
+    const usuario = JSON.parse(usuarioJSON)
+
+    // Obtener los valores del formulario
+    const titulo = document.getElementById("titulo").value
+    const categoria = document.getElementById("categoria").value
+    const dificultad = document.getElementById("dificultad").value
+    const tiempo = document.getElementById("tiempo").value
+    const descripcion = document.getElementById("descripcion").value
+    const ingredientes = document.getElementById("ingredientes").value
+    const pasos = document.getElementById("pasos").value
+    const recetaId = document.getElementById("receta-id").value
+
+    // Obtener el valor de cultura si existe el elemento
+    let cultura = null
+    const culturaElement = document.getElementById("cultura")
+    if (culturaElement) {
+      cultura = culturaElement.value || null
+    }
+
+    // Construir el objeto de datos básicos (sin campos problemáticos)
+    const recetaData = {
+      titulo: titulo,
+      categoria: categoria,
+      dificultad: dificultad,
+      tiempo: tiempo,
+      descripcion: descripcion,
+      ingredientes: ingredientes,
+      pasos: pasos,
+    }
+
+    // Añadir usuario_id solo si existe
+    if (usuario && usuario.id) {
+      recetaData.usuario_id = usuario.id
+    }
+
+    // Añadir cultura solo si tiene un valor
+    if (cultura) {
+      recetaData.Cultura = cultura
+    }
+
+    console.log("Datos de la receta a guardar:", recetaData)
+
     let response
-    if (id) {
-      console.log("Actualizando receta:", id, recetaData)
-      response = await supabase.from("recetas").update(recetaData).eq("id", id)
+    if (recetaId) {
+      console.log("Actualizando receta ID:", recetaId)
+      response = await supabase.from("recetas").update(recetaData).eq("id", recetaId)
     } else {
-      console.log("Creando nueva receta:", recetaData)
+      console.log("Creando nueva receta")
       response = await supabase.from("recetas").insert([recetaData])
     }
 
-    if (response.error) throw response.error
-
-    // Obtener la receta recién creada o actualizada
-    let receta
-    if (id) {
-      const { data, error } = await supabase.from("recetas").select("*").eq("id", id).single()
-      if (error) throw error
-      receta = data
-    } else {
-      // Si es una nueva receta, obtenemos la última insertada por este usuario
-      const { data, error } = await supabase
-        .from("recetas")
-        .select("*")
-        .eq("usuario_id", usuario.id)
-        .order("id", { ascending: false })
-        .limit(1)
-        .single()
-      if (error) throw error
-      receta = data
+    if (response.error) {
+      console.error("Error en la respuesta de Supabase:", response.error)
+      throw response.error
     }
 
-    // Intentar actualizar el campo Cultura por separado si está disponible
-    try {
-      const culturaValue = formData.get("cultura")
-      if (culturaValue && receta && receta.id) {
-        // Intentar actualizar solo el campo Cultura
-        const { error: culturaError } = await supabase
-          .from("recetas")
-          .update({ Cultura: culturaValue }) // Nota: "Cultura" con C mayúscula según la estructura de la BD
-          .eq("id", receta.id)
-
-        if (culturaError) {
-          console.warn("No se pudo actualizar el campo Cultura:", culturaError)
-        }
-      }
-    } catch (culturaError) {
-      console.warn("Error al actualizar el campo Cultura:", culturaError)
-      // No interrumpimos el flujo principal si falla la actualización de Cultura
-    }
+    console.log("Respuesta de Supabase:", response)
 
     modal.style.display = "none"
     await cargarRecetas()
+    alert(`Receta ${recetaId ? "actualizada" : "añadida"} con éxito`)
 
-    // Preguntar al usuario si desea generar el HTML ahora
-    if (
-      receta &&
-      confirm(`Receta ${id ? "actualizada" : "añadida"} con éxito. ¿Deseas generar el archivo HTML ahora?`)
-    ) {
-      generarHTML(receta.id)
-    } else {
-      alert(`Receta ${id ? "actualizada" : "añadida"} con éxito. Puedes generar el HTML más tarde desde la tabla.`)
+    // Obtener la receta recién creada o actualizada para generar HTML
+    const nuevoRecetaId = recetaId || (response.data && response.data[0] ? response.data[0].id : null)
+
+    if (nuevoRecetaId && confirm(`¿Deseas generar el archivo HTML para esta receta ahora?`)) {
+      generarHTML(nuevoRecetaId)
     }
   } catch (error) {
     console.error("Error al guardar receta:", error)
-    alert("Error al guardar la receta: " + error.message)
+    alert("Error al guardar la receta: " + (error.message || "Error desconocido"))
+  }
+}
+
+// Editar receta
+async function editarReceta(id) {
+  try {
+    console.log("Cargando receta para editar, ID:", id)
+
+    const { data: receta, error } = await supabase.from("recetas").select("*").eq("id", id).single()
+
+    if (error) {
+      console.error("Error al obtener receta:", error)
+      throw error
+    }
+
+    if (!receta) {
+      console.error("No se encontró la receta con ID:", id)
+      throw new Error("No se encontró la receta")
+    }
+
+    console.log("Receta cargada:", receta)
+
+    // Llenar el formulario con valores predeterminados si algún campo es null
+    document.getElementById("titulo").value = receta.titulo || ""
+    document.getElementById("categoria").value = receta.categoria || "Comida"
+    document.getElementById("dificultad").value = receta.dificultad || "Fácil"
+    document.getElementById("tiempo").value = receta.tiempo || ""
+    document.getElementById("descripcion").value = receta.descripcion || ""
+    document.getElementById("ingredientes").value = receta.ingredientes || ""
+    document.getElementById("pasos").value = receta.pasos || ""
+    document.getElementById("receta-id").value = receta.id
+
+    // Verificar si el elemento cultura existe antes de intentar asignarle un valor
+    const culturaElement = document.getElementById("cultura")
+    if (culturaElement) {
+      culturaElement.value = receta.Cultura || ""
+    }
+
+    // Configurar el formulario
+    document.getElementById("modal-title").textContent = "Editar Receta"
+    modal.style.display = "block"
+  } catch (error) {
+    console.error("Error al cargar receta para editar:", error)
+    alert("Error al cargar la receta: " + (error.message || "Error desconocido"))
+  }
+}
+
+// Eliminar receta
+async function eliminarReceta(id) {
+  try {
+    if (!confirm("¿Estás seguro de que quieres eliminar esta receta?")) return
+
+    console.log("Eliminando receta ID:", id)
+
+    const { error } = await supabase.from("recetas").delete().eq("id", id)
+
+    if (error) {
+      console.error("Error al eliminar receta:", error)
+      throw error
+    }
+
+    await cargarRecetas()
+    alert("Receta eliminada con éxito")
+  } catch (error) {
+    console.error("Error al eliminar receta:", error)
+    alert("Error al eliminar la receta: " + (error.message || "Error desconocido"))
   }
 }
 
 // Generar HTML para una receta
 async function generarHTML(id) {
   try {
-    const usuario = getUsuario()
-    if (!usuario) return
-
     // Obtener la receta de la base de datos
     const { data: receta, error } = await supabase.from("recetas").select("*").eq("id", id).single()
 
-    if (error) throw error
-    if (!receta) throw new Error("No se encontró la receta")
+    if (error) {
+      console.error("Error al obtener receta para HTML:", error)
+      throw error
+    }
+
+    if (!receta) {
+      console.error("No se encontró la receta con ID:", id)
+      throw new Error("No se encontró la receta")
+    }
+
+    // Verificar si existe la función generadorRecetas
+    if (!window.generadorRecetas) {
+      console.error("No se encontró el generador de recetas")
+      alert("El generador de HTML no está disponible. Asegúrate de que el archivo generadorRecetas.js esté cargado.")
+      return
+    }
 
     // Generar nombre de archivo a partir del título
     const nombreArchivo = window.generadorRecetas.generarNombreArchivo(receta.titulo)
@@ -184,140 +299,107 @@ async function generarHTML(id) {
     }
   } catch (error) {
     console.error("Error al generar HTML:", error)
-    alert("Error al generar HTML: " + error.message)
+    alert("Error al generar HTML: " + (error.message || "Error desconocido"))
   }
 }
 
-// Editar receta
-async function editarReceta(id) {
-  try {
-    const usuario = getUsuario()
-    if (!usuario) return
-
-    console.log("Cargando receta para editar:", id)
-    const { data: receta, error } = await supabase.from("recetas").select("*").eq("id", id).single()
-
-    if (error) throw error
-    if (!receta) throw new Error("No se encontró la receta")
-
-    // Llenar el formulario
-    document.getElementById("titulo").value = receta.titulo || ""
-    document.getElementById("dificultad").value = receta.dificultad || ""
-    document.getElementById("tiempo").value = receta.tiempo || ""
-    document.getElementById("categoria").value = receta.categoria || ""
-    document.getElementById("ingredientes").value = receta.ingredientes || ""
-    document.getElementById("pasos").value = receta.pasos || ""
-
-    // Verificar si el elemento cultura existe antes de intentar asignarle un valor
-    const culturaElement = document.getElementById("cultura")
-    if (culturaElement) {
-      // Intentar usar el campo Cultura (con C mayúscula) según la estructura de la BD
-      culturaElement.value = receta.Cultura || ""
-    }
-
-    // Configurar el formulario
-    document.getElementById("modal-title").textContent = "Editar Receta"
-    recipeForm.dataset.mode = "edit"
-    recipeForm.dataset.recetaId = id
-
-    modal.style.display = "block"
-  } catch (error) {
-    console.error("Error al cargar receta para editar:", error)
-    alert("Error al cargar la receta: " + error.message)
+// Limpiar formulario
+function limpiarFormulario() {
+  if (!recipeForm) {
+    console.error("No se encontró el formulario de recetas")
+    return
   }
-}
 
-// Eliminar receta
-async function eliminarReceta(id) {
-  try {
-    const usuario = getUsuario()
-    if (!usuario) return
+  recipeForm.reset()
 
-    if (!confirm("¿Estás seguro de que quieres eliminar esta receta?")) return
+  const recetaIdElement = document.getElementById("receta-id")
+  if (recetaIdElement) {
+    recetaIdElement.value = ""
+  }
 
-    console.log("Eliminando receta:", id)
-    const { error } = await supabase.from("recetas").delete().eq("id", id)
-
-    if (error) throw error
-
-    await cargarRecetas()
-    alert("Receta eliminada con éxito")
-  } catch (error) {
-    console.error("Error al eliminar receta:", error)
-    alert("Error al eliminar la receta: " + error.message)
+  const modalTitleElement = document.getElementById("modal-title")
+  if (modalTitleElement) {
+    modalTitleElement.textContent = "Añadir Nueva Receta"
   }
 }
 
 // Event Listeners
-recipeForm.onsubmit = async (e) => {
-  e.preventDefault()
-  const formData = new FormData(recipeForm)
-  const mode = recipeForm.dataset.mode
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Documento cargado, inicializando...")
 
-  try {
-    if (mode === "edit") {
-      const recetaId = Number.parseInt(recipeForm.dataset.recetaId)
-      if (!recetaId) throw new Error("ID de receta no válido")
-      await guardarReceta(formData, recetaId)
-    } else {
-      await guardarReceta(formData)
+  // Cargar recetas
+  cargarRecetas()
+
+  // Configurar usuario
+  const usuarioJSON = localStorage.getItem("usuario")
+  if (usuarioJSON) {
+    const usuario = JSON.parse(usuarioJSON)
+    const sidebarAdminName = document.getElementById("sidebar-admin-name")
+    if (sidebarAdminName) {
+      sidebarAdminName.textContent = usuario.username || usuario.email || "Administrador"
     }
-  } catch (error) {
-    console.error("Error en el formulario:", error)
-    alert("Error: " + error.message)
+  } else {
+    console.warn("No se encontró usuario en localStorage")
   }
-}
 
-addRecipeBtn.onclick = () => {
-  recipeForm.reset()
-  document.getElementById("modal-title").textContent = "Añadir Nueva Receta"
-  recipeForm.dataset.mode = "add"
-  delete recipeForm.dataset.recetaId
-  modal.style.display = "block"
-}
-
-closeBtn.onclick = () => {
-  modal.style.display = "none"
-}
-
-window.onclick = (event) => {
-  if (event.target == modal) {
-    modal.style.display = "none"
+  // Evento para añadir receta
+  if (addRecipeBtn) {
+    addRecipeBtn.addEventListener("click", () => {
+      limpiarFormulario()
+      modal.style.display = "block"
+    })
+  } else {
+    console.error("No se encontró el botón de añadir receta")
   }
-}
 
-// Inicializar la aplicación
-function inicializar() {
-  const usuario = getUsuario()
-  if (usuario) {
-    document.getElementById("user-info").style.display = "flex"
-    document.getElementById("user-name").textContent = usuario.username || usuario.email || "Usuario"
-    document.getElementById("sidebar-admin-name").textContent = usuario.username || usuario.email || "Usuario"
+  // Evento para cerrar modal
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none"
+    })
+  } else {
+    console.error("No se encontró el botón de cerrar modal")
+  }
 
-    // Cargar el script del generador de recetas
-    if (!window.generadorRecetas) {
-      const script = document.createElement("script")
-      script.src = "generadorRecetas.js"
-      script.onload = () => {
-        console.log("Script de generador de recetas cargado correctamente")
-        cargarRecetas()
-      }
-      script.onerror = (error) => {
-        console.error("Error al cargar el script de generador de recetas:", error)
-        cargarRecetas()
-      }
-      document.body.appendChild(script)
-    } else {
-      cargarRecetas()
+  // Evento para cancelar formulario
+  if (cancelFormBtn) {
+    cancelFormBtn.addEventListener("click", () => {
+      modal.style.display = "none"
+    })
+  } else {
+    console.error("No se encontró el botón de cancelar formulario")
+  }
+
+  // Evento para guardar receta
+  if (recipeForm) {
+    recipeForm.addEventListener("submit", guardarReceta)
+  } else {
+    console.error("No se encontró el formulario de recetas")
+  }
+
+  // Evento para mostrar instrucciones
+  if (showInstructionsBtn && instructionsModal) {
+    showInstructionsBtn.addEventListener("click", () => {
+      instructionsModal.style.display = "block"
+    })
+  }
+
+  // Evento para cerrar instrucciones
+  if (closeInstructionsBtn && instructionsModal) {
+    closeInstructionsBtn.addEventListener("click", () => {
+      instructionsModal.style.display = "none"
+    })
+  }
+
+  // Cerrar modales al hacer clic fuera
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none"
     }
-  }
-}
+    if (event.target === instructionsModal) {
+      instructionsModal.style.display = "none"
+    }
+  })
 
-// Exportar funciones para uso global
-window.editarReceta = editarReceta
-window.eliminarReceta = eliminarReceta
-window.generarHTML = generarHTML
-
-// Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", inicializar)
-
+  console.log("Inicialización completada")
+})

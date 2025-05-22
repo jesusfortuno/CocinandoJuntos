@@ -86,6 +86,90 @@
             display: flex;
             gap: 0.5rem;
         }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-success {
+            background-color: #e6f7e9;
+            color: #2ecc71;
+        }
+        .badge-warning {
+            background-color: #fef5e7;
+            color: #f39c12;
+        }
+        .badge-danger {
+            background-color: #fdedeb;
+            color: #e74c3c;
+        }
+        .badge-primary {
+            background-color: #f0e6dd;
+            color: #6b4423;
+        }
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        .close:hover {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #d4c3b5;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-text {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
     </style>
 
     <div id="nav-placeholder"></div>
@@ -153,46 +237,7 @@
                     <tbody id="recipes-table-body">
                         <!-- Las recetas se cargarán aquí dinámicamente -->
                         <tr>
-                            <td>1</td>
-                            <td>
-                                <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="Tortilla Española" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
-                            </td>
-                            <td>Tortilla Española</td>
-                            <td><span class="badge badge-primary">Comida</span></td>
-                            <td><span class="badge badge-success">Fácil</span></td>
-                            <td>30 minutos</td>
-                            <td class="action-buttons">
-                                <a href="#" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i> Editar
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </a>
-                                <a href="#" class="btn btn-success btn-sm">
-                                    <i class="fas fa-file-code"></i> Generar HTML
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <img src="../US1_PantallaInicio/Imagenes/placeholder.jpg" alt="Gazpacho Andaluz" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
-                            </td>
-                            <td>Gazpacho Andaluz</td>
-                            <td><span class="badge badge-primary">Comida</span></td>
-                            <td><span class="badge badge-warning">Media</span></td>
-                            <td>45 minutos</td>
-                            <td class="action-buttons">
-                                <a href="#" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i> Editar
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </a>
-                                <a href="#" class="btn btn-success btn-sm">
-                                    <i class="fas fa-file-code"></i> Generar HTML
-                                </a>
-                            </td>
+                            <td colspan="7" class="text-center">Cargando recetas...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -200,37 +245,101 @@
         </main>
     </div>
 
+    <!-- Modal para añadir/editar receta -->
+    <div id="recipe-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Añadir Nueva Receta</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="recipe-form">
+                <div class="form-group">
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria" name="categoria" class="form-control" required>
+                        <option value="Comida">Comida</option>
+                        <option value="Desayuno">Desayuno</option>
+                        <option value="Merienda">Merienda</option>
+                        <option value="Cena">Cena</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cultura">Cultura:</label>
+                    <select id="cultura" name="cultura" class="form-control">
+                        <option value="">Seleccionar cultura</option>
+                        <option value="China">China</option>
+                        <option value="España">España</option>
+                        <option value="Francia">Francia</option>
+                        <option value="Italia">Italia</option>
+                        <option value="Japón">Japón</option>
+                        <option value="Venezuela">Venezuela</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dificultad">Dificultad:</label>
+                    <select id="dificultad" name="dificultad" class="form-control" required>
+                        <option value="Fácil">Fácil</option>
+                        <option value="Media">Media</option>
+                        <option value="Difícil">Difícil</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tiempo">Tiempo de preparación (minutos):</label>
+                    <input type="number" id="tiempo" name="tiempo" class="form-control" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ingredientes">Ingredientes:</label>
+                    <textarea id="ingredientes" name="ingredientes" class="form-control" required rows="6"></textarea>
+                    <small class="form-text">Escribe cada ingrediente en una línea nueva</small>
+                </div>
+                <div class="form-group">
+                    <label for="pasos">Pasos:</label>
+                    <textarea id="pasos" name="pasos" class="form-control" required rows="6"></textarea>
+                    <small class="form-text">Escribe cada paso en una línea nueva</small>
+                </div>
+                <input type="hidden" id="receta-id" name="receta-id" value="">
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-form">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="save-recipe">Guardar Receta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de instrucciones -->
+    <div id="instructions-modal" class="modal">
+        <div class="modal-content">
+            <h2>Instrucciones para Gestión de Recetas</h2>
+            <p>Este panel te permite administrar las recetas del sitio web:</p>
+            
+            <ol>
+                <li>Para añadir una nueva receta, haz clic en el botón "Añadir Nueva Receta".</li>
+                <li>Para editar una receta existente, haz clic en el botón "Editar" en la fila correspondiente.</li>
+                <li>Para eliminar una receta, haz clic en el botón "Eliminar".</li>
+                <li>Para generar el archivo HTML de una receta, haz clic en "Generar HTML".</li>
+            </ol>
+            
+            <p><strong>Nota:</strong> Todos los campos marcados con * son obligatorios.</p>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-primary" id="close-instructions">Entendido</button>
+            </div>
+        </div>
+    </div>
+
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="generadorRecetas.js"></script>
     <script src="gestionRecetas.js"></script>
-
-    <script>
-        // Obtener el usuario desde localStorage
-        document.addEventListener('DOMContentLoaded', () => {
-            const usuario = JSON.parse(localStorage.getItem("usuario"));
-            const sidebarAdminName = document.getElementById("sidebar-admin-name");
-
-            if (usuario) {
-                console.log('Usuario encontrado:', usuario);
-                sidebarAdminName.textContent = usuario.username || "Administrador";
-            } else {
-                console.log('No se encontró usuario en localStorage');
-                // Comentado para permitir ver la página sin redirección
-                // window.location.href = "../login.html";
-            }
-
-            // Función para alternar la visibilidad del sidebar en móviles
-            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
-            if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener("click", function () {
-                    const sidebar = document.querySelector('.sidebar');
-                    sidebar.classList.toggle('sidebar-open');
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>
