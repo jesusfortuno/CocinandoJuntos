@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
             <!-- Encabezado del footer con logo y descripción -->
             <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem;">
-                <img src="${pathToRoot}US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 80px; height: auto; filter: brightness(0) invert(1); opacity: 0.9;">
+                <img src="${pathToRoot}Imagenes/logos/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 80px; height: auto; filter: brightness(0) invert(1); opacity: 0.9;">
                 <p style="margin-left: 1.5rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; max-width: 600px; line-height: 1.5;">
                     Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.
                 </p>
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     <!-- Botón de scroll -->
                     <button type="button" id="scrollToTop" class="scroll-to-top" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: transform 0.3s ease;">
-                      <img src="${pathToRoot}US1_PantallaInicio/Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif" style="width: 35px; height: 35px; border-radius: 50%;">
+                      <img src="${pathToRoot}Imagenes/animado.gif" alt="Volver arriba" class="scroll-gif" style="width: 35px; height: 35px; border-radius: 50%;">
                     </button>
                 </div>
             </div>
