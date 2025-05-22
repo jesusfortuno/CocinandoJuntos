@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,16 @@
     <link rel="stylesheet" href="./notification-styles.css">
     <script src="./notification-center.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
+
 <body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
     <div id="nav-placeholder"></div>
 
     <main style="flex: 1;">
         <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="./US1_PantallaInicio/index.html">Inicio</a> > 
+            <a href="./US1_PantallaInicio/index.html">Inicio</a> >
             <span>Mejores Valorados</span>
         </div>
 
@@ -31,8 +34,9 @@
         <!-- Filtros -->
         <div class="filters">
             <div class="filter-group">
-                <button class="filter-button active" onclick="window.location.href='./Platos.html'">Mejor Valoradas</button>
-            </div>            
+                <button class="filter-button active" onclick="window.location.href='./Platos.html'">Mejor
+                    Valoradas</button>
+            </div>
             <div class="filter-group">
                 <button class="filter-button" id="filter-btn">Filtros</button>
             </div>
@@ -50,7 +54,7 @@
                 <option value="Japonesa">Japonesa</option>
                 <option value="Venezolana">Venezolana</option>
             </select>
-    
+
             <label for="filter-time">Tiempo:</label>
             <select id="filter-time">
                 <option value="">Cualquier tiempo</option>
@@ -59,7 +63,7 @@
                 <option value="60-120">60 - 120 min</option>
                 <option value="121">Más de 120 min</option>
             </select>
-    
+
             <label for="filter-difficulty">Dificultad:</label>
             <select id="filter-difficulty">
                 <option value="">Cualquier dificultad</option>
@@ -67,7 +71,7 @@
                 <option value="Media">Media</option>
                 <option value="Difícil">Difícil</option>
             </select>
-    
+
             <button id="apply-filters">Filtrar</button>
         </div>
 
@@ -76,7 +80,7 @@
             <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Media">
                 <div class="recipe-image">
                     <a href="./US6_GuardarRecetas/pollo-agridulce.html">
-                    <img src="./US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
+                        <img src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce">
                     </a>
                 </div>
                 <h3>Pollo Agridulce</h3>
@@ -86,10 +90,12 @@
                     <span class="category">Comida</span>
                 </div>
             </div>
-        
+
             <div class="recipe-card" data-culture="Española" data-time="10" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/España/pan-tomate.jpg" alt="pan-tomate">
+                    <a href="./US6_GuardarRecetas/pan-con-tomate.html">
+                        <img src="./Imagenes/España/pan-tomate.jpg" alt="pan-tomate">
+                    </a>
                 </div>
                 <h3>Pan con tomate, jamón y aceite</h3>
                 <div class="recipe-meta">
@@ -98,10 +104,12 @@
                     <span class="category">Desayuno</span>
                 </div>
             </div>
-        
+
             <div class="recipe-card" data-culture="Italiana" data-time="120" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg" alt="bizcocho-capuccino">
+                    <a href="./US6_GuardarRecetas/bizcocho-capuccino.html">
+                        <img src="./Imagenes/Italia/bizcocho-capuccino.jpg" alt="bizcocho-capuccino">
+                    </a>
                 </div>
                 <h3>Bizcocho de capuchino</h3>
                 <div class="recipe-meta">
@@ -110,10 +118,12 @@
                     <span class="category">Desayuno</span>
                 </div>
             </div>
-        
+
             <div class="recipe-card" data-culture="Francesa" data-time="20" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Francia/tostada-francesa.jpg" alt="tostada-francesa">
+                    <a href="US6_GuardarRecetas/tostada-francesa.html">
+                        <img src="./Imagenes/Francia/tostada-francesa.jpg" alt="tostada-francesa">
+                    </a>
                 </div>
                 <h3>Tostadas Francesas</h3>
                 <div class="recipe-meta">
@@ -125,7 +135,9 @@
 
             <div class="recipe-card" data-culture="China" data-time="121" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/China/bollitos-chinos.jpg" alt="bollitos-chinos">
+                    <a href="US6_GuardarRecetas/bolitas-chinas.html">
+                        <img src="./Imagenes/China/bollitos-chinos.jpg" alt="bollitos-chinos">
+                    </a>
                 </div>
                 <h3>Bollitos Chinos</h3>
                 <div class="recipe-meta">
@@ -137,7 +149,7 @@
 
             <div class="recipe-card" data-culture="Japonesa" data-time="25" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Japon/tamagoyaki.jpg" alt="tamagoyaki">
+                    <img src="./Imagenes/Japon/tamagoyaki.jpg" alt="tamagoyaki">
                 </div>
                 <h3>Tamagoyaki</h3>
                 <div class="recipe-meta">
@@ -149,7 +161,9 @@
 
             <div class="recipe-card" data-culture="Venezolana" data-time="35" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg" alt="arepa-venezolana">
+                    <a href="US6_GuardarRecetas/arepa-venezolana.html">
+                        <img src="./Imagenes/Venezuela/arepa-venezolana.jpg" alt="arepa-venezolana">
+                    </a>
                 </div>
                 <h3>Arepa</h3>
                 <div class="recipe-meta">
@@ -161,7 +175,9 @@
 
             <div class="recipe-card" data-culture="Española" data-time="121" data-difficulty="Difícil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/España/paella.png" alt="paella">
+                    <a href="US6_GuardarRecetas/paella.html">
+                        <img src="./Imagenes/España/paella.png" alt="paella">
+                    </a>
                 </div>
                 <h3>Paella</h3>
                 <div class="recipe-meta">
@@ -173,7 +189,9 @@
 
             <div class="recipe-card" data-culture="Italiana" data-time="121" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Italia/lasaña.jpg" alt="lasaña">
+                    <a href="US6_GuardarRecetas/lasana.html">
+                        <img src="./Imagenes/Italia/lasaña.jpg" alt="lasaña">
+                    </a>
                 </div>
                 <h3>Lasaña</h3>
                 <div class="recipe-meta">
@@ -185,7 +203,9 @@
 
             <div class="recipe-card" data-culture="Francesa" data-time="121" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Francia/coq-au-vin.jpg" alt="coq-au-vin">
+                    <a href="US6_GuardarRecetas/coq-au-vin.html">
+                        <img src="./Imagenes/Francia/coq-au-vin.jpg" alt="coq-au-vin">
+                    </a>
                 </div>
                 <h3>Coq au vin</h3>
                 <div class="recipe-meta">
@@ -197,7 +217,7 @@
 
             <div class="recipe-card" data-culture="Japonesa" data-time="121" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Japon/ramen.jpg" alt="ramen">
+                    <img src="./Imagenes/Japon/ramen.jpg" alt="ramen">
                 </div>
                 <h3>ramen</h3>
                 <div class="recipe-meta">
@@ -206,10 +226,10 @@
                     <span class="category">Comida</span>
                 </div>
             </div>
-            
+
             <div class="recipe-card" data-culture="Venezolana" data-time="121" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Venezuela/criollo-venezolano.jpg" alt="criollo-venezolano">
+                    <img src="./Imagenes/Venezuela/criollo-venezolano.jpg" alt="criollo-venezolano">
                 </div>
                 <h3>Criollo Venezolano</h3>
                 <div class="recipe-meta">
@@ -221,7 +241,9 @@
 
             <div class="recipe-card" data-culture="Española" data-time="60" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/España/churros-chocolate.jpg" alt="churros-chocolate">
+                    <a href="US6_GuardarRecetas/churros-chocolate.html">
+                        <img src="./Imagenes/España/churros-chocolate.jpg" alt="churros-chocolate">
+                    </a>
                 </div>
                 <h3>Churros con chocolate</h3>
                 <div class="recipe-meta">
@@ -233,7 +255,9 @@
 
             <div class="recipe-card" data-culture="Italiana" data-time="121" data-difficulty="Difícil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Italia/cannoli.png" alt="cannoli">
+                    <a href="US6_GuardarRecetas/cannoli.html">
+                        <img src="./Imagenes/Italia/cannoli.png" alt="cannoli">
+                    </a>
                 </div>
                 <h3>Cannoli</h3>
                 <div class="recipe-meta">
@@ -245,7 +269,9 @@
 
             <div class="recipe-card" data-culture="Francesa" data-time="30" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg" alt="crepas-dulces">
+                    <a href="US6_GuardarRecetas/crepas-dulces.html">
+                        <img src="./Imagenes/Francia/crepas-dulces.jpg" alt="crepas-dulces">
+                    </a>
                 </div>
                 <h3>Crepas dulces</h3>
                 <div class="recipe-meta">
@@ -257,7 +283,9 @@
 
             <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/China/galletas-de-sesamo.jpg" alt="galletas-de-sesamo">
+                    <a href="US6_GuardarRecetas/galletas-de-sesamo.html">
+                        <img src="./Imagenes/China/galletas-de-sesamo.jpg" alt="galletas-de-sesamo">
+                    </a>
                 </div>
                 <h3>Galletas de sésamo</h3>
                 <div class="recipe-meta">
@@ -269,7 +297,7 @@
 
             <div class="recipe-card" data-culture="Japonesa" data-time="30" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Japon/dorayaki.jpg" alt="dorayaki">
+                    <img src="./Imagenes/Japon/dorayaki.jpg" alt="dorayaki">
                 </div>
                 <h3>Dorayaki</h3>
                 <div class="recipe-meta">
@@ -281,7 +309,7 @@
 
             <div class="recipe-card" data-culture="Venezolana" data-time="121" data-difficulty="Difícil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Venezuela/Golfeados-venezolanos.png" alt="Golfeados-venezolanos">
+                    <img src="./Imagenes/Venezuela/Golfeados-venezolanos.png" alt="Golfeados-venezolanos">
                 </div>
                 <h3>Golfeados</h3>
                 <div class="recipe-meta">
@@ -293,7 +321,9 @@
 
             <div class="recipe-card" data-culture="Española" data-time="45" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/España/tortilla-patatas.jpeg" alt="tortilla-patatas">
+                    <a href="US6_GuardarRecetas/tortilla-de-patatas.html">
+                        <img src="./Imagenes/España/tortilla-patatas.jpeg" alt="tortilla-patatas">
+                    </a>
                 </div>
                 <h3>Tortilla de patatas</h3>
                 <div class="recipe-meta">
@@ -305,7 +335,7 @@
 
             <div class="recipe-card" data-culture="Italiana" data-time="121" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Italia/pizza-margarita.jpg" alt="pizza-margarita">
+                    <img src="./Imagenes/Italia/pizza-margarita.jpg" alt="pizza-margarita">
                 </div>
                 <h3>Pizza margarita</h3>
                 <div class="recipe-meta">
@@ -317,7 +347,9 @@
 
             <div class="recipe-card" data-culture="Francesa" data-time="121" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Francia/quiche-lorraine.pn.webp" alt="quiche-lorraine">
+                    <a href="US6_GuardarRecetas/quiche-lorraine.html">
+                        <img src="./Imagenes/Francia/quiche-lorraine.pn.webp" alt="quiche-lorraine">
+                    </a>
                 </div>
                 <h3>Quiche Lorraine</h3>
                 <div class="recipe-meta">
@@ -329,7 +361,9 @@
 
             <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/China/fideos-salteados.jpg" alt="fideos-salteados">
+                    <a href="US6_GuardarRecetas/fideos-salteados.html">
+                        <img src="./Imagenes/China/fideos-salteados.jpg" alt="fideos-salteados">
+                    </a>
                 </div>
                 <h3>Fideos salteados</h3>
                 <div class="recipe-meta">
@@ -341,7 +375,7 @@
 
             <div class="recipe-card" data-culture="Japonesa" data-time="121" data-difficulty="Media">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Japon/sushi.jpeg" alt="sushi">
+                    <img src="./Imagenes/Japon/sushi.jpeg" alt="sushi">
                 </div>
                 <h3>Sushi</h3>
                 <div class="recipe-meta">
@@ -353,7 +387,7 @@
 
             <div class="recipe-card" data-culture="Venezolana" data-time="25" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <img src="./US1_PantallaInicio/Imagenes/Venezuela/cachapa-venezolana.jpg" alt="cachapa-venezolana">
+                    <img src="./Imagenes/Venezuela/cachapa-venezolana.jpg" alt="cachapa-venezolana">
                 </div>
                 <h3>Cachapa</h3>
                 <div class="recipe-meta">
@@ -363,7 +397,7 @@
                 </div>
             </div>
         </div> <!-- Cierre correcto del grid -->
-        
+
     </main>
 
     <div id="footer-placeholder"></div>
@@ -378,47 +412,47 @@
             const filterBtn = document.getElementById("filter-btn");
             const filterOptions = document.getElementById("filter-options");
             const applyFilterBtn = document.getElementById("apply-filters");
-    
+
             // Mostrar/ocultar el cuadro de filtros
             filterBtn.addEventListener("click", () => {
                 filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
             });
-    
+
             // Filtrar recetas
             applyFilterBtn.addEventListener("click", () => {
                 const selectedCulture = document.getElementById("filter-culture").value;
                 const selectedTime = document.getElementById("filter-time").value;
                 const selectedDifficulty = document.getElementById("filter-difficulty").value;
                 const recipes = document.querySelectorAll(".recipe-card");
-    
+
                 recipes.forEach(recipe => {
                     const recipeCulture = recipe.getAttribute("data-culture");
                     const recipeTime = parseInt(recipe.getAttribute("data-time"));
                     const recipeDifficulty = recipe.getAttribute("data-difficulty");
-    
+
                     const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
                     const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
                     let matchesTime = false;
-    
-                    if (selectedTime === "" || 
+
+                    if (selectedTime === "" ||
                         (selectedTime === "0-30" && recipeTime <= 30) ||
                         (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
                         (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
                         (selectedTime === "121" && recipeTime > 120)) {
                         matchesTime = true;
                     }
-    
+
                     if (matchesCulture && matchesDifficulty && matchesTime) {
                         recipe.style.display = "inline-block";
                     } else {
                         recipe.style.display = "none";
                     }
                 });
-    
+
                 // Ocultar el cuadro de filtros después de aplicar
                 filterOptions.style.display = "none";
             });
-    
+
             // Cerrar el cuadro si se hace clic fuera de él
             document.addEventListener("click", (event) => {
                 if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
@@ -431,14 +465,14 @@
         const usuario = JSON.parse(localStorage.getItem("usuario"));
         const userInfo = document.getElementById("user-info");
         const authButton = document.getElementById("auth-button");
-        
+
         // Si el usuario está registrado en localStorage
         if (usuario) {
             // Mostrar la información del usuario
             userInfo.style.display = "flex";
             document.getElementById("user-name").textContent = usuario.username;
             authButton.style.display = "none";
-            
+
             // Agregar funcionalidad de cerrar sesión
             document.getElementById("logout-btn").addEventListener("click", (e) => {
                 e.preventDefault();
@@ -453,4 +487,5 @@
     </script>
     <script src="../fix-links.js"></script>
 </body>
+
 </html>
