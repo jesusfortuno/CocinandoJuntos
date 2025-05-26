@@ -142,8 +142,10 @@
             <p>Administra los comentarios de tus recetas</p>
         </div>
 
-        <div id="comments-container">
-            <!-- Los comentarios se cargarán aquí dinámicamente -->
+
+        <h2 class="page-header" style="margin-top:40px;">Mis Comentarios Realizados</h2>
+        <div id="chef-own-comments-container">
+            <!-- Aquí se mostrarán los comentarios hechos por el chef -->
         </div>
     </div>
 
@@ -174,7 +176,6 @@
         // Función para cargar comentarios desde Supabase
         async function cargarComentarios(usuario) {
             const commentsContainer = document.getElementById("comments-container");
-            
             try {
                 // Obtener el ID del usuario
                 const { data: userData, error: userError } = await supabase
@@ -182,41 +183,29 @@
                     .select("id")
                     .eq("username", usuario.username)
                     .single();
-
                 if (userError) {
                     console.error("Error al obtener datos del usuario:", userError);
                     return;
                 }
-
                 const userId = userData.id;
-
                 // Obtener las recetas del chef
                 const { data: recetasData, error: recetasError } = await supabase
                     .from("recetas")
                     .select("id, titulo")
                     .eq("usuario_id", userId);
-
                 if (recetasError) {
                     console.error("Error al obtener recetas:", recetasError);
                     return;
                 }
-
                 if (recetasData.length === 0) {
-                    commentsContainer.innerHTML = `
-                        <div class="no-comments">
-                            <i class="fas fa-comments"></i>
-                            <p>No tienes recetas para mostrar comentarios.</p>
-                        </div>
-                    `;
+                    renderComentarios([], commentsContainer, '');
                     return;
                 }
-
                 const recetasIds = recetasData.map(receta => receta.id);
                 const recetasTitulos = {};
                 recetasData.forEach(receta => {
                     recetasTitulos[receta.id] = receta.titulo;
                 });
-
                 // Obtener comentarios de las recetas del chef
                 const { data: comentarios, error: comentariosError } = await supabase
                     .from("comentarios")
@@ -226,71 +215,26 @@
                         id_receta,
                         comentario,
                         fecha_comentario,
-                        usuarios:id_usuario (username)
+                        usuarios:id_usuario (username),
+                        recetas:id_receta (titulo)
                     `)
                     .in("id_receta", recetasIds)
                     .eq("visible", true)
                     .order("fecha_comentario", { ascending: false });
-
                 if (comentariosError) {
                     console.error("Error al obtener comentarios:", comentariosError);
                     return;
                 }
-
-                if (comentarios.length === 0) {
-                    commentsContainer.innerHTML = `
-                        <div class="no-comments">
-                            <i class="fas fa-comments"></i>
-                            <p>Aún no hay comentarios en tus recetas.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                // Mostrar comentarios
-                commentsContainer.innerHTML = "";
-                comentarios.forEach(comentario => {
-                    const recetaTitulo = recetasTitulos[comentario.id_receta] || "Receta desconocida";
-                    const username = comentario.usuarios?.username || "Usuario desconocido";
-                    
-                    // Formatear fecha
-                    const fecha = new Date(comentario.fecha_comentario);
-                    const ahora = new Date();
-                    const diferenciaDias = Math.floor((ahora - fecha) / (1000 * 60 * 60 * 24));
-                    
-                    let fechaFormateada;
-                    if (diferenciaDias === 0) {
-                        fechaFormateada = "Hoy";
-                    } else if (diferenciaDias === 1) {
-                        fechaFormateada = "Ayer";
-                    } else if (diferenciaDias < 7) {
-                        fechaFormateada = `Hace ${diferenciaDias} días`;
-                    } else if (diferenciaDias < 30) {
-                        const semanas = Math.floor(diferenciaDias / 7);
-                        fechaFormateada = `Hace ${semanas} ${semanas === 1 ? 'semana' : 'semanas'}`;
-                    } else {
-                        fechaFormateada = fecha.toLocaleDateString('es-ES', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        });
-                    }
-
-                    commentsContainer.innerHTML += `
-                        <div class="comment-item">
-                            <div class="comment-header">
-                                <span class="comment-recipe">${recetaTitulo}</span>
-                                <span class="comment-date">${fechaFormateada}</span>
-                            </div>
-                            <div class="comment-user">
-                                <i class="fas fa-user"></i> ${username}
-                            </div>
-                            <div class="comment-text">
-                                ${comentario.comentario}
-                            </div>
-                        </div>
-                    `;
-                });
+                // Mostrar comentarios usando la función reutilizable
+                renderComentarios(
+                    comentarios && comentarios.length > 0 ? comentarios.map(comentario => ({
+                        ...comentario,
+                        recetas: { titulo: recetasTitulos[comentario.id_receta] || 'Receta desconocida' },
+                        usuario: comentario.usuarios?.username || 'Usuario desconocido'
+                    })) : [],
+                    commentsContainer,
+                    ''
+                );
             } catch (error) {
                 console.error("Error al cargar comentarios:", error);
                 commentsContainer.innerHTML = `
@@ -299,6 +243,60 @@
                         <p>Error al cargar los comentarios. Por favor, intenta de nuevo más tarde.</p>
                     </div>
                 `;
+            }
+        }
+
+        // Función reutilizable para mostrar comentarios
+        function renderComentarios(comentarios, container, mensajeVacio) {
+            if (!comentarios || comentarios.length === 0) {
+                container.innerHTML = `<div class='no-comments'><i class='fas fa-comments'></i><p>${mensajeVacio}</p></div>`;
+                return;
+            }
+            container.innerHTML = '';
+            comentarios.forEach(c => {
+                const recetaTitulo = c.recetas?.titulo || `Receta ${c.id_receta}`;
+                const fecha = new Date(c.fecha_comentario);
+                const fechaFormateada = fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                container.innerHTML += `
+                    <div class='comment-item'>
+                        <div class='comment-header'>
+                            <span class='comment-recipe'>${recetaTitulo}</span>
+                            <span class='comment-date'>${fechaFormateada}</span>
+                        </div>
+                        <div class='comment-user'><i class='fas fa-user'></i> Tú</div>
+                        <div class='comment-text'>${c.comentario}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // Mostrar los comentarios que el chef ha hecho en otras recetas
+        document.addEventListener("DOMContentLoaded", async function() {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            if (!usuario || usuario.rol !== "chef") return;
+            await cargarComentariosHechosPorChef(usuario);
+        });
+
+        async function cargarComentariosHechosPorChef(usuario) {
+            const container = document.getElementById("chef-own-comments-container");
+            try {
+                // Obtener los comentarios hechos por el chef (id_usuario = usuario.id)
+                const { data: userData, error: userError } = await supabase
+                    .from("usuarios")
+                    .select("id")
+                    .eq("username", usuario.username)
+                    .single();
+                if (userError) return;
+                const chefId = userData.id;
+                const { data: comentarios, error } = await supabase
+                    .from("comentarios")
+                    .select(`id_comentario, id_receta, comentario, fecha_comentario, recetas:id_receta (titulo)`)
+                    .eq("id_usuario", chefId)
+                    .order("fecha_comentario", { ascending: false });
+                if (error) throw error;
+                renderComentarios(comentarios, container, '');
+            } catch (error) {
+                container.innerHTML = `<div class='no-comments'><i class='fas fa-exclamation-circle'></i><p>Error al cargar tus comentarios realizados.</p></div>`;
             }
         }
     </script>
