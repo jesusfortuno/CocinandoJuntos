@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios | Cocinando Juntos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="./include-components.js" data-include="nav,footer"></script>
+    <style>
+        :root {
+            --primary-color: #6b4423;
+            --primary-light: rgba(107, 68, 35, 0.1);
+            --secondary-color: #f8f5f2;
+            --text-color: #333;
+            --text-light: #666;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .back-link i {
+            margin-right: 8px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .comment-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .comment-recipe {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .comment-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .comment-user {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .comment-user i {
+            margin-right: 8px;
+            color: var(--text-light);
+        }
+
+        .comment-text {
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .no-comments {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+        }
+
+        .no-comments i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Placeholder para la navegación -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Espacio de separación -->
+    <div style="height: 20px;"></div>
+
+    <div class="container">
+        <a href="chef-page.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver al Panel
+        </a>
+
+        <div class="page-header">
+            <h1>Gestión de Comentarios</h1>
+            <p>Administra los comentarios de tus recetas</p>
+        </div>
+
+        <div id="comments-container">
+            <!-- Los comentarios se cargarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Placeholder para el footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Configuración de Supabase
+        const SUPABASE_URL = "https://uonkcjrokwtgvimjxawm.supabase.co";
+        const SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvbmtjanJva3d0Z3ZpbWp4YXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg2ODIyNTgsImV4cCI6MjA1NDI1ODI1OH0.fTH7cyyYYQFi5HQc8y-JXAKSY0PL3P1FKy6LymfeTvU";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
+
+        document.addEventListener("DOMContentLoaded", async function() {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            
+            // Si no hay usuario o el usuario no tiene rol chef, redirigir
+            if (!usuario || usuario.rol !== "chef") {
+                console.log("Acceso no autorizado a la página de comentarios");
+                alert("No tienes permisos para acceder a esta página");
+                window.location.href = "US1_PantallaInicio/index.html";
+                return;
+            }
+
+            // Cargar comentarios
+            await cargarComentarios(usuario);
+        });
+
+        // Función para cargar comentarios desde Supabase
+        async function cargarComentarios(usuario) {
+            const commentsContainer = document.getElementById("comments-container");
+            
+            try {
+                // Obtener el ID del usuario
+                const { data: userData, error: userError } = await supabase
+                    .from("usuarios")
+                    .select("id")
+                    .eq("username", usuario.username)
+                    .single();
+
+                if (userError) {
+                    console.error("Error al obtener datos del usuario:", userError);
+                    return;
+                }
+
+                const userId = userData.id;
+
+                // Obtener las recetas del chef
+                const { data: recetasData, error: recetasError } = await supabase
+                    .from("recetas")
+                    .select("id, titulo")
+                    .eq("usuario_id", userId);
+
+                if (recetasError) {
+                    console.error("Error al obtener recetas:", recetasError);
+                    return;
+                }
+
+                if (recetasData.length === 0) {
+                    commentsContainer.innerHTML = `
+                        <div class="no-comments">
+                            <i class="fas fa-comments"></i>
+                            <p>No tienes recetas para mostrar comentarios.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const recetasIds = recetasData.map(receta => receta.id);
+                const recetasTitulos = {};
+                recetasData.forEach(receta => {
+                    recetasTitulos[receta.id] = receta.titulo;
+                });
+
+                // Obtener comentarios de las recetas del chef
+                const { data: comentarios, error: comentariosError } = await supabase
+                    .from("comentarios")
+                    .select(`
+                        id_comentario,
+                        id_usuario,
+                        id_receta,
+                        comentario,
+                        fecha_comentario,
+                        usuarios:id_usuario (username)
+                    `)
+                    .in("id_receta", recetasIds)
+                    .eq("visible", true)
+                    .order("fecha_comentario", { ascending: false });
+
+                if (comentariosError) {
+                    console.error("Error al obtener comentarios:", comentariosError);
+                    return;
+                }
+
+                if (comentarios.length === 0) {
+                    commentsContainer.innerHTML = `
+                        <div class="no-comments">
+                            <i class="fas fa-comments"></i>
+                            <p>Aún no hay comentarios en tus recetas.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Mostrar comentarios
+                commentsContainer.innerHTML = "";
+                comentarios.forEach(comentario => {
+                    const recetaTitulo = recetasTitulos[comentario.id_receta] || "Receta desconocida";
+                    const username = comentario.usuarios?.username || "Usuario desconocido";
+                    
+                    // Formatear fecha
+                    const fecha = new Date(comentario.fecha_comentario);
+                    const ahora = new Date();
+                    const diferenciaDias = Math.floor((ahora - fecha) / (1000 * 60 * 60 * 24));
+                    
+                    let fechaFormateada;
+                    if (diferenciaDias === 0) {
+                        fechaFormateada = "Hoy";
+                    } else if (diferenciaDias === 1) {
+                        fechaFormateada = "Ayer";
+                    } else if (diferenciaDias < 7) {
+                        fechaFormateada = `Hace ${diferenciaDias} días`;
+                    } else if (diferenciaDias < 30) {
+                        const semanas = Math.floor(diferenciaDias / 7);
+                        fechaFormateada = `Hace ${semanas} ${semanas === 1 ? 'semana' : 'semanas'}`;
+                    } else {
+                        fechaFormateada = fecha.toLocaleDateString('es-ES', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                    }
+
+                    commentsContainer.innerHTML += `
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <span class="comment-recipe">${recetaTitulo}</span>
+                                <span class="comment-date">${fechaFormateada}</span>
+                            </div>
+                            <div class="comment-user">
+                                <i class="fas fa-user"></i> ${username}
+                            </div>
+                            <div class="comment-text">
+                                ${comentario.comentario}
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error al cargar comentarios:", error);
+                commentsContainer.innerHTML = `
+                    <div class="no-comments">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Error al cargar los comentarios. Por favor, intenta de nuevo más tarde.</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos | Cocinando Juntos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="./include-components.js" data-include="nav,footer"></script>
+    <style>
+        :root {
+            --primary-color: #6b4423;
+            --primary-light: rgba(107, 68, 35, 0.1);
+            --secondary-color: #f8f5f2;
+            --text-color: #333;
+            --text-light: #666;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .back-link i {
+            margin-right: 8px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .favorite-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .favorite-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .favorite-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .favorite-content {
+            padding: 15px;
+        }
+
+        .favorite-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+        }
+
+        .favorite-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .favorite-meta span {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .favorite-meta i {
+            margin-right: 5px;
+        }
+
+        .no-favorites {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+            grid-column: 1 / -1;
+        }
+
+        .no-favorites i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .favorites-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Placeholder para la navegación -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Espacio de separación -->
+    <div style="height: 20px;"></div>
+
+    <div class="container">
+        <a href="chef-page.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver al Panel
+        </a>
+
+        <div class="page-header">
+            <h1>Mis Recetas Favoritas</h1>
+            <p>Descubre las recetas que más te gustan</p>
+        </div>
+
+        <div id="favorites-container">
+            <!-- Las recetas favoritas se cargarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Placeholder para el footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Configuración de Supabase
+        const SUPABASE_URL = "https://uonkcjrokwtgvimjxawm.supabase.co";
+        const SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvbmtjanJva3d0Z3ZpbWp4YXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg2ODIyNTgsImV4cCI6MjA1NDI1ODI1OH0.fTH7cyyYYQFi5HQc8y-JXAKSY0PL3P1FKy6LymfeTvU";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
+
+        document.addEventListener("DOMContentLoaded", async function() {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            
+            // Si no hay usuario o el usuario no tiene rol chef, redirigir
+            if (!usuario || usuario.rol !== "chef") {
+                console.log("Acceso no autorizado a la página de favoritos");
+                alert("No tienes permisos para acceder a esta página");
+                window.location.href = "US1_PantallaInicio/index.html";
+                return;
+            }
+
+            // Cargar favoritos
+            await cargarFavoritos(usuario);
+        });
+
+        // Función para cargar favoritos desde Supabase
+        async function cargarFavoritos(usuario) {
+            const favoritesContainer = document.getElementById("favorites-container");
+            
+            try {
+                // Obtener el ID del usuario
+                const { data: userData, error: userError } = await supabase
+                    .from("usuarios")
+                    .select("id")
+                    .eq("username", usuario.username)
+                    .single();
+
+                if (userError) {
+                    console.error("Error al obtener datos del usuario:", userError);
+                    return;
+                }
+
+                const userId = userData.id;
+
+                // Obtener favoritos con información de las recetas
+                const { data: favoritos, error: favoritosError } = await supabase
+                    .from("favoritos")
+                    .select(`
+                        id,
+                        receta_id,
+                        recetas:receta_id (
+                            id,
+                            titulo,
+                            dificultad,
+                            Cultura
+                        )
+                    `)
+                    .eq("usuario_id", userId);
+
+                if (favoritosError) {
+                    console.error("Error al obtener favoritos:", favoritosError);
+                    return;
+                }
+
+                if (favoritos.length === 0) {
+                    favoritesContainer.innerHTML = `
+                        <div class="no-favorites">
+                            <i class="fas fa-heart"></i>
+                            <p>Aún no has añadido recetas a favoritos.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Mostrar favoritos
+                favoritesContainer.innerHTML = `<div class="favorites-grid"></div>`;
+                const favoritesGrid = favoritesContainer.querySelector(".favorites-grid");
+                
+                favoritos.forEach(favorito => {
+                    if (!favorito.recetas) return;
+                    
+                    const receta = favorito.recetas;
+                    const imagenUrl = obtenerImagenPredeterminada(receta.Cultura);
+                    
+                    favoritesGrid.innerHTML += `
+                        <div class="favorite-item">
+                            <img src="${imagenUrl}" alt="${receta.titulo}" class="favorite-image">
+                            <div class="favorite-content">
+                                <h3 class="favorite-title">${receta.titulo}</h3>
+                                <div class="favorite-meta">
+                                    <span><i class="fas fa-globe"></i> ${receta.Cultura || 'Sin cultura'}</span>
+                                    <span><i class="fas fa-signal"></i> ${receta.dificultad || 'Sin dificultad'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error al cargar favoritos:", error);
+                favoritesContainer.innerHTML = `
+                    <div class="no-favorites">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Error al cargar los favoritos. Por favor, intenta de nuevo más tarde.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Función para obtener imagen predeterminada según la cultura
+        function obtenerImagenPredeterminada(cultura) {
+            const imagenesPredeterminadas = {
+                "China": "US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg",
+                "España": "US1_PantallaInicio/Imagenes/España/tortilla-patatas.jpeg",
+                "Francia": "US1_PantallaInicio/Imagenes/Francia/coq-au-vin.jpg",
+                "Italia": "US1_PantallaInicio/Imagenes/Italia/pizza-margarita.jpg",
+                "Japón": "US1_PantallaInicio/Imagenes/Japon/sushi.jpeg",
+                "Venezuela": "US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg"
+            };
+
+            return imagenesPredeterminadas[cultura] || "US1_PantallaInicio/Imagenes/default-recipe.jpg";
+        }
+    </script>
+</body>
+
+</html>
