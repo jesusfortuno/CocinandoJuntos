@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Términos y Condiciones - Cocinando Juntos</title>
+    <title data-i18n="Términos y Condiciones - Cocinando Juntos">Términos y Condiciones - Cocinando Juntos</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="chefs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -18,63 +18,21 @@
 
     <main>
         <section class="policy-section">
-            <h1 class="policy-title">Términos y Condiciones</h1>
-            <p>Aquí va el contenido de los términos y condiciones...</p>
+            <h1 class="policy-title" data-i18n="Términos y Condiciones">Términos y Condiciones</h1>
+            <p data-i18n="Aquí va el contenido de los términos y condiciones...">Aquí va el contenido de los términos y condiciones...</p>
         </section>
     </main>
 
   <!-- Placeholder para el footer -->
   <div id="footer-placeholder"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <!-- Cargar primero el archivo de traducciones -->
-    <script src="i18n.js"></script>
-    <!-- Luego cargar el script de cambio de idioma -->
-    <script src="language-switcher.js"></script>
-    <script>
-        // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
-
-        if (usuario) {
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username;
-            authButton.style.display = "none";
-
-            document.getElementById("logout-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.reload();
-            });
-        } else {
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
-        }
-
-        // Código JavaScript directamente en el HTML para asegurar el orden correcto
-        document.addEventListener('DOMContentLoaded', () => {
-            // Menú desplegable
-            document.getElementById('menuToggle').addEventListener('click', function (e) {
-                e.preventDefault();
-                const overlayMenu = document.getElementById('overlayMenu');
-                overlayMenu.classList.toggle('active');
-            });
-
-            document.getElementById('closeMenu').addEventListener('click', function () {
-                const overlayMenu = document.getElementById('overlayMenu');
-                overlayMenu.classList.remove('active');
-            });
-
-            // Cerrar al hacer clic fuera del menú
-            document.getElementById('overlayMenu').addEventListener('click', function (e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
-            });
-        });
-    </script>
-    <script src="../fix-links.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Cargar primero el archivo de traducciones -->
+  <script src="../translations.js"></script>
+  <!-- Luego cargar el script de cambio de idioma -->
+  <script src="language-switcher.js"></script>
+  <!-- Finalmente, cargar el script para arreglar los enlaces -->
+  <script src="../fix-links.js"></script>
 </body>
 
 </html>

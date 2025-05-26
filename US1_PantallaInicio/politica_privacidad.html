@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - Cocinando Juntos</title>
+    <title data-i18n="Política de Privacidad - Cocinando Juntos">Política de Privacidad - Cocinando Juntos</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="chefs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -18,20 +18,21 @@
 
     <main>
         <section class="policy-section">
-            <h1 class="policy-title">Política de Privacidad</h1>
-            <p>Aquí va el contenido de la política de privacidad...</p>
+            <h1 class="policy-title" data-i18n="Política de Privacidad">Política de Privacidad</h1>
+            <p data-i18n="Aquí va el contenido de la política de privacidad...">Aquí va el contenido de la política de privacidad...</p>
         </section>
     </main>
 
     <!-- Placeholder para el footer -->
     <div id="footer-placeholder"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <!-- Cargar primero el archivo de traducciones -->
-    <script src="i18n.js"></script>
-    <!-- Luego cargar el script de cambio de idioma -->
-    <script src="language-switcher.js"></script>
-    <script src="../fix-links.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Cargar primero el archivo de traducciones -->
+  <script src="../translations.js"></script>
+  <!-- Luego cargar el script de cambio de idioma -->
+  <script src="language-switcher.js"></script>
+  <!-- Finalmente, cargar el script para arreglar los enlaces -->
+  <script src="../fix-links.js"></script>
 </body>
 
 </html>

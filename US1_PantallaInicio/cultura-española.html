@@ -134,12 +134,12 @@
             <label for="filter-culture" data-i18n="Cultura:">Cultura:</label>
             <select id="filter-culture">
                 <option value="" data-i18n="Todas">Todas</option>
-                <option value="Española">Española</option>
-                <option value="Italiana">Italiana</option>
-                <option value="Francesa">Francesa</option>
-                <option value="China">China</option>
-                <option value="Japonesa">Japonesa</option>
-                <option value="Venezolana">Venezolana</option>
+                <option value="Española" data-i18n="Española">Española</option>
+                <option value="Italiana" data-i18n="Italiana">Italiana</option>
+                <option value="Francesa" data-i18n="Francesa">Francesa</option>
+                <option value="China" data-i18n="China">China</option>
+                <option value="Japonesa" data-i18n="Japonesa">Japonesa</option>
+                <option value="Venezolana" data-i18n="Venezolana">Venezolana</option>
             </select>
 
             <label for="filter-difficulty" data-i18n="Dificultad:">Dificultad:</label>
@@ -172,7 +172,7 @@
                 <h3 data-i18n="Tortilla de Patatas">Tortilla de Patatas</h3>
                 <div class="recipe-meta">
                     <span class="difficulty" data-i18n="Difícil">Difícil</span>
-                    <span class="time">45 min</span>
+                    <span class="time" data-i18n="45 min">45 min</span>
                     <span class="category" data-i18n="Cena">Cena</span>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                 <h3 data-i18n="Churros con Chocolate">Churros con Chocolate</h3>
                 <div class="recipe-meta">
                     <span class="difficulty" data-i18n="Fácil">Fácil</span>
-                    <span class="time">35 min</span>
+                    <span class="time" data-i18n="35 min">35 min</span>
                     <span class="category" data-i18n="Merienda">Merienda</span>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                 <h3 data-i18n="Paella">Paella</h3>
                 <div class="recipe-meta">
                     <span class="difficulty" data-i18n="Difícil">Dificil</span>
-                    <span class="time">70 min</span>
+                    <span class="time" data-i18n="70 min">70 min</span>
                     <span class="category" data-i18n="Comida">Comida</span>
                 </div>
             </div>
@@ -211,7 +211,7 @@
                 <h3 data-i18n="Pan con Tomate">Pan con Tomate</h3>
                 <div class="recipe-meta">
                     <span class="difficulty" data-i18n="Fácil">Fácil</span>
-                    <span class="time">15 min</span>
+                    <span class="time" data-i18n="15 min">15 min</span>
                     <span class="category" data-i18n="Desayuno">Desayuno</span>
                 </div>
             </div>
@@ -223,6 +223,13 @@
 
     <script src="index.js" defer></script>
     <script src="include-components.js" defer></script>
+    <!-- Cargar primero el archivo de traducciones -->
+    <script src="../translations.js"></script>
+    <!-- Luego cargar el script de cambio de idioma -->
+    <script src="language-switcher.js"></script>
+    <!-- Opcionalmente, cargar el helper de traducciones -->
+    <script src="../translation-helper.js"></script>
+    <!-- Finalmente, cargar el script para arreglar los enlaces -->
     <script src="../fix-links.js"></script>
     <script>
         // Script para los filtros
@@ -276,215 +283,6 @@
             });
         });
     </script>
-    <script>
-// Load translations
-const translations = {
-  // Spanish (default language)
-  es: {
-    // Navigation
-    "Buscar recetas...": "Buscar recetas...",
-    "Iniciar Sesión": "Iniciar Sesión",
-    "Cerrar Sesión": "Cerrar Sesión",
-    
-    // Culture pages
-    "Cultura Española": "Cultura Española",
-    "Descubre los sabores auténticos de la cocina tradicional española": 
-      "Descubre los sabores auténticos de la cocina tradicional española",
-    "Mejor Valoradas": "Mejor Valoradas",
-    "Filtros": "Filtros",
-    "Cultura:": "Cultura:",
-    "Todas": "Todas",
-    "Dificultad:": "Dificultad:",
-    "Tiempo:": "Tiempo:",
-    "Cualquier tiempo": "Cualquier tiempo",
-    "Menos de 30 min": "Menos de 30 min",
-    "30 - 60 min": "30 - 60 min",
-    "60 - 120 min": "60 - 120 min",
-    "Más de 120 min": "Más de 120 min",
-    "Aplicar Filtros": "Aplicar Filtros",
-    "Tortilla de Patatas": "Tortilla de Patatas",
-    "Churros con Chocolate": "Churros con Chocolate",
-    "Paella": "Paella",
-    "Pan con Tomate": "Pan con Tomate",
-    "Media": "Media",
-    "Fácil": "Fácil",
-    "Difícil": "Difícil",
-    "Comida": "Comida",
-    "Merienda": "Merienda",
-    "Desayuno": "Desayuno",
-    "Cena": "Cena",
-    "Inicio": "Inicio",
-    
-    // Footer
-    "Sobre Nosotros": "Sobre Nosotros",
-    "Quiénes Somos": "Quiénes Somos",
-    Contacto: "Contacto",
-    Legal: "Legal",
-    "Política de Privacidad": "Política de Privacidad",
-    "Términos y Condiciones": "Términos y Condiciones",
-    "Política de Cookies": "Política de Cookies",
-    "Aviso Legal": "Aviso Legal",
-    Comunidad: "Comunidad",
-    Recetas: "Recetas",
-    Chefs: "Chefs",
-    Síguenos: "Síguenos",
-    "Idioma:": "Idioma:",
-    "© 2025 Cocinando Juntos - Todos los derechos reservados":
-      "© 2025 Cocinando Juntos - Todos los derechos reservados",
-  },
-
-  // English
-  en: {
-    // Navigation
-    "Buscar recetas...": "Search recipes...",
-    "Iniciar Sesión": "Log In",
-    "Cerrar Sesión": "Log Out",
-    
-    // Culture pages
-    "Cultura Española": "Spanish Culture",
-    "Descubre los sabores auténticos de la cocina tradicional española": 
-      "Discover the authentic flavors of traditional Spanish cuisine",
-    "Mejor Valoradas": "Top Rated",
-    "Filtros": "Filters",
-    "Cultura:": "Culture:",
-    "Todas": "All",
-    "Dificultad:": "Difficulty:",
-    "Tiempo:": "Time:",
-    "Cualquier tiempo": "Any time",
-    "Menos de 30 min": "Less than 30 min",
-    "30 - 60 min": "30 - 60 min",
-    "60 - 120 min": "60 - 120 min",
-    "Más de 120 min": "More than 120 min",
-    "Aplicar Filtros": "Apply Filters",
-    "Tortilla de Patatas": "Spanish Omelette",
-    "Churros con Chocolate": "Churros with Chocolate",
-    "Paella": "Paella",
-    "Pan con Tomate": "Bread with Tomato",
-    "Media": "Medium",
-    "Fácil": "Easy",
-    "Difícil": "Hard",
-    "Comida": "Lunch",
-    "Merienda": "Snack",
-    "Desayuno": "Breakfast",
-    "Cena": "Dinner",
-    "Inicio": "Home",
-    
-    // Footer
-    "Sobre Nosotros": "About Us",
-    "Quiénes Somos": "Who We Are",
-    Contacto: "Contact",
-    Legal: "Legal",
-    "Política de Privacidad": "Privacy Policy",
-    "Términos y Condiciones": "Terms and Conditions",
-    "Política de Cookies": "Cookie Policy",
-    "Aviso Legal": "Legal Notice",
-    Comunidad: "Community",
-    Recetas: "Recipes",
-    Chefs: "Chefs",
-    Síguenos: "Follow Us",
-    "Idioma:": "Language:",
-    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cooking Together - All rights reserved",
-  },
-
-  // Catalán
-  ca: {
-    // Navigation
-    "Buscar recetas...": "Cercar receptes...",
-    "Iniciar Sesión": "Iniciar Sessió",
-    "Cerrar Sesión": "Tancar Sessió",
-    
-    // Culture pages
-    "Cultura Española": "Cultura Espanyola",
-    "Descubre los sabores auténticos de la cocina tradicional española": 
-      "Descobreix els sabors autèntics de la cuina tradicional espanyola",
-    "Mejor Valoradas": "Millor Valorades",
-    "Filtros": "Filtres",
-    "Cultura:": "Cultura:",
-    "Todas": "Totes",
-    "Dificultad:": "Dificultat:",
-    "Tiempo:": "Temps:",
-    "Cualquier tiempo": "Qualsevol temps",
-    "Menos de 30 min": "Menys de 30 min",
-    "30 - 60 min": "30 - 60 min",
-    "60 - 120 min": "60 - 120 min",
-    "Más de 120 min": "Més de 120 min",
-    "Aplicar Filtros": "Aplicar Filtres",
-    "Tortilla de Patatas": "Truita de Patates",
-    "Churros con Chocolate": "Xurros amb Xocolata",
-    "Paella": "Paella",
-    "Pan con Tomate": "Pa amb Tomàquet",
-    "Media": "Mitjana",
-    "Fácil": "Fàcil",
-    "Difícil": "Difícil",
-    "Comida": "Dinar",
-    "Merienda": "Berenar",
-    "Desayuno": "Esmorzar",
-    "Cena": "Sopar",
-    "Inicio": "Inici",
-    
-    // Footer
-    "Sobre Nosotros": "Sobre Nosaltres",
-    "Quiénes Somos": "Qui Som",
-    Contacto: "Contacte",
-    Legal: "Legal",
-    "Política de Privacidad": "Política de Privacitat",
-    "Términos y Condiciones": "Termes i Condicions",
-    "Política de Cookies": "Política de Cookies",
-    "Aviso Legal": "Avís Legal",
-    Comunidad: "Comunitat",
-    Recetas: "Receptes",
-    Chefs: "Xefs",
-    Síguenos: "Segueix-nos",
-    "Idioma:": "Idioma:",
-    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cuinant Junts - Tots els drets reservats",
-  }
-};
-
-// Function to translate the page
-function translatePage(language) {
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
-    if (translations[language] && translations[language][key]) {
-      if (element.hasAttribute('placeholder')) {
-        element.setAttribute('placeholder', translations[language][key]);
-      } else {
-        element.textContent = translations[language][key];
-      }
-    }
-  });
-  
-  // Update the language selector
-  const languageSelector = document.getElementById('language');
-  if (languageSelector) {
-    languageSelector.value = language;
-  }
-}
-
-// Function to change language
-function changeLanguage(lang) {
-  localStorage.setItem('language', lang);
-  translatePage(lang);
-}
-
-// Initialize translation
-document.addEventListener('DOMContentLoaded', function() {
-  const savedLanguage = localStorage.getItem('language') || 'es';
-  translatePage(savedLanguage);
-  
-  // Set up language selector
-  const languageSelector = document.getElementById('language');
-  if (languageSelector) {
-    languageSelector.value = savedLanguage;
-    languageSelector.addEventListener('change', function() {
-      changeLanguage(this.value);
-    });
-  }
-});
-
-// Make functions available globally
-window.changeLanguage = changeLanguage;
-window.translatePage = translatePage;
-</script>
 </body>
 
 </html>

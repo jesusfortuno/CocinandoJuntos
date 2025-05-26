@@ -3,7 +3,7 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Home - Cocinando Juntos</title>
+      <title data-i18n="Home - Cocinando Juntos">Home - Cocinando Juntos</title>
       <link rel="stylesheet" href="styles.css">
       <link rel="stylesheet" href="styles-search-update.css">
       <!-- Añadir FontAwesome para los iconos -->
@@ -15,18 +15,6 @@
       <script src="../notification-center.js" defer></script>
       <script src="responsive-fixes.js" defer></script>
       <script src="../include-components.js" data-include="nav,footer"></script>
-        <!-- Cargar primero el archivo de traducciones -->
-        <script src="../translations.js"></script>
-
-        <!-- Luego cargar el script de cambio de idioma -->
-        <script src="../language-switcher.js"></script>
-
-        <!-- Opcionalmente, cargar el helper de traducciones -->
-        <script src="../translation-helper.js"></script>
-
-        <!-- Finalmente, cargar el script para arreglar los enlaces -->
-        <script src="../fix-links.js"></script>
-
   </head>
 <body>
   <!-- Placeholder para la navegación -->
@@ -37,7 +25,7 @@
           <div class="video-container">
               <video autoplay muted loop id="hero-video">
                   <source src="../Imagenes/short.mp4" type="video/mp4">
-                  Tu navegador no soporta videos HTML5.
+                  <span data-i18n="Tu navegador no soporta videos HTML5.">Tu navegador no soporta videos HTML5.</span>
               </video>
               <div class="video-overlay">
                   <h1 data-i18n="Cocinando Juntos">Cocinando Juntos</h1>
@@ -87,7 +75,7 @@
                 <div class="recipe-slider">
                     <div class="recipe-track">
                         <div class="loading-indicator">
-                            <p><i class="fas fa-spinner fa-spin"></i> Cargando recetas...</p>
+                            <p><i class="fas fa-spinner fa-spin"></i> <span data-i18n="Cargando recetas...">Cargando recetas...</span></p>
                         </div>
                     </div>
                     <button class="slider-nav prev-button">❮</button>
@@ -102,77 +90,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <!-- Cargar primero el archivo de traducciones -->
-  <script src="i18n.js"></script>
+  <script src="../translations.js"></script>
   <!-- Luego cargar el script de cambio de idioma -->
   <script src="language-switcher.js"></script>
-  <!-- Modificar el script para manejar correctamente los tipos de usuario -->
-  <script>
-  // Obtener el usuario desde localStorage
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
-  const userInfo = document.getElementById("user-info");
-  const authButton = document.getElementById("auth-button");
-  const userProfileLink = document.getElementById("user-profile-link");
-
-  console.log("Datos del usuario:", usuario); // Para depuración
-
-  // Si el usuario está registrado en localStorage
-  if (usuario) {
-      // Mostrar la información del usuario
-      userInfo.style.display = "flex";
-      document.getElementById("user-name").textContent = usuario.username || "Usuario";
-      authButton.style.display = "none";
-
-      // Determinar el tipo de usuario y establecer el enlace correcto
-      if (usuario.rol === "chef") {
-          // Si es chef, enlazar a la página de chef
-          userProfileLink.href = "../chef-page.html";
-          console.log("Usuario con rol chef detectado, redirigiendo a chef-page.html");
-      } else if (usuario.rol === "admin" || usuario.username === "admin") {
-          // Si es admin, enlazar a la página de administrador
-          userProfileLink.href = "./../US10_PaginaAdmin/PaginaAdmin.html";
-      } else {
-          // Si es usuario normal, enlazar a la página de perfil
-          userProfileLink.href = "../US7_PaginaDeUsuario/usuario.html";
-      }
-
-      // Agregar funcionalidad de cerrar sesión
-      document.getElementById("logout-btn").addEventListener("click", (e) => {
-          e.preventDefault();
-          localStorage.removeItem("usuario");
-          window.location.reload();
-      });
-  } else {
-      // Si no hay usuario, mostrar el botón de login
-      userInfo.style.display = "none";
-      authButton.style.display = "block";
-  }
-  </script>
-  
-  <!-- Script independiente para el botón de scroll -->
-  <script>
-  // Asegurarse de que este script se ejecute después de que todo el DOM esté cargado
-  document.addEventListener('DOMContentLoaded', function() {
-      // Obtener el botón de scroll
-      var scrollBtn = document.getElementById('scrollToTop');
-      
-      if (scrollBtn) {
-          console.log("Botón de scroll encontrado y configurado");
-          
-          // Agregar el evento click directamente al botón
-          scrollBtn.onclick = function(e) {
-              e.preventDefault();
-              console.log("Botón de scroll clickeado - script independiente");
-              
-              // Usar el método más básico para hacer scroll
-              window.scrollTo(0, 0);
-              
-              return false;
-          };
-      } else {
-          console.error("Botón de scroll no encontrado");
-      }
-  });
-  </script>
   <!-- Cargar los scripts necesarios -->
   <script src="index.js"></script>
   <script src="../include-components.js" defer></script>

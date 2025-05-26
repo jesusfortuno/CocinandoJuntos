@@ -37,8 +37,8 @@
                         </div>
                         <div class="contact-details">
                             <h3 data-i18n="Correo Electrónico">Correo Electrónico</h3>
-                            <a href="mailto:info@cocinandojuntos.com">info@cocinandojuntos.com</a>
-                            <a href="mailto:support@cocinandojuntos.com">support@cocinandojuntos.com</a>
+                            <a href="mailto:info@cocinandojuntos.com" data-i18n="info@cocinandojuntos.com">info@cocinandojuntos.com</a>
+                            <a href="mailto:support@cocinandojuntos.com" data-i18n="support@cocinandojuntos.com">support@cocinandojuntos.com</a>
                         </div>
                     </div>
                     
@@ -48,8 +48,8 @@
                         </div>
                         <div class="contact-details">
                             <h3 data-i18n="Ubicación">Ubicación</h3>
-                            <p>Centro de Estudios Roca - Grupo Escolar Roca</p>
-                            <p>Barcelona, España</p>
+                            <p data-i18n="Centro de Estudios Roca - Grupo Escolar Roca">Centro de Estudios Roca - Grupo Escolar Roca</p>
+                            <p data-i18n="Barcelona, España">Barcelona, España</p>
                         </div>
                     </div>
                     
@@ -102,22 +102,22 @@
                 <form class="contact-form">
                     <div class="form-group">
                         <label for="name" data-i18n="Nombre">Nombre</label>
-                        <input type="text" id="name" placeholder="Tu nombre" required data-i18n="Tu nombre">
+                        <input type="text" id="name" placeholder="Tu nombre" required data-i18n-placeholder="Tu nombre">
                     </div>
                     
                     <div class="form-group">
                         <label for="email" data-i18n="Correo Electrónico">Correo Electrónico</label>
-                        <input type="email" id="email" placeholder="Tu correo electrónico" required data-i18n="Tu correo electrónico">
+                        <input type="email" id="email" placeholder="Tu correo electrónico" required data-i18n-placeholder="Tu correo electrónico">
                     </div>
                     
                     <div class="form-group">
                         <label for="subject" data-i18n="Asunto">Asunto</label>
-                        <input type="text" id="subject" placeholder="Asunto de tu consulta" data-i18n="Asunto de tu consulta">
+                        <input type="text" id="subject" placeholder="Asunto de tu consulta" data-i18n-placeholder="Asunto de tu consulta">
                     </div>
                     
                     <div class="form-group">
                         <label for="message" data-i18n="Mensaje">Mensaje</label>
-                        <textarea id="message" placeholder="Escribe tu consulta aquí..." rows="5" required data-i18n="Escribe tu consulta aquí..."></textarea>
+                        <textarea id="message" placeholder="Escribe tu consulta aquí..." rows="5" required data-i18n-placeholder="Escribe tu consulta aquí..."></textarea>
                     </div>
                     
                     <button type="submit" class="submit-button" data-i18n="Enviar Mensaje">Enviar Mensaje</button>
@@ -185,11 +185,41 @@
     <!-- Cargar primero el archivo de traducciones -->
     <script src="../translations.js"></script>
     <!-- Luego cargar el script de cambio de idioma -->
-    <script src="./language-switcher.js"></script>
+    <script src="language-switcher.js"></script>
     <!-- Opcionalmente, cargar el helper de traducciones -->
     <script src="../translation-helper.js"></script>
     <!-- Finalmente, cargar el script para arreglar los enlaces -->
     <script src="../fix-links.js"></script>
+    <script>
+    // Script para FAQ
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const toggle = item.querySelector('.faq-toggle');
+            
+            question.addEventListener('click', () => {
+                const isOpen = answer.style.display === 'block';
+                
+                // Cerrar todas las respuestas
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.style.display = 'none';
+                });
+                document.querySelectorAll('.faq-toggle').forEach(t => {
+                    t.textContent = '+';
+                });
+                
+                // Abrir/cerrar la respuesta actual
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    toggle.textContent = '-';
+                }
+            });
+        });
+    });
+  </script>
 </body>
 
 </html>
