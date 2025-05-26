@@ -105,34 +105,34 @@
     <main>
         <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="index.html">Inicio</a> >
-            <span>Cultura Francesa</span>
+            <a href="index.html" data-i18n="Inicio">Inicio</a> >
+            <span data-i18n="Cultura Francesa">Cultura Francesa</span>
         </div>
 
         <!-- Título de la cultura -->
         <div class="culture-header">
-            <h1>Cultura Francesa</h1>
+            <h1 data-i18n="Cultura Francesa">Cultura Francesa</h1>
             <div class="culture-description">
-                <p>Descubre los sabores auténticos de la cocina tradicional francesa</p>
+                <p data-i18n="Descubre los sabores auténticos de la cocina tradicional francesa">Descubre los sabores auténticos de la cocina tradicional francesa</p>
             </div>
         </div>
 
         <!-- Filtros -->
         <div class="filters">
             <div class="filter-group">
-                <button class="filter-button active" onclick="window.location.href='../Platos.html'">Mejor
+                <button class="filter-button active" onclick="window.location.href='../Platos.html'" data-i18n="Mejor Valoradas">Mejor
                     Valoradas</button>
             </div>
             <div class="filter-group">
-                <button class="filter-button" id="filter-btn">Filtros</button>
+                <button class="filter-button" id="filter-btn" data-i18n="Filtros">Filtros</button>
             </div>
         </div>
 
         <!-- Cuadro emergente de filtros -->
         <div id="filter-options" style="display: none;">
-            <label for="filter-culture">Cultura:</label>
+            <label for="filter-culture" data-i18n="Cultura:">Cultura:</label>
             <select id="filter-culture">
-                <option value="">Todas</option>
+                <option value="" data-i18n="Todas">Todas</option>
                 <option value="Francesa">Francesa</option>
                 <option value="Española">Española</option>
                 <option value="Italiana">Italiana</option>
@@ -141,24 +141,24 @@
                 <option value="Venezolana">Venezolana</option>
             </select>
 
-            <label for="filter-difficulty">Dificultad:</label>
+            <label for="filter-difficulty" data-i18n="Dificultad:">Dificultad:</label>
             <select id="filter-difficulty">
-                <option value="">Todas</option>
-                <option value="Fácil">Fácil</option>
-                <option value="Media">Media</option>
-                <option value="Difícil">Difícil</option>
+                <option value="" data-i18n="Todas">Todas</option>
+                <option value="Fácil" data-i18n="Fácil">Fácil</option>
+                <option value="Media" data-i18n="Media">Media</option>
+                <option value="Difícil" data-i18n="Difícil">Difícil</option>
             </select>
 
-            <label for="filter-time">Tiempo:</label>
+            <label for="filter-time" data-i18n="Tiempo:">Tiempo:</label>
             <select id="filter-time">
-                <option value="">Cualquier tiempo</option>
-                <option value="0-30">Menos de 30 min</option>
-                <option value="30-60">30 - 60 min</option>
-                <option value="60-120">60 - 120 min</option>
-                <option value="121">Más de 120 min</option>
+                <option value="" data-i18n="Cualquier tiempo">Cualquier tiempo</option>
+                <option value="0-30" data-i18n="Menos de 30 min">Menos de 30 min</option>
+                <option value="30-60" data-i18n="30 - 60 min">30 - 60 min</option>
+                <option value="60-120" data-i18n="60 - 120 min">60 - 120 min</option>
+                <option value="121" data-i18n="Más de 120 min">Más de 120 min</option>
             </select>
 
-            <button id="apply-filters">Aplicar Filtros</button>
+            <button id="apply-filters" data-i18n="Aplicar Filtros">Aplicar Filtros</button>
         </div>
 
         <!-- Grid de recetas -->
@@ -168,11 +168,11 @@
                     <a href="./../US6_GuardarRecetas/coq-au-vin.html"><img src="../Imagenes/Francia/coq-au-vin.jpg"
                             alt="Coq au vin"></a>
                 </div>
-                <h3>Coq au vin</h3>
+                <h3 data-i18n="Coq au vin">Coq au vin</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Media</span>
+                    <span class="difficulty" data-i18n="Media">Media</span>
                     <span class="time">2h 45 min</span>
-                    <span class="category">Comida</span>
+                    <span class="category" data-i18n="Comida">Comida</span>
                 </div>
             </div>
 
@@ -181,11 +181,11 @@
                     <a href="./../US6_GuardarRecetas/crepas-dulces.html"><img src="../Imagenes/Francia/crepas-dulces.jpg"
                             alt="Crepas dulces"></a>
                 </div>
-                <h3>Crepas dulces</h3>
+                <h3 data-i18n="Crepas dulces">Crepas dulces</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Fácil</span>
+                    <span class="difficulty" data-i18n="Fácil">Fácil</span>
                     <span class="time">30 min</span>
-                    <span class="category">Merienda</span>
+                    <span class="category" data-i18n="Merienda">Merienda</span>
                 </div>
             </div>
 
@@ -194,11 +194,11 @@
                     <a href="./../US6_GuardarRecetas/quiche-lorraine.html"><img src="../Imagenes/Francia/quiche-lorraine.pn.webp"
                             alt="Quiche Lorraine"></a>
                 </div>
-                <h3>Quiche Lorraine</h3>
+                <h3 data-i18n="Quiche Lorraine">Quiche Lorraine</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Media</span>
+                    <span class="difficulty" data-i18n="Media">Media</span>
                     <span class="time">1h</span>
-                    <span class="category">Comida</span>
+                    <span class="category" data-i18n="Comida">Comida</span>
                 </div>
             </div>
 
@@ -207,11 +207,11 @@
                     <a href="./../US6_GuardarRecetas/tostada-francesa.html"><img src="../Imagenes/Francia/tostada-francesa.jpg"
                             alt="Tostada Francesa"></a>
                 </div>
-                <h3>Tostada Francesa</h3>
+                <h3 data-i18n="Tostada Francesa">Tostada Francesa</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Fácil</span>
+                    <span class="difficulty" data-i18n="Fácil">Fácil</span>
                     <span class="time">20 min</span>
-                    <span class="category">Desayuno</span>
+                    <span class="category" data-i18n="Desayuno">Desayuno</span>
                 </div>
             </div>
         </div>
@@ -275,6 +275,217 @@
             });
         });
     </script>
+    <script>
+// Load translations
+const translations = {
+  // Spanish (default language)
+  es: {
+    // Navigation
+    "Buscar recetas...": "Buscar recetas...",
+    "Iniciar Sesión": "Iniciar Sesión",
+    "Cerrar Sesión": "Cerrar Sesión",
+    
+    // Culture pages
+    "Cultura Francesa": "Cultura Francesa",
+    "Descubre los sabores auténticos de la cocina tradicional francesa": 
+      "Descubre los sabores auténticos de la cocina tradicional francesa",
+    "Mejor Valoradas": "Mejor Valoradas",
+    "Filtros": "Filtros",
+    "Cultura:": "Cultura:",
+    "Todas": "Todas",
+    "Dificultad:": "Dificultad:",
+    "Tiempo:": "Tiempo:",
+    "Cualquier tiempo": "Cualquier tiempo",
+    "Menos de 30 min": "Menos de 30 min",
+    "30 - 60 min": "30 - 60 min  Cualquier tiempo",
+    "Menos de 30 min": "Menos de 30 min",
+    "30 - 60 min": "30 - 60 min",
+    "60 - 120 min": "60 - 120 min",
+    "Más de 120 min": "Más de 120 min",
+    "Aplicar Filtros": "Aplicar Filtros",
+    "Coq au vin": "Coq au vin",
+    "Crepas dulces": "Crepas dulces",
+    "Quiche Lorraine": "Quiche Lorraine",
+    "Tostada Francesa": "Tostada Francesa",
+    "Media": "Media",
+    "Fácil": "Fácil",
+    "Difícil": "Difícil",
+    "Comida": "Comida",
+    "Merienda": "Merienda",
+    "Desayuno": "Desayuno",
+    "Cena": "Cena",
+    "Inicio": "Inicio",
+    
+    // Footer
+    "Sobre Nosotros": "Sobre Nosotros",
+    "Quiénes Somos": "Quiénes Somos",
+    Contacto: "Contacto",
+    Legal: "Legal",
+    "Política de Privacidad": "Política de Privacidad",
+    "Términos y Condiciones": "Términos y Condiciones",
+    "Política de Cookies": "Política de Cookies",
+    "Aviso Legal": "Aviso Legal",
+    Comunidad: "Comunidad",
+    Recetas: "Recetas",
+    Chefs: "Chefs",
+    Síguenos: "Síguenos",
+    "Idioma:": "Idioma:",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados":
+      "© 2025 Cocinando Juntos - Todos los derechos reservados",
+  },
+
+  // English
+  en: {
+    // Navigation
+    "Buscar recetas...": "Search recipes...",
+    "Iniciar Sesión": "Log In",
+    "Cerrar Sesión": "Log Out",
+    
+    // Culture pages
+    "Cultura Francesa": "French Culture",
+    "Descubre los sabores auténticos de la cocina tradicional francesa": 
+      "Discover the authentic flavors of traditional French cuisine",
+    "Mejor Valoradas": "Top Rated",
+    "Filtros": "Filters",
+    "Cultura:": "Culture:",
+    "Todas": "All",
+    "Dificultad:": "Difficulty:",
+    "Tiempo:": "Time:",
+    "Cualquier tiempo": "Any time",
+    "Menos de 30 min": "Less than 30 min",
+    "30 - 60 min": "30 - 60 min",
+    "60 - 120 min": "60 - 120 min",
+    "Más de 120 min": "More than 120 min",
+    "Aplicar Filtros": "Apply Filters",
+    "Coq au vin": "Coq au vin",
+    "Crepas dulces": "Sweet Crepes",
+    "Quiche Lorraine": "Quiche Lorraine",
+    "Tostada Francesa": "French Toast",
+    "Media": "Medium",
+    "Fácil": "Easy",
+    "Difícil": "Hard",
+    "Comida": "Lunch",
+    "Merienda": "Snack",
+    "Desayuno": "Breakfast",
+    "Cena": "Dinner",
+    "Inicio": "Home",
+    
+    // Footer
+    "Sobre Nosotros": "About Us",
+    "Quiénes Somos": "Who We Are",
+    Contacto: "Contact",
+    Legal: "Legal",
+    "Política de Privacidad": "Privacy Policy",
+    "Términos y Condiciones": "Terms and Conditions",
+    "Política de Cookies": "Cookie Policy",
+    "Aviso Legal": "Legal Notice",
+    Comunidad: "Community",
+    Recetas: "Recipes",
+    Chefs: "Chefs",
+    Síguenos: "Follow Us",
+    "Idioma:": "Language:",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cooking Together - All rights reserved",
+  },
+
+  // Catalán
+  ca: {
+    // Navigation
+    "Buscar recetas...": "Cercar receptes...",
+    "Iniciar Sesión": "Iniciar Sessió",
+    "Cerrar Sesión": "Tancar Sessió",
+    
+    // Culture pages
+    "Cultura Francesa": "Cultura Francesa",
+    "Descubre los sabores auténticos de la cocina tradicional francesa": 
+      "Descobreix els sabors autèntics de la cuina tradicional francesa",
+    "Mejor Valoradas": "Millor Valorades",
+    "Filtros": "Filtres",
+    "Cultura:": "Cultura:",
+    "Todas": "Totes",
+    "Dificultad:": "Dificultat:",
+    "Tiempo:": "Temps:",
+    "Cualquier tiempo": "Qualsevol temps",
+    "Menos de 30 min": "Menys de 30 min",
+    "30 - 60 min": "30 - 60 min",
+    "60 - 120 min": "60 - 120 min",
+    "Más de 120 min": "Més de 120 min",
+    "Aplicar Filtros": "Aplicar Filtres",
+    "Coq au vin": "Coq au vin",
+    "Crepas dulces": "Creps Dolços",
+    "Quiche Lorraine": "Quiche Lorraine",
+    "Tostada Francesa": "Torrada Francesa",
+    "Media": "Mitjana",
+    "Fácil": "Fàcil",
+    "Difícil": "Difícil",
+    "Comida": "Dinar",
+    "Merienda": "Berenar",
+    "Desayuno": "Esmorzar",
+    "Cena": "Sopar",
+    "Inicio": "Inici",
+    
+    // Footer
+    "Sobre Nosotros": "Sobre Nosaltres",
+    "Quiénes Somos": "Qui Som",
+    Contacto: "Contacte",
+    Legal: "Legal",
+    "Política de Privacidad": "Política de Privacitat",
+    "Términos y Condiciones": "Termes i Condicions",
+    "Política de Cookies": "Política de Cookies",
+    "Aviso Legal": "Avís Legal",
+    Comunidad: "Comunitat",
+    Recetas: "Receptes",
+    Chefs: "Xefs",
+    Síguenos: "Segueix-nos",
+    "Idioma:": "Idioma:",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cuinant Junts - Tots els drets reservats",
+  }
+};
+
+// Function to translate the page
+function translatePage(language) {
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (translations[language] && translations[language][key]) {
+      if (element.hasAttribute('placeholder')) {
+        element.setAttribute('placeholder', translations[language][key]);
+      } else {
+        element.textContent = translations[language][key];
+      }
+    }
+  });
+  
+  // Update the language selector
+  const languageSelector = document.getElementById('language');
+  if (languageSelector) {
+    languageSelector.value = language;
+  }
+}
+
+// Function to change language
+function changeLanguage(lang) {
+  localStorage.setItem('language', lang);
+  translatePage(lang);
+}
+
+// Initialize translation
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLanguage = localStorage.getItem('language') || 'es';
+  translatePage(savedLanguage);
+  
+  // Set up language selector
+  const languageSelector = document.getElementById('language');
+  if (languageSelector) {
+    languageSelector.value = savedLanguage;
+    languageSelector.addEventListener('change', function() {
+      changeLanguage(this.value);
+    });
+  }
+});
+
+// Make functions available globally
+window.changeLanguage = changeLanguage;
+window.translatePage = translatePage;
+</script>
 </body>
 
 </html>

@@ -105,34 +105,34 @@
     <main>
         <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="index.html">Inicio</a> >
-            <span>Cultura Italiana</span>
+            <a href="index.html" data-i18n="Inicio">Inicio</a> >
+            <span data-i18n="Cultura Italiana">Cultura Italiana</span>
         </div>
 
         <!-- Título de la cultura -->
         <div class="culture-header">
-            <h1>Cultura Italiana</h1>
+            <h1 data-i18n="Cultura Italiana">Cultura Italiana</h1>
             <div class="culture-description">
-                <p>Descubre los sabores auténticos de la cocina tradicional italiana</p>
+                <p data-i18n="Descubre los sabores auténticos de la cocina tradicional italiana">Descubre los sabores auténticos de la cocina tradicional italiana</p>
             </div>
         </div>
 
         <!-- Filtros -->
         <div class="filters">
             <div class="filter-group">
-                <button class="filter-button active" onclick="window.location.href='../Platos.html'">Mejor
+                <button class="filter-button active" onclick="window.location.href='../Platos.html'" data-i18n="Mejor Valoradas">Mejor
                     Valoradas</button>
             </div>
             <div class="filter-group">
-                <button class="filter-button" id="filter-btn">Filtros</button>
+                <button class="filter-button" id="filter-btn" data-i18n="Filtros">Filtros</button>
             </div>
         </div>
 
         <!-- Cuadro emergente de filtros -->
         <div id="filter-options" style="display: none;">
-            <label for="filter-culture">Cultura:</label>
+            <label for="filter-culture" data-i18n="Cultura:">Cultura:</label>
             <select id="filter-culture">
-                <option value="">Todas</option>
+                <option value="" data-i18n="Todas">Todas</option>
                 <option value="Italiana">Italiana</option>
                 <option value="Española">Española</option>
                 <option value="Francesa">Francesa</option>
@@ -141,24 +141,24 @@
                 <option value="Venezolana">Venezolana</option>
             </select>
 
-            <label for="filter-difficulty">Dificultad:</label>
+            <label for="filter-difficulty" data-i18n="Dificultad:">Dificultad:</label>
             <select id="filter-difficulty">
-                <option value="">Todas</option>
-                <option value="Fácil">Fácil</option>
-                <option value="Media">Media</option>
-                <option value="Difícil">Difícil</option>
+                <option value="" data-i18n="Todas">Todas</option>
+                <option value="Fácil" data-i18n="Fácil">Fácil</option>
+                <option value="Media" data-i18n="Media">Media</option>
+                <option value="Difícil" data-i18n="Difícil">Difícil</option>
             </select>
 
-            <label for="filter-time">Tiempo:</label>
+            <label for="filter-time" data-i18n="Tiempo:">Tiempo:</label>
             <select id="filter-time">
-                <option value="">Cualquier tiempo</option>
-                <option value="0-30">Menos de 30 min</option>
-                <option value="30-60">30 - 60 min</option>
-                <option value="60-120">60 - 120 min</option>
-                <option value="121">Más de 120 min</option>
+                <option value="" data-i18n="Cualquier tiempo">Cualquier tiempo</option>
+                <option value="0-30" data-i18n="Menos de 30 min">Menos de 30 min</option>
+                <option value="30-60" data-i18n="30 - 60 min">30 - 60 min</option>
+                <option value="60-120" data-i18n="60 - 120 min">60 - 120 min</option>
+                <option value="121" data-i18n="Más de 120 min">Más de 120 min</option>
             </select>
 
-            <button id="apply-filters">Aplicar Filtros</button>
+            <button id="apply-filters" data-i18n="Aplicar Filtros">Aplicar Filtros</button>
         </div>
 
         <!-- Grid de recetas -->
@@ -168,11 +168,11 @@
                     <a href="./../US6_GuardarRecetas/bizcocho-capuccino.html"><img
                             src="../Imagenes/Italia/bizcocho-capuccino.jpg" alt="Bizcocho de Capuccino"></a>
                 </div>
-                <h3>Bizcocho de Capuccino</h3>
+                <h3 data-i18n="Bizcocho de Capuccino">Bizcocho de Capuccino</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Media</span>
+                    <span class="difficulty" data-i18n="Media">Media</span>
                     <span class="time">1h 30 min</span>
-                    <span class="category">Desayuno</span>
+                    <span class="category" data-i18n="Desayuno">Desayuno</span>
                 </div>
             </div>
 
@@ -181,11 +181,11 @@
                     <a href="./../US6_GuardarRecetas/cannoli.html"><img
                             src="../Imagenes/Italia/cannoli.png" alt="Cannoli"></a>
                 </div>
-                <h3>Cannoli</h3>
+                <h3 data-i18n="Cannoli">Cannoli</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Media</span>
+                    <span class="difficulty" data-i18n="Media">Media</span>
                     <span class="time">40 min</span>
-                    <span class="category">Merienda</span>
+                    <span class="category" data-i18n="Merienda">Merienda</span>
                 </div>
             </div>
 
@@ -194,11 +194,11 @@
                     <a href="./../US6_GuardarRecetas/lasana.html"><img
                             src="../Imagenes/Italia/lasaña.jpg" alt="Lasaña"></a>
                 </div>
-                <h3>Lasaña</h3>
+                <h3 data-i18n="Lasaña">Lasaña</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Media</span>
+                    <span class="difficulty" data-i18n="Media">Media</span>
                     <span class="time">1h 45 min</span>
-                    <span class="category">Comida</span>
+                    <span class="category" data-i18n="Comida">Comida</span>
                 </div>
             </div>
 
@@ -207,11 +207,11 @@
                     <a href="./../US6_GuardarRecetas/pizza-margarita.html"><img
                             src="../Imagenes/Italia/pizza-margarita.jpg" alt="Pizza Margarita"></a>
                 </div>
-                <h3>Pizza Margarita</h3>
+                <h3 data-i18n="Pizza Margarita">Pizza Margarita</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Fácil</span>
+                    <span class="difficulty" data-i18n="Fácil">Fácil</span>
                     <span class="time">55 min</span>
-                    <span class="category">Cena</span>
+                    <span class="category" data-i18n="Cena">Cena</span>
                 </div>
             </div>
         </div>
@@ -224,57 +224,273 @@
     <script src="include-components.js" defer></script>
     <script src="../fix-links.js"></script>
     <script>
-        // Script para los filtros
-        document.addEventListener("DOMContentLoaded", () => {
-            const filterBtn = document.getElementById("filter-btn");
-            const filterOptions = document.getElementById("filter-options");
-            const applyFiltersBtn = document.getElementById("apply-filters");
+// Load translations
+const translations = {
+  // Spanish (default language)
+  es: {
+    // Navigation
+    "Buscar recetas...": "Buscar recetas...",
+    "Iniciar Sesión": "Iniciar Sesión",
+    "Cerrar Sesión": "Cerrar Sesión",
+    
+    // Culture pages
+    "Cultura Italiana": "Cultura Italiana",
+    "Descubre los sabores auténticos de la cocina tradicional italiana": 
+      "Descubre los sabores auténticos de la cocina tradicional italiana",
+    "Mejor Valoradas": "Mejor Valoradas",
+    "Filtros": "Filtros",
+    "Cultura:": "Cultura:",
+    "Todas": "Todas",
+    "Dificultad:": "Dificultad:",
+    "Tiempo:": "Tiempo:",
+    "Cualquier tiempo": "Cualquier tiempo",
+    "Menos de 30 min": "Menos de 30 min",
+    "30 - 60 min": "30 - 60 min",
+    "60 - 120 min": "60 - 120 min",
+    "Más de 120 min": "Más de 120 min",
+    "Aplicar Filtros": "Aplicar Filtros",
+    "Bizcocho de Capuccino": "Bizcocho de Capuccino",
+    "Cannoli": "Cannoli",
+    "Lasaña": "Lasaña",
+    "Pizza Margarita": "Pizza Margarita",
+    "Media": "Media",
+    "Fácil": "Fácil",
+    "Difícil": "Difícil",
+    "Comida": "Comida",
+    "Merienda": "Merienda",
+    "Desayuno": "Desayuno",
+    "Cena": "Cena",
+    "Inicio": "Inicio",
+    
+    // Footer
+    "Sobre Nosotros": "Sobre Nosotros",
+    "Quiénes Somos": "Quiénes Somos",
+    "Contacto": "Contacto",
+    "Legal": "Legal",
+    "Política de Privacidad": "Política de Privacidad",
+    "Términos y Condiciones": "Términos y Condiciones",
+    "Política de Cookies": "Política de Cookies",
+    "Aviso Legal": "Aviso Legal",
+    "Comunidad": "Comunidad",
+    "Recetas": "Recetas",
+    "Chefs": "Chefs",
+    "Síguenos": "Síguenos",
+    "Idioma:": "Idioma:",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cocinando Juntos - Todos los derechos reservados",
+    "Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.": "Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias."
+  },
 
-            filterBtn.addEventListener("click", () => {
-                filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
-            });
+  // English
+  en: {
+    // Navigation
+    "Buscar recetas...": "Search recipes...",
+    "Iniciar Sesión": "Log In",
+    "Cerrar Sesión": "Log Out",
+    
+    // Culture pages
+    "Cultura Italiana": "Italian Culture",
+    "Descubre los sabores auténticos de la cocina tradicional italiana": 
+      "Discover the authentic flavors of traditional Italian cuisine",
+    "Mejor Valoradas": "Top Rated",
+    "Filtros": "Filters",
+    "Cultura:": "Culture:",
+    "Todas": "All",
+    "Dificultad:": "Difficulty:",
+    "Tiempo:": "Time:",
+    "Cualquier tiempo": "Any time",
+    "Menos de 30 min": "Less than 30 min",
+    "30 - 60 min": "30 - 60 min",
+    "60 - 120 min": "60 - 120 min",
+    "Más de 120 min": "More than 120 min",
+    "Aplicar Filtros": "Apply Filters",
+    "Bizcocho de Capuccino": "Cappuccino Cake",
+    "Cannoli": "Cannoli",
+    "Lasaña": "Lasagna",
+    "Pizza Margarita": "Margherita Pizza",
+    "Media": "Medium",
+    "Fácil": "Easy",
+    "Difícil": "Hard",
+    "Comida": "Lunch",
+    "Merienda": "Snack",
+    "Desayuno": "Breakfast",
+    "Cena": "Dinner",
+    "Inicio": "Home",
+    
+    // Footer
+    "Sobre Nosotros": "About Us",
+    "Quiénes Somos": "Who We Are",
+    "Contacto": "Contact",
+    "Legal": "Legal",
+    "Política de Privacidad": "Privacy Policy",
+    "Términos y Condiciones": "Terms and Conditions",
+    "Política de Cookies": "Cookie Policy",
+    "Aviso Legal": "Legal Notice",
+    "Comunidad": "Community",
+    "Recetas": "Recipes",
+    "Chefs": "Chefs",
+    "Síguenos": "Follow Us",
+    "Idioma:": "Language:",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cooking Together - All rights reserved",
+    "Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.": "Cooking Together is a community of food lovers where you can explore flavors from different cultures, share your favorite recipes, and learn new culinary techniques."
+  },
 
-            applyFiltersBtn.addEventListener("click", () => {
-                const selectedCulture = document.getElementById("filter-culture").value;
-                const selectedDifficulty = document.getElementById("filter-difficulty").value;
-                const selectedTime = document.getElementById("filter-time").value;
+  // Catalán
+  ca: {
+    // Navigation
+    "Buscar recetas...": "Cercar receptes...",
+    "Iniciar Sesión": "Iniciar Sessió",
+    "Cerrar Sesión": "Tancar Sessió",
+    
+    // Culture pages
+    "Cultura Italiana": "Cultura Italiana",
+    "Descubre los sabores auténticos de la cocina tradicional italiana": 
+      "Descobreix els sabors autèntics de la cuina tradicional italiana",
+    "Mejor Valoradas": "Millor Valorades",
+    "Filtros": "Filtres",
+    "Cultura:": "Cultura:",
+    "Todas": "Totes",
+    "Dificultad:": "Dificultat:",
+    "Tiempo:": "Temps:",
+    "Cualquier tiempo": "Qualsevol temps",
+    "Menos de 30 min": "Menys de 30 min",
+    "30 - 60 min": "30 - 60 min",
+    "60 - 120 min": "60 - 120 min",
+    "Más de 120 min": "Més de 120 min",
+    "Aplicar Filtros": "Aplicar Filtres",
+    "Bizcocho de Capuccino": "Pastís de Cappuccino",
+    "Cannoli": "Cannoli",
+    "Lasaña": "Lasanya",
+    "Pizza Margarita": "Pizza Margarita",
+    "Media": "Mitjana",
+    "Fácil": "Fàcil",
+    "Difícil": "Difícil",
+    "Comida": "Dinar",
+    "Merienda": "Berenar",
+    "Desayuno": "Esmorzar",
+    "Cena": "Sopar",
+    "Inicio": "Inici",
+    
+    // Footer
+    "Sobre Nosotros": "Sobre Nosaltres",
+    "Quiénes Somos": "Qui Som",
+    "Contacto": "Contacte",
+    "Legal": "Legal",
+    "Política de Privacidad": "Política de Privacitat",
+    "Términos y Condiciones": "Termes i Condicions",
+    "Política de Cookies": "Política de Cookies",
+    "Aviso Legal": "Avís Legal",
+    "Comunidad": "Comunitat",
+    "Recetas": "Receptes",
+    "Chefs": "Xefs",
+    "Síguenos": "Segueix-nos",
+    "Idioma:": "Idioma:",
+    "© 2025 Cocinando Juntos - Todos los derechos reservados": "© 2025 Cuinant Junts - Tots els drets reservats",
+    "Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias.": "Cuinant Junts és una comunitat d'amants de la gastronomia on podràs explorar sabors de diferents cultures, compartir les teves receptes favorites i aprendre noves tècniques culinàries."
+  }
+};
 
-                const recipes = document.querySelectorAll(".recipe-card");
+// Function to translate the page
+function translatePage(language) {
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (translations[language] && translations[language][key]) {
+      if (element.hasAttribute('placeholder')) {
+        element.setAttribute('placeholder', translations[language][key]);
+      } else {
+        element.textContent = translations[language][key];
+      }
+    }
+  });
+  
+  // Update the language selector
+  const languageSelector = document.getElementById('language');
+  if (languageSelector) {
+    languageSelector.value = language;
+  }
+  
+  // Update footer text (which might not have data-i18n attributes)
+  const footerDescription = document.querySelector('.footer-description');
+  if (footerDescription && translations[language]["Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias."]) {
+    footerDescription.textContent = translations[language]["Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias."];
+  }
+}
 
-                recipes.forEach(recipe => {
-                    const recipeCulture = recipe.getAttribute("data-culture");
-                    const recipeTime = parseInt(recipe.getAttribute("data-time"));
-                    const recipeDifficulty = recipe.getAttribute("data-difficulty");
+// Function to change language
+function changeLanguage(lang) {
+  localStorage.setItem('language', lang);
+  translatePage(lang);
+}
 
-                    const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
-                    const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
-                    let matchesTime = false;
+// Initialize translation
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLanguage = localStorage.getItem('language') || 'es';
+  translatePage(savedLanguage);
+  
+  // Set up language selector
+  const languageSelector = document.getElementById('language');
+  if (languageSelector) {
+    languageSelector.value = savedLanguage;
+    languageSelector.addEventListener('change', function() {
+      changeLanguage(this.value);
+    });
+  }
+});
 
-                    if (selectedTime === "" ||
-                        (selectedTime === "0-30" && recipeTime <= 30) ||
-                        (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
-                        (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
-                        (selectedTime === "121" && recipeTime > 120)) {
-                        matchesTime = true;
-                    }
+// Make functions available globally
+window.changeLanguage = changeLanguage;
+window.translatePage = translatePage;
 
-                    if (matchesCulture && matchesDifficulty && matchesTime) {
-                        recipe.style.display = "block";
-                    } else {
-                        recipe.style.display = "none";
-                    }
-                });
+// Script para los filtros
+document.addEventListener("DOMContentLoaded", () => {
+    const filterBtn = document.getElementById("filter-btn");
+    const filterOptions = document.getElementById("filter-options");
+    const applyFiltersBtn = document.getElementById("apply-filters");
 
-                filterOptions.style.display = "none";
-            });
+    filterBtn.addEventListener("click", () => {
+        filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
+    });
 
-            document.addEventListener("click", (event) => {
-                if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
-                    filterOptions.style.display = "none";
-                }
-            });
+    applyFiltersBtn.addEventListener("click", () => {
+        const selectedCulture = document.getElementById("filter-culture").value;
+        const selectedDifficulty = document.getElementById("filter-difficulty").value;
+        const selectedTime = document.getElementById("filter-time").value;
+
+        const recipes = document.querySelectorAll(".recipe-card");
+
+        recipes.forEach(recipe => {
+            const recipeCulture = recipe.getAttribute("data-culture");
+            const recipeTime = parseInt(recipe.getAttribute("data-time"));
+            const recipeDifficulty = recipe.getAttribute("data-difficulty");
+
+            const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
+            const matchesDifficulty = !selectedDifficulty || selectedDifficulty === recipeDifficulty;
+            let matchesTime = false;
+
+            if (selectedTime === "" ||
+                (selectedTime === "0-30" && recipeTime <= 30) ||
+                (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
+                (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
+                (selectedTime === "121" && recipeTime > 120)) {
+                matchesTime = true;
+            }
+
+            if (matchesCulture && matchesDifficulty && matchesTime) {
+                recipe.style.display = "block";
+            } else {
+                recipe.style.display = "none";
+            }
         });
-    </script>
+
+        filterOptions.style.display = "none";
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
+            filterOptions.style.display = "none";
+        }
+    });
+});
+</script>
 </body>
 
 </html>
