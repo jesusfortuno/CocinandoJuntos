@@ -67,9 +67,6 @@ async function cargarRecetas() {
           <button class="btn btn-danger btn-sm delete-recipe" data-id="${receta.id}">
             <i class="fas fa-trash"></i> Eliminar
           </button>
-          <button class="btn btn-success btn-sm generate-html" data-id="${receta.id}">
-            <i class="fas fa-file-code"></i> Generar HTML
-          </button>
         </td>
       `
       recipesTableBody.appendChild(row)
@@ -87,13 +84,6 @@ async function cargarRecetas() {
       btn.addEventListener("click", function () {
         const recetaId = this.getAttribute("data-id")
         eliminarReceta(recetaId)
-      })
-    })
-
-    document.querySelectorAll(".generate-html").forEach((btn) => {
-      btn.addEventListener("click", function () {
-        const recetaId = this.getAttribute("data-id")
-        generarHTML(recetaId)
       })
     })
   } catch (error) {
@@ -181,13 +171,6 @@ async function guardarReceta(event) {
     modal.style.display = "none"
     await cargarRecetas()
     alert(`Receta ${recetaId ? "actualizada" : "añadida"} con éxito`)
-
-    // Obtener la receta recién creada o actualizada para generar HTML
-    const nuevoRecetaId = recetaId || (response.data && response.data[0] ? response.data[0].id : null)
-
-    if (nuevoRecetaId && confirm(`¿Deseas generar el archivo HTML para esta receta ahora?`)) {
-      generarHTML(nuevoRecetaId)
-    }
   } catch (error) {
     console.error("Error al guardar receta:", error)
     alert("Error al guardar la receta: " + (error.message || "Error desconocido"))
@@ -257,49 +240,6 @@ async function eliminarReceta(id) {
   } catch (error) {
     console.error("Error al eliminar receta:", error)
     alert("Error al eliminar la receta: " + (error.message || "Error desconocido"))
-  }
-}
-
-// Generar HTML para una receta
-async function generarHTML(id) {
-  try {
-    // Obtener la receta de la base de datos
-    const { data: receta, error } = await supabase.from("recetas").select("*").eq("id", id).single()
-
-    if (error) {
-      console.error("Error al obtener receta para HTML:", error)
-      throw error
-    }
-
-    if (!receta) {
-      console.error("No se encontró la receta con ID:", id)
-      throw new Error("No se encontró la receta")
-    }
-
-    // Verificar si existe la función generadorRecetas
-    if (!window.generadorRecetas) {
-      console.error("No se encontró el generador de recetas")
-      alert("El generador de HTML no está disponible. Asegúrate de que el archivo generadorRecetas.js esté cargado.")
-      return
-    }
-
-    // Generar nombre de archivo a partir del título
-    const nombreArchivo = window.generadorRecetas.generarNombreArchivo(receta.titulo)
-
-    // Generar el contenido HTML
-    const contenidoHTML = window.generadorRecetas.generarHTMLReceta(receta)
-
-    // Descargar el archivo HTML
-    const resultado = window.generadorRecetas.descargarArchivoHTML(nombreArchivo, contenidoHTML)
-
-    if (resultado) {
-      alert(`Archivo HTML generado correctamente. Por favor, guárdalo en la carpeta US6_GuardarRecetas.`)
-    } else {
-      alert("Error al generar el archivo HTML")
-    }
-  } catch (error) {
-    console.error("Error al generar HTML:", error)
-    alert("Error al generar HTML: " + (error.message || "Error desconocido"))
   }
 }
 

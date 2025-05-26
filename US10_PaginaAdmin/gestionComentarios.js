@@ -92,9 +92,6 @@ async function cargarComentarios() {
                 <td>${fecha}</td>
                 <td><span class="status-badge ${estadoClass}">${estadoText}</span></td>
                 <td class="action-buttons">
-                    <button class="btn btn-info btn-sm view-comment" onclick="verComentario(${comentario.id_comentario})">
-                        <i class="fas fa-eye"></i> Ver
-                    </button>
                     <button class="btn btn-danger btn-sm delete-comment" onclick="eliminarComentario(${comentario.id_comentario})">
                         <i class="fas fa-trash"></i> Eliminar
                     </button>
