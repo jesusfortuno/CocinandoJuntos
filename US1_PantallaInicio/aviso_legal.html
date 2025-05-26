@@ -18,7 +18,7 @@
 
   <main>
       <section class="policy-section">
-          <h1 class="policy-title">Aviso Legal</h1>
+          <h1 class="policy-title" data-i18n="Aviso Legal">Aviso Legal</h1>
           <p>Aquí va el contenido del aviso legal...</p>
       </section>
   </main>
@@ -28,9 +28,12 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <!-- Cargar primero el archivo de traducciones -->
-  <script src="i18n.js"></script>
+  <script src="../translations.js"></script>
   <!-- Luego cargar el script de cambio de idioma -->
-  <script src="language-switcher.js"></script>
+  <script src="./language-switcher.js"></script>
+  <!-- Opcionalmente, cargar el helper de traducciones -->
+  <script src="../translation-helper.js"></script>
+  <!-- Finalmente, cargar el script para arreglar los enlaces -->
   <script src="../fix-links.js"></script>
 </body>
 

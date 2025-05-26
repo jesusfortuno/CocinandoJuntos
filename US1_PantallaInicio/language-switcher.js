@@ -1,5 +1,248 @@
-// Language switcher functionality
-let selectedLanguage = localStorage.getItem("selectedLanguage") || "es"
+/**
+ * Sistema de cambio de idioma para Cocinando Juntos
+ * Este archivo maneja la funcionalidad de cambio de idioma en todo el sitio
+ */
+
+// Esperar a que el DOM esté completamente cargado
+document.addEventListener("DOMContentLoaded", () => {
+  // Inicializar el sistema de traducción
+  initializeLanguageSystem()
+})
+
+// Función principal para inicializar el sistema de idiomas
+function initializeLanguageSystem() {
+  console.log("Inicializando sistema de idiomas...")
+
+  // Obtener el idioma guardado o usar español como predeterminado
+  const savedLanguage = localStorage.getItem("language") || "es"
+
+  // Configurar el selector de idioma
+  setupLanguageSelector(savedLanguage)
+
+  // Aplicar las traducciones iniciales
+  translatePage(savedLanguage)
+
+  // Exponer funciones globalmente para que puedan ser usadas desde otros scripts
+  window.changeLanguage = changeLanguage
+  window.translatePage = translatePage
+  window.getTranslation = getTranslation
+}
+
+// Configurar el selector de idioma
+function setupLanguageSelector(currentLanguage) {
+  const languageSelector = document.getElementById("language-selector") || document.getElementById("language")
+
+  if (languageSelector) {
+    // Establecer el valor actual
+    languageSelector.value = currentLanguage
+
+    // Añadir evento de cambio
+    languageSelector.addEventListener("change", function () {
+      const selectedLanguage = this.value
+      changeLanguage(selectedLanguage)
+    })
+
+    console.log(`Selector de idioma configurado con idioma: ${currentLanguage}`)
+  } else {
+    console.warn("No se encontró el selector de idioma en la página")
+  }
+}
+
+// Función para cambiar el idioma
+function changeLanguage(language) {
+  console.log(`Cambiando idioma a: ${language}`)
+
+  // Guardar el idioma seleccionado
+  localStorage.setItem("language", language)
+
+  // Aplicar traducciones
+  translatePage(language)
+
+  // Disparar un evento personalizado para que otros scripts puedan reaccionar
+  const event = new CustomEvent("languageChanged", { detail: { language } })
+  document.dispatchEvent(event)
+}
+
+// Función para traducir la página completa
+function translatePage(language) {
+  // Verificar que el idioma existe
+  if (!window.translations || !window.translations[language]) {
+    console.error(`Traducciones para el idioma "${language}" no encontradas`)
+    return
+  }
+
+  // Obtener todas las traducciones para el idioma seleccionado
+  const translations = window.translations[language]
+
+  // Traducir todos los elementos con atributo data-i18n
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const key = element.getAttribute("data-i18n")
+
+    if (translations[key]) {
+      // Si es un input con placeholder
+      if (element.hasAttribute("placeholder")) {
+        element.setAttribute("placeholder", translations[key])
+      }
+      // Si es un elemento normal
+      else {
+        element.textContent = translations[key]
+      }
+    }
+  })
+
+  // Traducir el título de la página
+  translatePageTitle(language)
+
+  // Traducir el texto del footer
+  translateFooterText(language)
+
+  console.log(`Página traducida a: ${language}`)
+}
+
+// Función para traducir el título de la página
+function translatePageTitle(language) {
+  const pageTitle = document.querySelector("title")
+  if (!pageTitle) return
+
+  const currentTitle = pageTitle.textContent
+
+  // Mapeo de títulos de página
+  const titleMap = {
+    es: {
+      "Home - Cocinando Juntos": "Home - Cocinando Juntos",
+      "Chefs - Cocinando Juntos": "Chefs - Cocinando Juntos",
+      "Contacto - Cocinando Juntos": "Contacto - Cocinando Juntos",
+      "Quiénes Somos - Cocinando Juntos": "Quiénes Somos - Cocinando Juntos",
+      "Política de Cookies - Cocinando Juntos": "Política de Cookies - Cocinando Juntos",
+      "Política de Privacidad - Cocinando Juntos": "Política de Privacidad - Cocinando Juntos",
+      "Términos y Condiciones - Cocinando Juntos": "Términos y Condiciones - Cocinando Juntos",
+      "Aviso Legal - Cocinando Juntos": "Aviso Legal - Cocinando Juntos",
+      "Cultura China - Cocinando Juntos": "Cultura China - Cocinando Juntos",
+      "Cultura Española - Cocinando Juntos": "Cultura Española - Cocinando Juntos",
+      "Cultura Francesa - Cocinando Juntos": "Cultura Francesa - Cocinando Juntos",
+      "Cultura Italiana - Cocinando Juntos": "Cultura Italiana - Cocinando Juntos",
+      "Cultura Japonesa - Cocinando Juntos": "Cultura Japonesa - Cocinando Juntos",
+      "Cultura Venezolana - Cocinando Juntos": "Cultura Venezolana - Cocinando Juntos",
+      "Arepa Venezolana - Cocinando Juntos": "Arepa Venezolana - Cocinando Juntos",
+      "Bizcocho Capuccino - Cocinando Juntos": "Bizcocho Capuccino - Cocinando Juntos",
+      "Bollitos Chinos - Cocinando Juntos": "Bollitos Chinos - Cocinando Juntos",
+      "Churros con Chocolate - Cocinando Juntos": "Churros con Chocolate - Cocinando Juntos",
+      "Crepas Dulces - Cocinando Juntos": "Crepas Dulces - Cocinando Juntos",
+      "Cannoli - Cocinando Juntos": "Cannoli - Cocinando Juntos",
+      "Coq au Vin - Cocinando Juntos": "Coq au Vin - Cocinando Juntos",
+      "Galletas de Sésamo - Cocinando Juntos": "Galletas de Sésamo - Cocinando Juntos",
+      "Fideos Salteados - Cocinando Juntos": "Fideos Salteados - Cocinando Juntos",
+      "Lasaña - Cocinando Juntos": "Lasaña - Cocinando Juntos",
+    },
+    en: {
+      "Home - Cocinando Juntos": "Home - Cooking Together",
+      "Chefs - Cocinando Juntos": "Chefs - Cooking Together",
+      "Contacto - Cocinando Juntos": "Contact - Cooking Together",
+      "Quiénes Somos - Cocinando Juntos": "About Us - Cooking Together",
+      "Política de Cookies - Cocinando Juntos": "Cookie Policy - Cooking Together",
+      "Política de Privacidad - Cocinando Juntos": "Privacy Policy - Cooking Together",
+      "Términos y Condiciones - Cocinando Juntos": "Terms and Conditions - Cooking Together",
+      "Aviso Legal - Cocinando Juntos": "Legal Notice - Cooking Together",
+      "Cultura China - Cocinando Juntos": "Chinese Culture - Cooking Together",
+      "Cultura Española - Cocinando Juntos": "Spanish Culture - Cooking Together",
+      "Cultura Francesa - Cocinando Juntos": "French Culture - Cooking Together",
+      "Cultura Italiana - Cocinando Juntos": "Italian Culture - Cooking Together",
+      "Cultura Japonesa - Cocinando Juntos": "Japanese Culture - Cooking Together",
+      "Cultura Venezolana - Cocinando Juntos": "Venezuelan Culture - Cooking Together",
+      "Arepa Venezolana - Cocinando Juntos": "Venezuelan Arepa - Cooking Together",
+      "Bizcocho Capuccino - Cocinando Juntos": "Cappuccino Cake - Cooking Together",
+      "Bollitos Chinos - Cocinando Juntos": "Chinese Buns - Cooking Together",
+      "Churros con Chocolate - Cocinando Juntos": "Churros with Chocolate - Cooking Together",
+      "Crepas Dulces - Cocinando Juntos": "Sweet Crepes - Cooking Together",
+      "Cannoli - Cocinando Juntos": "Cannoli - Cooking Together",
+      "Coq au Vin - Cocinando Juntos": "Coq au Vin - Cooking Together",
+      "Galletas de Sésamo - Cocinando Juntos": "Sesame Cookies - Cooking Together",
+      "Fideos Salteados - Cocinando Juntos": "Stir-Fried Noodles - Cooking Together",
+      "Lasaña - Cocinando Juntos": "Lasagna - Cooking Together",
+    },
+    ca: {
+      "Home - Cocinando Juntos": "Inici - Cuinant Junts",
+      "Chefs - Cocinando Juntos": "Xefs - Cuinant Junts",
+      "Contacto - Cocinando Juntos": "Contacte - Cuinant Junts",
+      "Quiénes Somos - Cocinando Juntos": "Qui Som - Cuinant Junts",
+      "Política de Cookies - Cocinando Juntos": "Política de Cookies - Cuinant Junts",
+      "Política de Privacidad - Cocinando Juntos": "Política de Privacitat - Cuinant Junts",
+      "Términos y Condiciones - Cocinando Juntos": "Termes i Condicions - Cuinant Junts",
+      "Aviso Legal - Cocinando Juntos": "Avís Legal - Cuinant Junts",
+      "Cultura China - Cocinando Juntos": "Cultura Xinesa - Cuinant Junts",
+      "Cultura Española - Cocinando Juntos": "Cultura Espanyola - Cuinant Junts",
+      "Cultura Francesa - Cocinando Juntos": "Cultura Francesa - Cuinant Junts",
+      "Cultura Italiana - Cocinando Juntos": "Cultura Italiana - Cuinant Junts",
+      "Cultura Japonesa - Cocinando Juntos": "Cultura Japonesa - Cuinant Junts",
+      "Cultura Venezolana - Cocinando Juntos": "Cultura Veneçolana - Cuinant Junts",
+      "Arepa Venezolana - Cocinando Juntos": "Arepa Veneçolana - Cuinant Junts",
+      "Bizcocho Capuccino - Cocinando Juntos": "Pastís de Capuccino - Cuinant Junts",
+      "Bollitos Chinos - Cocinando Juntos": "Panets Xinesos - Cuinant Junts",
+      "Churros con Chocolate - Cocinando Juntos": "Xurros amb Xocolata - Cuinant Junts",
+      "Crepas Dulces - Cocinando Juntos": "Creps Dolços - Cuinant Junts",
+      "Cannoli - Cocinando Juntos": "Cannoli - Cuinant Junts",
+      "Coq au Vin - Cocinando Juntos": "Coq au Vin - Cuinant Junts",
+      "Galletas de Sésamo - Cocinando Juntos": "Galetes de Sèsam - Cuinant Junts",
+      "Fideos Salteados - Cocinando Juntos": "Fideus Saltats - Cuinant Junts",
+      "Lasaña - Cocinando Juntos": "Lasanya - Cuinant Junts",
+    },
+  }
+
+  // Buscar coincidencias exactas
+  if (titleMap[language] && titleMap[language][currentTitle]) {
+    pageTitle.textContent = titleMap[language][currentTitle]
+    return
+  }
+
+  // Buscar coincidencias parciales
+  for (const [originalTitle, translatedTitle] of Object.entries(titleMap[language] || {})) {
+    if (currentTitle.includes("Cocinando Juntos")) {
+      // Extraer la primera parte del título
+      const titlePart = currentTitle.split(" - ")[0]
+      // Traducir esa parte si existe en las traducciones
+      if (window.translations[language][titlePart]) {
+        const translatedPart = window.translations[language][titlePart]
+        const suffix =
+          language === "en" ? " - Cooking Together" : language === "ca" ? " - Cuinant Junts" : " - Cocinando Juntos"
+        pageTitle.textContent = translatedPart + suffix
+        break
+      }
+    }
+  }
+}
+
+// Función para traducir el texto del footer
+function translateFooterText(language) {
+  // Traducir la descripción del footer
+  const footerDescription = document.querySelector(".footer-text, footer p")
+  if (footerDescription) {
+    const key =
+      "Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias."
+    if (window.translations[language][key]) {
+      footerDescription.textContent = window.translations[language][key]
+    }
+  }
+
+  // Traducir el copyright
+  const copyright = document.querySelector(".copyright, footer div:last-child p")
+  if (copyright) {
+    const key = "© 2025 Cocinando Juntos - Todos los derechos reservados"
+    if (window.translations[language][key]) {
+      copyright.textContent = window.translations[language][key]
+    }
+  }
+}
+
+// Función para obtener una traducción específica
+function getTranslation(text, language) {
+  if (!window.translations || !window.translations[language]) {
+    return text
+  }
+
+  return window.translations[language][text] || text
+}
+
+const selectedLanguage = localStorage.getItem("selectedLanguage") || "es"
 
 function updateLanguageDisplay() {
   const languageSelector = document.getElementById("language-selector")
@@ -11,14 +254,8 @@ function updateLanguageDisplay() {
   updateDynamicElements(selectedLanguage)
 }
 
-function changeLanguage(language) {
-  selectedLanguage = language
-  localStorage.setItem("selectedLanguage", language)
-  updateLanguageDisplay()
-}
-
 // Initialize language display when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
   const languageSelector = document.getElementById("language-selector")
   if (languageSelector) {
     languageSelector.addEventListener("change", function () {
@@ -27,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   updateLanguageDisplay()
-})
+})*/
 
 function updateDynamicElements(language) {
   // Update all elements with data-i18n attribute
@@ -58,7 +295,7 @@ function updateDynamicElements(language) {
     const currentTitle = pageTitle.textContent
 
     // Map of page titles
-    const titleMap = {
+    /*const titleMap = {
       es: {
         "Home - Cocinando Juntos": "Home - Cocinando Juntos",
         "Chefs - Cocinando Juntos": "Chefs - Cocinando Juntos",
@@ -137,15 +374,15 @@ function updateDynamicElements(language) {
         "Fideos Salteados - Cocinando Juntos": "Fideus Saltats - Cuinant Junts",
         "Lasaña - Cocinando Juntos": "Lasanya - Cuinant Junts",
       },
-    }
+    }*/
 
     // Find and update the title
-    for (const [originalTitle, translatedTitle] of Object.entries(titleMap[language] || {})) {
+    /*for (const [originalTitle, translatedTitle] of Object.entries(titleMap[language] || {})) {
       if (currentTitle.includes(originalTitle)) {
         pageTitle.textContent = translatedTitle
         break
       }
-    }
+    }*/
   }
 
   // Update recipe page specific elements
@@ -342,7 +579,7 @@ function updateDynamicElements(language) {
       ca: {
         "Tu nombre": "El teu nom",
         "Tu correo electrónico": "El teu correu electrònic",
-        "Asunto de tu consulta": "Assumpte de la teva consulta",
+        "Asunto de la teva consulta": "Assumpte de la teva consulta",
         "Escribe tu consulta aquí...": "Escriu la teva consulta aquí...",
         "Escribe tu comentario aquí...": "Escriu el teu comentari aquí...",
       },
@@ -362,7 +599,7 @@ function updateDynamicElements(language) {
     const text =
       "Cocinando Juntos es una comunidad de amantes de la gastronomía donde podrás explorar sabores de diferentes culturas, compartir tus recetas favoritas y aprender nuevas técnicas culinarias."
 
-    if (language === "en") {
+    /*if (language === "en") {
       footerText.textContent =
         "Cooking Together is a community of food lovers where you can explore flavors from different cultures, share your favorite recipes, and learn new culinary techniques."
     } else if (language === "ca") {
@@ -370,7 +607,7 @@ function updateDynamicElements(language) {
         "Cuinant Junts és una comunitat d'amants de la gastronomia on podràs explorar sabors de diferents cultures, compartir les teves receptes favorites i aprendre noves tècniques culinàries."
     } else {
       footerText.textContent = text
-    }
+    }*/
   }
 
   // Update copyright text
@@ -378,12 +615,18 @@ function updateDynamicElements(language) {
   if (copyright) {
     const text = "© 2025 Cocinando Juntos - Todos los derechos reservados"
 
-    if (language === "en") {
+/*if (language === "en") {
       copyright.textContent = "© 2025 Cooking Together - All rights reserved"
+    } else if (language === "ca") {
+      copyright.textContent = "© 2025 Cuinant Junts - Tots els drets reservats"
+    } else {
     } else if (language === "ca") {
       copyright.textContent = "© 2025 Cuinant Junts - Tots els drets reservats"
     } else {
       copyright.textContent = text
     }
+  }
+}
+*/
   }
 }

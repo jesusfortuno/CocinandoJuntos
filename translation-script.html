@@ -1,0 +1,40 @@
+<!-- Incluir este fragmento en todas las páginas HTML justo antes del cierre del body -->
+<!-- Asegúrate de que este script se cargue después de que el footer esté cargado -->
+
+<!-- Cargar primero el archivo de traducciones -->
+<script src="../translations.js"></script>
+
+<!-- Luego cargar el script de cambio de idioma -->
+<script src="../language-switcher.js"></script>
+
+<!-- Opcionalmente, cargar el helper de traducciones -->
+<script src="../translation-helper.js"></script>
+
+<!-- Finalmente, cargar el script para arreglar los enlaces -->
+<script src="../fix-links.js"></script>
+
+<script>
+  // Inicializar el sistema de traducción cuando el DOM esté cargado
+  document.addEventListener("DOMContentLoaded", function() {
+    // Obtener el idioma guardado o usar español como predeterminado
+    const savedLanguage = localStorage.getItem("language") || "es";
+    
+    // Aplicar las traducciones iniciales
+    if (typeof window.translatePage === "function") {
+      window.translatePage(savedLanguage);
+    }
+    
+    // Configurar el selector de idioma
+    const languageSelector = document.getElementById("language");
+    if (languageSelector) {
+      languageSelector.value = savedLanguage;
+      
+      languageSelector.addEventListener("change", function() {
+        const selectedLanguage = this.value;
+        if (typeof window.changeLanguage === "function") {
+          window.changeLanguage(selectedLanguage);
+        }
+      });
+    }
+  });
+</script>
