@@ -1087,7 +1087,7 @@ function setupSearchFunctionality() {
         })
 
         verTodoButton.addEventListener("click", () => {
-          window.location.href = `${pathToRoot}US1_PantallaInicio/busqueda.html?q=${encodeURIComponent(query)}`
+          window.location.href = `${pathToRoot}/Platos.html?q=${encodeURIComponent(query)}`
         })
 
         searchResults.appendChild(verTodoButton)
@@ -1304,7 +1304,7 @@ function setupSearchFunctionality() {
         })
 
         verTodoButton.addEventListener("click", () => {
-          window.location.href = `${pathToRoot}US1_PantallaInicio/busqueda.html?q=${encodeURIComponent(query)}`
+          window.location.href = `${pathToRoot}Platos.html?q=${encodeURIComponent(query)}`
         })
 
         searchResults.appendChild(verTodoButton)
@@ -1380,17 +1380,17 @@ function setupSearchFunctionality() {
   function getImagePath(titulo, categoria) {
     // Mapeo de títulos a rutas de imágenes
     const imageMap = {
-      "Pollo Agridulce": `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`,
-      "Sweet and Sour Chicken": `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`,
-      "Pollastre Agredolç": `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`,
-      Paella: `${pathToRoot}US1_PantallaInicio/Imagenes/España/paella.png`,
-      "Crepas Dulces": `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`,
-      "Sweet Crepes": `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`,
-      "Creps Dolços": `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`,
-      "Bizcocho Capuccino": `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`,
-      "Cappuccino Cake": `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`,
-      "Pastís de Capuccino": `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`,
-      "Arepa Venezolana": `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`,
+      "Pollo Agridulce": `${pathToRoot}/Imagenes/China/pollo-agridulce.jpg`,
+      "Sweet and Sour Chicken": `${pathToRoot}/Imagenes/China/pollo-agridulce.jpg`,
+      "Pollastre Agredolç": `${pathToRoot}/Imagenes/China/pollo-agridulce.jpg`,
+      Paella: `${pathToRoot}/Imagenes/España/paella.png`,
+      "Crepas Dulces": `${pathToRoot}/Imagenes/Francia/crepas-dulces.jpg`,
+      "Sweet Crepes": `${pathToRoot}/Imagenes/Francia/crepas-dulces.jpg`,
+      "Creps Dolços": `${pathToRoot}/Imagenes/Francia/crepas-dulces.jpg`,
+      "Bizcocho Capuccino": `${pathToRoot}/Imagenes/Italia/bizcocho-capuccino.jpg`,
+      "Cappuccino Cake": `${pathToRoot}/Imagenes/Italia/bizcocho-capuccino.jpg`,
+      "Pastís de Capuccino": `${pathToRoot}/Imagenes/Italia/bizcocho-capuccino.jpg`,
+      "Arepa Venezolana": `${pathToRoot}/Imagenes/Venezuela/arepa-venezolana.jpg`,
     }
 
     // Buscar coincidencia exacta
@@ -1402,54 +1402,54 @@ function setupSearchFunctionality() {
     if (categoria) {
       const categoriaLower = categoria.toLowerCase()
       if (categoriaLower.includes("china")) {
-        return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`
+        return `${pathToRoot}/Imagenes/China/pollo-agridulce.jpg`
       } else if (
         categoriaLower.includes("españa") ||
         categoriaLower.includes("spain") ||
         categoriaLower.includes("espanya")
       ) {
-        return `${pathToRoot}US1_PantallaInicio/Imagenes/España/paella.png`
+        return `${pathToRoot}/Imagenes/España/paella.png`
       } else if (
         categoriaLower.includes("francia") ||
         categoriaLower.includes("france") ||
         categoriaLower.includes("frança")
       ) {
-        return `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`
+        return `${pathToRoot}/Imagenes/Francia/crepas-dulces.jpg`
       } else if (
         categoriaLower.includes("italia") ||
         categoriaLower.includes("italy") ||
         categoriaLower.includes("itàlia")
       ) {
-        return `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`
+        return `${pathToRoot}/Imagenes/Italia/bizcocho-capuccino.jpg`
       } else if (categoriaLower.includes("venezuela") || categoriaLower.includes("veneçuela")) {
-        return `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`
+        return `${pathToRoot}/Imagenes/Venezuela/arepa-venezolana.jpg`
       } else if (
         categoriaLower.includes("japón") ||
         categoriaLower.includes("japan") ||
         categoriaLower.includes("japó")
       ) {
-        return `${pathToRoot}US1_PantallaInicio/Imagenes/Japon/sushi.jpeg`
+        return `${pathToRoot}/Imagenes/Japon/sushi.jpeg`
       }
     }
 
     // Imagen por defecto basada en el título
     const tituloLower = titulo.toLowerCase()
     if (tituloLower.includes("china") || tituloLower.includes("pollo")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/China/pollo-agridulce.jpg`
+      return `${pathToRoot}/Imagenes/China/pollo-agridulce.jpg`
     } else if (tituloLower.includes("españa") || tituloLower.includes("paella")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/España/paella.png`
+      return `${pathToRoot}/Imagenes/España/paella.png`
     } else if (tituloLower.includes("francia") || tituloLower.includes("crepa")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg`
+      return `${pathToRoot}/Imagenes/Francia/crepas-dulces.jpg`
     } else if (tituloLower.includes("italia") || tituloLower.includes("bizcocho")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg`
+      return `${pathToRoot}/Imagenes/Italia/bizcocho-capuccino.jpg`
     } else if (tituloLower.includes("venezuela") || tituloLower.includes("arepa")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg`
+      return `${pathToRoot}/Imagenes/Venezuela/arepa-venezolana.jpg`
     } else if (tituloLower.includes("japón") || tituloLower.includes("sushi")) {
-      return `${pathToRoot}US1_PantallaInicio/Imagenes/Japon/sushi.jpeg`
+      return `${pathToRoot}/Imagenes/Japon/sushi.jpeg`
     }
 
     // Imagen por defecto
-    return `${pathToRoot}US1_PantallaInicio/Imagenes/placeholder-recipe.jpg`
+    return `${pathToRoot}/Imagenes/placeholder-recipe.jpg`
   }
 
   // Función para obtener la URL de la receta
@@ -1587,7 +1587,7 @@ function setupFooterFunctionality() {
         window.i18n.changeLanguage(selectedLanguage)
       } else if (window.i18n && typeof window.i18n.translatePage === "function") {
         window.i18n.translatePage(selectedLanguage)
-      } else {
+      } else {  
         // Recargar la página como fallback
         window.location.reload()
       }
