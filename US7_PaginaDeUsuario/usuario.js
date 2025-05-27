@@ -9,6 +9,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const userInfo = document.getElementById("user-info")
   const changePasswordBtn = document.querySelector(".profile-info .primary-btn")
   const passwordModal = document.getElementById("password-modal")
+  const savedRecipesContainer = document.getElementById("savedRecipes")
+  const userInfoContainer = document.getElementById("userInfo")
+
+  // Función para obtener la información del usuario desde localStorage
+  function getUserInfo() {
+    const userInfo = localStorage.getItem("userInfo")
+    return userInfo ? JSON.parse(userInfo) : null
+  }
+
+  // Función para mostrar la información del usuario en la página
+  function displayUserInfo() {
+    const user = getUserInfo()
+    if (user) {
+      userInfoContainer.innerHTML = `
+                <h2>Bienvenido, ${user.nombre}</h2>
+                <p>Email: ${user.email}</p>
+            `
+    } else {
+      userInfoContainer.innerHTML = "<p>No hay información de usuario disponible.</p>"
+    }
+  }
+
+  // Función para obtener las recetas guardadas desde localStorage
+  function getSavedRecipes() {
+    const savedRecipes = localStorage.getItem("savedRecipes")
+    return savedRecipes ? JSON.parse(savedRecipes) : []
+  }
+
+  // Función para mostrar las recetas guardadas en la página
   async function fetchSavedRecipes(userId) {
     try {
       console.log("Buscando recetas para usuario:", userId)
@@ -133,17 +162,21 @@ document.addEventListener("DOMContentLoaded", () => {
           // Generar imagen para la receta
           const imagenReceta = obtenerImagenParaReceta(recipe.titulo)
 
+          // Verificar si el archivo existe antes de crear el enlace
+          const recipeFileName = recipe.titulo.toLowerCase().replace(/\s+/g, "-")
+
           recipeElement.innerHTML = `
-                      <img src="${imagenReceta}" alt="${recipe.titulo}">
-                      <h4>${recipe.titulo}</h4>
-                      <div class="recipe-actions">
-                          <a href="../US6_GuardarRecetas/${recipe.titulo.toLowerCase().replace(/\s+/g, "-")}.html?id=${recipe.id}" 
-                             class="recipe-btn view-btn">Ver Receta</a>
-                          <button 
-                              onclick="eliminarDeFavoritos(${recipe.id})"
-                              class="recipe-btn delete-btn">Eliminar</button>
-                      </div>
-                  `
+                <img src="${imagenReceta}" alt="${recipe.titulo}">
+                <h4>${recipe.titulo}</h4>
+                <div class="recipe-actions">
+                    <a href="javascript:void(0)" 
+                       onclick="window.location.href='../US6_GuardarRecetas/${recipeFileName}.html'" 
+                       class="recipe-btn view-btn">Ver Receta</a>
+                    <button 
+                        onclick="eliminarDeFavoritos(${recipe.id})"
+                        class="recipe-btn delete-btn">Eliminar</button>
+                </div>
+            `
           recipesContainer.appendChild(recipeElement)
         }
       })
@@ -228,28 +261,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const estrellas = generarEstrellas(c.valoracion)
         const valoracionHTML = c.valoracion
           ? `<div class="valoracion">
-            <span class="estrellas">${estrellas}</span>
-            <span class="valor">${c.valoracion}/5</span>
-          </div>`
+      <span class="estrellas">${estrellas}</span>
+      <span class="valor">${c.valoracion}/5</span>
+    </div>`
           : ""
 
         const comentarioElement = document.createElement("div")
         comentarioElement.classList.add("comentario-item")
         comentarioElement.setAttribute("data-comentario-id", c.id_comentario)
 
+        // Crear la URL correcta para la receta
+        const recipeFileName = nombreReceta.toLowerCase().replace(/\s+/g, "-")
+
         comentarioElement.innerHTML = `
-          <div class="comentario-header">
-            <span class="nombre-receta" onclick="irAReceta(${c.id_receta}, '${nombreReceta}')">${nombreReceta}</span>
-            ${valoracionHTML}
-          </div>
-          <p class="comentario-texto">${c.comentario || "Sin comentario"}</p>
-          <p class="comentario-fecha">${fechaFormateada}</p>
-          <div class="comentario-actions">
-            <button onclick="eliminarComentario(${c.id_comentario})" class="delete-comment-btn">
-              Eliminar
-            </button>
-          </div>
-        `
+    <div class="comentario-header">
+      <span class="nombre-receta" onclick="javascript:window.location.href='../US6_GuardarRecetas/${recipeFileName}.html'">${nombreReceta}</span>
+      ${valoracionHTML}
+    </div>
+    <p class="comentario-texto">${c.comentario || "Sin comentario"}</p>
+    <p class="comentario-fecha">${fechaFormateada}</p>
+    <div class="comentario-actions">
+      <button onclick="eliminarComentario(${c.id_comentario})" class="delete-comment-btn">
+        Eliminar
+      </button>
+    </div>
+  `
 
         comentariosContainer.appendChild(comentarioElement)
       })
@@ -431,12 +467,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Función para ir a la receta al hacer clic en el comentario
-  window.irAReceta = (recetaId, titulo) => {
-    const recetaUrl = `../US6_GuardarRecetas/${titulo.toLowerCase().replace(/\s+/g, "-")}.html?id=${recetaId}`
-    window.location.href = recetaUrl
-  }
-
   // Referencias a los nuevos elementos
   const editProfileBtn = document.getElementById("edit-profile-btn")
   const profileModal = document.getElementById("profile-modal")
@@ -545,5 +575,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (usuario && usuario.avatar_url) {
     document.getElementById("profile-image").src = usuario.avatar_url
     document.querySelector(".user-icon").src = usuario.avatar_url
+  }
+
+  // Añade esta función global para navegar a las recetas
+  window.irAReceta = (titulo) => {
+    const recipeFileName = titulo.toLowerCase().replace(/\s+/g, "-")
+    window.location.href = `../US6_GuardarRecetas/${recipeFileName}.html`
   }
 })
