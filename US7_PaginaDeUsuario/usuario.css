@@ -25,17 +25,6 @@ nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  width: 127px;
-  height: auto;
-  padding-left: 60px;
-}
-
 .user-info {
   display: flex;
   align-items: center;
@@ -122,6 +111,8 @@ main {
 
 .profile-avatar {
   flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
 }
 
 .profile-avatar img {
@@ -131,6 +122,36 @@ main {
   object-fit: cover;
   border: 3px solid #e0d5c9;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(107, 68, 35, 0.7);
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  transition: opacity .3s ease;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.profile-avatar:hover .upload-overlay {
+  height: 100%;
+  opacity: 1;
+}
+
+.upload-btn {
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-align: center;
+  padding: 5px 10px;
 }
 
 #profile-user-name {
@@ -288,6 +309,28 @@ main {
   font-weight: bold;
   color: #6b4423;
   font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nombre-receta:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #6b4423;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.nombre-receta:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .valoracion {
@@ -311,6 +354,29 @@ main {
   color: #888;
   font-size: 0.85rem;
   text-align: right;
+}
+
+/* Añadir después de los estilos de .comentario-fecha */
+.comentario-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.delete-comment-btn {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.delete-comment-btn:hover {
+  background-color: #ffe5e5;
+  transform: translateY(-1px);
 }
 
 /* Actualizar los estilos de la cuadrícula de recetas */
@@ -392,6 +458,15 @@ main {
   width: 90%;
   max-width: 400px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1001;
+}
+
+/* Añadir estilos para los botones en el modal de edición de perfil */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
 }
 
 .form-group {
@@ -458,11 +533,28 @@ main {
   transform: translateY(-2px);
 }
 
-/* Actualizar los estilos del contenedor de comentarios */
+/* Estilos para los botones de acción del perfil */
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
 
-/* Estilizar la barra de desplazamiento */
+/* Mejorar el estilo del input en el formulario de edición */
+#edit-username {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0d5c9;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #333;
+}
 
-/* Actualizar el indicador de scroll */
+#edit-username:focus {
+  outline: none;
+  border-color: #6b4423;
+  box-shadow: 0 0 0 2px rgba(107, 68, 35, 0.2);
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -524,4 +616,3 @@ footer {
   padding: 1rem;
   margin-top: auto;
 }
-

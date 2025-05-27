@@ -1,35 +1,230 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Usuarios</title>
-    <link rel="stylesheet" href="gestionUsuarios.css">
+    <title>Gestión de Usuarios | Cocinando Juntos</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="PaginaAdmin.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
+
 <body>
-    <nav>
-        <a href="./../US1_PantallaInicio/index.html" class="logo">
-            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-    </nav>
+    <style>
+        #footer-placeholder {
+            margin-top: 40px;
+        }
+        #nav-placeholder {
+            margin-bottom: 40px;
+        }
+        .table-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f1e9;
+            color: #6b4423;
+            font-weight: 600;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .breadcrumb a {
+            color: #6b4423;
+            text-decoration: none;
+        }
+        .breadcrumb span {
+            margin: 0 0.5rem;
+        }
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: #6b4423;
+        }
+        .btn-info {
+            background-color: #3498db;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        .user-info-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .role-badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .role-admin {
+            background-color: #fdedeb;
+            color: #e74c3c;
+        }
+        .role-user {
+            background-color: #e8f4fd;
+            color: #3498db;
+        }
+        .role-chef {
+            background-color: #e6f7e9;
+            color: #2ecc71;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-active {
+            background-color: #e6f7e9;
+            color: #2ecc71;
+        }
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        .close:hover {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #d4c3b5;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-text {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
 
-    <main>
-        <div class="breadcrumb">
-            <a href="./PaginaAdmin.html">Panel de Administración</a> &gt; <span>Gestión de Usuarios</span>
-        </div>
+    <div id="nav-placeholder"></div>
 
-        <div class="users-management">
-            <div class="management-header">
-                <h1>Gestión de Usuarios</h1>
-                <button id="add-user-btn" class="primary-button">Añadir Nuevo Usuario</button>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil" class="admin-profile-pic">
+                <span class="admin-name" id="sidebar-admin-name">Nombre usuario</span>
+                <span class="admin-role">Administrador</span>
             </div>
 
-            <div class="users-list">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="./PaginaAdmin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="./gestionRecetas.html"><i class="fas fa-utensils"></i> Gestión de Recetas</a>
+                    </li>
+                    <li class="active">
+                        <a href="./gestionUsuarios.html"><i class="fas fa-users"></i> Gestión de Usuarios</a>
+                    </li>
+                    <li>
+                        <a href="./gestionComentarios.html"><i class="fas fa-comments"></i> Gestión de Comentarios</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="./PaginaAdmin.html"><i class="fas fa-home"></i> Panel de Administración</a>
+                <span>/</span>
+                <span>Gestión de Usuarios</span>
+            </div>
+
+            <div class="page-header">
+                <h1>Gestión de Usuarios</h1>
+                <button id="add-user-btn" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Añadir Nuevo Usuario
+                </button>
+            </div>
+
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
@@ -37,54 +232,89 @@
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Rol</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="users-table-body">
-                        <!-- Los usuarios se cargarán aquí dinámicamente -->
+                        <tr>
+                            <td colspan="6" class="text-center">Cargando usuarios...</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
+        </main>
+    </div>
 
-        <!-- Modal para añadir/editar usuario -->
-        <div id="user-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
+    <!-- Modal para añadir/editar usuario -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
                 <h2 id="modal-title">Añadir Nuevo Usuario</h2>
-                <form id="user-form">
-                    <div class="form-group">
-                        <label for="username">Nombre de usuario:</label>
-                        <input type="text" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" id="password" name="password">
-                        <small>Dejar en blanco para mantener la contraseña actual al editar</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="rol">Rol:</label>
-                        <select id="rol" name="rol" required>
-                            <option value="user">Usuario</option>
-                            <option value="admin">Administrador</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="primary-button">Guardar Usuario</button>
-                </form>
+                <span class="close">&times;</span>
             </div>
+            <form id="user-form">
+                <div class="form-group">
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="form-control">
+                    <small class="form-text">Dejar en blanco para mantener la contraseña actual (solo al editar)</small>
+                </div>
+                <div class="form-group">
+                    <label for="rol">Rol:</label>
+                    <select id="rol" name="rol" class="form-control" required>
+                        <option value="user">Usuario</option>
+                        <option value="chef">Chef</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <input type="hidden" id="user-id" name="user-id" value="">
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-form">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="save-user">Guardar Usuario</button>
+                </div>
+            </form>
         </div>
-    </main>
+    </div>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="gestionUsuarios.js"></script>
-</body>
-</html>
 
+    <script>
+        // Obtener el usuario desde localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            const sidebarAdminName = document.getElementById("sidebar-admin-name");
+
+            if (usuario) {
+                console.log('Usuario encontrado:', usuario);
+                sidebarAdminName.textContent = usuario.username || "Administrador";
+            } else {
+                console.log('No se encontró usuario en localStorage');
+                // Comentado para permitir ver la página sin redirección
+                // window.location.href = "../login.html";
+            }
+
+            // Función para alternar la visibilidad del sidebar en móviles
+            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener("click", function () {
+                    const sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.toggle('sidebar-open');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

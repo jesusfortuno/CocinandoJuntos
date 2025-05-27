@@ -7,14 +7,10 @@
     <title>Iniciar Sesión - Cocinando Juntos</title>
   </head>
   <body>
-
     <div class="login-container">
-      <a class="volver-container" href="./US1_PantallaInicio/index.html">
-        <img src="./US1_PantallaInicio/Imagenes/75519.png" alt="Volver a la Página Principal" title="Volver a la Página Principal">
-      </a>
       <h1 class="title">Iniciar Sesión</h1>
       <div class="logo">
-        <img src="./US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
+        <img src="./Imagenes/logos/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
       </div>
       <form class="login-form" id="login-form">
         <label for="email">Correo Electrónico:</label>
@@ -28,9 +24,14 @@
 
       <!-- Enlaces para registro y recuperación de contraseña -->
       <div class="links-container">
-        <a href="registro.html">Registrarse</a> |
-        <a href="cambiar_contraseña.html">¿Olvidaste tu contraseña?</a>
+        <p style="margin-bottom: 10px;">¿No tienes cuenta? <a href="registro.html">Registrarse</a></p>
+        <p><a href="cambiar_contraseña.html">¿Olvidaste tu contraseña?</a></p>
       </div>
+      
+      <!-- Nuevo botón para volver al inicio -->
+      <a href="./US1_PantallaInicio/index.html" class="volver-inicio-btn">
+        ← Volver al inicio
+      </a>
     </div>
 
     <!-- Asegúrate de cargar la librería de Supabase antes del script de login.js -->

@@ -5,9 +5,11 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f7f1e8; /* Fondo beige claro */
-  color: #5a3e2b; /* Marrón oscuro */
+  font-family: "Arial", sans-serif;
+  background-color: #f7f1e8;
+  /* Fondo beige claro */
+  color: #5a3e2b;
+  /* Marrón oscuro */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,10 +18,12 @@ body {
 
 .login-container {
   text-align: center;
-  border: 2px solid #c7a17a; /* Borde marrón claro */
+  border: 2px solid #c7a17a;
+  /* Borde marrón claro */
   padding: 40px;
   width: 400px;
-  background-color: #f3e4d6; /* Fondo más claro */
+  background-color: #f3e4d6;
+  /* Fondo más claro */
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -27,7 +31,8 @@ body {
 .title {
   margin-bottom: 20px;
   font-size: 1.8em;
-  color: #8c5a38; /* Marrón oscuro */
+  color: #8c5a38;
+  /* Marrón oscuro */
 }
 
 .logo-box {
@@ -46,7 +51,8 @@ body {
 
 label {
   text-align: left;
-  color: #8c5a38; /* Marrón oscuro */
+  color: #8c5a38;
+  /* Marrón oscuro */
   font-weight: bold;
 }
 
@@ -76,7 +82,8 @@ input:focus {
 }
 
 .login-button:hover {
-  background-color: #8c5a38;
+  background-color: #d9c4a6;
+  color: #5a3e2b;
 }
 
 .logo img {
@@ -85,22 +92,43 @@ input:focus {
   max-width: 100%;
 }
 
-.volver-container {
-  top: 220px;
-  right: 780px;
-}
-
-.volver-container img {
-  position: fixed;
-  margin-left: 160px;
-  margin-top: -20px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
 .links-container {
   margin-top: 20px;
   font-size: 1em;
   color: #8c5a38;
+}
+
+.links-container a {
+  color: #a97c50;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.links-container a:hover {
+  background-color: #e8d3b5;
+  color: #5a3e2b;
+  text-decoration: underline;
+}
+
+/* Estilo unificado para el botón de volver al inicio */
+.volver-inicio-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: transparent;
+  color: #a97c50;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 1px solid #a97c50;
+  font-weight: bold;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.volver-inicio-btn:hover {
+  background-color: #e8d3b5;
+  color: #5a3e2b;
 }

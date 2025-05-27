@@ -4,21 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Usuario - Cocinando Juntos</title>
+    <script src="../include-components.js" data-include="nav,footer"></script>
     <link rel="stylesheet" href="usuario.css">
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Estilos para corregir el botón de cerrar sesión */
+        #logout-btn {
+            background-color: transparent !important;
+            color: #6b4423 !important;
+            text-decoration: none !important;
+            font-size: 0.85rem !important;
+            opacity: 0.8 !important;
+            padding: 0 !important;
+        }
+        
+        /* Añadir espacio en el footer */
+        #footer-placeholder {
+            margin-top: 40px;
+        }
+    </style>
 </head>
-<body>
-    <nav>
-        <div class="logo">
-            <a href="../US1_PantallaInicio/index.html">
-                <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-            </a>
-        </div>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="../Us1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="../US1_PantallaInicio/index.html" id="logout-btn">Cerrar Sesión</a>
-        </div>
-    </nav>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
     <main>
         <!-- Sección de Perfil -->
@@ -27,7 +39,13 @@
             
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil">
+                    <img src="../Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de Perfil" id="profile-image">
+                    <div class="upload-overlay">
+                        <label for="profile-upload" class="upload-btn">
+                            <span>Cambiar foto</span>
+                        </label>
+                        <input type="file" id="profile-upload" accept="image/*" style="display: none;">
+                    </div>
                 </div>
                 <span id="profile-user-name">Nombre del Usuario</span>
             </div>
@@ -35,10 +53,17 @@
             <div class="profile-info">
                 <h3>Información Personal</h3>
                 <p>
+                    <strong>Nombre:</strong>
+                    <span id="display-username">Nombre del Usuario</span>
+                </p>
+                <p>
                     <strong>Email:</strong>
                     <span id="user-email">usuario@ejemplo.com</span>
                 </p>
-                <button class="primary-btn">Cambiar Contraseña</button>
+                <div class="profile-actions">
+                    <button class="primary-btn" id="edit-profile-btn">Editar Perfil</button>
+                    <button class="primary-btn cambiar-contrasena-btn">Cambiar Contraseña</button>
+                </div>
             </div>
         </section>
 
@@ -97,12 +122,48 @@
         </div>
     </div>
 
-    <footer>
-        <p>2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <!-- Modal de Edición de Perfil -->
+    <div id="profile-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Editar Perfil</h2>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label for="edit-username">Nombre de usuario:</label>
+                    <input type="text" id="edit-username" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Guardar Cambios</button>
+                    <button type="button" class="secondary-btn" onclick="closeProfileModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../US1_PantallaInicio/index.js" defer></script>
+    <script type="module" src="../favoritos.js"></script>
+    <script type="module" src="../valorar.js"></script>
     <script src="usuario.js"></script>
+    <script src="../navigation-handler.js"></script>
+    
+    <!-- Script para corregir la ruta del logo -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Esperar a que se cargue el navegador
+            setTimeout(function() {
+                // Reemplazar directamente el HTML del logo con la ruta correcta
+                const navPlaceholder = document.getElementById('nav-placeholder');
+                if (navPlaceholder) {
+                    const logoLink = navPlaceholder.querySelector('.logo');
+                    if (logoLink) {
+                        logoLink.innerHTML = '<img src="/Imagenes/logos/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos" style="width: 100%; height: auto; object-fit: contain;">';
+                    }
+                }
+            }, 500);
+        });
+    </script>
+    <script src="../fix-links.js"></script>
 </body>
 </html>
-

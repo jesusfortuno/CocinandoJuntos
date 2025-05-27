@@ -1,0 +1,84 @@
+<!-- This is a helper file to be included in all recipe pages -->
+<script>
+    // This script directly adds data-i18n attributes to elements when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+      // Add data-i18n attributes to all text elements that need translation
+      
+      // Recipe title
+      const recipeTitle = document.querySelector(".recipe-title h1");
+      if (recipeTitle) {
+        const titleText = recipeTitle.childNodes[0].textContent.trim();
+        recipeTitle.setAttribute("data-i18n", titleText);
+      }
+      
+      // Recipe tags
+      document.querySelectorAll(".recipe-tags .tag").forEach(tag => {
+        tag.setAttribute("data-i18n", tag.textContent.trim());
+      });
+      
+      // Buttons
+      const favoriteBtn = document.querySelector(".favorite-btn");
+      if (favoriteBtn) {
+        favoriteBtn.setAttribute("data-i18n", favoriteBtn.textContent.trim());
+      }
+      
+      const rateBtn = document.querySelector(".rate-btn");
+      if (rateBtn) {
+        rateBtn.setAttribute("data-i18n", rateBtn.textContent.trim());
+      }
+      
+      // Section headings
+      const ingredientsHeading = document.querySelector(".recipe-ingredients h2");
+      if (ingredientsHeading) {
+        ingredientsHeading.setAttribute("data-i18n", "Ingredientes");
+      }
+      
+      const stepsHeading = document.querySelector(".recipe-steps h2");
+      if (stepsHeading) {
+        stepsHeading.setAttribute("data-i18n", "Pasos para la Receta");
+      }
+      
+      // Comments section
+      const commentsHeading = document.querySelector("#commentsSection h3");
+      if (commentsHeading) {
+        commentsHeading.setAttribute("data-i18n", "Deja tu comentario");
+      }
+      
+      const commentTextarea = document.querySelector("#commentText");
+      if (commentTextarea) {
+        commentTextarea.setAttribute("data-i18n", "Escribe tu comentario aquí...");
+      }
+      
+      const submitCommentBtn = document.querySelector("#submitComment");
+      if (submitCommentBtn) {
+        submitCommentBtn.setAttribute("data-i18n", "Publicar");
+      }
+      
+      const cancelReplyBtn = document.querySelector("#cancelReply");
+      if (cancelReplyBtn) {
+        cancelReplyBtn.setAttribute("data-i18n", "Cancelar");
+      }
+      
+      // Breadcrumbs
+      document.querySelectorAll(".breadcrumb a").forEach(item => {
+        const text = item.textContent.trim();
+        if (text === "Inicio" || text.includes("Cultura") || 
+            text === "Arepa Venezolana" || text === "Bizcocho Capuccino" || 
+            text === "Bollitos Chinos" || text === "Churros con Chocolate" || 
+            text === "Crepas Dulces" || text === "Cannoli" || 
+            text === "Coq au Vin" || text === "Galletas de Sésamo" || 
+            text === "Fideos Salteados" || text === "Lasaña") {
+          item.setAttribute("data-i18n", text);
+        }
+      });
+      
+      // Force update with current language
+      setTimeout(() => {
+        const currentLang = localStorage.getItem("selectedLanguage") || "es";
+        if (typeof updateDynamicElements === "function") {
+          updateDynamicElements(currentLang);
+        }
+      }, 500);
+    });
+  </script>
+  

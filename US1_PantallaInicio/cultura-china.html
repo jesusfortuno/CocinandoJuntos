@@ -1,66 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cultura China - Cocinando Juntos</title>
     <link rel="stylesheet" href="styles2.css">
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../include-components.js" data-include="nav,footer"></script>
+    <style>
+        /* Estilos para mantener el diseño original */
+        .culture-header {
+            text-align: left;
+            padding: 1rem 0;
+        }
+        
+        .culture-description p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .recipe-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: white;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .recipe-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .recipe-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .recipe-card:hover .recipe-image img {
+            transform: scale(1.05);
+        }
+        
+        .recipe-card h3 {
+            padding: 1rem;
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .recipe-meta {
+            display: flex;
+            padding: 0 1rem 1rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .difficulty, .time, .category {
+            background: #f8f1e9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #6b4423;
+        }
+    </style>
 </head>
-
-<body>
-    <!--MENU NAVEGACIÓN-->
-    <nav>
-        <a href="index.html">
-            <div class="logo">
-                <img src="./Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-            </div>
-        </a>
-
-        <input type="text" class="search-bar" placeholder="Buscar recetas...">
-
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <a href="../US7_PaginaDeUsuario/usuario.html"><span id="user-name">Nombre del Usuario</span></a>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-
-        <div class="menu-icon" id="menuToggle">☰</div>
-    </nav>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
     <!-- El menú desplegable debe estar aquí, fuera del nav -->
     <div class="overlay-menu" id="overlayMenu">
         <div class="overlay-content">
             <div class="close-btn" id="closeMenu">×</div>
             <div class="menu-section">
-                <h3>Culturas Gastronómicas</h3>
+                <h3 data-i18n="Culturas Gastronómicas">Culturas Gastronómicas</h3>
                 <ul>
-                    <li><a href="cultura-china.html">China</a></li>
-                    <li><a href="cultura-española.html">Española</a></li>
-                    <li><a href="cultura-francesa.html">Francesa</a></li>
-                    <li><a href="cultura-italiana.html">Italiana</a></li>
-                    <li><a href="cultura-japonesa.html">Japonesa</a></li>
-                    <li><a href="cultura-venezolana.html">Venezolana</a></li>
+                    <li><a href="cultura-china.html" data-i18n="China">China</a></li>
+                    <li><a href="cultura-española.html" data-i18n="Española">Española</a></li>
+                    <li><a href="cultura-francesa.html" data-i18n="Francesa">Francesa</a></li>
+                    <li><a href="cultura-italiana.html" data-i18n="Italiana">Italiana</a></li>
+                    <li><a href="cultura-japonesa.html" data-i18n="Japonesa">Japonesa</a></li>
+                    <li><a href="cultura-venezolana.html" data-i18n="Venezolana">Venezolana</a></li>
                 </ul>
             </div>
             <div class="menu-section">
-                <h3>Tipo de Plato</h3>
+                <h3 data-i18n="Tipo de Plato">Tipo de Plato</h3>
                 <ul>
-                    <li><a href="../US12_MenuNavegacion/desayuno.html">Desayuno</a></li>
-                    <li><a href="../US12_MenuNavegacion/comidas.html">Comida</a></li>
-                    <li><a href="../US12_MenuNavegacion/merienda.html">Merienda</a></li>
-                    <li><a href="../US12_MenuNavegacion/cena.html">Cena</a></li>
+                    <li><a href="../US12_MenuNavegacion/desayuno.html" data-i18n="Desayuno">Desayuno</a></li>
+                    <li><a href="../US12_MenuNavegacion/comidas.html" data-i18n="Comida">Comida</a></li>
+                    <li><a href="../US12_MenuNavegacion/merienda.html" data-i18n="Merienda">Merienda</a></li>
+                    <li><a href="../US12_MenuNavegacion/cena.html" data-i18n="Cena">Cena</a></li>
                 </ul>
             </div>
             <div class="menu-section">
-                <h3>Dificultad de la Receta</h3>
+                <h3 data-i18n="Dificultad de la Receta">Dificultad de la Receta</h3>
                 <ul>
-                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html">Fácil</a></li>
-                    <li><a href="../US12_MenuNavegacion/dificultad-media.html">Media</a></li>
-                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html">Difícil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-facil.html" data-i18n="Fácil">Fácil</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-media.html" data-i18n="Media">Media</a></li>
+                    <li><a href="../US12_MenuNavegacion/dificultad-dificil.html" data-i18n="Difícil">Difícil</a></li>
                 </ul>
             </div>
         </div>
@@ -69,60 +119,61 @@
     <main>
         <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="index.html">Inicio</a> >
-            <span>Cultura China</span>
+            <a href="index.html" data-i18n="Inicio">Inicio</a> >
+            <span data-i18n="Cultura China">Cultura China</span>
         </div>
 
         <!-- Título de la cultura -->
         <div class="culture-header">
-            <h1>Cultura China</h1>
+            <h1 data-i18n="Cultura China">Cultura China</h1>
             <div class="culture-description">
-                <p>Descubre los sabores auténticos de la cocina tradicional china</p>
+                <p data-i18n="Descubre los sabores auténticos de la cocina tradicional china">Descubre los sabores auténticos de la cocina tradicional china</p>
             </div>
         </div>
 
         <!-- Filtros -->
         <div class="filters">
             <div class="filter-group">
-                <button class="filter-button active" onclick="window.location.href='../Platos.html'">Mejor
+                <button class="filter-button active" onclick="window.location.href='../Platos.html'"
+                    data-i18n="Mejor Valoradas">Mejor
                     Valoradas</button>
             </div>
             <div class="filter-group">
-                <button class="filter-button" id="filter-btn">Filtros</button>
+                <button class="filter-button" id="filter-btn" data-i18n="Filtros">Filtros</button>
             </div>
         </div>
 
         <!-- Cuadro emergente de filtros -->
         <div id="filter-options" style="display: none;">
-            <label for="filter-culture">Cultura:</label>
+            <label for="filter-culture" data-i18n="Cultura:">Cultura:</label>
             <select id="filter-culture">
-                <option value="">Todas</option>
-                <option value="China">China</option>
-                <option value="Española">Española</option>
-                <option value="Italiana">Italiana</option>
-                <option value="Francesa">Francesa</option>
-                <option value="Japonesa">Japonesa</option>
-                <option value="Venezolana">Venezolana</option>
+                <option value="" data-i18n="Todas">Todas</option>
+                <option value="China" data-i18n="China">China</option>
+                <option value="Española" data-i18n="Española">Española</option>
+                <option value="Italiana" data-i18n="Italiana">Italiana</option>
+                <option value="Francesa" data-i18n="Francesa">Francesa</option>
+                <option value="Japonesa" data-i18n="Japonesa">Japonesa</option>
+                <option value="Venezolana" data-i18n="Venezolana">Venezolana</option>
             </select>
 
-            <label for="filter-difficulty">Dificultad:</label>
+            <label for="filter-difficulty" data-i18n="Dificultad:">Dificultad:</label>
             <select id="filter-difficulty">
-                <option value="">Todas</option>
-                <option value="Fácil">Fácil</option>
-                <option value="Media">Media</option>
-                <option value="Difícil">Difícil</option>
+                <option value="" data-i18n="Todas">Todas</option>
+                <option value="Fácil" data-i18n="Fácil">Fácil</option>
+                <option value="Media" data-i18n="Media">Media</option>
+                <option value="Difícil" data-i18n="Difícil">Difícil</option>
             </select>
 
-            <label for="filter-time">Tiempo:</label>
+            <label for="filter-time" data-i18n="Tiempo:">Tiempo:</label>
             <select id="filter-time">
-                <option value="">Cualquier tiempo</option>
-                <option value="0-30">Menos de 30 min</option>
-                <option value="30-60">30 - 60 min</option>
-                <option value="60-120">60 - 120 min</option>
-                <option value="121">Más de 120 min</option>
+                <option value="" data-i18n="Cualquier tiempo">Cualquier tiempo</option>
+                <option value="0-30" data-i18n="Menos de 30 min">Menos de 30 min</option>
+                <option value="30-60" data-i18n="30 - 60 min">30 - 60 min</option>
+                <option value="60-120" data-i18n="60 - 120 min">60 - 120 min</option>
+                <option value="121" data-i18n="Más de 120 min">Más de 120 min</option>
             </select>
 
-            <button id="apply-filters">Aplicar Filtros</button>
+            <button id="apply-filters" data-i18n="Aplicar Filtros">Aplicar Filtros</button>
         </div>
 
         <!-- Grid de recetas -->
@@ -130,121 +181,88 @@
             <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Media">
                 <div class="recipe-image">
                     <a href="./../US6_GuardarRecetas/pollo-agridulce.html"><img
-                            src="./Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce"></a>
+                            src="../Imagenes/China/pollo-agridulce.jpg" alt="Pollo Agridulce"></a>
                 </div>
-                <h3>Pollo Agridulce</h3>
+                <h3 data-i18n="Pollo Agridulce">Pollo Agridulce</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Media</span>
-                    <span class="time">45 min</span>
-                    <span class="category">Comida</span>
+                    <span class="difficulty" data-i18n="Media">Media</span>
+                    <span class="time" data-i18n="45 min">45 min</span>
+                    <span class="category" data-i18n="Comida">Comida</span>
                 </div>
             </div>
 
             <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
                 <div class="recipe-image">
-                    <a href="./../US6_GuardarRecetas/galleta-de-sesamo.html"><img
-                            src="./Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo"></a>
+                    <a href="./../US6_GuardarRecetas/galletas-de-sesamo.html"><img
+                            src="../Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo"></a>
                 </div>
-                <h3>Galletas de Sésamo</h3>
+                <h3 data-i18n="Galletas de Sésamo">Galletas de Sésamo</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Fácil</span>
-                    <span class="time">45 min</span>
-                    <span class="category">Merienda</span>
+                    <span class="difficulty" data-i18n="Fácil">Fácil</span>
+                    <span class="time" data-i18n="45 min">45 min</span>
+                    <span class="category" data-i18n="Merienda">Merienda</span>
                 </div>
             </div>
 
             <div class="recipe-card" data-culture="China" data-time="90" data-difficulty="Media">
                 <div class="recipe-image">
-                    <a href="./../US6_GuardarRecetas/bolitas-chinas.html"><img src="./Imagenes/China/bollitos-chinos.jpg" alt="Bolitas Chinas"></a>
+                    <a href="./../US6_GuardarRecetas/bolitas-chinas.html"><img src="../Imagenes/China/bollitos-chinos.jpg" alt="Bolitas Chinas"></a>
                 </div>
-                <h3>Bollitos Chinos</h3>
+                <h3 data-i18n="Bollitos Chinos">Bollitos Chinos</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Media</span>
-                    <span class="time">1.30h</span>
-                    <span class="category">Desayuno</span>
+                    <span class="difficulty" data-i18n="Media">Media</span>
+                    <span class="time" data-i18n="1.30h">1.30h</span>
+                    <span class="category" data-i18n="Desayuno">Desayuno</span>
                 </div>
             </div>
 
             <div class="recipe-card" data-culture="China" data-time="40" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <a href="./../US6_GuardarRecetas/fideos-salteados.html"><img
-                            src="./Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados"></a>
+                            src="../Imagenes/China/fideos-salteados.jpg" alt="Fideos Salteados"></a>
                 </div>
-                <h3>Fideos Salteados</h3>
+                <h3 data-i18n="Fideos Salteados">Fideos Salteados</h3>
                 <div class="recipe-meta">
-                    <span class="difficulty">Fácil</span>
-                    <span class="time">40 min</span>
-                    <span class="category">Cena</span>
+                    <span class="difficulty" data-i18n="Fácil">Fácil</span>
+                    <span class="time" data-i18n="40 min">40 min</span>
+                    <span class="category" data-i18n="Cena">Cena</span>
                 </div>
             </div>
         </div>
     </main>
-
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
-
+    <div id="footer-placeholder"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="index.js" defer></script>
+    <script src="include-components.js" defer></script>
+    <!-- Cargar primero el archivo de traducciones -->
+    <script src="../translations.js"></script>
+    <!-- Luego cargar el script de cambio de idioma -->
+    <script src="language-switcher.js"></script>
+    <!-- Opcionalmente, cargar el helper de traducciones -->
+    <script src="../translation-helper.js"></script>
+    <!-- Finalmente, cargar el script para arreglar los enlaces -->
+    <script src="../fix-links.js"></script>
+    
     <script>
-        // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
-
-        if (usuario) {
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username;
-            authButton.style.display = "none";
-
-            document.getElementById("logout-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.reload();
-            });
-        } else {
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
-        }
-
-        // Código JavaScript directamente en el HTML para asegurar el orden correcto
-        document.addEventListener('DOMContentLoaded', () => {
-                // Menú desplegable
-                document.getElementById('menuToggle').addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const overlayMenu = document.getElementById('overlayMenu');
-                    overlayMenu.classList.toggle('active');
-                });
-
-                document.getElementById('closeMenu').addEventListener('click', function () {
-                    const overlayMenu = document.getElementById('overlayMenu');
-                    overlayMenu.classList.remove('active');
-                });
-
-                // Cerrar al hacer clic fuera del menú
-                document.getElementById('overlayMenu').addEventListener('click', function (e) {
-                    if (e.target === this) {
-                        this.classList.remove('active');
-                    }
-                });
-            });
-
         // Script para los filtros
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", function() {
             const filterBtn = document.getElementById("filter-btn");
             const filterOptions = document.getElementById("filter-options");
             const applyFiltersBtn = document.getElementById("apply-filters");
 
-            filterBtn.addEventListener("click", () => {
-                filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
+            filterBtn.addEventListener("click", function() {
+                filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
             });
 
-            applyFiltersBtn.addEventListener("click", () => {
+            applyFiltersBtn.addEventListener("click", function() {
                 const selectedCulture = document.getElementById("filter-culture").value;
                 const selectedDifficulty = document.getElementById("filter-difficulty").value;
                 const selectedTime = document.getElementById("filter-time").value;
 
                 const recipes = document.querySelectorAll(".recipe-card");
 
-                recipes.forEach(recipe => {
+                recipes.forEach(function(recipe) {
                     const recipeCulture = recipe.getAttribute("data-culture");
                     const recipeTime = parseInt(recipe.getAttribute("data-time"));
                     const recipeDifficulty = recipe.getAttribute("data-difficulty");
@@ -262,7 +280,7 @@
                     }
 
                     if (matchesCulture && matchesDifficulty && matchesTime) {
-                        recipe.style.display = "inline-block";
+                        recipe.style.display = "block";
                     } else {
                         recipe.style.display = "none";
                     }
@@ -271,14 +289,12 @@
                 filterOptions.style.display = "none";
             });
 
-            document.addEventListener("click", (event) => {
+            document.addEventListener("click", function(event) {
                 if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
                     filterOptions.style.display = "none";
                 }
             });
         });
     </script>
-    <script src="index.js"></script>
 </body>
-
 </html>

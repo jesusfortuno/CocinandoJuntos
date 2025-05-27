@@ -1,54 +1,285 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Comentarios</title>
-    <link rel="stylesheet" href="gestionComentarios.css">
+    <title>Gestión de Comentarios | Cocinando Juntos</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="PaginaAdmin.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
+
 <body>
-    <nav>
-        <a href="./../US1_PantallaInicio/index.html" class="logo">
-            <img src="./../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="./../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <span id="user-name">Nombre del Usuario</span>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-    </nav>
+    <style>
+        #footer-placeholder {
+            margin-top: 40px;
+        }
+        #nav-placeholder {
+            margin-bottom: 40px;
+        }
+        .table-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f1e9;
+            color: #6b4423;
+            font-weight: 600;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .breadcrumb a {
+            color: #6b4423;
+            text-decoration: none;
+        }
+        .breadcrumb span {
+            margin: 0 0.5rem;
+        }
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: #6b4423;
+        }
+        .btn-success {
+            background-color: #2ecc71;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        .btn-info {
+            background-color: #3498db;
+        }
+        .user-info-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-approved {
+            background-color: #e6f7e9;
+            color: #2ecc71;
+        }
+        .status-pending {
+            background-color: #fef5e7;
+            color: #f39c12;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .comment-detail {
+            margin-top: 20px;
+        }
+        
+        .comment-detail h3 {
+            margin-bottom: 5px;
+            color: #6b4423;
+        }
+        
+        .comment-detail p {
+            margin-bottom: 15px;
+        }
+        
+        .comment-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Estilos para comentarios expandibles */
+        .comment-text {
+            max-height: 60px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .comment-text.expanded {
+            max-height: 1000px;
+        }
+    </style>
 
-    <main>
-        <div class="breadcrumb">
-            <a href="./PaginaAdmin.html">Panel de Administración</a> &gt; <span>Gestión de Comentarios</span>
-        </div>
+    <div id="nav-placeholder"></div>
 
-        <div class="comments-management">
-            <h1>Gestión de Comentarios</h1>
-            <div class="comments-list">
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="Foto de perfil" class="admin-profile-pic">
+                <span class="admin-name" id="sidebar-admin-name">Nombre usuario</span>
+                <span class="admin-role">Administrador</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="./PaginaAdmin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="./gestionRecetas.html"><i class="fas fa-utensils"></i> Gestión de Recetas</a>
+                    </li>
+                    <li>
+                        <a href="./gestionUsuarios.html"><i class="fas fa-users"></i> Gestión de Usuarios</a>
+                    </li>
+                    <li class="active">
+                        <a href="./gestionComentarios.html"><i class="fas fa-comments"></i> Gestión de Comentarios</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="./PaginaAdmin.html"><i class="fas fa-home"></i> Panel de Administración</a>
+                <span>/</span>
+                <span>Gestión de Comentarios</span>
+            </div>
+
+            <div class="page-header">
+                <h1>Gestión de Comentarios</h1>
+                <div>
+                    <button id="delete-all-btn" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Eliminar Seleccionados
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
+                            <th><input type="checkbox" id="select-all"></th>
                             <th>ID</th>
-                            <th>Comentario</th>
                             <th>Usuario</th>
-                            <th>Visible</th>
+                            <th>Receta</th>
+                            <th>Comentario</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="comments-table-body">
-                        <!-- Los comentarios se cargarán aquí dinámicamente -->
+                        <!-- Los comentarios se cargarán dinámicamente aquí -->
                     </tbody>
                 </table>
             </div>
+        </main>
+    </div>
+
+    <!-- Modal para ver detalles del comentario -->
+    <div id="comment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-details">&times;</span>
+            <h2>Detalle del Comentario</h2>
+            <div class="comment-detail">
+                <h3>Usuario</h3>
+                <p id="comment-user">Nombre de Usuario</p>
+                
+                <h3>Receta</h3>
+                <p id="comment-recipe">Nombre de la Receta</p>
+                
+                <h3>Comentario</h3>
+                <p id="comment-text">Texto del comentario</p>
+                
+                <h3>Fecha</h3>
+                <p id="comment-date">01/01/2025</p>
+                
+                <h3>Estado</h3>
+                <p id="comment-status">Aprobado</p>
+            </div>
+            <div class="comment-actions">
+                <button id="toggle-visibility-btn" class="btn btn-primary">
+                    <i class="fas fa-eye-slash"></i> Cambiar Visibilidad
+                </button>
+                <button id="delete-comment-btn" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
         </div>
-    </main>
+    </div>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="gestionComentarios.js"></script>
 </body>
-</html> 
+
+</html>

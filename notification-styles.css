@@ -1,0 +1,439 @@
+/* Estilos para el Centro de Notificaciones */
+
+/* Contenedor principal */
+.notification-container {
+  position: relative;
+  margin-right: 15px; /* Espacio entre la campana y el nombre de usuario */
+  display: flex;
+  align-items: center;
+}
+
+/* Icono de campana */
+.notification-bell {
+  position: relative;
+  cursor: pointer;
+  width: 30px; /* Reducir un poco el tamaño */
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.notification-bell:hover {
+  transform: scale(1.1);
+}
+
+.notification-bell i {
+  font-size: 1.5rem;
+  color: #6b4423;
+}
+
+/* Contador de notificaciones */
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff4b4b;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Panel de notificaciones */
+.notification-panel {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 350px;
+  max-height: 400px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  border: 1px solid #e0d5c9;
+}
+
+/* Añadir un triángulo indicador en la parte superior del panel */
+.notification-panel::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+  z-index: 1001;
+}
+
+.notification-panel.active {
+  display: flex;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Cabecera del panel */
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background-color: #f8f1e9;
+  border-bottom: 1px solid #e0d5c9;
+}
+
+.notification-header h3 {
+  margin: 0;
+  color: #6b4423;
+  font-size: 1.1rem;
+}
+
+/* Añadir estilos específicos para el botón "Marcar todas como leídas" para mejorar su clickabilidad */
+.mark-all-read-btn {
+  background: none;
+  border: none;
+  color: #6b4423;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 5px 10px;
+  margin-left: 5px;
+  transition: color 0.2s ease;
+  z-index: 1001;
+  position: relative;
+}
+
+.mark-all-read-btn:hover {
+  color: #ff4b4b;
+}
+
+.mark-all-read-btn:active {
+  transform: scale(0.95);
+}
+
+/* Añadir un área de clic más grande */
+.mark-all-read-btn::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+}
+
+/* Lista de notificaciones */
+.notification-list {
+  overflow-y: auto;
+  max-height: 350px;
+  padding: 0;
+}
+
+/* Mensaje cuando no hay notificaciones */
+.notification-empty {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* Elemento de notificación */
+.notification-item {
+  display: flex;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.5s ease, height 0.5s ease, padding 0.5s ease, margin 0.5s ease;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notification-item:hover {
+  background-color: #f8f8f8;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+/* Contenido de la notificación */
+.notification-content {
+  flex: 1;
+}
+
+.notification-title {
+  margin: 0 0 5px 0;
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.notification-message {
+  margin: 0 0 5px 0;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.notification-date {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* Botón para marcar como leída */
+.notification-mark-read {
+  background: none;
+  border: none;
+  color: #6b4423;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-mark-read i {
+  font-size: 1rem;
+}
+
+/* Estilos para notificaciones leídas/no leídas */
+.notification-unread {
+  background-color: #f8f1e9;
+  border-left: 3px solid #ff4b4b;
+  position: relative;
+}
+
+.notification-unread::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #ff4b4b;
+  border-radius: 50%;
+}
+
+.notification-read {
+  opacity: 0.8;
+}
+
+/* Animación para notificaciones en tiempo real */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.notification-bell.notification-new i {
+  animation: pulse 0.5s ease-in-out 3;
+  color: #ff4b4b;
+}
+
+/* Añadir animación para nuevas notificaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-item.notification-new {
+  animation: fadeIn 0.5s ease-in-out;
+  background-color: rgba(255, 75, 75, 0.1) !important;
+  border-left: 3px solid #ff4b4b !important;
+}
+
+/* Animación para la campana de notificaciones */
+@keyframes bellRing {
+  0% {
+    transform: rotate(0);
+  }
+  10% {
+    transform: rotate(15deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  30% {
+    transform: rotate(10deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(-5deg);
+  }
+  70% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.fa-bell.notification-new {
+  animation: bellRing 1s ease-in-out;
+  color: #ff4b4b !important;
+}
+
+.notification-new {
+  animation: bellRing 1s ease-in-out;
+  color: #ff4b4b !important;
+}
+
+.fa-bell-animation {
+  animation: bellRing 1s ease-in-out;
+  color: #ff4b4b !important;
+}
+
+/* Estilos para los elementos de notificación en el panel */
+.notification-item-unread {
+  background-color: rgba(255, 75, 75, 0.05);
+  border-left: 3px solid #ff4b4b;
+}
+
+.notification-item-read,
+.notification-item-unread {
+  transition: background-color 0.2s ease;
+}
+
+.notification-item-read:hover,
+.notification-item-unread:hover {
+  background-color: #f8f8f8;
+}
+
+/* Animación para eliminar notificaciones */
+@keyframes removeNotification {
+  from {
+    opacity: 1;
+    max-height: 100px;
+    padding: 12px 15px;
+    margin-bottom: 1px;
+  }
+  to {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.notification-item.removing {
+  animation: removeNotification 0.5s ease forwards;
+  overflow: hidden;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .notification-panel {
+    width: 300px;
+    right: -100px;
+  }
+
+  .notification-panel::before {
+    right: 110px;
+  }
+
+  .notification-header h3 {
+    font-size: 1rem;
+  }
+
+  .mark-all-read-btn {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .notification-panel {
+    width: 280px;
+    right: -120px;
+    max-height: 350px;
+  }
+
+  .notification-panel::before {
+    right: 130px;
+  }
+
+  .notification-title {
+    font-size: 0.9rem;
+  }
+
+  .notification-message {
+    font-size: 0.8rem;
+  }
+
+  .notification-item {
+    padding: 10px 12px;
+  }
+
+  .notification-bell {
+    width: 25px;
+    height: 25px;
+  }
+
+  .notification-bell i {
+    font-size: 1.3rem;
+  }
+
+  .notification-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .notification-panel {
+    width: 250px;
+    right: -100px;
+  }
+
+  .notification-panel::before {
+    right: 110px;
+  }
+
+  .notification-header {
+    padding: 10px;
+  }
+
+  .notification-title {
+    font-size: 0.85rem;
+  }
+
+  .notification-message {
+    font-size: 0.75rem;
+  }
+
+  .notification-date {
+    font-size: 0.7rem;
+  }
+}

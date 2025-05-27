@@ -1,67 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desayunos - Cocinando Juntos</title>
     <link rel="stylesheet" href="./dificultades.css">
-    <script src="../US1_PantallaInicio/index.js"></script>
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
-<body>
-    <nav>
-        <a href="../US1_PantallaInicio/index.html" class="logo">
-            <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
-        <input type="text" class="search-bar" placeholder="Buscar recetas...">
-     
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <a href="../US7_PaginaDeUsuario/usuario.html" style="text-decoration: none;"><span id="user-name">Nombre del Usuario</span></a>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-
-        <div class="menu-icon" id="menuToggle">☰</div>
-    </nav>
-
-    <!-- El menú desplegable debe estar aquí, fuera del nav -->
-    <div class="overlay-menu" id="overlayMenu">
-        <div class="overlay-content">
-            <div class="close-btn" id="closeMenu">×</div>
-            <div class="menu-section">
-                <h3>Culturas Gastronómicas</h3>
-                <ul>
-                    <li><a href="../US1_PantallaInicio/cultura-china.html">China</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-española.html">Española</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-francesa.html">Francesa</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-italiana.html">Italiana</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-japonesa.html">Japonesa</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-venezolana.html">Venezolana</a></li>
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Tipo de Plato</h3>
-                <ul>
-                    <li><a href="desayuno.html">Desayuno</a></li>
-                    <li><a href="comidas.html">Comida</a></li>
-                    <li><a href="merienda.html">Merienda</a></li>
-                    <li><a href="cena.html">Cena</a></li>
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Dificultad de la Receta</h3>
-                <ul>
-                    <li><a href="dificultad-facil.html">Fácil</a></li>
-                    <li><a href="dificultad-media.html">Media</a></li>
-                    <li><a href="dificultad-dificil.html">Difícil</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <main>
+    <main style="flex: 1;">
         <!-- Breadcrumb -->
         <div class="breadcrumb">
             <a href="../US1_PantallaInicio/index.html">Inicio</a> > 
@@ -124,7 +77,7 @@
             <div class="recipe-card" data-culture="China" data-time="90" data-difficulty="Media">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/bollitos-chinos.html">
-                    <img src="../US1_PantallaInicio/Imagenes/China/bollitos-chinos.jpg" alt="Bollitos Chinos">
+                    <img src="../Imagenes/China/bollitos-chinos.jpg" alt="Bollitos Chinos">
                     </a>
                 </div>
                 <h3>Bollitos Chinos</h3>
@@ -138,7 +91,7 @@
             <div class="recipe-card" data-culture="Francesa" data-time="20" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/tostada-francesa.html">
-                    <img src="../US1_PantallaInicio/Imagenes/Francia/tostada-francesa.jpg" alt="Tostada Francesa">
+                    <img src="../Imagenes/Francia/tostada-francesa.jpg" alt="Tostada Francesa">
                     </a>
                 </div>
                 <h3>Tostada Francesa</h3>
@@ -152,7 +105,7 @@
             <div class="recipe-card" data-culture="Española" data-time="10" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/pan-tomate.html">
-                        <img src="../US1_PantallaInicio/Imagenes/España/pan-tomate.jpg" alt="Pan con Tomate">
+                        <img src="../Imagenes/España/pan-tomate.jpg" alt="Pan con Tomate">
                     </a>
                 </div>
                 <h3>Pan con Tomate</h3>
@@ -166,7 +119,7 @@
             <div class="recipe-card" data-culture="Italiana" data-time="90" data-difficulty="Media">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/crepas-dulces.html">
-                        <img src="../US1_PantallaInicio/Imagenes/Italia/bizcocho-capuccino.jpg" alt="Bizcocho de Capuccino">
+                        <img src="../Imagenes/Italia/bizcocho-capuccino.jpg" alt="Bizcocho de Capuccino">
                     </a>
                 </div>
                 <h3>Bizcocho de Capuccino</h3>
@@ -180,7 +133,7 @@
             <div class="recipe-card" data-culture="Japonesa" data-time="25" data-difficulty="Media">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/tamagoyaki.html">
-                        <img src="../US1_PantallaInicio/Imagenes/Japon/tamagoyaki.jpg" alt="Tamagoyaki">
+                        <img src="../Imagenes/Japon/tamagoyaki.jpg" alt="Tamagoyaki">
                     </a>
                 </div>
                 <h3>Tamagoyaki</h3>
@@ -194,7 +147,7 @@
             <div class="recipe-card" data-culture="Venezolana" data-time="35" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/arepa-venezolana.html">
-                        <img src="../US1_PantallaInicio/Imagenes/Venezuela/arepa-venezolana.jpg" alt="Arepas">
+                        <img src="../Imagenes/Venezuela/arepa-venezolana.jpg" alt="Arepas">
                     </a>
                 </div>
                 <h3>Arepas</h3>
@@ -208,37 +161,14 @@
         
     </main>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
+    <!-- Scripts -->
+    <script src="../US1_PantallaInicio/index.js"></script>
+    <script src="../US1_PantallaInicio/include-components.js"></script>
+    <script type="module" src="../favoritos.js"></script>
+    <script type="module" src="../valorar.js"></script>
     <script>
-        // Obtener el usuario desde localStorage
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const userInfo = document.getElementById("user-info");
-        const authButton = document.getElementById("auth-button");
-        
-        console.log("Datos del usuario:", usuario); // Para depuración
-    
-        // Si el usuario está registrado en localStorage
-        if (usuario) {
-            // Mostrar la información del usuario
-            userInfo.style.display = "flex";
-            document.getElementById("user-name").textContent = usuario.username || "Usuario";
-            authButton.style.display = "none";
-            
-            // Agregar funcionalidad de cerrar sesión
-            document.getElementById("logout-btn").addEventListener("click", (e) => {
-                e.preventDefault();
-                localStorage.removeItem("usuario");
-                window.location.reload();
-            });
-        } else {
-            // Si no hay usuario, mostrar el botón de login
-            userInfo.style.display = "none";
-            authButton.style.display = "block";
-        }
-
         // Funcionalidad del menú desplegable
         document.addEventListener('DOMContentLoaded', () => {
             // Menú desplegable
@@ -248,67 +178,55 @@
                 overlayMenu.classList.add('active');
             });
 
+            // Cerrar menú
             document.getElementById('closeMenu').addEventListener('click', function() {
-                const overlayMenu = document.getElementById('overlayMenu');
-                overlayMenu.classList.remove('active');
+                document.getElementById('overlayMenu').classList.remove('active');
             });
 
-            // Cerrar al hacer clic fuera del menú
-            document.getElementById('overlayMenu').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
+            // Filtros
+            const filterBtn = document.getElementById('filter-btn');
+            const filterOptions = document.getElementById('filter-options');
+            const applyFiltersBtn = document.getElementById('apply-filters');
+
+            filterBtn.addEventListener('click', function() {
+                filterOptions.style.display = filterOptions.style.display === 'none' ? 'block' : 'none';
             });
 
-            // Funcionalidad de filtros
-            const filterBtn = document.getElementById("filter-btn");
-            const filterOptions = document.getElementById("filter-options");
-            const applyFilterBtn = document.getElementById("apply-filters");
-        
-            // Mostrar/ocultar el cuadro de filtros
-            filterBtn.addEventListener("click", () => {
-                filterOptions.style.display = filterOptions.style.display === "block" ? "none" : "block";
-            });
-        
-            // Filtrar recetas
-            applyFilterBtn.addEventListener("click", () => {
-                const selectedCulture = document.getElementById("filter-culture").value;
-                const selectedTime = document.getElementById("filter-time").value;
-                const recipes = document.querySelectorAll(".recipe-card");
-        
+            applyFiltersBtn.addEventListener('click', function() {
+                const culture = document.getElementById('filter-culture').value;
+                const time = document.getElementById('filter-time').value;
+                const difficulty = document.getElementById('filter-difficulty').value;
+
+                const recipes = document.querySelectorAll('.recipe-card');
+
                 recipes.forEach(recipe => {
-                    const recipeCulture = recipe.getAttribute("data-culture");
-                    const recipeTime = parseInt(recipe.getAttribute("data-time"));
-        
-                    const matchesCulture = !selectedCulture || selectedCulture === recipeCulture;
-                    let matchesTime = false;
-        
-                    if (selectedTime === "" || 
-                        (selectedTime === "0-30" && recipeTime <= 30) ||
-                        (selectedTime === "30-60" && recipeTime > 30 && recipeTime <= 60) ||
-                        (selectedTime === "60-120" && recipeTime > 60 && recipeTime <= 120) ||
-                        (selectedTime === "121" && recipeTime > 120)) {
-                        matchesTime = true;
+                    let show = true;
+
+                    if (culture && recipe.dataset.culture !== culture) {
+                        show = false;
                     }
-        
-                    if (matchesCulture && matchesTime) {
-                        recipe.style.display = "inline-block";
-                    } else {
-                        recipe.style.display = "none";
+
+                    if (time) {
+                        const [min, max] = time.split('-').map(Number);
+                        const recipeTime = parseInt(recipe.dataset.time);
+                        if (max && (recipeTime < min || recipeTime > max)) {
+                            show = false;
+                        } else if (!max && recipeTime < min) {
+                            show = false;
+                        }
                     }
+
+                    if (difficulty && recipe.dataset.difficulty !== difficulty) {
+                        show = false;
+                    }
+
+                    recipe.style.display = show ? 'block' : 'none';
                 });
-        
-                // Ocultar el cuadro de filtros después de aplicar
-                filterOptions.style.display = "none";
-            });
-        
-            // Cerrar el cuadro si se hace clic fuera de él
-            document.addEventListener("click", (event) => {
-                if (!filterOptions.contains(event.target) && event.target !== filterBtn) {
-                    filterOptions.style.display = "none";
-                }
+
+                filterOptions.style.display = 'none';
             });
         });
     </script>
+    <script src="../fix-links.js"></script>
 </body>
 </html>

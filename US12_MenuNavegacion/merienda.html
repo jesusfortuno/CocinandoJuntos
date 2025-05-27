@@ -1,78 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merienda - Cocinando Juntos</title>
+    <title>Meriendas - Cocinando Juntos</title>
     <link rel="stylesheet" href="./dificultades.css">
-    <script src="../US1_PantallaInicio/index.js"></script>
+    <link rel="stylesheet" href="../US1_PantallaInicio/styles2.css">
+    <link rel="stylesheet" href="../notification-styles.css">
+    <script src="../notification-center.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../include-components.js" data-include="nav,footer"></script>
 </head>
-<body>
-    <nav>
-        <a href="../US1_PantallaInicio/index.html" class="logo">
-            <img src="../US1_PantallaInicio/Imagenes/logo-cocinando-juntos.png" alt="Logo Cocinando Juntos">
-        </a>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="nav-placeholder"></div>
 
-        <input type="text" class="search-bar" placeholder="Buscar recetas...">
-     
-        <div id="user-info" class="user-info" style="display: none;">
-            <img src="../US1_PantallaInicio/Imagenes/blank-profile-picture-973460_1280.webp" alt="User Icon" class="user-icon">
-            <a href="../US7_PaginaDeUsuario/usuario.html" style="text-decoration: none;"><span id="user-name">Nombre del Usuario</span></a>
-            <a href="#" id="logout-btn" class="auth-buttons">Cerrar Sesión</a>
-        </div>
-
-        <a href="../login.html" id="auth-button" class="auth-buttons">Iniciar Sesión</a>
-
-        <div class="menu-icon" id="menuToggle">☰</div>
-    </nav>
-
-    <!-- El menú desplegable debe estar aquí, fuera del nav -->
-    <div class="overlay-menu" id="overlayMenu">
-        <div class="overlay-content">
-            <div class="close-btn" id="closeMenu">×</div>
-            <div class="menu-section">
-                <h3>Culturas Gastronómicas</h3>
-                <ul>
-                    <li><a href="../US1_PantallaInicio/cultura-china.html">China</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-española.html">Española</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-francesa.html">Francesa</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-italiana.html">Italiana</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-japonesa.html">Japonesa</a></li>
-                    <li><a href="../US1_PantallaInicio/cultura-venezolana.html">Venezolana</a></li>
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Tipo de Plato</h3>
-                <ul>
-                    <li><a href="desayuno.html">Desayuno</a></li>
-                    <li><a href="comidas.html">Comida</a></li>
-                    <li><a href="merienda.html">Merienda</a></li>
-                    <li><a href="cena.html">Cena</a></li>
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Dificultad de la Receta</h3>
-                <ul>
-                    <li><a href="dificultad-facil.html">Fácil</a></li>
-                    <li><a href="dificultad-media.html">Media</a></li>
-                    <li><a href="dificultad-dificil.html">Difícil</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <main>
+    <main style="flex: 1;">
         <!-- Breadcrumb -->
         <div class="breadcrumb">
             <a href="../US1_PantallaInicio/index.html">Inicio</a> > 
-            <span>Comidas</span>
+            <span>Meriendas</span>
         </div>
 
         <!-- Título de la cultura -->
         <div class="culture-header">
-            <h1>Recetas para Meriendas</h1>
+            <h1>Recetas para la Merienda</h1>
             <div class="culture-description">
-                <p>Descubre las recetas para una mejor merienda</p>
+                <p>Descubre las mejores recetas para la merienda</p>
             </div>
         </div>
 
@@ -124,7 +77,7 @@
             <div class="recipe-card" data-culture="China" data-time="45" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/galleta-de-sesamo.html">
-                    <img src="../US1_PantallaInicio/Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
+                    <img src="../Imagenes/China/galletas-de-sesamo.jpg" alt="Galletas de Sésamo">
                     </a>
                 </div>
                 <h3>Galletas de Sésamo</h3>
@@ -138,7 +91,7 @@
             <div class="recipe-card" data-culture="Española" data-time="60" data-difficulty="Media">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/churros-chocolate.html">
-                    <img src="../US1_PantallaInicio/Imagenes/España/churros-chocolate.jpg" alt="Churros con Chocolate">
+                    <img src="../Imagenes/España/churros-chocolate.jpg" alt="Churros con Chocolate">
                     </a>
                 </div>
                 <h3>Churros con Chocolate</h3>
@@ -152,7 +105,7 @@
             <div class="recipe-card" data-culture="Francesa" data-time="30" data-difficulty="Fácil">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/crepas-dulces.html">
-                        <img src="../US1_PantallaInicio/Imagenes/Francia/crepas-dulces.jpg" alt="Crepas Dulces">
+                        <img src="../Imagenes/Francia/crepas-dulces.jpg" alt="Crepas Dulces">
                     </a>
                 </div>
                 <h3>Crepas Dulces</h3>
@@ -166,7 +119,7 @@
             <div class="recipe-card" data-culture="Italiana" data-time="165" data-difficulty="Difícil">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/cannoli.html">
-                        <img src="../US1_PantallaInicio/Imagenes/Italia/cannoli.png" alt="Cannoli">
+                        <img src="../Imagenes/Italia/cannoli.png" alt="Cannoli">
                     </a>
                 </div>
                 <h3>Cannoli</h3>
@@ -180,7 +133,7 @@
             <div class="recipe-card" data-culture="Japonesa" data-time="30" data-difficulty="Media">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/dorayaki.html">
-                        <img src="../US1_PantallaInicio/Imagenes/Japon/dorayaki.jpg" alt="Dorayaki">
+                        <img src="../Imagenes/Japon/dorayaki.jpg" alt="Dorayaki">
                     </a>
                 </div>
                 <h3>Dorayaki</h3>
@@ -194,7 +147,7 @@
             <div class="recipe-card" data-culture="Venezolana" data-time="180" data-difficulty="Difícil">
                 <div class="recipe-image">
                     <a href="../US6_GuardarRecetas/golfeados-venezolanos.html">
-                        <img src="../US1_PantallaInicio/Imagenes/Venezuela/Golfeados-venezolanos.png" alt="Golfeados Venezolanos">
+                        <img src="../Imagenes/Venezuela/Golfeados-venezolanos.png" alt="Golfeados Venezolanos">
                     </a>
                 </div>
                 <h3>Golfeados Venezolanos</h3>
@@ -208,10 +161,13 @@
         
     </main>
 
-    <footer>
-        <p>© 2025 Cocinando Juntos - Todos los derechos reservados</p>
-    </footer>
+    <div id="footer-placeholder"></div>
 
+    <!-- Scripts -->
+    <script src="../US1_PantallaInicio/index.js"></script>
+    <script src="../US1_PantallaInicio/include-components.js"></script>
+    <script type="module" src="../favoritos.js"></script>
+    <script type="module" src="../valorar.js"></script>
     <script>
         // Obtener el usuario desde localStorage
         const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -310,5 +266,6 @@
             });
         });
     </script>
+    <script src="../fix-links.js"></script>
 </body>
 </html>
