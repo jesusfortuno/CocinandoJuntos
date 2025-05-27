@@ -15,6 +15,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Crear cliente de Supabase
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY)
 
+    // Función para detectar la ruta correcta a las imágenes
+    function obtenerRutaImagenes() {
+      // Intentar diferentes rutas posibles
+      const rutasPosibles = [
+        "./Imagenes/", // Si el HTML está en la raíz
+        "../Imagenes/", // Si el HTML está en US1_PantallaInicio
+        "../../Imagenes/", // Si hay más niveles
+        "./US1_PantallaInicio/../Imagenes/", // Ruta absoluta desde raíz
+      ]
+
+      // Por ahora usamos la ruta más común
+      return "../Imagenes/"
+    }
+
+    // Mapeo de imágenes para cada chef
+    const rutaImagenes = obtenerRutaImagenes()
+    const chefImages = {
+      chef: "../Imagenes/chef-professional.jpg",
+      juanma: "../Imagenes/chef-juanma.jpeg",
+      miguel: "../Imagenes/chef-miguel.jpeg",
+      default: "../Imagenes/blank-profile-picture-973460_1280.webp",
+    }
+
+    console.log("Rutas de imágenes configuradas:", chefImages)
+
     // Obtener el contenedor donde se mostrarán los chefs
     const chefsContainer = document.querySelector(".chefs-container")
 
@@ -44,6 +69,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Limpiar el contenedor antes de agregar nuevos chefs
       chefsContainer.innerHTML = ""
+      // Verificar que se limpió correctamente
+      console.log("Contenedor limpiado, HTML actual:", chefsContainer.innerHTML)
 
       if (error) {
         console.error("Error al cargar los chefs:", error.message)
@@ -67,50 +94,83 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         if (!chefsExactos || chefsExactos.length === 0) {
-          chefsContainer.innerHTML = `
-            <p class="text-center">No se encontraron chefs en la base de datos.</p>
-            <p class="text-center">Verifica que los usuarios tengan el rol "chef" correctamente asignado.</p>
-          `
+          // Si no hay chefs en la base de datos, mostrar chefs de ejemplo con las imágenes reales
+          console.log("No se encontraron chefs en la base de datos, mostrando chefs de ejemplo")
+          const chefsEjemplo = [
+            { id: 1, username: "chef", rol: "chef" },
+            { id: 2, username: "juanma", rol: "chef" },
+            { id: 3, username: "miguel", rol: "chef" },
+          ]
 
-          // Crear un botón para mostrar todos los usuarios
-          const mostrarTodosBtn = document.createElement("button")
-          mostrarTodosBtn.textContent = "Mostrar todos los usuarios"
-          mostrarTodosBtn.style.margin = "20px auto"
-          mostrarTodosBtn.style.display = "block"
-          mostrarTodosBtn.style.padding = "10px 20px"
-          mostrarTodosBtn.style.backgroundColor = "#6b4423"
-          mostrarTodosBtn.style.color = "white"
-          mostrarTodosBtn.style.border = "none"
-          mostrarTodosBtn.style.borderRadius = "5px"
-          mostrarTodosBtn.style.cursor = "pointer"
+          mostrarChefs(chefsEjemplo, chefsContainer, chefImages)
 
-          mostrarTodosBtn.onclick = async () => {
-            // Mostrar todos los usuarios como chefs (para propósitos de depuración)
-            mostrarChefs(todosUsuarios, chefsContainer)
-          }
-
-          chefsContainer.appendChild(mostrarTodosBtn)
+          // Agregar mensaje informativo
+          const mensaje = document.createElement("p")
+          mensaje.textContent = "Mostrando chefs de ejemplo (no se encontraron en la base de datos)"
+          mensaje.style.textAlign = "center"
+          mensaje.style.color = "#666"
+          mensaje.style.fontStyle = "italic"
+          chefsContainer.appendChild(mensaje)
           return
         }
 
         // Si encontramos chefs con la búsqueda exacta, usamos esos
-        mostrarChefs(chefsExactos, chefsContainer)
+        mostrarChefs(chefsExactos, chefsContainer, chefImages)
       } else {
         // Si encontramos chefs con la búsqueda flexible, los mostramos
-        mostrarChefs(chefs, chefsContainer)
+        mostrarChefs(chefs, chefsContainer, chefImages)
       }
     } else {
       console.error("No se encontró el contenedor de chefs (.chefs-container)")
+      console.log("Elementos disponibles en la página:", document.querySelectorAll("*"))
     }
   } catch (error) {
     console.error("Error inesperado:", error)
   }
 })
 
+// Función para obtener la imagen correcta según el nombre del chef
+function obtenerImagenChef(username, chefImages) {
+  const nombreLower = username.toLowerCase()
+
+  console.log(`Buscando imagen para chef: ${username}`)
+
+  // Buscar coincidencias específicas
+  if (nombreLower.includes("juanma")) {
+    console.log("Usando imagen de Juanma")
+    return chefImages.juanma
+  } else if (nombreLower.includes("miguel")) {
+    console.log("Usando imagen de Miguel")
+    return chefImages.miguel
+  } else if (nombreLower.includes("chef") || nombreLower === "chef") {
+    console.log("Usando imagen del chef profesional")
+    return chefImages.chef
+  }
+
+  console.log("Usando imagen por defecto")
+  // Si no hay coincidencia, usar imagen por defecto
+  return chefImages.default
+}
+
 // Función para mostrar los chefs en el contenedor
-function mostrarChefs(chefs, container) {
+function mostrarChefs(chefs, container, chefImages) {
+  console.log("Mostrando chefs:", chefs)
+
+  // Verificar que el contenedor existe
+  console.log("Container antes de limpiar:", container)
+  console.log("HTML actual del container:", container.innerHTML)
+
+  // Limpiar completamente el contenedor
+  container.innerHTML = ""
+  console.log("Container después de limpiar:", container.innerHTML)
+
   // Crear y agregar las tarjetas de chef al contenedor
   chefs.forEach((chef) => {
+    // Obtener la imagen correcta para este chef
+    const imagenChef = obtenerImagenChef(chef.username, chefImages)
+
+    console.log(`Chef ${chef.username} usará la imagen: ${imagenChef}`)
+
     // Crear el elemento HTML para el chef
     const chefCard = document.createElement("div")
     chefCard.className = "chef-card"
@@ -119,7 +179,9 @@ function mostrarChefs(chefs, container) {
       <div class="chef-hover-effect">
         <a href="#" class="view-profile-btn">Ver Perfil</a>
       </div>
-      <img src="./Imagenes/blank-profile-picture-973460_1280.webp" alt="Chef ${chef.username}">
+      <img src="${imagenChef}" alt="Chef ${chef.username}" 
+           onerror="this.src='../Imagenes/blank-profile-picture-973460_1280.webp'"
+           style="width: 100%; height: 250px; object-fit: cover;">
       <div class="chef-details">
         <h2>Chef ${chef.username}</h2>
       </div>
@@ -138,6 +200,8 @@ function cargarSupabase() {
       resolve()
       return
     }
+
+    console.log("Cargando Supabase...")
 
     // Crear elemento script
     const script = document.createElement("script")
